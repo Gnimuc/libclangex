@@ -3,6 +3,7 @@ cmake_minimum_required(VERSION 3.15.0)
 project(clangex)
 
 set(LLVM_ARTIFACTS_VER "v9.0.1+1")
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 if(JULIA_ARTIFACTS_DIR)
     set(JULIA_CLANG_ARTIFACTS_DIR "${JULIA_ARTIFACTS_DIR}/0fc3ff57692101a729211b7033bb4f22f07ae4a2")
@@ -68,3 +69,5 @@ install(TARGETS clangex
         ARCHIVE DESTINATION lib/static
         INCLUDES DESTINATION include
         PUBLIC_HEADER DESTINATION include)
+
+install(FILES ${CMAKE_CURRENT_BINARY_DIR}/compile_commands.json DESTINATION lib)
