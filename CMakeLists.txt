@@ -42,9 +42,10 @@ message(STATUS "Found LLVM: ${LLVM}")
 add_library(clangex SHARED)
 
 target_sources(clangex PRIVATE src/libclangex.cpp)
+target_sources(clangex PRIVATE src/CXCompilerInstance.cpp)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -fno-rtti")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14 -fno-rtti")
 
 target_include_directories(clangex PUBLIC
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
@@ -53,7 +54,10 @@ target_include_directories(clangex PUBLIC
     $<BUILD_INTERFACE:${LLVM_SOURCE_DIR}>
     $<INSTALL_INTERFACE:include>)
 
-set_target_properties(clangex PROPERTIES PUBLIC_HEADER ${CMAKE_CURRENT_SOURCE_DIR}/include/libclangex.h)
+set(PUB_HEADERS_PREFIX ${CMAKE_CURRENT_SOURCE_DIR}/include)
+set_property(TARGET clangex APPEND PROPERTY
+    PUBLIC_HEADER ${PUB_HEADERS_PREFIX}/libclangex.h
+                  ${PUB_HEADERS_PREFIX}/CXCompilerInstance.h)
 
 target_link_libraries(clangex ${ClangCPP} ${LLVM})
 
