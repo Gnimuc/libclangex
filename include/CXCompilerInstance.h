@@ -1,48 +1,50 @@
 #ifndef LIBCLANGEX_CXCOMPILERINSTANCE_H
 #define LIBCLANGEX_CXCOMPILERINSTANCE_H
 
+#include "CXCodeGenOptions.h"
+#include "CXDiagnostic.h"
+#include "CXDiagnosticOptions.h"
+#include "CXIntrusiveRefCntPtr.h"
 #include "clang-c/Platform.h"
+
+#ifndef __cplusplus
+typedef int bool;
+#endif
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-/**
- * Opaque type for CompilerInstance
- *
- * It must be freed by \c clang_CompilerInstance_dispose.
- */
-typedef void * CXCompilerInstance;
+typedef void *CXCompilerInstance;
 
-/**
- * Error codes for Compilation Database
- */
-typedef enum  {
-  /*
-   * No error occurred
-   */
+typedef enum {
   CXCompilerInstance_NoError = 0,
-
-  /*
-   * CompilerInstance can not be created
-   */
   CXCompilerInstance_CanNotCreate = 1
-
 } CXCompilerInstance_Error;
 
-/**
- * Create CompilerInstance.
- * It must be freed by \c clang_CompilerInstance_dispose.
- */
 CINDEX_LINKAGE CXCompilerInstance
 clang_CompilerInstance_create(CXCompilerInstance_Error *ErrorCode);
 
-/**
- * Create CompilerInstance.
- *
- * It must be freed by \c clang_CompilationDatabase_dispose.
- */
 CINDEX_LINKAGE void clang_CompilerInstance_dispose(CXCompilerInstance CI);
+
+CINDEX_LINKAGE bool
+clang_CompilerInstance_hasDiagnostics(CXCompilerInstance CI);
+CINDEX_LINKAGE CXDiagnosticsEngine
+clang_CompilerInstance_getDiagnostics(CXCompilerInstance CI);
+CINDEX_LINKAGE void
+clang_CompilerInstance_setDiagnostics(CXCompilerInstance CI,
+                                      CXDiagnosticsEngine Value);
+CINDEX_LINKAGE CXDiagnosticConsumer
+clang_CompilerInstance_getDiagnosticClient(CXCompilerInstance CI);
+
+CINDEX_LINKAGE void clang_CompilerInstance_createDiagnostics(
+    CXCompilerInstance CI, CXDiagnosticConsumer DC, bool ShouldOwnClient);
+
+CINDEX_LINKAGE CXIntrusiveRefCntPtr
+clang_CompilerInstance_createDiagnosticsEngine(CXDiagnosticOptions DO,
+                                               CXDiagnosticConsumer DC,
+                                               bool ShouldOwnClient,
+                                               CXCodeGenOptions CGO);
 
 #ifdef __cplusplus
 }

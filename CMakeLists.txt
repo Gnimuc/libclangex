@@ -44,6 +44,9 @@ add_library(clangex SHARED)
 
 target_sources(clangex PRIVATE src/libclangex.cpp)
 target_sources(clangex PRIVATE src/CXCompilerInstance.cpp)
+target_sources(clangex PRIVATE src/CXCodeGenOptions.cpp)
+target_sources(clangex PRIVATE src/CXDiagnosticOptions.cpp)
+target_sources(clangex PRIVATE src/CXDiagnostic.cpp)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14 -fno-rtti")
@@ -58,7 +61,11 @@ target_include_directories(clangex PUBLIC
 set(PUB_HEADERS_PREFIX ${CMAKE_CURRENT_SOURCE_DIR}/include)
 set_property(TARGET clangex APPEND PROPERTY
     PUBLIC_HEADER ${PUB_HEADERS_PREFIX}/libclangex.h
-                  ${PUB_HEADERS_PREFIX}/CXCompilerInstance.h)
+                  ${PUB_HEADERS_PREFIX}/CXCompilerInstance.h
+                  ${PUB_HEADERS_PREFIX}/CXCodeGenOptions.h
+                  ${PUB_HEADERS_PREFIX}/CXDiagnosticOptions.h
+                  ${PUB_HEADERS_PREFIX}/CXDiagnostic.h
+                  ${PUB_HEADERS_PREFIX}/CXIntrusiveRefCntPtr.h)
 
 target_link_libraries(clangex ${ClangCPP} ${LLVM})
 
@@ -70,4 +77,4 @@ install(TARGETS clangex
         INCLUDES DESTINATION include
         PUBLIC_HEADER DESTINATION include)
 
-install(FILES ${CMAKE_CURRENT_BINARY_DIR}/compile_commands.json DESTINATION lib)
+install(FILES ${CMAKE_CURRENT_BINARY_DIR}/compile_commands.json DESTINATION share)
