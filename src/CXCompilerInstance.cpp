@@ -2,16 +2,15 @@
 #include "clang/Frontend/CompilerInstance.h"
 #include <cstdio>
 
-CXCompilerInstance
-clang_CompilerInstance_create(CXCompilerInstance_Error *ErrorCode) {
-  CXCompilerInstance_Error Err = CXCompilerInstance_NoError;
+CXCompilerInstance clang_CompilerInstance_create(CXInit_Error *ErrorCode) {
+  CXInit_Error Err = CXInit_NoError;
   std::unique_ptr<clang::CompilerInstance> ptr =
       std::make_unique<clang::CompilerInstance>();
 
   if (!ptr) {
     fprintf(stderr,
             "LIBCLANGEX ERROR: failed to create `clang::CompilerInstance`\n");
-    Err = CXCompilerInstance_CanNotCreate;
+    Err = CXInit_CanNotCreate;
   }
 
   if (ErrorCode)

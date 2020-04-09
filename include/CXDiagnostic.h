@@ -3,6 +3,7 @@
 
 #include "CXIntrusiveRefCntPtr.h"
 #include "clang-c/Platform.h"
+#include "CXError.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -10,13 +11,8 @@ extern "C" {
 
 typedef void *CXDiagnosticConsumer;
 
-typedef enum {
-  CXDiagnosticConsumer_NoError = 0,
-  CXDiagnosticConsumer_CanNotCreate = 1
-} CXDiagnosticConsumer_Error;
-
 CINDEX_LINKAGE CXDiagnosticConsumer
-clang_DiagnosticConsumer_create(CXDiagnosticConsumer_Error *ErrorCode);
+clang_DiagnosticConsumer_create(CXInit_Error *ErrorCode);
 
 CINDEX_LINKAGE void clang_DiagnosticConsumer_dispose(CXDiagnosticConsumer DC);
 

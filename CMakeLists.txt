@@ -43,6 +43,7 @@ message(STATUS "Found LLVM: ${LLVM}")
 add_library(clangex SHARED)
 
 target_sources(clangex PRIVATE src/libclangex.cpp)
+target_sources(clangex PRIVATE src/CXCompilerInvocation.cpp)
 target_sources(clangex PRIVATE src/CXCompilerInstance.cpp)
 target_sources(clangex PRIVATE src/CXCodeGenOptions.cpp)
 target_sources(clangex PRIVATE src/CXDiagnosticOptions.cpp)
@@ -62,11 +63,13 @@ target_include_directories(clangex PUBLIC
 set(PUB_HEADERS_PREFIX ${CMAKE_CURRENT_SOURCE_DIR}/include)
 set_property(TARGET clangex APPEND PROPERTY
     PUBLIC_HEADER ${PUB_HEADERS_PREFIX}/libclangex.h
+                  ${PUB_HEADERS_PREFIX}/CXCompilerInvocation.h
                   ${PUB_HEADERS_PREFIX}/CXCompilerInstance.h
                   ${PUB_HEADERS_PREFIX}/CXCodeGenOptions.h
                   ${PUB_HEADERS_PREFIX}/CXDiagnosticOptions.h
                   ${PUB_HEADERS_PREFIX}/CXDiagnostic.h
-                  ${PUB_HEADERS_PREFIX}/CXIntrusiveRefCntPtr.h)
+                  ${PUB_HEADERS_PREFIX}/CXIntrusiveRefCntPtr.h
+                  ${PUB_HEADERS_PREFIX}/CXError.h)
 
 target_link_libraries(clangex ${ClangCPP} ${LLVM})
 

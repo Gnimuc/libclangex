@@ -2,16 +2,15 @@
 #include "clang/Basic/DiagnosticOptions.h"
 #include <cstdio>
 
-CXDiagnosticOptions
-clang_DiagnosticOptions_create(CXDiagnosticOptions_Error *ErrorCode) {
-  CXDiagnosticOptions_Error Err = CXDiagnosticOptions_NoError;
+CXDiagnosticOptions clang_DiagnosticOptions_create(CXInit_Error *ErrorCode) {
+  CXInit_Error Err = CXInit_NoError;
   std::unique_ptr<clang::DiagnosticOptions> ptr =
       std::make_unique<clang::DiagnosticOptions>();
 
   if (!ptr) {
     fprintf(stderr,
             "LIBCLANGEX ERROR: failed to create `clang::DiagnosticOptions`\n");
-    Err = CXDiagnosticOptions_CanNotCreate;
+    Err = CXInit_CanNotCreate;
   }
 
   if (ErrorCode)

@@ -3,16 +3,15 @@
 #include "llvm/ADT/IntrusiveRefCntPtr.h"
 #include <cstdio>
 
-CXDiagnosticConsumer
-clang_DiagnosticConsumer_create(CXDiagnosticConsumer_Error *ErrorCode) {
-  CXDiagnosticConsumer_Error Err = CXDiagnosticConsumer_NoError;
+CXDiagnosticConsumer clang_DiagnosticConsumer_create(CXInit_Error *ErrorCode) {
+  CXInit_Error Err = CXInit_NoError;
   std::unique_ptr<clang::DiagnosticConsumer> ptr =
       std::make_unique<clang::DiagnosticConsumer>();
 
   if (!ptr) {
     fprintf(stderr,
             "LIBCLANGEX ERROR: failed to create `clang::DiagnosticConsumer`\n");
-    Err = CXDiagnosticConsumer_CanNotCreate;
+    Err = CXInit_CanNotCreate;
   }
 
   if (ErrorCode)
@@ -31,6 +30,7 @@ clang_DiagnosticsEngineIntrusiveRefCntPtr_get(CXIntrusiveRefCntPtr ptr) {
       ->get();
 }
 
-void clang_DiagnosticsEngineIntrusiveRefCntPtr_dispose(CXIntrusiveRefCntPtr ptr) {
+void clang_DiagnosticsEngineIntrusiveRefCntPtr_dispose(
+    CXIntrusiveRefCntPtr ptr) {
   delete static_cast<llvm::IntrusiveRefCntPtr<clang::DiagnosticsEngine> *>(ptr);
 }

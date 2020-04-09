@@ -6,6 +6,7 @@
 #include "CXDiagnosticOptions.h"
 #include "CXIntrusiveRefCntPtr.h"
 #include "clang-c/Platform.h"
+#include "CXError.h"
 
 #ifndef __cplusplus
 typedef int bool;
@@ -17,13 +18,8 @@ extern "C" {
 
 typedef void *CXCompilerInstance;
 
-typedef enum {
-  CXCompilerInstance_NoError = 0,
-  CXCompilerInstance_CanNotCreate = 1
-} CXCompilerInstance_Error;
-
 CINDEX_LINKAGE CXCompilerInstance
-clang_CompilerInstance_create(CXCompilerInstance_Error *ErrorCode);
+clang_CompilerInstance_create(CXInit_Error *ErrorCode);
 
 CINDEX_LINKAGE void clang_CompilerInstance_dispose(CXCompilerInstance CI);
 

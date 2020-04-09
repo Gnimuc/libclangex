@@ -2,16 +2,15 @@
 #include "clang/Basic/CodeGenOptions.h"
 #include <cstdio>
 
-CXCodeGenOptions
-clang_CodeGenOptions_create(CXCodeGenOptions_Error *ErrorCode) {
-  CXCodeGenOptions_Error Err = CXCodeGenOptions_NoError;
+CXCodeGenOptions clang_CodeGenOptions_create(CXInit_Error *ErrorCode) {
+  CXInit_Error Err = CXInit_NoError;
   std::unique_ptr<clang::CodeGenOptions> ptr =
       std::make_unique<clang::CodeGenOptions>();
 
   if (!ptr) {
     fprintf(stderr,
             "LIBCLANGEX ERROR: failed to create `clang::CodeGenOptions`\n");
-    Err = CXCodeGenOptions_CanNotCreate;
+    Err = CXInit_CanNotCreate;
   }
 
   if (ErrorCode)

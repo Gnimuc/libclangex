@@ -2,6 +2,7 @@
 #define LIBCLANGEX_H
 
 #include "CXCodeGenOptions.h"
+#include "CXCompilerInvocation.h"
 #include "CXCompilerInstance.h"
 #include "CXDiagnostic.h"
 #include "CXDiagnosticOptions.h"
