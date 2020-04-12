@@ -48,6 +48,7 @@ target_sources(clangex PRIVATE src/CXCompilerInstance.cpp)
 target_sources(clangex PRIVATE src/CXCodeGenOptions.cpp)
 target_sources(clangex PRIVATE src/CXDiagnosticOptions.cpp)
 target_sources(clangex PRIVATE src/CXDiagnostic.cpp)
+target_sources(clangex PRIVATE src/CXFileManager.cpp)
 target_sources(clangex PRIVATE src/CXTriple.cpp)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
@@ -69,9 +70,11 @@ set_property(TARGET clangex APPEND PROPERTY
                   ${PUB_HEADERS_PREFIX}/CXCodeGenOptions.h
                   ${PUB_HEADERS_PREFIX}/CXDiagnosticOptions.h
                   ${PUB_HEADERS_PREFIX}/CXDiagnostic.h
+                  ${PUB_HEADERS_PREFIX}/CXError.h
+                  ${PUB_HEADERS_PREFIX}/CXFileManager.h
                   ${PUB_HEADERS_PREFIX}/CXIntrusiveRefCntPtr.h
                   ${PUB_HEADERS_PREFIX}/CXTriple.h
-                  ${PUB_HEADERS_PREFIX}/CXError.h)
+                  )
 
 target_link_libraries(clangex ${ClangCPP} ${LLVM})
 
