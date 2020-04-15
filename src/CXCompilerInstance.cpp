@@ -1,5 +1,6 @@
 #include "CXCompilerInstance.h"
 #include "clang/Frontend/CompilerInstance.h"
+#include "llvm/Support/VirtualFileSystem.h"
 #include <cstdio>
 
 CXCompilerInstance clang_CompilerInstance_create(CXInit_Error *ErrorCode) {
@@ -43,22 +44,58 @@ clang_CompilerInstance_getDiagnosticClient(CXCompilerInstance CI) {
   return &(static_cast<clang::CompilerInstance *>(CI)->getDiagnosticClient());
 }
 
-CINDEX_LINKAGE void clang_CompilerInstance_createDiagnostics(
-    CXCompilerInstance CI, CXDiagnosticConsumer DC, bool ShouldOwnClient) {
+void clang_CompilerInstance_createDiagnostics(CXCompilerInstance CI,
+                                              CXDiagnosticConsumer DC,
+                                              bool ShouldOwnClient) {
   return static_cast<clang::CompilerInstance *>(CI)->createDiagnostics(
       static_cast<clang::DiagnosticConsumer *>(DC), ShouldOwnClient);
 }
 
-CINDEX_LINKAGE CXIntrusiveRefCntPtr
-clang_CompilerInstance_createDiagnosticsEngine(CXDiagnosticOptions DO,
-                                               CXDiagnosticConsumer DC,
-                                               bool ShouldOwnClient,
-                                               CXCodeGenOptions CGO) {
-  std::unique_ptr<llvm::IntrusiveRefCntPtr<clang::DiagnosticsEngine>> ptr =
+CXIntrusiveRefCntPtr clang_CompilerInstance_createDiagnosticsEngine(
+    CXDiagnosticOptions DO, CXDiagnosticConsumer DC, bool ShouldOwnClient,
+    CXCodeGenOptions CGO) {
+  auto ptr =
       std::make_unique<llvm::IntrusiveRefCntPtr<clang::DiagnosticsEngine>>(
           clang::CompilerInstance::createDiagnostics(
               static_cast<clang::DiagnosticOptions *>(DO),
               static_cast<clang::DiagnosticConsumer *>(DC), ShouldOwnClient,
               static_cast<clang::CodeGenOptions *>(CGO)));
   return ptr.release();
+}
+
+bool clang_CompilerInstance_hasFileManager(CXCompilerInstance CI) {
+  return static_cast<clang::CompilerInstance *>(CI)->hasFileManager();
+}
+
+CXFileManager clang_CompilerInstance_getFileManager(CXCompilerInstance CI) {
+  return &(static_cast<clang::CompilerInstance *>(CI)->getFileManager());
+}
+
+void clang_CompilerInstance_setFileManager(CXCompilerInstance CI,
+                                           CXFileManager FM) {
+  static_cast<clang::CompilerInstance *>(CI)->setFileManager(
+      static_cast<clang::FileManager *>(FM));
+}
+
+CXFileManager clang_CompilerInstance_createFileManager(CXCompilerInstance CI) {
+  return static_cast<clang::CompilerInstance *>(CI)->createFileManager();
+}
+
+CXFileManager clang_CompilerInstance_createFileManagerWithVOFS4PCH(
+    CXCompilerInstance CI, const char *Path, time_t ModificationTime,
+    CXMemoryBuffer PCHBuffer) {
+  std::unique_ptr<llvm::MemoryBuffer> buffer(
+      static_cast<llvm::MemoryBuffer *>(PCHBuffer));
+
+  llvm::IntrusiveRefCntPtr<llvm::vfs::OverlayFileSystem> Overlay(
+      new llvm::vfs::OverlayFileSystem(
+          llvm::vfs::createPhysicalFileSystem().release()));
+
+  llvm::IntrusiveRefCntPtr<llvm::vfs::InMemoryFileSystem> PCHIMFS(
+      new llvm::vfs::InMemoryFileSystem());
+
+  PCHIMFS->addFile(llvm::StringRef(Path), ModificationTime, std::move(buffer));
+  Overlay->pushOverlay(PCHIMFS);
+
+  return static_cast<clang::CompilerInstance *>(CI)->createFileManager(Overlay);
 }

@@ -4,9 +4,11 @@
 #include "CXCodeGenOptions.h"
 #include "CXDiagnostic.h"
 #include "CXDiagnosticOptions.h"
-#include "CXIntrusiveRefCntPtr.h"
-#include "clang-c/Platform.h"
 #include "CXError.h"
+#include "CXFileManager.h"
+#include "CXIntrusiveRefCntPtr.h"
+#include "CXMemoryBuffer.h"
+#include "clang-c/Platform.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -37,6 +39,22 @@ clang_CompilerInstance_createDiagnosticsEngine(CXDiagnosticOptions DO,
                                                CXDiagnosticConsumer DC,
                                                bool ShouldOwnClient,
                                                CXCodeGenOptions CGO);
+
+CINDEX_LINKAGE bool
+clang_CompilerInstance_hasFileManager(CXCompilerInstance CI);
+CINDEX_LINKAGE CXFileManager
+clang_CompilerInstance_getFileManager(CXCompilerInstance CI);
+CINDEX_LINKAGE void clang_CompilerInstance_setFileManager(CXCompilerInstance CI,
+                                                          CXFileManager FM);
+
+CINDEX_LINKAGE CXFileManager
+clang_CompilerInstance_createFileManager(CXCompilerInstance CI);
+
+CINDEX_LINKAGE CXFileManager
+clang_CompilerInstance_createFileManagerWithVOFS4PCH(CXCompilerInstance CI,
+                                                     const char *Path,
+                                                     time_t ModificationTime,
+                                                     CXMemoryBuffer PCHBuffer);
 
 #ifdef __cplusplus
 }
