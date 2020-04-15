@@ -99,3 +99,17 @@ CXFileManager clang_CompilerInstance_createFileManagerWithVOFS4PCH(
 
   return static_cast<clang::CompilerInstance *>(CI)->createFileManager(Overlay);
 }
+
+bool clang_CompilerInstance_hasSourceManager(CXCompilerInstance CI) {
+  return static_cast<clang::CompilerInstance *>(CI)->hasSourceManager();
+}
+
+CXSourceManager clang_CompilerInstance_getSourceManager(CXCompilerInstance CI) {
+  return &(static_cast<clang::CompilerInstance *>(CI)->getSourceManager());
+}
+
+void clang_CompilerInstance_setSourceManager(CXCompilerInstance CI,
+                                             CXSourceManager SM) {
+  static_cast<clang::CompilerInstance *>(CI)->setSourceManager(
+      static_cast<clang::SourceManager *>(SM));
+}

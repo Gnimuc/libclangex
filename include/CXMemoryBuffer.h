@@ -3,8 +3,6 @@
 
 #include "CXError.h"
 #include "clang-c/Platform.h"
-#include "clang-c/CXString.h"
-#include <time.h>
 
 #ifdef __cplusplus
 extern "C" {

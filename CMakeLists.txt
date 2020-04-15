@@ -50,6 +50,7 @@ target_sources(clangex PRIVATE src/CXDiagnosticOptions.cpp)
 target_sources(clangex PRIVATE src/CXDiagnostic.cpp)
 target_sources(clangex PRIVATE src/CXFileManager.cpp)
 target_sources(clangex PRIVATE src/CXMemoryBuffer.cpp)
+target_sources(clangex PRIVATE src/CXSourceManager.cpp)
 target_sources(clangex PRIVATE src/CXTriple.cpp)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
@@ -75,6 +76,7 @@ set_property(TARGET clangex APPEND PROPERTY
                   ${PUB_HEADERS_PREFIX}/CXFileManager.h
                   ${PUB_HEADERS_PREFIX}/CXIntrusiveRefCntPtr.h
                   ${PUB_HEADERS_PREFIX}/CXMemoryBuffer.h
+                  ${PUB_HEADERS_PREFIX}/CXSourceManager.h
                   ${PUB_HEADERS_PREFIX}/CXTriple.h
                   )
 
