@@ -2,56 +2,39 @@ cmake_minimum_required(VERSION 3.15.0)
 
 project(clangex)
 
-set(CLANG_ARTIFACTS_VER "v9.0.1+4")
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-if(JULIA_ARTIFACTS_DIR)
-    set(JULIA_CLANG_ARTIFACTS_DIR "${JULIA_ARTIFACTS_DIR}/74b247b0f53ce91c334e5a1c16a7d5d871cf8d79")
-    if(EXISTS "${JULIA_CLANG_ARTIFACTS_DIR}")
-        message(STATUS "Found JULIA_CLANG_ARTIFACTS_DIR: " ${JULIA_CLANG_ARTIFACTS_DIR})
-    else()
-        message(FATAL_ERROR "Cannot find `Clang_jll`'s artifact directory. Please install the correct version of `Clang_jll${CLANG_ARTIFACTS_VER}`.")
-    endif()
+set(CLANG_DIR "/Users/gnimuc/.julia/artifacts/6c7a3feab6522aaf3177294226d990601674698a")
+set(LLVM_DIR "/Users/gnimuc/.julia/artifacts/3573623adf6de1dfee72be3f6edc6400772b8f76")
 
-    set(JULIA_LLVM_ARTIFACTS_DIR "${JULIA_ARTIFACTS_DIR}/406c3c69fd526bc1bc87b36fdcd9d31f626d9cb6")
-    if(EXISTS "${JULIA_LLVM_ARTIFACTS_DIR}")
-        message(STATUS "Found JULIA_LLVM_ARTIFACTS_DIR: " ${JULIA_LLVM_ARTIFACTS_DIR})
-    else()
-        message(FATAL_ERROR "Cannot find `LLVM_jll`'s artifact directory. Please install the correct version of `LLVM_jll${CLANG_ARTIFACTS_VER}`.")
-    endif()
+if(EXISTS ${CLANG_DIR})
+    message(STATUS "Found Clang directory: " ${CLANG_DIR})
 else()
-    message(FATAL_ERROR "Please set `JULIA_ARTIFACTS_DIR`.")
+    message(FATAL_ERROR "Cannot find Clang directory. You may need to install `Clang_jll`.")
 endif()
 
-if(LLVM_SOURCE_PREFIX)
-    set(LLVM_SOURCE_DIR "${LLVM_SOURCE_PREFIX}")
-    message(STATUS "Found LLVM_SOURCE_DIR: " ${LLVM_SOURCE_DIR})
+if(EXISTS ${LLVM_DIR})
+    message(STATUS "Found LLVM directory: " ${LLVM_DIR})
 else()
-    message(FATAL_ERROR "Please set `LLVM_SOURCE_PREFIX`")
+    message(FATAL_ERROR "Cannot find LLVM directory. You may need to install `LLVM_full_jll`.")
 endif()
 
-find_library(LibClang NAMES clang HINTS "${JULIA_CLANG_ARTIFACTS_DIR}/lib")
-message(STATUS "Found libClang: ${LibClang}")
+# if(LLVM_SOURCE_PREFIX)
+#     set(LLVM_SOURCE_DIR "${LLVM_SOURCE_PREFIX}")
+#     message(STATUS "Found LLVM_SOURCE_DIR: " ${LLVM_SOURCE_DIR})
+# else()
+#     message(FATAL_ERROR "Please set `LLVM_SOURCE_PREFIX`")
+# endif()
 
-find_library(ClangCPP NAMES clang-cpp HINTS "${JULIA_CLANG_ARTIFACTS_DIR}/lib")
+find_library(ClangCPP NAMES clang-cpp HINTS "${CLANG_DIR}/lib")
 message(STATUS "Found Clang: ${ClangCPP}")
 
-find_library(LLVM NAMES LLVM HINTS "${JULIA_LLVM_ARTIFACTS_DIR}/lib")
+find_library(LLVM NAMES LLVM HINTS "${LLVM_DIR}/lib")
 message(STATUS "Found LLVM: ${LLVM}")
-
 
 add_library(clangex SHARED)
 
 target_sources(clangex PRIVATE src/libclangex.cpp)
-target_sources(clangex PRIVATE src/CXCompilerInvocation.cpp)
-target_sources(clangex PRIVATE src/CXCompilerInstance.cpp)
-target_sources(clangex PRIVATE src/CXCodeGenOptions.cpp)
-target_sources(clangex PRIVATE src/CXDiagnosticOptions.cpp)
-target_sources(clangex PRIVATE src/CXDiagnostic.cpp)
-target_sources(clangex PRIVATE src/CXFileManager.cpp)
-target_sources(clangex PRIVATE src/CXMemoryBuffer.cpp)
-target_sources(clangex PRIVATE src/CXSourceManager.cpp)
-target_sources(clangex PRIVATE src/CXTriple.cpp)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(CMAKE_SKIP_RPATH ON)
@@ -59,25 +42,14 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14 -fno-rtti")
 
 target_include_directories(clangex PUBLIC
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
-    $<BUILD_INTERFACE:${JULIA_CLANG_ARTIFACTS_DIR}/include>
-    $<BUILD_INTERFACE:${JULIA_LLVM_ARTIFACTS_DIR}/include>
-    $<BUILD_INTERFACE:${LLVM_SOURCE_DIR}>
+    $<BUILD_INTERFACE:${CLANG_DIR}/include>
+    $<BUILD_INTERFACE:${LLVM_DIR}/include>
+    # $<BUILD_INTERFACE:${LLVM_SOURCE_DIR}>
     $<INSTALL_INTERFACE:include>)
 
 set(PUB_HEADERS_PREFIX ${CMAKE_CURRENT_SOURCE_DIR}/include)
 set_property(TARGET clangex APPEND PROPERTY
     PUBLIC_HEADER ${PUB_HEADERS_PREFIX}/libclangex.h
-                  ${PUB_HEADERS_PREFIX}/CXCompilerInvocation.h
-                  ${PUB_HEADERS_PREFIX}/CXCompilerInstance.h
-                  ${PUB_HEADERS_PREFIX}/CXCodeGenOptions.h
-                  ${PUB_HEADERS_PREFIX}/CXDiagnosticOptions.h
-                  ${PUB_HEADERS_PREFIX}/CXDiagnostic.h
-                  ${PUB_HEADERS_PREFIX}/CXError.h
-                  ${PUB_HEADERS_PREFIX}/CXFileManager.h
-                  ${PUB_HEADERS_PREFIX}/CXIntrusiveRefCntPtr.h
-                  ${PUB_HEADERS_PREFIX}/CXMemoryBuffer.h
-                  ${PUB_HEADERS_PREFIX}/CXSourceManager.h
-                  ${PUB_HEADERS_PREFIX}/CXTriple.h
                   )
 
 target_link_libraries(clangex ${ClangCPP} ${LLVM})
