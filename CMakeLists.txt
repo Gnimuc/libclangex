@@ -35,8 +35,8 @@ message(STATUS "Found LLVM: ${LLVM}")
 
 target_sources(${target} PRIVATE src/libclangex.cpp)
 
-set(CMAKE_SKIP_RPATH ON)
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14 -fno-rtti")
+# set(CMAKE_SKIP_RPATH ON)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-rtti")
 
 target_include_directories(${target} PUBLIC
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
