@@ -23,7 +23,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 >
 > For more information, please refer to <https://unlicense.org>
 
-`include/CXStringEx.h`:
+`include/CIndexer.h`, `include/CXString.h`, `include/CXTranslationUnit.h`:
 > Part of the LLVM Project, under the Apache License v2.0 with LLVM Exceptions.
 >
 > See https://llvm.org/LICENSE.txt for license information.
