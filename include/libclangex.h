@@ -1,12 +1,7 @@
 #ifndef LIBCLANGEX_H
 #define LIBCLANGEX_H
 
-#include "CXCodeGenOptions.h"
-#include "CXCompilerInvocation.h"
-#include "CXCompilerInstance.h"
-#include "CXDiagnostic.h"
-#include "CXDiagnosticOptions.h"
-#include "CXIntrusiveRefCntPtr.h"
+#include <clang-c/Index.h>
 
 #ifdef __cplusplus
 extern "C" {
