@@ -1,17 +1,20 @@
 #ifndef LIBCLANGEX_H
 #define LIBCLANGEX_H
 
-#include "CIndexer.h"
-#include "CXTranslationUnit.h"
+#include "CXASTUnit.h"
+#include "CXCodeGenOptions.h"
+#include "CXCompilerInstance.h"
+#include "CXCompilerInvocation.h"
+#include "CXDiagnostic.h"
+#include "CXDiagnosticOptions.h"
+#include "CXIntrusiveRefCntPtr.h"
+#include "clang-c/Platform.h"
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-typedef void *CXASTUnit;
-
-CINDEX_LINKAGE CXASTUnit
-clang_get_ASTUnit_from_TranslationUnit(CXTranslationUnit TU);
+// clang_create_CodeGenModule
 
 #ifdef __cplusplus
 }

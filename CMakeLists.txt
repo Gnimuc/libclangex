@@ -34,6 +34,15 @@ find_library(LLVM NAMES LLVM HINTS "${LLVM_DIR}/lib")
 message(STATUS "Found LLVM: ${LLVM}")
 
 target_sources(${target} PRIVATE src/libclangex.cpp)
+target_sources(${target} PRIVATE src/CXCodeGenOptions.cpp)
+target_sources(${target} PRIVATE src/CXCompilerInstance.cpp)
+target_sources(${target} PRIVATE src/CXCompilerInvocation.cpp)
+target_sources(${target} PRIVATE src/CXDiagnostic.cpp)
+target_sources(${target} PRIVATE src/CXDiagnosticOptions.cpp)
+target_sources(${target} PRIVATE src/CXFileManager.cpp)
+target_sources(${target} PRIVATE src/CXMemoryBuffer.cpp)
+target_sources(${target} PRIVATE src/CXSourceManager.cpp)
+target_sources(${target} PRIVATE src/CXASTUnit.cpp)
 
 # set(CMAKE_SKIP_RPATH ON)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-rtti")
@@ -48,7 +57,12 @@ target_include_directories(${target} PUBLIC
 target_compile_features(${target} PRIVATE cxx_std_14)
 
 set(pub_hdrs ${CMAKE_CURRENT_SOURCE_DIR}/include/libclangex.h
-            #  ${CMAKE_CURRENT_SOURCE_DIR}/include/libclangex.h
+             ${CMAKE_CURRENT_SOURCE_DIR}/include/CXCodeGenOptions.h
+             ${CMAKE_CURRENT_SOURCE_DIR}/include/CXCompilerInstance.h
+             ${CMAKE_CURRENT_SOURCE_DIR}/include/CXCompilerInvocation.h
+             ${CMAKE_CURRENT_SOURCE_DIR}/include/CXDiagnostic.h
+             ${CMAKE_CURRENT_SOURCE_DIR}/include/CXDiagnosticOptions.h
+             ${CMAKE_CURRENT_SOURCE_DIR}/include/CXIntrusiveRefCntPtr.h
             )
 set_target_properties(${target} PROPERTIES PUBLIC_HEADER "${pub_hdrs}")
 
