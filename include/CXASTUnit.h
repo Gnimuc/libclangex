@@ -2,20 +2,13 @@
 #define LIBCLANGEX_CXASTUNIT_H
 
 #include "CIndexer.h"
-#include "CXCodeGenOptions.h"
-#include "CXDiagnostic.h"
+#include "CXTypes.h"
 #include "CXTranslationUnit.h"
 #include "clang-c/Platform.h"
 
 #ifdef __cplusplus
 extern "C" {
 #endif
-
-typedef void *CXASTUnit;
-typedef void *CXASTContext;
-typedef void *CXHeaderSearchOptions;
-typedef void *CXPreprocessorOptions;
-typedef void *CXSema;
 
 CINDEX_LINKAGE CXASTUnit clang_TranslationUnit_getASTUnit(CXTranslationUnit TU);
 
@@ -28,6 +21,12 @@ CINDEX_LINKAGE CXPreprocessorOptions clang_ASTUnit_getPreprocessorOpts(CXASTUnit
 CINDEX_LINKAGE CXDiagnosticsEngine clang_ASTUnit_getDiagnostics(CXASTUnit ASTU);
 
 CINDEX_LINKAGE CXSema clang_ASTUnit_getSema(CXASTUnit ASTU);
+
+CINDEX_LINKAGE CXFileManager clang_ASTUnit_getFileManager(CXASTUnit ASTU);
+
+CINDEX_LINKAGE CXSourceManager clang_ASTUnit_getSourceManager(CXASTUnit ASTU);
+
+CINDEX_LINKAGE CXPreprocessor clang_ASTUnit_getPreprocessor(CXASTUnit ASTU);
 
 #ifdef __cplusplus
 }

@@ -2,13 +2,12 @@
 #define LIBCLANGEX_CXMEMORYBUFFER_H
 
 #include "CXError.h"
+#include "CXTypes.h"
 #include "clang-c/Platform.h"
 
 #ifdef __cplusplus
 extern "C" {
 #endif
-
-typedef void *CXMemoryBuffer;
 
 CINDEX_LINKAGE CXMemoryBuffer clang_MemoryBuffer_getMemBuffer(const char *InputData,
                                                               unsigned InputDataSize,

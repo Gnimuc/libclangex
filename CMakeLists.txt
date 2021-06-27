@@ -57,12 +57,16 @@ target_include_directories(${target} PUBLIC
 target_compile_features(${target} PRIVATE cxx_std_14)
 
 set(pub_hdrs ${CMAKE_CURRENT_SOURCE_DIR}/include/libclangex.h
+             ${CMAKE_CURRENT_SOURCE_DIR}/include/CXASTUnit.h
              ${CMAKE_CURRENT_SOURCE_DIR}/include/CXCodeGenOptions.h
              ${CMAKE_CURRENT_SOURCE_DIR}/include/CXCompilerInstance.h
              ${CMAKE_CURRENT_SOURCE_DIR}/include/CXCompilerInvocation.h
              ${CMAKE_CURRENT_SOURCE_DIR}/include/CXDiagnostic.h
              ${CMAKE_CURRENT_SOURCE_DIR}/include/CXDiagnosticOptions.h
-             ${CMAKE_CURRENT_SOURCE_DIR}/include/CXIntrusiveRefCntPtr.h
+             ${CMAKE_CURRENT_SOURCE_DIR}/include/CXFileManager.h
+             ${CMAKE_CURRENT_SOURCE_DIR}/include/CXMemoryBuffer.h
+             ${CMAKE_CURRENT_SOURCE_DIR}/include/CXSourceManager.h
+             ${CMAKE_CURRENT_SOURCE_DIR}/include/CXTypes.h
             )
 set_target_properties(${target} PROPERTIES PUBLIC_HEADER "${pub_hdrs}")
 

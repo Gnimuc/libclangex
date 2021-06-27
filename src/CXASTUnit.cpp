@@ -30,3 +30,13 @@ CXSema clang_ASTUnit_getSema(CXASTUnit ASTU) {
   auto &Sema = static_cast<clang::ASTUnit *>(ASTU)->getSema();
   return &Sema;
 }
+
+CXFileManager clang_ASTUnit_getFileManager(CXASTUnit ASTU) {
+  auto &FileMgr = static_cast<clang::ASTUnit *>(ASTU)->getFileManager();
+  return &FileMgr;
+}
+
+CXFileManager clang_ASTUnit_getSourceManager(CXASTUnit ASTU) {
+  auto &SourceMgr = static_cast<clang::ASTUnit *>(ASTU)->getSourceManager();
+  return &SourceMgr;
+}

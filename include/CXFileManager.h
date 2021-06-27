@@ -3,16 +3,12 @@
 
 #include "CXError.h"
 #include "CXString.h"
+#include "CXTypes.h"
 #include "clang-c/Platform.h"
-#include <time.h>
 
 #ifdef __cplusplus
 extern "C" {
 #endif
-
-typedef void *CXDirectoryEntry;
-typedef void *CXFileEntry;
-typedef void *CXFileManager;
 
 CINDEX_LINKAGE CXFileManager clang_FileManager_create(CXInit_Error *ErrorCode);
 

@@ -2,13 +2,12 @@
 #define LIBCLANGEX_CXCODEGENOPTIONS_H
 
 #include "CXError.h"
+#include "CXTypes.h"
 #include "clang-c/Platform.h"
 
 #ifdef __cplusplus
 extern "C" {
 #endif
-
-typedef void *CXCodeGenOptions;
 
 CINDEX_LINKAGE CXCodeGenOptions clang_CodeGenOptions_create(CXInit_Error *ErrorCode);
 

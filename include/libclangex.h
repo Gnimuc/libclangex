@@ -7,7 +7,10 @@
 #include "CXCompilerInvocation.h"
 #include "CXDiagnostic.h"
 #include "CXDiagnosticOptions.h"
-#include "CXIntrusiveRefCntPtr.h"
+#include "CXFileManager.h"
+#include "CXMemoryBuffer.h"
+#include "CXSourceManager.h"
+#include "CXTypes.h"
 #include "clang-c/Platform.h"
 
 #ifdef __cplusplus

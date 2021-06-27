@@ -2,13 +2,12 @@
 #define LIBCLANGEX_CXDIAGNOSTICOPTIONS_H
 
 #include "CXError.h"
+#include "CXTypes.h"
 #include "clang-c/Platform.h"
 
 #ifdef __cplusplus
 extern "C" {
 #endif
-
-typedef void *CXDiagnosticOptions;
 
 CINDEX_LINKAGE CXDiagnosticOptions clang_DiagnosticOptions_create(CXInit_Error *ErrorCode);
 

@@ -1,21 +1,13 @@
 #ifndef LIBCLANGEX_CXCOMPILERINSTANCE_H
 #define LIBCLANGEX_CXCOMPILERINSTANCE_H
 
-#include "CXCodeGenOptions.h"
-#include "CXDiagnostic.h"
-#include "CXDiagnosticOptions.h"
 #include "CXError.h"
-#include "CXFileManager.h"
-#include "CXIntrusiveRefCntPtr.h"
-#include "CXMemoryBuffer.h"
-#include "CXSourceManager.h"
+#include "CXTypes.h"
 #include "clang-c/Platform.h"
 
 #ifdef __cplusplus
 extern "C" {
 #endif
-
-typedef void *CXCompilerInstance;
 
 CINDEX_LINKAGE CXCompilerInstance clang_CompilerInstance_create(CXInit_Error *ErrorCode);
 

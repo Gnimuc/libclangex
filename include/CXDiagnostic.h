@@ -2,21 +2,17 @@
 #define LIBCLANGEX_CXDIAGNOSTIC_H
 
 #include "CXError.h"
-#include "CXIntrusiveRefCntPtr.h"
+#include "CXTypes.h"
 #include "clang-c/Platform.h"
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-typedef void *CXDiagnosticConsumer;
-
 CINDEX_LINKAGE CXDiagnosticConsumer
 clang_DiagnosticConsumer_create(CXInit_Error *ErrorCode);
 
 CINDEX_LINKAGE void clang_DiagnosticConsumer_dispose(CXDiagnosticConsumer DC);
-
-typedef void *CXDiagnosticsEngine;
 
 CINDEX_LINKAGE CXDiagnosticsEngine
 clang_DiagnosticsEngineIntrusiveRefCntPtr_get(CXIntrusiveRefCntPtr ptr);

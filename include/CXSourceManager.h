@@ -4,13 +4,12 @@
 #include "CXDiagnostic.h"
 #include "CXError.h"
 #include "CXFileManager.h"
+#include "CXTypes.h"
 #include "clang-c/Platform.h"
 
 #ifdef __cplusplus
 extern "C" {
 #endif
-
-typedef void *CXSourceManager;
 
 CINDEX_LINKAGE CXSourceManager clang_SourceManager_create(CXInit_Error *ErrorCode,
                                                           CXDiagnosticsEngine Diag,
