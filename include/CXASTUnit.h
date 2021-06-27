@@ -15,6 +15,7 @@ typedef void *CXASTUnit;
 typedef void *CXASTContext;
 typedef void *CXHeaderSearchOptions;
 typedef void *CXPreprocessorOptions;
+typedef void *CXSema;
 
 CINDEX_LINKAGE CXASTUnit clang_TranslationUnit_getASTUnit(CXTranslationUnit TU);
 
@@ -27,6 +28,8 @@ CINDEX_LINKAGE CXPreprocessorOptions
 clang_ASTUnit_getPreprocessorOpts(CXASTUnit ASTU);
 
 CINDEX_LINKAGE CXDiagnosticsEngine clang_ASTUnit_getDiagnostics(CXASTUnit ASTU);
+
+CINDEX_LINKAGE CXSema clang_ASTUnit_getSema(CXASTUnit ASTU);
 
 #ifdef __cplusplus
 }

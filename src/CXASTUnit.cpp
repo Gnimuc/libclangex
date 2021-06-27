@@ -1,5 +1,6 @@
 #include "CXASTUnit.h"
 #include "clang/Frontend/ASTUnit.h"
+#include "clang/Sema/Sema.h"
 
 CXASTUnit clang_TranslationUnit_getASTUnit(CXTranslationUnit TU) {
   return clang::cxtu::getASTUnit(TU);
@@ -23,4 +24,9 @@ CXPreprocessorOptions clang_ASTUnit_getPreprocessorOpts(CXASTUnit ASTU) {
 CXDiagnosticsEngine clang_ASTUnit_getDiagnostics(CXASTUnit ASTU) {
   auto &Diagnostics = static_cast<clang::ASTUnit *>(ASTU)->getDiagnostics();
   return &Diagnostics;
+}
+
+CXSema clang_ASTUnit_getSema(CXASTUnit ASTU) {
+  auto &Sema = static_cast<clang::ASTUnit *>(ASTU)->getSema();
+  return &Sema;
 }

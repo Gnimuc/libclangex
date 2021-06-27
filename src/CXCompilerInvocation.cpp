@@ -24,6 +24,12 @@ void clang_CompilerInvocation_dispose(CXCompilerInvocation CI) {
   delete static_cast<clang::CompilerInvocation *>(CI);
 }
 
+CXTargetOptions clang_CompilerInvocation_getTargetOpts(CXCompilerInvocation CI) {
+  auto &TargetOpts =
+      static_cast<clang::CompilerInvocation *>(CI)->getTargetOpts();
+  return &TargetOpts;
+}
+
 CXCompilerInvocation clang_CompilerInvocation_createFromCommandLine(
     const char *source_filename, const char *const *command_line_args,
     int num_command_line_args, CXDiagnosticsEngine Diags,
