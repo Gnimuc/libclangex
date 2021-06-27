@@ -11,10 +11,10 @@
 extern "C" {
 #endif
 
-CINDEX_LINKAGE CXSourceManager clang_SourceManager_create(CXInit_Error *ErrorCode,
-                                                          CXDiagnosticsEngine Diag,
+CINDEX_LINKAGE CXSourceManager clang_SourceManager_create(CXDiagnosticsEngine Diag,
                                                           CXFileManager FileMgr,
-                                                          bool UserFilesAreVolatile);
+                                                          bool UserFilesAreVolatile,
+                                                          CXInit_Error *ErrorCode);
 
 CINDEX_LINKAGE void clang_SourceManager_dispose(CXSourceManager SM);
 
