@@ -3,6 +3,7 @@
 
 #include "CIndexer.h"
 #include "CXCodeGenOptions.h"
+#include "CXDiagnostic.h"
 #include "CXTranslationUnit.h"
 #include "clang-c/Platform.h"
 
@@ -14,7 +15,6 @@ typedef void *CXASTUnit;
 typedef void *CXASTContext;
 typedef void *CXHeaderSearchOptions;
 typedef void *CXPreprocessorOptions;
-typedef void *CXDiagnosticsEngine;
 
 CINDEX_LINKAGE CXASTUnit clang_TranslationUnit_getASTUnit(CXTranslationUnit TU);
 
