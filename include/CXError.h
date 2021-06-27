@@ -3,10 +3,6 @@
 
 #include "clang-c/Platform.h"
 
-#ifndef __cplusplus
-typedef int bool;
-#endif
-
 #ifdef __cplusplus
 extern "C" {
 #endif
