@@ -16,8 +16,8 @@ CXMemoryBuffer clang_MemoryBuffer_getMemBufferCopy(const char *InputData,
                                                    unsigned InputDataSize,
                                                    const char *BufferName,
                                                    unsigned BufferNameSize) {
-  auto buffer = llvm::MemoryBuffer::getMemBufferCopy(
-      llvm::StringRef(InputData, InputDataSize),
-      llvm::StringRef(BufferName, BufferNameSize));
+  auto buffer =
+      llvm::MemoryBuffer::getMemBufferCopy(llvm::StringRef(InputData, InputDataSize),
+                                           llvm::StringRef(BufferName, BufferNameSize));
   return buffer.release();
 }

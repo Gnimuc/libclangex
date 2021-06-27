@@ -10,13 +10,16 @@ extern "C" {
 
 typedef void *CXMemoryBuffer;
 
-CINDEX_LINKAGE CXMemoryBuffer clang_MemoryBuffer_getMemBuffer(
-    const char *InputData, unsigned InputDataSize, const char *BufferName,
-    unsigned BufferNameSize, bool RequiresNullTerminator);
+CINDEX_LINKAGE CXMemoryBuffer clang_MemoryBuffer_getMemBuffer(const char *InputData,
+                                                              unsigned InputDataSize,
+                                                              const char *BufferName,
+                                                              unsigned BufferNameSize,
+                                                              bool RequiresNullTerminator);
 
-CINDEX_LINKAGE CXMemoryBuffer clang_MemoryBuffer_getMemBufferCopy(
-    const char *InputData, unsigned InputDataSize, const char *BufferName,
-    unsigned BufferNameSize);
+CINDEX_LINKAGE CXMemoryBuffer clang_MemoryBuffer_getMemBufferCopy(const char *InputData,
+                                                                  unsigned InputDataSize,
+                                                                  const char *BufferName,
+                                                                  unsigned BufferNameSize);
 
 #ifdef __cplusplus
 }

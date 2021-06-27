@@ -4,12 +4,10 @@
 
 CXCodeGenOptions clang_CodeGenOptions_create(CXInit_Error *ErrorCode) {
   CXInit_Error Err = CXInit_NoError;
-  std::unique_ptr<clang::CodeGenOptions> ptr =
-      std::make_unique<clang::CodeGenOptions>();
+  std::unique_ptr<clang::CodeGenOptions> ptr = std::make_unique<clang::CodeGenOptions>();
 
   if (!ptr) {
-    fprintf(stderr,
-            "LIBCLANGEX ERROR: failed to create `clang::CodeGenOptions`\n");
+    fprintf(stderr, "LIBCLANGEX ERROR: failed to create `clang::CodeGenOptions`\n");
     Err = CXInit_CanNotCreate;
   }
 

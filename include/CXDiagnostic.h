@@ -1,9 +1,9 @@
 #ifndef LIBCLANGEX_CXDIAGNOSTIC_H
 #define LIBCLANGEX_CXDIAGNOSTIC_H
 
+#include "CXError.h"
 #include "CXIntrusiveRefCntPtr.h"
 #include "clang-c/Platform.h"
-#include "CXError.h"
 
 #ifdef __cplusplus
 extern "C" {

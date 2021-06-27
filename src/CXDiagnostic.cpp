@@ -9,8 +9,7 @@ CXDiagnosticConsumer clang_DiagnosticConsumer_create(CXInit_Error *ErrorCode) {
       std::make_unique<clang::DiagnosticConsumer>();
 
   if (!ptr) {
-    fprintf(stderr,
-            "LIBCLANGEX ERROR: failed to create `clang::DiagnosticConsumer`\n");
+    fprintf(stderr, "LIBCLANGEX ERROR: failed to create `clang::DiagnosticConsumer`\n");
     Err = CXInit_CanNotCreate;
   }
 
@@ -26,11 +25,9 @@ void clang_DiagnosticConsumer_dispose(CXDiagnosticConsumer DC) {
 
 CXDiagnosticsEngine
 clang_DiagnosticsEngineIntrusiveRefCntPtr_get(CXIntrusiveRefCntPtr ptr) {
-  return static_cast<llvm::IntrusiveRefCntPtr<clang::DiagnosticsEngine> *>(ptr)
-      ->get();
+  return static_cast<llvm::IntrusiveRefCntPtr<clang::DiagnosticsEngine> *>(ptr)->get();
 }
 
-void clang_DiagnosticsEngineIntrusiveRefCntPtr_dispose(
-    CXIntrusiveRefCntPtr ptr) {
+void clang_DiagnosticsEngineIntrusiveRefCntPtr_dispose(CXIntrusiveRefCntPtr ptr) {
   delete static_cast<llvm::IntrusiveRefCntPtr<clang::DiagnosticsEngine> *>(ptr);
 }

@@ -8,8 +8,7 @@ CXDiagnosticOptions clang_DiagnosticOptions_create(CXInit_Error *ErrorCode) {
       std::make_unique<clang::DiagnosticOptions>();
 
   if (!ptr) {
-    fprintf(stderr,
-            "LIBCLANGEX ERROR: failed to create `clang::DiagnosticOptions`\n");
+    fprintf(stderr, "LIBCLANGEX ERROR: failed to create `clang::DiagnosticOptions`\n");
     Err = CXInit_CanNotCreate;
   }
 
