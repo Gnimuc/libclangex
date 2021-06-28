@@ -1,12 +1,10 @@
-cmake_minimum_required(VERSION 3.15.0)
+cmake_minimum_required(VERSION 3.20.0)
 
 project(clangex)
 
 set(target clangex)
 
 add_library(${target} SHARED)
-
-set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 if(EXISTS ${CLANG_DIR})
     message(STATUS "Found Clang directory: " ${CLANG_DIR})
@@ -72,6 +70,7 @@ set(pub_hdrs ${CMAKE_CURRENT_SOURCE_DIR}/include/libclangex.h
              ${CMAKE_CURRENT_SOURCE_DIR}/include/CXTypes.h
             )
 set_target_properties(${target} PROPERTIES PUBLIC_HEADER "${pub_hdrs}")
+set_target_properties(${target} PROPERTIES EXPORT_COMPILE_COMMANDS true) 
 
 target_link_libraries(${target} LINK_PUBLIC ${ClangCPP} ${LLVM})
 
