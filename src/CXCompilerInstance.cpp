@@ -1,5 +1,6 @@
 #include "CXCompilerInstance.h"
 #include "clang/Frontend/CompilerInstance.h"
+#include "clang/Lex/Preprocessor.h"
 #include "llvm/Support/VirtualFileSystem.h"
 #include <cstdio>
 
@@ -105,4 +106,30 @@ CXSourceManager clang_CompilerInstance_getSourceManager(CXCompilerInstance CI) {
 void clang_CompilerInstance_setSourceManager(CXCompilerInstance CI, CXSourceManager SM) {
   static_cast<clang::CompilerInstance *>(CI)->setSourceManager(
       static_cast<clang::SourceManager *>(SM));
+}
+
+void clang_CompilerInstance_setInvocation(CXCompilerInstance CI,
+                                          CXCompilerInvocation CInv) {
+  std::shared_ptr<clang::CompilerInvocation> Invocation(
+      static_cast<clang::CompilerInvocation *>(CInv));
+  static_cast<clang::CompilerInstance *>(CI)->setInvocation(Invocation);
+}
+
+void clang_CompilerInstance_setSema(CXCompilerInstance CI, CXSema S) {
+  static_cast<clang::CompilerInstance *>(CI)->setSema(static_cast<clang::Sema *>(S));
+}
+
+void clang_CompilerInstance_setPreprocessor(CXCompilerInstance CI, CXPreprocessor PP) {
+  std::shared_ptr<clang::Preprocessor> PProc(static_cast<clang::Preprocessor *>(PP));
+  static_cast<clang::CompilerInstance *>(CI)->setPreprocessor(PProc);
+}
+
+void clang_CompilerInstance_setASTContext(CXCompilerInstance CI, CXASTContext Ctx) {
+  static_cast<clang::CompilerInstance *>(CI)->setASTContext(
+      static_cast<clang::ASTContext *>(Ctx));
+}
+
+void clang_CompilerInstance_setASTConsumer(CXCompilerInstance CI, CXASTConsumer Csm) {
+  static_cast<clang::CompilerInstance *>(CI)->setASTConsumer(
+      std::unique_ptr<clang::ASTConsumer>(static_cast<clang::ASTConsumer *>(Csm)));
 }

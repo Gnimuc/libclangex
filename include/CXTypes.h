@@ -24,9 +24,10 @@ typedef void *CXSema;
 // Preprocessor
 typedef void *CXPreprocessor;
 
-// ASTUnit
+// AST
 typedef void *CXASTUnit;
 typedef void *CXASTContext;
+typedef void *CXASTConsumer;
 
 // CompilerInstance
 typedef void *CXCompilerInstance;

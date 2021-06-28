@@ -60,6 +60,21 @@ CINDEX_LINKAGE void clang_CompilerInstance_setSourceManager(CXCompilerInstance C
 CINDEX_LINKAGE void clang_CompilerInstance_createSourceManager(CXCompilerInstance CI,
                                                                CXFileManager FileMgr);
 
+// Invocation
+CINDEX_LINKAGE void clang_CompilerInstance_setInvocation(CXCompilerInstance CI,
+                                                         CXCompilerInvocation CInv);
+
+// Sema
+CINDEX_LINKAGE void clang_CompilerInstance_setSema(CXCompilerInstance CI, CXSema S);
+
+// Preprocesser
+CINDEX_LINKAGE void clang_CompilerInstance_setPreprocessor(CXCompilerInstance CI, CXPreprocessor PP);
+
+// AST
+CINDEX_LINKAGE void clang_CompilerInstance_setASTContext(CXCompilerInstance CI, CXASTContext Ctx);
+CINDEX_LINKAGE void clang_CompilerInstance_setASTConsumer(CXCompilerInstance CI, CXASTConsumer Csm);
+
+
 #ifdef __cplusplus
 }
 #endif
