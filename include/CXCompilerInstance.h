@@ -70,9 +70,11 @@ CINDEX_LINKAGE void clang_CompilerInstance_setSema(CXCompilerInstance CI, CXSema
 // Preprocesser
 CINDEX_LINKAGE void clang_CompilerInstance_setPreprocessor(CXCompilerInstance CI, CXPreprocessor PP);
 
-// AST
+// ASTContext
 CINDEX_LINKAGE void clang_CompilerInstance_setASTContext(CXCompilerInstance CI, CXASTContext Ctx);
-CINDEX_LINKAGE void clang_CompilerInstance_setASTConsumer(CXCompilerInstance CI, CXASTConsumer Csm);
+
+// ASTConsumer
+CINDEX_LINKAGE void clang_CompilerInstance_setCodeGenerator(CXCompilerInstance CI, CXCodeGenerator CG);
 
 
 #ifdef __cplusplus

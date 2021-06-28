@@ -1,4 +1,6 @@
 #include "CXCompilerInstance.h"
+#include "CXCodeGen.h"
+#include "clang/CodeGen/ModuleBuilder.h"
 #include "clang/Frontend/CompilerInstance.h"
 #include "clang/Lex/Preprocessor.h"
 #include "llvm/Support/VirtualFileSystem.h"
@@ -129,7 +131,7 @@ void clang_CompilerInstance_setASTContext(CXCompilerInstance CI, CXASTContext Ct
       static_cast<clang::ASTContext *>(Ctx));
 }
 
-void clang_CompilerInstance_setASTConsumer(CXCompilerInstance CI, CXASTConsumer Csm) {
+void clang_CompilerInstance_setCodeGenerator(CXCompilerInstance CI, CXCodeGenerator CG) {
   static_cast<clang::CompilerInstance *>(CI)->setASTConsumer(
-      std::unique_ptr<clang::ASTConsumer>(static_cast<clang::ASTConsumer *>(Csm)));
+      std::unique_ptr<clang::ASTConsumer>(static_cast<clang::CodeGenerator *>(CG)));
 }
