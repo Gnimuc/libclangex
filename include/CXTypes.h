@@ -48,6 +48,9 @@ typedef void *CXDiagnosticOptions;
 typedef void *CXDiagnosticConsumer;
 typedef void *CXDiagnosticsEngine;
 
+// CodeGen
+typedef void *CXCodeGenerator;
+
 #ifdef __cplusplus
 }
 #endif
