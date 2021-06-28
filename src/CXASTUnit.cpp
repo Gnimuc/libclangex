@@ -1,4 +1,6 @@
 #include "CXASTUnit.h"
+#include "CIndexer.h"
+#include "CXTranslationUnit.h"
 #include "clang/Frontend/ASTUnit.h"
 #include "clang/Sema/Sema.h"
 

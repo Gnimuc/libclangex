@@ -2,8 +2,8 @@
 #define LIBCLANGEX_CXFILEMANAGER_H
 
 #include "CXError.h"
-#include "CXString.h"
 #include "CXTypes.h"
+#include "clang-c/CXString.h"
 #include "clang-c/Platform.h"
 
 #ifdef __cplusplus

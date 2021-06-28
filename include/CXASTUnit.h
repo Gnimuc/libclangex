@@ -1,10 +1,9 @@
 #ifndef LIBCLANGEX_CXASTUNIT_H
 #define LIBCLANGEX_CXASTUNIT_H
 
-#include "CIndexer.h"
 #include "CXTypes.h"
-#include "CXTranslationUnit.h"
 #include "clang-c/Platform.h"
+#include "clang-c/Index.h"
 
 #ifdef __cplusplus
 extern "C" {

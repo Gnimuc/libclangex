@@ -64,6 +64,9 @@ CINDEX_LINKAGE void clang_CompilerInstance_createSourceManager(CXCompilerInstanc
 CINDEX_LINKAGE void clang_CompilerInstance_setInvocation(CXCompilerInstance CI,
                                                          CXCompilerInvocation CInv);
 
+// Target
+CINDEX_LINKAGE void clang_CompilerInstance_setTarget(CXCompilerInstance CI);
+
 // Sema
 CINDEX_LINKAGE void clang_CompilerInstance_setSema(CXCompilerInstance CI, CXSema S);
 

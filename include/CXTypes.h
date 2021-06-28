@@ -3,6 +3,7 @@
 
 #include "clang-c/Platform.h"
 #include <time.h>
+#include <stdbool.h>
 
 #ifdef __cplusplus
 extern "C" {

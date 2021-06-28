@@ -1,5 +1,6 @@
 #include "CXCompilerInstance.h"
 #include "CXCodeGen.h"
+#include "clang/Basic/TargetInfo.h"
 #include "clang/CodeGen/ModuleBuilder.h"
 #include "clang/Frontend/CompilerInstance.h"
 #include "clang/Lex/Preprocessor.h"
@@ -115,6 +116,13 @@ void clang_CompilerInstance_setInvocation(CXCompilerInstance CI,
   std::shared_ptr<clang::CompilerInvocation> Invocation(
       static_cast<clang::CompilerInvocation *>(CInv));
   static_cast<clang::CompilerInstance *>(CI)->setInvocation(Invocation);
+}
+
+void clang_CompilerInstance_setTarget(CXCompilerInstance CI) {
+  auto compiler = static_cast<clang::CompilerInstance *>(CI);
+  compiler->setTarget(clang::TargetInfo::CreateTargetInfo(
+      compiler->getDiagnostics(),
+      std::make_shared<clang::TargetOptions>(compiler->getTargetOpts())));
 }
 
 void clang_CompilerInstance_setSema(CXCompilerInstance CI, CXSema S) {
