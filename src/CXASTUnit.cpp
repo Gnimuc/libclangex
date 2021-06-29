@@ -42,3 +42,8 @@ CXFileManager clang_ASTUnit_getSourceManager(CXASTUnit ASTU) {
   auto &SourceMgr = static_cast<clang::ASTUnit *>(ASTU)->getSourceManager();
   return &SourceMgr;
 }
+
+CXPreprocessor clang_ASTUnit_getPreprocessor(CXASTUnit ASTU) {
+  auto &PP = static_cast<clang::ASTUnit *>(ASTU)->getPreprocessor();
+  return &PP;
+}
