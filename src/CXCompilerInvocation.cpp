@@ -36,6 +36,9 @@ CXCompilerInvocation clang_CompilerInvocation_createFromCommandLine(
 
   Args->insert(Args->end(), command_line_args, command_line_args + num_command_line_args);
 
+  if (source_filename)
+    Args->push_back(source_filename);
+
   CXInit_Error Err = CXInit_NoError;
   std::unique_ptr<clang::CompilerInvocation> ptr = clang::createInvocationFromCommandLine(
       llvm::makeArrayRef(Args->data(), Args->data() + Args->size()),
