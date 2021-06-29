@@ -32,7 +32,8 @@ bool clang_CompilerInstance_hasDiagnostics(CXCompilerInstance CI) {
 }
 
 CXDiagnosticsEngine clang_CompilerInstance_getDiagnostics(CXCompilerInstance CI) {
-  return &(static_cast<clang::CompilerInstance *>(CI)->getDiagnostics());
+  auto &Diag = static_cast<clang::CompilerInstance *>(CI)->getDiagnostics();
+  return &Diag;
 }
 
 void clang_CompilerInstance_setDiagnostics(CXCompilerInstance CI,
@@ -42,7 +43,8 @@ void clang_CompilerInstance_setDiagnostics(CXCompilerInstance CI,
 }
 
 CXDiagnosticConsumer clang_CompilerInstance_getDiagnosticClient(CXCompilerInstance CI) {
-  return &(static_cast<clang::CompilerInstance *>(CI)->getDiagnosticClient());
+  auto &DC = static_cast<clang::CompilerInstance *>(CI)->getDiagnosticClient();
+  return &DC;
 }
 
 void clang_CompilerInstance_createDiagnostics(CXCompilerInstance CI,
@@ -69,7 +71,8 @@ bool clang_CompilerInstance_hasFileManager(CXCompilerInstance CI) {
 }
 
 CXFileManager clang_CompilerInstance_getFileManager(CXCompilerInstance CI) {
-  return &(static_cast<clang::CompilerInstance *>(CI)->getFileManager());
+  auto &FileMgr = static_cast<clang::CompilerInstance *>(CI)->getFileManager();
+  return &FileMgr;
 }
 
 void clang_CompilerInstance_setFileManager(CXCompilerInstance CI, CXFileManager FM) {
@@ -103,7 +106,8 @@ bool clang_CompilerInstance_hasSourceManager(CXCompilerInstance CI) {
 }
 
 CXSourceManager clang_CompilerInstance_getSourceManager(CXCompilerInstance CI) {
-  return &(static_cast<clang::CompilerInstance *>(CI)->getSourceManager());
+  auto &SrcMgr = static_cast<clang::CompilerInstance *>(CI)->getSourceManager();
+  return &SrcMgr;
 }
 
 void clang_CompilerInstance_setSourceManager(CXCompilerInstance CI, CXSourceManager SM) {
@@ -123,6 +127,11 @@ void clang_CompilerInstance_setTarget(CXCompilerInstance CI) {
   compiler->setTarget(clang::TargetInfo::CreateTargetInfo(
       compiler->getDiagnostics(),
       std::make_shared<clang::TargetOptions>(compiler->getTargetOpts())));
+}
+
+CXSema clang_CompilerInstance_getSema(CXCompilerInstance CI) {
+  auto &Sema = static_cast<clang::CompilerInstance *>(CI)->getSema();
+  return &Sema;
 }
 
 void clang_CompilerInstance_setSema(CXCompilerInstance CI, CXSema S) {

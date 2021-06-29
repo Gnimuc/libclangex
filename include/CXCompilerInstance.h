@@ -68,6 +68,7 @@ CINDEX_LINKAGE void clang_CompilerInstance_setInvocation(CXCompilerInstance CI,
 CINDEX_LINKAGE void clang_CompilerInstance_setTarget(CXCompilerInstance CI);
 
 // Sema
+CINDEX_LINKAGE CXSema clang_CompilerInstance_getSema(CXCompilerInstance CI);
 CINDEX_LINKAGE void clang_CompilerInstance_setSema(CXCompilerInstance CI, CXSema S);
 
 // Preprocesser

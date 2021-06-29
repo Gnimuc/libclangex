@@ -18,7 +18,7 @@
 extern "C" {
 #endif
 
-// clang_create_CodeGenModule
+CINDEX_LINKAGE void clang_ParseAST(CXSema Sema, bool PrintStats, bool SkipFunctionBodies);
 
 #ifdef __cplusplus
 }

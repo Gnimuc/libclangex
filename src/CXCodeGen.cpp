@@ -2,6 +2,7 @@
 #include "clang/CodeGen/ModuleBuilder.h"
 #include "clang/Frontend/CompilerInstance.h"
 #include "llvm/IR/LLVMContext.h"
+#include "llvm/IR/Module.h"
 
 CXCodeGenerator clang_CreateLLVMCodeGen(CXCompilerInstance CI, LLVMContextRef LLVMCtx,
                                         const char *ModuleName) {
@@ -10,4 +11,8 @@ CXCodeGenerator clang_CreateLLVMCodeGen(CXCompilerInstance CI, LLVMContextRef LL
                                   compiler->getHeaderSearchOpts(),
                                   compiler->getPreprocessorOpts(),
                                   compiler->getCodeGenOpts(), *llvm::unwrap(LLVMCtx));
+}
+
+LLVMModuleRef clang_CodeGenerator_getLLVMModule(CXCodeGenerator CG) {
+  return llvm::wrap(static_cast<clang::CodeGenerator *>(CG)->GetModule());
 }

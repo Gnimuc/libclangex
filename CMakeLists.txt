@@ -45,6 +45,7 @@ target_sources(${target} PRIVATE src/CXSourceManager.cpp)
 
 
 # set(CMAKE_SKIP_RPATH ON)
+# SET(CMAKE_INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/lib")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-rtti")
 
 target_include_directories(${target} PUBLIC
