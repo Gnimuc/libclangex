@@ -1,6 +1,7 @@
 #include "CXFileManager.h"
 #include "CXString.h"
 #include "clang/Basic/FileManager.h"
+#include "llvm/Support/MemoryBuffer.h"
 #include <cstdio>
 
 CXFileManager clang_FileManager_create(CXInit_Error *ErrorCode) {
@@ -30,6 +31,18 @@ CXDirectoryEntry clang_FileManager_getDirectory(CXFileManager FM, const char *Di
                                                            CacheFailure));
 }
 
+void clang_FileManager_PrintStats(CXFileManager FM) {
+  static_cast<clang::FileManager *>(FM)->PrintStats();
+}
+
+CXMemoryBuffer clang_FileManager_getBufferForFile(CXFileManager FM, CXFileEntry FE,
+                                                  bool isVolatile,
+                                                  bool RequiresNullTerminator) {
+  auto MB = static_cast<clang::FileManager *>(FM)->getBufferForFile(
+      static_cast<clang::FileEntry *>(FE), isVolatile, RequiresNullTerminator);
+  return MB->release();
+}
+
 CXFileEntry clang_FileManager_getFile(CXFileManager FM, const char *Filename, bool OpenFile,
                                       bool CacheFailure) {
   return const_cast<clang::FileEntry *>(*static_cast<clang::FileManager *>(FM)->getFile(
@@ -41,6 +54,37 @@ CXFileEntry clang_FileManager_getVirtualFile(CXFileManager FM, const char *Filen
   return const_cast<clang::FileEntry *>(
       static_cast<clang::FileManager *>(FM)->getVirtualFile(llvm::StringRef(Filename), Size,
                                                             ModificationTime));
+}
+
+CXFileEntryRef clang_FileManager_getFileRef(CXFileManager FM, const char *Filename,
+                                            bool OpenFile, bool CacheFailure) {
+  std::unique_ptr<clang::FileEntryRef> ptr = std::make_unique<clang::FileEntryRef>(
+      static_cast<clang::FileManager *>(FM)
+          ->getFileRef(Filename, OpenFile, CacheFailure)
+          .get());
+  return ptr.release();
+}
+
+void clang_FileEntryRef_dispose(CXFileEntryRef FER) {
+  delete static_cast<clang::FileEntryRef *>(FER);
+}
+
+CXFileEntry clang_FileEntryRef_getFileEntry(CXFileEntryRef FER) {
+  auto &FE = const_cast<clang::FileEntry &>(
+      static_cast<clang::FileEntryRef *>(FER)->getFileEntry());
+  return &FE;
+}
+
+const char *clang_DirectoryEntry_getName(CXDirectoryEntry DE) {
+  return static_cast<clang::DirectoryEntry *>(DE)->getName().data();
+}
+
+const char *clang_FileEntry_getName(CXFileEntry FE) {
+  return static_cast<clang::FileEntry *>(FE)->getName().data();
+}
+
+const char *clang_FileEntry_tryGetRealPathName(CXFileEntry FE) {
+  return static_cast<clang::FileEntry *>(FE)->tryGetRealPathName().data();
 }
 
 bool clang_FileEntry_isValid(CXFileEntry FE) {

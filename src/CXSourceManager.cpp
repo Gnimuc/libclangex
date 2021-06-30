@@ -1,5 +1,7 @@
 #include "CXSourceManager.h"
+#include "clang/Basic/FileManager.h"
 #include "clang/Basic/SourceManager.h"
+#include "llvm/Support/MemoryBuffer.h"
 #include <cstdio>
 
 CXSourceManager clang_SourceManager_create(CXDiagnosticsEngine Diag, CXFileManager FileMgr,
@@ -23,4 +25,23 @@ CXSourceManager clang_SourceManager_create(CXDiagnosticsEngine Diag, CXFileManag
 
 void clang_SourceManager_dispose(CXSourceManager SM) {
   delete static_cast<clang::SourceManager *>(SM);
+}
+
+void clang_SourceManager_overrideFileContents(CXSourceManager SM, CXFileEntry FE,
+                                              CXMemoryBuffer MB) {
+  auto SourceMgr = static_cast<clang::SourceManager *>(SM);
+  SourceMgr->overrideFileContents(
+      static_cast<clang::FileEntry *>(FE),
+      std::unique_ptr<llvm::MemoryBuffer>(static_cast<llvm::MemoryBuffer *>(MB)));
+}
+
+void clang_SourceManager_createAndSetMainFileID(CXSourceManager SM, CXFileEntry FE) {
+  auto SourceMgr = static_cast<clang::SourceManager *>(SM);
+  SourceMgr->setMainFileID(SourceMgr->createFileID(static_cast<clang::FileEntry *>(FE),
+                                                   clang::SourceLocation(),
+                                                   clang::SrcMgr::C_User));
+}
+
+int clang_SourceManager_getMainFileID_HashValue(CXSourceManager SM) {
+  return static_cast<clang::SourceManager *>(SM)->getMainFileID().getHashValue();
 }

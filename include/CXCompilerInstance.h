@@ -68,18 +68,23 @@ CINDEX_LINKAGE void clang_CompilerInstance_setInvocation(CXCompilerInstance CI,
 CINDEX_LINKAGE void clang_CompilerInstance_setTarget(CXCompilerInstance CI);
 
 // Sema
+CINDEX_LINKAGE void clang_CompilerInstance_createSema(CXCompilerInstance CI);
 CINDEX_LINKAGE CXSema clang_CompilerInstance_getSema(CXCompilerInstance CI);
 CINDEX_LINKAGE void clang_CompilerInstance_setSema(CXCompilerInstance CI, CXSema S);
 
 // Preprocesser
-CINDEX_LINKAGE void clang_CompilerInstance_setPreprocessor(CXCompilerInstance CI, CXPreprocessor PP);
+CINDEX_LINKAGE void clang_CompilerInstance_createPreprocessor(CXCompilerInstance CI);
+CINDEX_LINKAGE void clang_CompilerInstance_setPreprocessor(CXCompilerInstance CI,
+                                                           CXPreprocessor PP);
 
 // ASTContext
-CINDEX_LINKAGE void clang_CompilerInstance_setASTContext(CXCompilerInstance CI, CXASTContext Ctx);
+CINDEX_LINKAGE void clang_CompilerInstance_createASTContext(CXCompilerInstance CI);
+CINDEX_LINKAGE void clang_CompilerInstance_setASTContext(CXCompilerInstance CI,
+                                                         CXASTContext Ctx);
 
 // ASTConsumer
-CINDEX_LINKAGE void clang_CompilerInstance_setCodeGenerator(CXCompilerInstance CI, CXCodeGenerator CG);
-
+CINDEX_LINKAGE void clang_CompilerInstance_setCodeGenerator(CXCompilerInstance CI,
+                                                            CXCodeGenerator CG);
 
 #ifdef __cplusplus
 }

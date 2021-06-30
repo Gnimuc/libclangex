@@ -2,8 +2,8 @@
 #define LIBCLANGEX_CXTYPES_H
 
 #include "clang-c/Platform.h"
-#include <time.h>
 #include <stdbool.h>
+#include <time.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -39,6 +39,7 @@ typedef void *CXCompilerInvocation;
 // FileManager
 typedef void *CXDirectoryEntry;
 typedef void *CXFileEntry;
+typedef void *CXFileEntryRef; // FIXME: make it a stack value instead of opaque pointer
 typedef void *CXFileManager;
 
 // SourceManager

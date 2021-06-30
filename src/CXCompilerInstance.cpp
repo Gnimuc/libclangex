@@ -115,6 +115,12 @@ void clang_CompilerInstance_setSourceManager(CXCompilerInstance CI, CXSourceMana
       static_cast<clang::SourceManager *>(SM));
 }
 
+void clang_CompilerInstance_createSourceManager(CXCompilerInstance CI,
+                                                CXFileManager FileMgr) {
+  auto FM = static_cast<clang::FileManager *>(FileMgr);
+  static_cast<clang::CompilerInstance *>(CI)->createSourceManager(*FM);
+}
+
 void clang_CompilerInstance_setInvocation(CXCompilerInstance CI,
                                           CXCompilerInvocation CInv) {
   std::shared_ptr<clang::CompilerInvocation> Invocation(
@@ -127,6 +133,11 @@ void clang_CompilerInstance_setTarget(CXCompilerInstance CI) {
   compiler->setTarget(clang::TargetInfo::CreateTargetInfo(
       compiler->getDiagnostics(),
       std::make_shared<clang::TargetOptions>(compiler->getTargetOpts())));
+  compiler->getTarget().adjust(compiler->getLangOpts());
+}
+
+void clang_CompilerInstance_createSema(CXCompilerInstance CI) {
+  static_cast<clang::CompilerInstance *>(CI)->createSema(clang::TU_Prefix, nullptr);
 }
 
 CXSema clang_CompilerInstance_getSema(CXCompilerInstance CI) {
@@ -138,6 +149,10 @@ void clang_CompilerInstance_setSema(CXCompilerInstance CI, CXSema S) {
   static_cast<clang::CompilerInstance *>(CI)->setSema(static_cast<clang::Sema *>(S));
 }
 
+void clang_CompilerInstance_createPreprocessor(CXCompilerInstance CI) {
+  static_cast<clang::CompilerInstance *>(CI)->createPreprocessor(clang::TU_Prefix);
+}
+
 void clang_CompilerInstance_setPreprocessor(CXCompilerInstance CI, CXPreprocessor PP) {
   std::shared_ptr<clang::Preprocessor> PProc(static_cast<clang::Preprocessor *>(PP));
   static_cast<clang::CompilerInstance *>(CI)->setPreprocessor(PProc);
@@ -146,6 +161,10 @@ void clang_CompilerInstance_setPreprocessor(CXCompilerInstance CI, CXPreprocesso
 void clang_CompilerInstance_setASTContext(CXCompilerInstance CI, CXASTContext Ctx) {
   static_cast<clang::CompilerInstance *>(CI)->setASTContext(
       static_cast<clang::ASTContext *>(Ctx));
+}
+
+void clang_CompilerInstance_createASTContext(CXCompilerInstance CI) {
+  static_cast<clang::CompilerInstance *>(CI)->createASTContext();
 }
 
 void clang_CompilerInstance_setCodeGenerator(CXCompilerInstance CI, CXCodeGenerator CG) {
