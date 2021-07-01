@@ -1,6 +1,7 @@
 #include "CXCompilerInvocation.h"
 #include "clang/Frontend/CompilerInvocation.h"
 #include "clang/Frontend/Utils.h"
+#include "llvm/ADT/IntrusiveRefCntPtr.h"
 #include <cstdio>
 
 CXCompilerInvocation clang_CompilerInvocation_create(CXInit_Error *ErrorCode) {
@@ -24,8 +25,13 @@ void clang_CompilerInvocation_dispose(CXCompilerInvocation CI) {
 }
 
 CXTargetOptions clang_CompilerInvocation_getTargetOpts(CXCompilerInvocation CI) {
-  auto &TargetOpts = static_cast<clang::CompilerInvocation *>(CI)->getTargetOpts();
-  return &TargetOpts;
+  auto &TargetOps = static_cast<clang::CompilerInvocation *>(CI)->getTargetOpts();
+  return &TargetOps;
+}
+
+CXCodeGenOptions clang_CompilerInvocation_getCodeGenOpts(CXCompilerInvocation CI) {
+  auto &CodeGenOps = static_cast<clang::CompilerInvocation *>(CI)->getCodeGenOpts();
+  return &CodeGenOps;
 }
 
 CXCompilerInvocation clang_CompilerInvocation_createFromCommandLine(
@@ -42,7 +48,8 @@ CXCompilerInvocation clang_CompilerInvocation_createFromCommandLine(
   CXInit_Error Err = CXInit_NoError;
   std::unique_ptr<clang::CompilerInvocation> ptr = clang::createInvocationFromCommandLine(
       llvm::makeArrayRef(Args->data(), Args->data() + Args->size()),
-      static_cast<clang::DiagnosticsEngine *>(Diags));
+      llvm::IntrusiveRefCntPtr<clang::DiagnosticsEngine>(
+          static_cast<clang::DiagnosticsEngine *>(Diags)));
 
   if (!ptr) {
     fprintf(stderr, "LIBCLANGEX ERROR: failed to create `clang::CompilerInvocation`\n");

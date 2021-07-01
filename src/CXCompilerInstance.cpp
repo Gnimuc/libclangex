@@ -121,11 +121,16 @@ void clang_CompilerInstance_createSourceManager(CXCompilerInstance CI,
   static_cast<clang::CompilerInstance *>(CI)->createSourceManager(*FM);
 }
 
+bool clang_CompilerInstance_hasInvocation(CXCompilerInstance CI) {
+  return static_cast<clang::CompilerInstance *>(CI)->hasInvocation();
+}
+
 void clang_CompilerInstance_setInvocation(CXCompilerInstance CI,
                                           CXCompilerInvocation CInv) {
   std::shared_ptr<clang::CompilerInvocation> Invocation(
       static_cast<clang::CompilerInvocation *>(CInv));
-  static_cast<clang::CompilerInstance *>(CI)->setInvocation(Invocation);
+  static_cast<clang::CompilerInstance *>(CI)->setInvocation(
+      Invocation); // std::move(Invocation)
 }
 
 void clang_CompilerInstance_setTarget(CXCompilerInstance CI) {

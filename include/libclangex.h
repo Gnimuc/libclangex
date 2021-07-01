@@ -10,6 +10,7 @@
 #include "CXMemoryBuffer.h"
 #include "CXSourceManager.h"
 #include "CXTypes.h"
+#include "CXOptions.h"
 #include "clang-c/Platform.h"
 
 #ifdef __cplusplus

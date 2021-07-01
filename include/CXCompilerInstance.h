@@ -61,6 +61,8 @@ CINDEX_LINKAGE void clang_CompilerInstance_createSourceManager(CXCompilerInstanc
                                                                CXFileManager FileMgr);
 
 // Invocation
+CINDEX_LINKAGE bool clang_CompilerInstance_hasInvocation(CXCompilerInstance CI);
+
 CINDEX_LINKAGE void clang_CompilerInstance_setInvocation(CXCompilerInstance CI,
                                                          CXCompilerInvocation CInv);
 
