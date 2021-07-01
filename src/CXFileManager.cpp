@@ -43,11 +43,11 @@ CXMemoryBuffer clang_FileManager_getBufferForFile(CXFileManager FM, CXFileEntry 
   return MB->release();
 }
 
-CXFileEntry clang_FileManager_getFile(CXFileManager FM, const char *Filename, bool OpenFile,
-                                      bool CacheFailure) {
-  return const_cast<clang::FileEntry *>(*static_cast<clang::FileManager *>(FM)->getFile(
-      llvm::StringRef(Filename), OpenFile, CacheFailure));
-}
+// CXFileEntry clang_FileManager_getFile(CXFileManager FM, const char *Filename, bool OpenFile,
+//                                       bool CacheFailure) {
+//   return const_cast<clang::FileEntry *>(*static_cast<clang::FileManager *>(FM)->getFile(
+//       llvm::StringRef(Filename), OpenFile, CacheFailure));
+// }
 
 CXFileEntry clang_FileManager_getVirtualFile(CXFileManager FM, const char *Filename,
                                              unsigned Size, time_t ModificationTime) {
