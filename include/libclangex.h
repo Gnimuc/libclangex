@@ -7,7 +7,6 @@
 #include "CXCompilerInstance.h"
 #include "CXCompilerInvocation.h"
 #include "CXDiagnostic.h"
-#include "CXDiagnosticOptions.h"
 #include "CXFileManager.h"
 #include "CXMemoryBuffer.h"
 #include "CXSourceManager.h"

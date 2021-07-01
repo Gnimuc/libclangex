@@ -38,7 +38,6 @@ target_sources(${target} PRIVATE src/CXCodeGenOptions.cpp)
 target_sources(${target} PRIVATE src/CXCompilerInstance.cpp)
 target_sources(${target} PRIVATE src/CXCompilerInvocation.cpp)
 target_sources(${target} PRIVATE src/CXDiagnostic.cpp)
-target_sources(${target} PRIVATE src/CXDiagnosticOptions.cpp)
 target_sources(${target} PRIVATE src/CXFileManager.cpp)
 target_sources(${target} PRIVATE src/CXMemoryBuffer.cpp)
 target_sources(${target} PRIVATE src/CXSourceManager.cpp)
@@ -64,7 +63,6 @@ set(pub_hdrs ${CMAKE_CURRENT_SOURCE_DIR}/include/libclangex.h
              ${CMAKE_CURRENT_SOURCE_DIR}/include/CXCompilerInstance.h
              ${CMAKE_CURRENT_SOURCE_DIR}/include/CXCompilerInvocation.h
              ${CMAKE_CURRENT_SOURCE_DIR}/include/CXDiagnostic.h
-             ${CMAKE_CURRENT_SOURCE_DIR}/include/CXDiagnosticOptions.h
              ${CMAKE_CURRENT_SOURCE_DIR}/include/CXError.h
              ${CMAKE_CURRENT_SOURCE_DIR}/include/CXFileManager.h
              ${CMAKE_CURRENT_SOURCE_DIR}/include/CXMemoryBuffer.h

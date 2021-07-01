@@ -20,6 +20,11 @@ clang_DiagnosticsEngineIntrusiveRefCntPtr_get(CXIntrusiveRefCntPtr ptr);
 CINDEX_LINKAGE void
 clang_DiagnosticsEngineIntrusiveRefCntPtr_dispose(CXIntrusiveRefCntPtr ptr);
 
+// DiagnosticOptions
+CINDEX_LINKAGE CXDiagnosticOptions clang_DiagnosticOptions_create(CXInit_Error *ErrorCode);
+
+CINDEX_LINKAGE void clang_DiagnosticOptions_dispose(CXDiagnosticOptions DO);
+
 #ifdef __cplusplus
 }
 #endif
