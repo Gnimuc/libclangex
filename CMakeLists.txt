@@ -34,7 +34,6 @@ message(STATUS "Found LLVM: ${LLVM}")
 target_sources(${target} PRIVATE src/libclangex.cpp)
 target_sources(${target} PRIVATE src/CXASTUnit.cpp)
 target_sources(${target} PRIVATE src/CXCodeGen.cpp)
-target_sources(${target} PRIVATE src/CXCodeGenOptions.cpp)
 target_sources(${target} PRIVATE src/CXCompilerInstance.cpp)
 target_sources(${target} PRIVATE src/CXCompilerInvocation.cpp)
 target_sources(${target} PRIVATE src/CXDiagnostic.cpp)
@@ -59,7 +58,6 @@ target_compile_features(${target} PRIVATE cxx_std_14)
 set(pub_hdrs ${CMAKE_CURRENT_SOURCE_DIR}/include/libclangex.h
              ${CMAKE_CURRENT_SOURCE_DIR}/include/CXASTUnit.h
              ${CMAKE_CURRENT_SOURCE_DIR}/include/CXCodeGen.h
-             ${CMAKE_CURRENT_SOURCE_DIR}/include/CXCodeGenOptions.h
              ${CMAKE_CURRENT_SOURCE_DIR}/include/CXCompilerInstance.h
              ${CMAKE_CURRENT_SOURCE_DIR}/include/CXCompilerInvocation.h
              ${CMAKE_CURRENT_SOURCE_DIR}/include/CXDiagnostic.h

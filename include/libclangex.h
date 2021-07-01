@@ -3,7 +3,6 @@
 
 #include "CXASTUnit.h"
 #include "CXCodeGen.h"
-#include "CXCodeGenOptions.h"
 #include "CXCompilerInstance.h"
 #include "CXCompilerInvocation.h"
 #include "CXDiagnostic.h"
