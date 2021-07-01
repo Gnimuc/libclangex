@@ -14,3 +14,8 @@ mkdir build && cd build
 cmake .. -DLLVM_DIR=${LLVM_DIR} -DCLANG_DIR=${CLANG_DIR}
 make
 ```
+
+## License
+libclangex is primarily distributed under the terms of both the MIT license and the Apache License (Version 2.0) with LLVM exceptions.
+
+See LICENSE-APACHE, LICENSE-MIT, and COPYRIGHT for details.
