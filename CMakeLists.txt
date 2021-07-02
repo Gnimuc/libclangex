@@ -4,6 +4,8 @@ project(clangex)
 
 set(target clangex)
 
+option(LLVM_ASSERT_BUILD "build with LLVM assert" OFF)
+
 add_library(${target} SHARED)
 
 if(EXISTS ${CLANG_DIR})
@@ -55,6 +57,13 @@ target_include_directories(${target} PUBLIC
     $<INSTALL_INTERFACE:include>)
     
 target_compile_features(${target} PRIVATE cxx_std_14)
+
+if(LLVM_ASSERT_BUILD)
+    message(STATUS "Build with LLVM assert. This means Julia should also be built with `LLVM_ASSERTIONS=1`.")
+    target_compile_definitions(${target} PUBLIC "LLVM_DISABLE_ABI_BREAKING_CHECKS_ENFORCING=1")  # hack for the assert build
+else()
+    message(STATUS "Build without LLVM assert."
+endif()
 
 set(pub_hdrs ${CMAKE_CURRENT_SOURCE_DIR}/include/libclangex.h
              ${CMAKE_CURRENT_SOURCE_DIR}/include/CXASTUnit.h
