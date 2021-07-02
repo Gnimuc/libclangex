@@ -14,6 +14,11 @@ clang_CompilerInvocation_create(CXInit_Error *ErrorCode);
 
 CINDEX_LINKAGE void clang_CompilerInvocation_dispose(CXCompilerInvocation CI);
 
+CINDEX_LINKAGE CXCompilerInvocation clang_CompilerInvocation_createFromCommandLine(
+    const char **command_line_args_with_src, int num_command_line_args,
+    CXDiagnosticsEngine Diags, CXInit_Error *ErrorCode);
+
+// Options
 CINDEX_LINKAGE CXTargetOptions
 clang_CompilerInvocation_getTargetOpts(CXCompilerInvocation CI);
 

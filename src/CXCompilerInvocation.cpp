@@ -34,20 +34,14 @@ CXCodeGenOptions clang_CompilerInvocation_getCodeGenOpts(CXCompilerInvocation CI
   return &CodeGenOps;
 }
 
+#include <iostream>
+
 CXCompilerInvocation clang_CompilerInvocation_createFromCommandLine(
-    const char *source_filename, const char *const *command_line_args,
-    int num_command_line_args, CXDiagnosticsEngine Diags, CXInit_Error *ErrorCode) {
-  std::unique_ptr<std::vector<const char *>> Args(
-      std::make_unique<std::vector<const char *>>());
-
-  Args->insert(Args->end(), command_line_args, command_line_args + num_command_line_args);
-
-  if (source_filename)
-    Args->push_back(source_filename);
-
+    const char **command_line_args_with_src, int num_command_line_args,
+    CXDiagnosticsEngine Diags, CXInit_Error *ErrorCode) {
   CXInit_Error Err = CXInit_NoError;
   std::unique_ptr<clang::CompilerInvocation> ptr = clang::createInvocationFromCommandLine(
-      llvm::makeArrayRef(Args->data(), Args->data() + Args->size()),
+      llvm::makeArrayRef(command_line_args_with_src, num_command_line_args),
       llvm::IntrusiveRefCntPtr<clang::DiagnosticsEngine>(
           static_cast<clang::DiagnosticsEngine *>(Diags)));
 
