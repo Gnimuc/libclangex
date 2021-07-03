@@ -64,6 +64,26 @@ void clang_DiagnosticConsumer_dispose(CXDiagnosticConsumer DC) {
   delete static_cast<clang::DiagnosticConsumer *>(DC);
 }
 
+CXIgnoringDiagConsumer clang_IgnoringDiagConsumer_create(CXInit_Error *ErrorCode) {
+  CXInit_Error Err = CXInit_NoError;
+  std::unique_ptr<clang::IgnoringDiagConsumer> ptr =
+      std::make_unique<clang::IgnoringDiagConsumer>();
+
+  if (!ptr) {
+    fprintf(stderr, "LIBCLANGEX ERROR: failed to create `clang::IgnoringDiagConsumer`\n");
+    Err = CXInit_CanNotCreate;
+  }
+
+  if (ErrorCode)
+    *ErrorCode = Err;
+
+  return ptr.release();
+}
+
+void clang_IgnoringDiagConsumer_dispose(CXIgnoringDiagConsumer DC) {
+  delete static_cast<clang::IgnoringDiagConsumer *>(DC);
+}
+
 CXDiagnosticsEngine clang_DiagnosticsEngine_create(CXDiagnosticIDs ID,
                                                    CXDiagnosticOptions DO,
                                                    CXDiagnosticConsumer DC,

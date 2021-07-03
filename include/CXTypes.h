@@ -49,6 +49,7 @@ typedef void *CXSourceManager;
 typedef void *CXDiagnosticIDs;
 typedef void *CXDiagnosticOptions;
 typedef void *CXDiagnosticConsumer;
+typedef void *CXIgnoringDiagConsumer;
 typedef void *CXDiagnosticsEngine;
 
 // CodeGen

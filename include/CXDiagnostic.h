@@ -25,6 +25,10 @@ clang_DiagnosticConsumer_create(CXInit_Error *ErrorCode);
 
 CINDEX_LINKAGE void clang_DiagnosticConsumer_dispose(CXDiagnosticConsumer DC);
 
+CINDEX_LINKAGE CXIgnoringDiagConsumer clang_IgnoringDiagConsumer_create(CXInit_Error *ErrorCode);
+
+CINDEX_LINKAGE void clang_IgnoringDiagConsumer_dispose(CXIgnoringDiagConsumer DC);
+
 // DiagnosticsEngine
 CINDEX_LINKAGE CXDiagnosticsEngine clang_DiagnosticsEngine_create(CXDiagnosticIDs ID,
                                                                   CXDiagnosticOptions DO,
