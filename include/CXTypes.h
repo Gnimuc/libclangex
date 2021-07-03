@@ -46,6 +46,7 @@ typedef void *CXFileManager;
 typedef void *CXSourceManager;
 
 // Diagnostic
+typedef void *CXDiagnosticIDs;
 typedef void *CXDiagnosticOptions;
 typedef void *CXDiagnosticConsumer;
 typedef void *CXDiagnosticsEngine;

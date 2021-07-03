@@ -37,12 +37,17 @@ CINDEX_LINKAGE void clang_PreprocessorOptions_getChainedIncludes(CXPreprocessorO
                                                                  const char **IncsOut,
                                                                  size_t Num);
 
-CINDEX_LINKAGE size_t
-clang_PreprocessorOptions_getIncludesNum(CXPreprocessorOptions PPO);
+CINDEX_LINKAGE size_t clang_PreprocessorOptions_getIncludesNum(CXPreprocessorOptions PPO);
 
 CINDEX_LINKAGE void clang_PreprocessorOptions_getIncludes(CXPreprocessorOptions PPO,
-                                                                 const char **IncsOut,
-                                                                 size_t Num);
+                                                          const char **IncsOut, size_t Num);
+
+CINDEX_LINKAGE size_t
+clang_PreprocessorOptions_getMacroIncludesNum(CXPreprocessorOptions PPO);
+
+CINDEX_LINKAGE void clang_PreprocessorOptions_getMacroIncludes(CXPreprocessorOptions PPO,
+                                                               const char **IncsOut,
+                                                               size_t Num);
 
 #ifdef __cplusplus
 }

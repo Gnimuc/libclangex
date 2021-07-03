@@ -60,3 +60,17 @@ void clang_PreprocessorOptions_getIncludes(CXPreprocessorOptions PPO, const char
       IncsOut[i] = Inc.c_str();
   }
 }
+
+size_t clang_PreprocessorOptions_getMacroIncludesNum(CXPreprocessorOptions PPO) {
+  return static_cast<clang::PreprocessorOptions *>(PPO)->MacroIncludes.size();
+}
+
+void clang_PreprocessorOptions_getMacroIncludes(CXPreprocessorOptions PPO,
+                                                const char **IncsOut, size_t Num) {
+  auto &Incs = static_cast<clang::PreprocessorOptions *>(PPO)->MacroIncludes;
+  for (auto &Inc : Incs) {
+    auto i = &Inc - &Incs[0];
+    if (i < Num)
+      IncsOut[i] = Inc.c_str();
+  }
+}
