@@ -1,6 +1,7 @@
 #ifndef LIBCLANGEX_H
 #define LIBCLANGEX_H
 
+#include "CXDriver.h"
 #include "CXASTUnit.h"
 #include "CXCodeGen.h"
 #include "CXCompilerInstance.h"
@@ -8,9 +9,9 @@
 #include "CXDiagnostic.h"
 #include "CXFileManager.h"
 #include "CXMemoryBuffer.h"
+#include "CXOptions.h"
 #include "CXSourceManager.h"
 #include "CXTypes.h"
-#include "CXOptions.h"
 #include "clang-c/Platform.h"
 
 #ifdef __cplusplus

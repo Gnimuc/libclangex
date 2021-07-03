@@ -14,12 +14,6 @@ clang_DiagnosticConsumer_create(CXInit_Error *ErrorCode);
 
 CINDEX_LINKAGE void clang_DiagnosticConsumer_dispose(CXDiagnosticConsumer DC);
 
-CINDEX_LINKAGE CXDiagnosticsEngine
-clang_DiagnosticsEngineIntrusiveRefCntPtr_get(CXIntrusiveRefCntPtr ptr);
-
-CINDEX_LINKAGE void
-clang_DiagnosticsEngineIntrusiveRefCntPtr_dispose(CXIntrusiveRefCntPtr ptr);
-
 // DiagnosticOptions
 CINDEX_LINKAGE CXDiagnosticOptions clang_DiagnosticOptions_create(CXInit_Error *ErrorCode);
 

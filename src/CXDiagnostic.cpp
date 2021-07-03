@@ -24,15 +24,6 @@ void clang_DiagnosticConsumer_dispose(CXDiagnosticConsumer DC) {
   delete static_cast<clang::DiagnosticConsumer *>(DC);
 }
 
-CXDiagnosticsEngine
-clang_DiagnosticsEngineIntrusiveRefCntPtr_get(CXIntrusiveRefCntPtr ptr) {
-  return static_cast<llvm::IntrusiveRefCntPtr<clang::DiagnosticsEngine> *>(ptr)->get();
-}
-
-void clang_DiagnosticsEngineIntrusiveRefCntPtr_dispose(CXIntrusiveRefCntPtr ptr) {
-  delete static_cast<llvm::IntrusiveRefCntPtr<clang::DiagnosticsEngine> *>(ptr);
-}
-
 CXDiagnosticOptions clang_DiagnosticOptions_create(CXInit_Error *ErrorCode) {
   CXInit_Error Err = CXInit_NoError;
   std::unique_ptr<clang::DiagnosticOptions> ptr =

@@ -39,6 +39,7 @@ target_sources(${target} PRIVATE src/CXCodeGen.cpp)
 target_sources(${target} PRIVATE src/CXCompilerInstance.cpp)
 target_sources(${target} PRIVATE src/CXCompilerInvocation.cpp)
 target_sources(${target} PRIVATE src/CXDiagnostic.cpp)
+target_sources(${target} PRIVATE src/CXDriver.cpp)
 target_sources(${target} PRIVATE src/CXFileManager.cpp)
 target_sources(${target} PRIVATE src/CXMemoryBuffer.cpp)
 target_sources(${target} PRIVATE src/CXOptions.cpp)
@@ -46,7 +47,7 @@ target_sources(${target} PRIVATE src/CXSourceManager.cpp)
 
 
 # set(CMAKE_SKIP_RPATH ON)
-# SET(CMAKE_INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/lib")
+# set(CMAKE_INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/lib")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-rtti")
 
 target_include_directories(${target} PUBLIC
@@ -62,7 +63,7 @@ if(LLVM_ASSERT_BUILD)
     message(STATUS "Build with LLVM assert. This means Julia should also be built with `LLVM_ASSERTIONS=1`.")
     target_compile_definitions(${target} PUBLIC "LLVM_DISABLE_ABI_BREAKING_CHECKS_ENFORCING=1")  # hack for the assert build
 else()
-    message(STATUS "Build without LLVM assert."
+    message(STATUS "Build without LLVM assert.")
 endif()
 
 set(pub_hdrs ${CMAKE_CURRENT_SOURCE_DIR}/include/libclangex.h
@@ -71,6 +72,7 @@ set(pub_hdrs ${CMAKE_CURRENT_SOURCE_DIR}/include/libclangex.h
              ${CMAKE_CURRENT_SOURCE_DIR}/include/CXCompilerInstance.h
              ${CMAKE_CURRENT_SOURCE_DIR}/include/CXCompilerInvocation.h
              ${CMAKE_CURRENT_SOURCE_DIR}/include/CXDiagnostic.h
+             ${CMAKE_CURRENT_SOURCE_DIR}/include/CXDriver.h
              ${CMAKE_CURRENT_SOURCE_DIR}/include/CXError.h
              ${CMAKE_CURRENT_SOURCE_DIR}/include/CXFileManager.h
              ${CMAKE_CURRENT_SOURCE_DIR}/include/CXMemoryBuffer.h

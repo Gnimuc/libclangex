@@ -133,6 +133,11 @@ void clang_CompilerInstance_setInvocation(CXCompilerInstance CI,
       Invocation); // std::move(Invocation)
 }
 
+CXCompilerInvocation clang_CompilerInstance_getInvocation(CXCompilerInstance CI) {
+  auto &Invocation = static_cast<clang::CompilerInstance *>(CI)->getInvocation();
+  return &Invocation;
+}
+
 void clang_CompilerInstance_setTarget(CXCompilerInstance CI) {
   auto compiler = static_cast<clang::CompilerInstance *>(CI);
   compiler->setTarget(clang::TargetInfo::CreateTargetInfo(

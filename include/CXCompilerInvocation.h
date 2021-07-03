@@ -25,9 +25,11 @@ clang_CompilerInvocation_getTargetOpts(CXCompilerInvocation CI);
 CINDEX_LINKAGE CXCodeGenOptions
 clang_CompilerInvocation_getCodeGenOpts(CXCompilerInvocation CI);
 
-CINDEX_LINKAGE CXCompilerInvocation clang_CompilerInvocation_createFromCommandLine(
-    const char *source_filename, const char *const *command_line_args,
-    int num_command_line_args, CXDiagnosticsEngine Diags, CXInit_Error *ErrorCode);
+CINDEX_LINKAGE CXPreprocessorOptions
+clang_CompilerInvocation_getPreprocessorOpts(CXCompilerInvocation CI);
+
+CINDEX_LINKAGE CXHeaderSearchOptions
+clang_CompilerInvocation_getHeaderSearchOpts(CXCompilerInvocation CI);
 
 #ifdef __cplusplus
 }
