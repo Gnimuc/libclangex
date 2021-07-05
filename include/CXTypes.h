@@ -38,6 +38,7 @@ typedef void *CXCompilerInvocation;
 
 // FileManager
 typedef void *CXDirectoryEntry;
+typedef void *CXFileID;
 typedef void *CXFileEntry;
 typedef void *CXFileEntryRef; // FIXME: make it a stack value instead of opaque pointer
 typedef void *CXFileManager;
