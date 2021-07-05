@@ -20,6 +20,8 @@ CINDEX_LINKAGE CXMemoryBuffer clang_MemoryBuffer_getMemBufferCopy(const char *In
                                                                   const char *BufferName,
                                                                   unsigned BufferNameSize);
 
+CINDEX_LINKAGE size_t clang_MemoryBuffer_getBufferSize(CXMemoryBuffer MB);
+
 #ifdef __cplusplus
 }
 #endif

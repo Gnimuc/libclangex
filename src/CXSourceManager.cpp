@@ -51,6 +51,10 @@ CXFileID clang_SourceManager_getMainFileID(CXSourceManager SM) {
   return ptr.release();
 }
 
+unsigned clang_FileID_getHashValue(CXFileID FID) {
+  return static_cast<clang::FileID *>(FID)->getHashValue();
+}
+
 void clang_FileID_dispose(CXFileID FID) { delete static_cast<clang::FileID *>(FID); }
 
 void clang_SourceManager_setMainFileID(CXSourceManager SM, CXFileID FID) {

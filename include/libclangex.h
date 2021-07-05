@@ -10,6 +10,7 @@
 #include "CXFileManager.h"
 #include "CXMemoryBuffer.h"
 #include "CXOptions.h"
+#include "CXPreprocessor.h"
 #include "CXSourceManager.h"
 #include "CXTypes.h"
 #include "clang-c/Platform.h"

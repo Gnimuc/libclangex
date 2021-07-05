@@ -21,3 +21,7 @@ CXMemoryBuffer clang_MemoryBuffer_getMemBufferCopy(const char *InputData,
                                            llvm::StringRef(BufferName, BufferNameSize));
   return buffer.release();
 }
+
+size_t clang_MemoryBuffer_getBufferSize(CXMemoryBuffer MB) {
+  return static_cast<llvm::MemoryBuffer *>(MB)->getBufferSize();
+}

@@ -19,17 +19,23 @@ CINDEX_LINKAGE CXCompilerInvocation clang_CompilerInvocation_createFromCommandLi
     CXDiagnosticsEngine Diags, CXInit_Error *ErrorCode);
 
 // Options
-CINDEX_LINKAGE CXTargetOptions
-clang_CompilerInvocation_getTargetOpts(CXCompilerInvocation CI);
-
 CINDEX_LINKAGE CXCodeGenOptions
 clang_CompilerInvocation_getCodeGenOpts(CXCompilerInvocation CI);
+
+CINDEX_LINKAGE CXDiagnosticOptions
+clang_CompilerInvocation_getDiagnosticOpts(CXCompilerInvocation CI);
+
+CINDEX_LINKAGE CXFrontendOptions
+clang_CompilerInvocation_getFrontendOpts(CXCompilerInvocation CI);
+
+CINDEX_LINKAGE CXHeaderSearchOptions
+clang_CompilerInvocation_getHeaderSearchOpts(CXCompilerInvocation CI);
 
 CINDEX_LINKAGE CXPreprocessorOptions
 clang_CompilerInvocation_getPreprocessorOpts(CXCompilerInvocation CI);
 
-CINDEX_LINKAGE CXHeaderSearchOptions
-clang_CompilerInvocation_getHeaderSearchOpts(CXCompilerInvocation CI);
+CINDEX_LINKAGE CXTargetOptions
+clang_CompilerInvocation_getTargetOpts(CXCompilerInvocation CI);
 
 #ifdef __cplusplus
 }

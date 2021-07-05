@@ -19,12 +19,14 @@ typedef void *CXTargetInfo;
 typedef void *CXCodeGenOptions;
 typedef void *CXHeaderSearchOptions;
 typedef void *CXPreprocessorOptions;
+typedef void *CXFrontendOptions;
 
 // Sema
 typedef void *CXSema;
 
 // Preprocessor
 typedef void *CXPreprocessor;
+typedef void *CXHeaderSearch;
 
 // AST
 typedef void *CXASTUnit;

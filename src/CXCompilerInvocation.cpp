@@ -44,22 +44,34 @@ CXCompilerInvocation clang_CompilerInvocation_createFromCommandLine(
   return ptr.release();
 }
 
-CXTargetOptions clang_CompilerInvocation_getTargetOpts(CXCompilerInvocation CI) {
-  auto &TargetOps = static_cast<clang::CompilerInvocation *>(CI)->getTargetOpts();
-  return &TargetOps;
-}
-
 CXCodeGenOptions clang_CompilerInvocation_getCodeGenOpts(CXCompilerInvocation CI) {
-  auto &CodeGenOps = static_cast<clang::CompilerInvocation *>(CI)->getCodeGenOpts();
-  return &CodeGenOps;
+  auto &Opts = static_cast<clang::CompilerInvocation *>(CI)->getCodeGenOpts();
+  return &Opts;
 }
 
-CXPreprocessorOptions clang_CompilerInvocation_getPreprocessorOpts(CXCompilerInvocation CI) {
-  auto &PPOps = static_cast<clang::CompilerInvocation *>(CI)->getPreprocessorOpts();
-  return &PPOps;
+CXDiagnosticOptions clang_CompilerInvocation_getDiagnosticOpts(CXCompilerInvocation CI) {
+  auto &Opts = static_cast<clang::CompilerInvocation *>(CI)->getDiagnosticOpts();
+  return &Opts;
 }
 
-CXHeaderSearchOptions clang_CompilerInvocation_getHeaderSearchOpts(CXCompilerInvocation CI) {
-  auto &HSOps = static_cast<clang::CompilerInvocation *>(CI)->getHeaderSearchOpts();
-  return &HSOps;
+CXFrontendOptions clang_CompilerInvocation_getFrontendOpts(CXCompilerInvocation CI) {
+  auto &Opts = static_cast<clang::CompilerInvocation *>(CI)->getFrontendOpts();
+  return &Opts;
+}
+
+CXHeaderSearchOptions
+clang_CompilerInvocation_getHeaderSearchOpts(CXCompilerInvocation CI) {
+  auto &Opts = static_cast<clang::CompilerInvocation *>(CI)->getHeaderSearchOpts();
+  return &Opts;
+}
+
+CXPreprocessorOptions
+clang_CompilerInvocation_getPreprocessorOpts(CXCompilerInvocation CI) {
+  auto &Opts = static_cast<clang::CompilerInvocation *>(CI)->getPreprocessorOpts();
+  return &Opts;
+}
+
+CXTargetOptions clang_CompilerInvocation_getTargetOpts(CXCompilerInvocation CI) {
+  auto &Opts = static_cast<clang::CompilerInvocation *>(CI)->getTargetOpts();
+  return &Opts;
 }

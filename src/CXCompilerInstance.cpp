@@ -130,7 +130,7 @@ void clang_CompilerInstance_setInvocation(CXCompilerInstance CI,
   std::shared_ptr<clang::CompilerInvocation> Invocation(
       static_cast<clang::CompilerInvocation *>(CInv));
   static_cast<clang::CompilerInstance *>(CI)->setInvocation(
-      Invocation); // std::move(Invocation)
+      Invocation);
 }
 
 CXCompilerInvocation clang_CompilerInstance_getInvocation(CXCompilerInstance CI) {
@@ -138,7 +138,12 @@ CXCompilerInvocation clang_CompilerInstance_getInvocation(CXCompilerInstance CI)
   return &Invocation;
 }
 
-void clang_CompilerInstance_setTarget(CXCompilerInstance CI) {
+void clang_CompilerInstance_setTarget(CXCompilerInstance CI, CXTargetInfo Info) {
+  static_cast<clang::CompilerInstance *>(CI)->setTarget(
+      static_cast<clang::TargetInfo *>(Info));
+}
+
+void clang_CompilerInstance_setTargetAndLangOpts(CXCompilerInstance CI) {
   auto compiler = static_cast<clang::CompilerInstance *>(CI);
   compiler->setTarget(clang::TargetInfo::CreateTargetInfo(
       compiler->getDiagnostics(),
@@ -146,8 +151,26 @@ void clang_CompilerInstance_setTarget(CXCompilerInstance CI) {
   compiler->getTarget().adjust(compiler->getLangOpts());
 }
 
-void clang_CompilerInstance_createSema(CXCompilerInstance CI) {
-  static_cast<clang::CompilerInstance *>(CI)->createSema(clang::TU_Prefix, nullptr);
+bool clang_CompilerInstance_hasPreprocessor(CXCompilerInstance CI) {
+  return static_cast<clang::CompilerInstance *>(CI)->hasPreprocessor();
+}
+
+CXPreprocessor clang_CompilerInstance_getPreprocessor(CXCompilerInstance CI) {
+  auto &PP = static_cast<clang::CompilerInstance *>(CI)->getPreprocessor();
+  return &PP;
+}
+
+void clang_CompilerInstance_setPreprocessor(CXCompilerInstance CI, CXPreprocessor PP) {
+  std::shared_ptr<clang::Preprocessor> PProc(static_cast<clang::Preprocessor *>(PP));
+  static_cast<clang::CompilerInstance *>(CI)->setPreprocessor(PProc);
+}
+
+void clang_CompilerInstance_createPreprocessor(CXCompilerInstance CI) {
+  static_cast<clang::CompilerInstance *>(CI)->createPreprocessor(clang::TU_Prefix);
+}
+
+bool clang_CompilerInstance_hasSema(CXCompilerInstance CI) {
+  return static_cast<clang::CompilerInstance *>(CI)->hasSema();
 }
 
 CXSema clang_CompilerInstance_getSema(CXCompilerInstance CI) {
@@ -159,13 +182,17 @@ void clang_CompilerInstance_setSema(CXCompilerInstance CI, CXSema S) {
   static_cast<clang::CompilerInstance *>(CI)->setSema(static_cast<clang::Sema *>(S));
 }
 
-void clang_CompilerInstance_createPreprocessor(CXCompilerInstance CI) {
-  static_cast<clang::CompilerInstance *>(CI)->createPreprocessor(clang::TU_Prefix);
+void clang_CompilerInstance_createSema(CXCompilerInstance CI) {
+  static_cast<clang::CompilerInstance *>(CI)->createSema(clang::TU_Prefix, nullptr);
 }
 
-void clang_CompilerInstance_setPreprocessor(CXCompilerInstance CI, CXPreprocessor PP) {
-  std::shared_ptr<clang::Preprocessor> PProc(static_cast<clang::Preprocessor *>(PP));
-  static_cast<clang::CompilerInstance *>(CI)->setPreprocessor(PProc);
+bool clang_CompilerInstance_hasASTContext(CXCompilerInstance CI) {
+  return static_cast<clang::CompilerInstance *>(CI)->hasASTContext();
+}
+
+CXSema clang_CompilerInstance_getASTContext(CXCompilerInstance CI) {
+  auto &Ctx = static_cast<clang::CompilerInstance *>(CI)->getASTContext();
+  return &Ctx;
 }
 
 void clang_CompilerInstance_setASTContext(CXCompilerInstance CI, CXASTContext Ctx) {
@@ -177,7 +204,41 @@ void clang_CompilerInstance_createASTContext(CXCompilerInstance CI) {
   static_cast<clang::CompilerInstance *>(CI)->createASTContext();
 }
 
+bool clang_CompilerInstance_hasASTConsumer(CXCompilerInstance CI) {
+  return static_cast<clang::CompilerInstance *>(CI)->hasASTConsumer();
+}
+
 void clang_CompilerInstance_setCodeGenerator(CXCompilerInstance CI, CXCodeGenerator CG) {
   static_cast<clang::CompilerInstance *>(CI)->setASTConsumer(
       std::unique_ptr<clang::ASTConsumer>(static_cast<clang::CodeGenerator *>(CG)));
+}
+
+CXCodeGenOptions clang_CompilerInstance_getCodeGenOpts(CXCompilerInstance CI) {
+  auto &Opts = static_cast<clang::CompilerInstance *>(CI)->getCodeGenOpts();
+  return &Opts;
+}
+
+CXDiagnosticOptions clang_CompilerInstance_getDiagnosticOpts(CXCompilerInstance CI) {
+  auto &Opts = static_cast<clang::CompilerInstance *>(CI)->getDiagnosticOpts();
+  return &Opts;
+}
+
+CXFrontendOptions clang_CompilerInstance_getFrontendOpts(CXCompilerInstance CI) {
+  auto &Opts = static_cast<clang::CompilerInstance *>(CI)->getFrontendOpts();
+  return &Opts;
+}
+
+CXHeaderSearchOptions clang_CompilerInstance_getHeaderSearchOpts(CXCompilerInstance CI) {
+  auto &Opts = static_cast<clang::CompilerInstance *>(CI)->getHeaderSearchOpts();
+  return &Opts;
+}
+
+CXPreprocessorOptions clang_CompilerInstance_getPreprocessorOpts(CXCompilerInstance CI) {
+  auto &Opts = static_cast<clang::CompilerInstance *>(CI)->getPreprocessorOpts();
+  return &Opts;
+}
+
+CXTargetOptions clang_CompilerInstance_getTargetOpts(CXCompilerInstance CI) {
+  auto &Opts = static_cast<clang::CompilerInstance *>(CI)->getTargetOpts();
+  return &Opts;
 }
