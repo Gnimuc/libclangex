@@ -11,7 +11,7 @@ CLANG_DIR=`julia -e "using Clang_jll; print(Clang_jll.artifact_dir)"`
 echo "CLANG_DIR=$CLANG_DIR"
 
 mkdir build && cd build
-cmake .. -DLLVM_DIR=${LLVM_DIR} -DCLANG_DIR=${CLANG_DIR}
+cmake .. -DLLVM_DIR=${LLVM_DIR} -DCLANG_DIR=${CLANG_DIR} -DCMAKE_INSTALL_PREFIX=./install -DLLVM_ASSERT_BUILD=false
 make
 ```
 
