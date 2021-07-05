@@ -1,7 +1,39 @@
 #include "CXOptions.h"
 #include "clang/Basic/CodeGenOptions.h"
+#include "clang/Basic/TargetInfo.h"
+#include "clang/Basic/TargetOptions.h"
 #include "clang/Lex/HeaderSearchOptions.h"
 #include "clang/Lex/PreprocessorOptions.h"
+
+CXTargetOptions clang_TargetOptions_create(CXInit_Error *ErrorCode) {
+  CXInit_Error Err = CXInit_NoError;
+  std::unique_ptr<clang::TargetOptions> ptr = std::make_unique<clang::TargetOptions>();
+
+  if (!ptr) {
+    fprintf(stderr, "LIBCLANGEX ERROR: failed to create `clang::TargetOptions`\n");
+    Err = CXInit_CanNotCreate;
+  }
+
+  if (ErrorCode)
+    *ErrorCode = Err;
+
+  return ptr.release();
+}
+
+void clang_TargetOptions_dispose(CXTargetOptions TO) {
+  delete static_cast<clang::TargetOptions *>(TO);
+}
+
+void clang_TargetOptions_setTriple(CXTargetOptions TO, const char* TripleStr, size_t Num) {
+  static_cast<clang::TargetOptions *>(TO)->Triple = std::string(TripleStr, Num);
+}
+
+CXTargetInfo clang_TargetInfo_CreateTargetInfo(CXDiagnosticsEngine DE,
+                                               CXTargetOptions Opts) {
+  return clang::TargetInfo::CreateTargetInfo(
+      *static_cast<clang::DiagnosticsEngine *>(DE),
+      std::shared_ptr<clang::TargetOptions>(static_cast<clang::TargetOptions *>(Opts)));
+}
 
 const char *clang_CodeGenOptions_getArgv0(CXCodeGenOptions CGO) {
   return static_cast<clang::CodeGenOptions *>(CGO)->Argv0;

@@ -15,6 +15,7 @@ typedef void *CXMemoryBuffer;
 
 // Options
 typedef void *CXTargetOptions;
+typedef void *CXTargetInfo;
 typedef void *CXCodeGenOptions;
 typedef void *CXHeaderSearchOptions;
 typedef void *CXPreprocessorOptions;
