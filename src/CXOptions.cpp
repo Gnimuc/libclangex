@@ -71,6 +71,28 @@ void clang_CodeGenOptions_getCommandLineArgs(CXCodeGenOptions CGO, const char **
   std::copy_n(CmdArgs.begin(), Num, ArgsOut);
 }
 
+void clang_CodeGenOptions_PrintStats(CXCodeGenOptions CGO) {
+  auto Opts = static_cast<clang::CodeGenOptions *>(CGO);
+  llvm::errs() << "\n*** CodeGenOptions Stats:\n";
+  llvm::errs() << "  CodeModel: " << Opts->CodeModel << "\n";
+  llvm::errs() << "  DebugPass: " << Opts->DebugPass << "\n";
+  llvm::errs() << "  FloatABI: " << Opts->FloatABI << "\n";
+  llvm::errs() << "  LimitFloatPrecision: " << Opts->LimitFloatPrecision << "\n";
+  llvm::errs() << "  MainFileName: " << Opts->MainFileName << "\n";
+  llvm::errs() << "  ThreadModel: " << Opts->ThreadModel << "\n";
+  llvm::errs() << "  TrapFuncName: " << Opts->TrapFuncName << "\n";
+
+  llvm::errs() << "  DependentLibraries: \n";
+  for (const auto &Dep : Opts->DependentLibraries)
+    llvm::errs() << "    " << Dep << "\n";
+
+  llvm::errs() << "  LinkerOptions: \n";
+  for (const auto &Opt : Opts->LinkerOptions)
+    llvm::errs() << "    " << Opt << "\n";
+
+  llvm::errs() << "  CudaGpuBinaryFileName: " << Opts->CudaGpuBinaryFileName << "\n";
+}
+
 size_t clang_HeaderSearchOptions_GetResourceDirLength(CXHeaderSearchOptions HSO) {
   return static_cast<clang::HeaderSearchOptions *>(HSO)->ResourceDir.size();
 }
@@ -85,6 +107,49 @@ void clang_HeaderSearchOptions_SetResourceDir(CXHeaderSearchOptions HSO,
                                               const char *ResourcesDir, size_t N) {
   static_cast<clang::HeaderSearchOptions *>(HSO)->ResourceDir =
       std::string(ResourcesDir, N);
+}
+
+void clang_HeaderSearchOptions_PrintStats(CXHeaderSearchOptions HSO) {
+  auto Opts = static_cast<clang::HeaderSearchOptions *>(HSO);
+  llvm::errs() << "\n*** HeaderSearchOptions Stats:\n";
+  llvm::errs() << "  Sysroot: " << Opts->Sysroot << "\n";
+
+  llvm::errs() << "  UserEntries: \n";
+  for (const auto &UE : Opts->UserEntries)
+    llvm::errs() << "    " << UE.Path << "  (IsFramework:" << UE.IsFramework
+                 << "; IgnoreSysRoot:" << UE.IgnoreSysRoot << ")\n";
+
+  llvm::errs() << "  SystemHeaderPrefixes: \n";
+  for (const auto &PF : Opts->SystemHeaderPrefixes)
+    llvm::errs() << "    " << PF.Prefix << "  (IsSystemHeader:" << PF.IsSystemHeader
+                 << ")\n";
+
+  llvm::errs() << "  ResourceDir: " << Opts->ResourceDir << "\n";
+  llvm::errs() << "  ModuleCachePath: " << Opts->ModuleCachePath << "\n";
+  llvm::errs() << "  ModuleUserBuildPath: " << Opts->ModuleUserBuildPath << "\n";
+
+  llvm::errs() << "  PrebuiltModulePaths: \n";
+  for (const auto &Path : Opts->PrebuiltModulePaths)
+    llvm::errs() << "    " << Path << "\n";
+
+  llvm::errs() << "  ModuleFormat: " << Opts->ModuleFormat << "\n";
+
+  llvm::errs() << "  VFSOverlayFiles: \n";
+  for (const auto &VFS : Opts->VFSOverlayFiles)
+    llvm::errs() << "    " << VFS << "\n";
+
+  llvm::errs() << "  Options: \n";
+  llvm::errs() << "    UseBuiltinIncludes: " << Opts->UseBuiltinIncludes << "\n";
+  llvm::errs() << "    UseStandardSystemIncludes: " << Opts->UseStandardSystemIncludes
+               << "\n";
+  llvm::errs() << "    UseStandardCXXIncludes: " << Opts->UseStandardCXXIncludes << "\n";
+  llvm::errs() << "    UseLibcxx: " << Opts->UseLibcxx << "\n";
+  llvm::errs() << "    Verbose: " << Opts->Verbose << "\n";
+  llvm::errs() << "    ModulesValidateSystemHeaders: " << Opts->ModulesValidateSystemHeaders
+               << "\n";
+  llvm::errs() << "    ValidateASTInputFilesContent: " << Opts->ValidateASTInputFilesContent
+               << "\n";
+  llvm::errs() << "    UseDebugInfo: " << Opts->UseDebugInfo << "\n";
 }
 
 size_t clang_PreprocessorOptions_getChainedIncludesNum(CXPreprocessorOptions PPO) {
@@ -141,4 +206,50 @@ void clang_FrontendOptions_getModulesEmbedFiles(CXFrontendOptions Opts,
     if (i < Num)
       FileNames[i] = File.c_str();
   }
+}
+
+void clang_FrontendOptions_PrintStats(CXFrontendOptions FEO) {
+  auto Opts = static_cast<clang::FrontendOptions *>(FEO);
+  llvm::errs() << "\n*** FrontendOptions Stats:\n";
+  llvm::errs() << "  Inputs: \n";
+  for (const auto &IF : Opts->Inputs)
+    llvm::errs() << "    " << IF.getFile() << "  (IsSystem:" << IF.isSystem()
+                 << "; IsBuffer:" << IF.isBuffer() << "; IsEmpty:" << IF.isEmpty()
+                 << "; IsPreprocessed:" << IF.isPreprocessed() << ")\n";
+
+  llvm::errs() << "  OutputFile: " << Opts->OutputFile << "\n";
+
+  llvm::errs() << "  ModuleMapFiles: \n";
+  for (const auto &MF : Opts->ModuleMapFiles)
+    llvm::errs() << "    " << MF << "\n";
+
+  llvm::errs() << "  ModuleFiles: \n";
+  for (const auto &MF : Opts->ModuleFiles)
+    llvm::errs() << "    " << MF << "\n";
+
+  llvm::errs() << "  ModulesEmbedFiles: \n";
+  for (const auto &MF : Opts->ModulesEmbedFiles)
+    llvm::errs() << "    " << MF << "\n";
+
+  llvm::errs() << "  LLVMArgs: \n";
+  for (const auto &Arg : Opts->LLVMArgs)
+    llvm::errs() << "    " << Arg << "\n";
+
+  llvm::errs() << "  AuxTriple: " << Opts->AuxTriple << "\n";
+  llvm::errs() << "  StatsFile: " << Opts->StatsFile << "\n";
+
+  llvm::errs() << "  Options: \n";
+  llvm::errs() << "    ShowHelp: " << Opts->ShowHelp << "\n";
+  llvm::errs() << "    ShowStats: " << Opts->ShowStats << "\n";
+  llvm::errs() << "    ShowTimers: " << Opts->ShowTimers << "\n";
+  llvm::errs() << "    PrintSupportedCPUs: " << Opts->PrintSupportedCPUs << "\n";
+  llvm::errs() << "    ShowVersion: " << Opts->ShowVersion << "\n";
+  llvm::errs() << "    SkipFunctionBodies: " << Opts->SkipFunctionBodies << "\n";
+  llvm::errs() << "    ASTDumpDecls: " << Opts->ASTDumpDecls << "\n";
+  llvm::errs() << "    ASTDumpAll: " << Opts->ASTDumpAll << "\n";
+  llvm::errs() << "    ASTDumpLookups: " << Opts->ASTDumpLookups << "\n";
+  llvm::errs() << "    ASTDumpDeclTypes: " << Opts->ASTDumpDeclTypes << "\n";
+  llvm::errs() << "    ModulesEmbedAllFiles: " << Opts->ModulesEmbedAllFiles << "\n";
+  llvm::errs() << "    UseTemporary: " << Opts->UseTemporary << "\n";
+  llvm::errs() << "    IsSystemModule: " << Opts->IsSystemModule << "\n";
 }

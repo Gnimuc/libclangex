@@ -34,6 +34,8 @@ CINDEX_LINKAGE void clang_CodeGenOptions_getCommandLineArgs(CXCodeGenOptions CGO
                                                             const char **ArgsOut,
                                                             size_t Num);
 
+CINDEX_LINKAGE void clang_CodeGenOptions_PrintStats(CXCodeGenOptions CGO);
+
 // HeaderSearchOptions
 CINDEX_LINKAGE size_t
 clang_HeaderSearchOptions_GetResourceDirLength(CXHeaderSearchOptions HSO);
@@ -44,6 +46,8 @@ CINDEX_LINKAGE void clang_HeaderSearchOptions_GetResourceDir(CXHeaderSearchOptio
 CINDEX_LINKAGE void clang_HeaderSearchOptions_SetResourceDir(CXHeaderSearchOptions HSO,
                                                              const char *ResourcesDir,
                                                              size_t N);
+
+CINDEX_LINKAGE void clang_HeaderSearchOptions_PrintStats(CXHeaderSearchOptions HSO);
 
 // PreprocessorOptions
 CINDEX_LINKAGE size_t
@@ -71,6 +75,8 @@ CINDEX_LINKAGE size_t clang_FrontendOptions_getModulesEmbedFilesNum(CXFrontendOp
 CINDEX_LINKAGE void clang_FrontendOptions_getModulesEmbedFiles(CXFrontendOptions Opts,
                                                                const char **FileNames,
                                                                size_t Num);
+
+CINDEX_LINKAGE void clang_FrontendOptions_PrintStats(CXFrontendOptions FEO);
 
 #ifdef __cplusplus
 }

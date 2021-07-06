@@ -3,6 +3,7 @@
 #include "clang/Basic/DiagnosticIDs.h"
 #include "clang/Basic/DiagnosticOptions.h"
 #include "llvm/ADT/IntrusiveRefCntPtr.h"
+#include "llvm/Support/raw_ostream.h"
 #include <cstdio>
 
 CXDiagnosticIDs clang_DiagnosticIDs_create(CXInit_Error *ErrorCode) {
@@ -42,6 +43,30 @@ CXDiagnosticOptions clang_DiagnosticOptions_create(CXInit_Error *ErrorCode) {
 
 void clang_DiagnosticOptions_dispose(CXDiagnosticOptions DO) {
   delete static_cast<clang::DiagnosticOptions *>(DO);
+}
+
+void clang_DiagnosticOptions_PrintStats(CXDiagnosticOptions DO) {
+  auto Opts = static_cast<clang::DiagnosticOptions *>(DO);
+  llvm::errs() << "\n*** DiagnosticOptions Stats:\n";
+  llvm::errs() << "  DiagnosticLogFile: " << Opts->DiagnosticLogFile << "\n";
+  llvm::errs() << "  DiagnosticSerializationFile: " << Opts->DiagnosticSerializationFile
+               << "\n";
+
+  llvm::errs() << "  Warnings: \n";
+  for (const auto &WN : Opts->Warnings)
+    llvm::errs() << "    " << WN << "\n";
+
+  llvm::errs() << "  UndefPrefixes: \n";
+  for (const auto &UP : Opts->UndefPrefixes)
+    llvm::errs() << "    " << UP << "\n";
+
+  llvm::errs() << "  Remarks: \n";
+  for (const auto &RM : Opts->Remarks)
+    llvm::errs() << "    " << RM << "\n";
+
+  llvm::errs() << "  VerifyPrefixes: \n";
+  for (const auto &VP : Opts->VerifyPrefixes)
+    llvm::errs() << "    " << VP << "\n";
 }
 
 CXDiagnosticConsumer clang_DiagnosticConsumer_create(CXInit_Error *ErrorCode) {

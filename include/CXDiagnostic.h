@@ -19,6 +19,8 @@ CINDEX_LINKAGE CXDiagnosticOptions clang_DiagnosticOptions_create(CXInit_Error *
 
 CINDEX_LINKAGE void clang_DiagnosticOptions_dispose(CXDiagnosticOptions DO);
 
+CINDEX_LINKAGE void clang_DiagnosticOptions_PrintStats(CXDiagnosticOptions DO);
+
 // DiagnosticConsumer
 CINDEX_LINKAGE CXDiagnosticConsumer
 clang_DiagnosticConsumer_create(CXInit_Error *ErrorCode);
