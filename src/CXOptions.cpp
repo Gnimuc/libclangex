@@ -2,6 +2,7 @@
 #include "clang/Basic/CodeGenOptions.h"
 #include "clang/Basic/TargetInfo.h"
 #include "clang/Basic/TargetOptions.h"
+#include "clang/Frontend/FrontendOptions.h"
 #include "clang/Lex/HeaderSearchOptions.h"
 #include "clang/Lex/PreprocessorOptions.h"
 
@@ -24,7 +25,7 @@ void clang_TargetOptions_dispose(CXTargetOptions TO) {
   delete static_cast<clang::TargetOptions *>(TO);
 }
 
-void clang_TargetOptions_setTriple(CXTargetOptions TO, const char* TripleStr, size_t Num) {
+void clang_TargetOptions_setTriple(CXTargetOptions TO, const char *TripleStr, size_t Num) {
   static_cast<clang::TargetOptions *>(TO)->Triple = std::string(TripleStr, Num);
 }
 
@@ -35,17 +36,38 @@ CXTargetInfo clang_TargetInfo_CreateTargetInfo(CXDiagnosticsEngine DE,
       std::shared_ptr<clang::TargetOptions>(static_cast<clang::TargetOptions *>(Opts)));
 }
 
+CXCodeGenOptions clang_CodeGenOptions_create(CXInit_Error *ErrorCode) {
+  CXInit_Error Err = CXInit_NoError;
+  std::unique_ptr<clang::CodeGenOptions> ptr = std::make_unique<clang::CodeGenOptions>();
+
+  if (!ptr) {
+    fprintf(stderr, "LIBCLANGEX ERROR: failed to create `clang::CodeGenOptions`\n");
+    Err = CXInit_CanNotCreate;
+  }
+
+  if (ErrorCode)
+    *ErrorCode = Err;
+
+  return ptr.release();
+}
+
+void clang_CodeGenOptions_dispose(CXCodeGenOptions DO) {
+  delete static_cast<clang::CodeGenOptions *>(DO);
+}
+
 const char *clang_CodeGenOptions_getArgv0(CXCodeGenOptions CGO) {
   return static_cast<clang::CodeGenOptions *>(CGO)->Argv0;
 }
 
 size_t clang_CodeGenOptions_getCommandLineArgsNum(CXCodeGenOptions CGO) {
-  return static_cast<clang::CodeGenOptions *>(CGO)->CommandLineArgs.size();
+  // return static_cast<clang::CodeGenOptions *>(CGO)->CommandLineArgs.size();
+  return 0; // seal the usage, see
+            // https://llvm.discourse.group/t/confused-about-the-usage-of-arrayref-in-clang/3807
 }
 
 void clang_CodeGenOptions_getCommandLineArgs(CXCodeGenOptions CGO, const char **ArgsOut,
                                              size_t Num) {
-  auto CmdArgs = static_cast<clang::CodeGenOptions *>(CGO)->CommandLineArgs.vec();
+  auto CmdArgs = static_cast<clang::CodeGenOptions *>(CGO)->CommandLineArgs;
   std::copy_n(CmdArgs.begin(), Num, ArgsOut);
 }
 
@@ -104,5 +126,19 @@ void clang_PreprocessorOptions_getMacroIncludes(CXPreprocessorOptions PPO,
     auto i = &Inc - &Incs[0];
     if (i < Num)
       IncsOut[i] = Inc.c_str();
+  }
+}
+
+size_t clang_FrontendOptions_getModulesEmbedFilesNum(CXFrontendOptions Opts) {
+  return static_cast<clang::FrontendOptions *>(Opts)->ModulesEmbedFiles.size();
+}
+
+void clang_FrontendOptions_getModulesEmbedFiles(CXFrontendOptions Opts,
+                                                const char **FileNames, size_t Num) {
+  auto &Files = static_cast<clang::FrontendOptions *>(Opts)->ModulesEmbedFiles;
+  for (auto &File : Files) {
+    auto i = &File - &Files[0];
+    if (i < Num)
+      FileNames[i] = File.c_str();
   }
 }

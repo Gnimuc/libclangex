@@ -28,6 +28,12 @@ typedef void *CXSema;
 typedef void *CXPreprocessor;
 typedef void *CXHeaderSearch;
 
+enum CXTranslationUnitKind {
+  CXTU_Complete,
+  CXTU_Prefix,
+  CXTU_Module
+};
+
 // AST
 typedef void *CXASTUnit;
 typedef void *CXASTContext;

@@ -129,8 +129,7 @@ void clang_CompilerInstance_setInvocation(CXCompilerInstance CI,
                                           CXCompilerInvocation CInv) {
   std::shared_ptr<clang::CompilerInvocation> Invocation(
       static_cast<clang::CompilerInvocation *>(CInv));
-  static_cast<clang::CompilerInstance *>(CI)->setInvocation(
-      Invocation);
+  static_cast<clang::CompilerInstance *>(CI)->setInvocation(Invocation);
 }
 
 CXCompilerInvocation clang_CompilerInstance_getInvocation(CXCompilerInstance CI) {
@@ -165,8 +164,10 @@ void clang_CompilerInstance_setPreprocessor(CXCompilerInstance CI, CXPreprocesso
   static_cast<clang::CompilerInstance *>(CI)->setPreprocessor(PProc);
 }
 
-void clang_CompilerInstance_createPreprocessor(CXCompilerInstance CI) {
-  static_cast<clang::CompilerInstance *>(CI)->createPreprocessor(clang::TU_Prefix);
+void clang_CompilerInstance_createPreprocessor(CXCompilerInstance CI,
+                                               CXTranslationUnitKind TUKind) {
+  static_cast<clang::CompilerInstance *>(CI)->createPreprocessor(
+      static_cast<clang::TranslationUnitKind>(TUKind));
 }
 
 bool clang_CompilerInstance_hasSema(CXCompilerInstance CI) {
@@ -182,8 +183,10 @@ void clang_CompilerInstance_setSema(CXCompilerInstance CI, CXSema S) {
   static_cast<clang::CompilerInstance *>(CI)->setSema(static_cast<clang::Sema *>(S));
 }
 
-void clang_CompilerInstance_createSema(CXCompilerInstance CI) {
-  static_cast<clang::CompilerInstance *>(CI)->createSema(clang::TU_Prefix, nullptr);
+void clang_CompilerInstance_createSema(CXCompilerInstance CI,
+                                       CXTranslationUnitKind TUKind) {
+  static_cast<clang::CompilerInstance *>(CI)->createSema(
+      static_cast<clang::TranslationUnitKind>(TUKind), nullptr);
 }
 
 bool clang_CompilerInstance_hasASTContext(CXCompilerInstance CI) {

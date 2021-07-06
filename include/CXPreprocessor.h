@@ -11,7 +11,7 @@ extern "C" {
 
 CINDEX_LINKAGE CXHeaderSearch clang_Preprocessor_getHeaderSearchInfo(CXPreprocessor PP);
 
-CINDEX_LINKAGE void clang_HeaderSearch_PrintStats();
+CINDEX_LINKAGE void clang_HeaderSearch_PrintStats(void);
 
 #ifdef __cplusplus
 }

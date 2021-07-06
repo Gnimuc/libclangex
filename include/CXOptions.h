@@ -1,8 +1,8 @@
 #ifndef LIBCLANGEX_CXOPTIONS_H
 #define LIBCLANGEX_CXOPTIONS_H
 
-#include "CXTypes.h"
 #include "CXError.h"
+#include "CXTypes.h"
 #include "clang-c/Platform.h"
 #include <stdint.h>
 
@@ -12,11 +12,20 @@ extern "C" {
 
 // TargetOptions
 CINDEX_LINKAGE CXTargetOptions clang_TargetOptions_create(CXInit_Error *ErrorCode);
+
 CINDEX_LINKAGE void clang_TargetOptions_dispose(CXTargetOptions TO);
+
+CINDEX_LINKAGE void clang_TargetOptions_setTriple(CXTargetOptions TO, const char *TripleStr,
+                                                  size_t Num);
+                                                  
 CINDEX_LINKAGE CXTargetInfo clang_TargetInfo_CreateTargetInfo(CXDiagnosticsEngine DE,
                                                               CXTargetOptions Opts);
 
 // CodeGenOptions
+CINDEX_LINKAGE CXCodeGenOptions clang_CodeGenOptions_create(CXInit_Error *ErrorCode);
+
+CINDEX_LINKAGE void clang_CodeGenOptions_dispose(CXCodeGenOptions DO);
+
 CINDEX_LINKAGE const char *clang_CodeGenOptions_getArgv0(CXCodeGenOptions CGO);
 
 CINDEX_LINKAGE size_t clang_CodeGenOptions_getCommandLineArgsNum(CXCodeGenOptions CGO);
@@ -24,8 +33,6 @@ CINDEX_LINKAGE size_t clang_CodeGenOptions_getCommandLineArgsNum(CXCodeGenOption
 CINDEX_LINKAGE void clang_CodeGenOptions_getCommandLineArgs(CXCodeGenOptions CGO,
                                                             const char **ArgsOut,
                                                             size_t Num);
-
-CINDEX_LINKAGE void clang_TargetOptions_setTriple(CXTargetOptions TO, const char* TripleStr, size_t Num);
 
 // HeaderSearchOptions
 CINDEX_LINKAGE size_t
@@ -56,6 +63,13 @@ clang_PreprocessorOptions_getMacroIncludesNum(CXPreprocessorOptions PPO);
 
 CINDEX_LINKAGE void clang_PreprocessorOptions_getMacroIncludes(CXPreprocessorOptions PPO,
                                                                const char **IncsOut,
+                                                               size_t Num);
+
+// FrontendOptions
+CINDEX_LINKAGE size_t clang_FrontendOptions_getModulesEmbedFilesNum(CXFrontendOptions Opts);
+
+CINDEX_LINKAGE void clang_FrontendOptions_getModulesEmbedFiles(CXFrontendOptions Opts,
+                                                               const char **FileNames,
                                                                size_t Num);
 
 #ifdef __cplusplus

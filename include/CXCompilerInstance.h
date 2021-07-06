@@ -83,7 +83,8 @@ CINDEX_LINKAGE CXPreprocessor clang_CompilerInstance_getPreprocessor(CXCompilerI
 CINDEX_LINKAGE void clang_CompilerInstance_setPreprocessor(CXCompilerInstance CI,
                                                            CXPreprocessor PP);
 
-CINDEX_LINKAGE void clang_CompilerInstance_createPreprocessor(CXCompilerInstance CI);
+CINDEX_LINKAGE void clang_CompilerInstance_createPreprocessor(CXCompilerInstance CI,
+                                                              CXTranslationUnitKind TUKind);
 
 // Sema
 CINDEX_LINKAGE bool clang_CompilerInstance_hasSema(CXCompilerInstance CI);
@@ -92,7 +93,8 @@ CINDEX_LINKAGE CXSema clang_CompilerInstance_getSema(CXCompilerInstance CI);
 
 CINDEX_LINKAGE void clang_CompilerInstance_setSema(CXCompilerInstance CI, CXSema S);
 
-CINDEX_LINKAGE void clang_CompilerInstance_createSema(CXCompilerInstance CI);
+CINDEX_LINKAGE void clang_CompilerInstance_createSema(CXCompilerInstance CI,
+                                                      CXTranslationUnitKind TUKind);
 
 // ASTContext
 CINDEX_LINKAGE bool clang_CompilerInstance_hasASTContext(CXCompilerInstance CI);
