@@ -1,6 +1,7 @@
 #ifndef LIBCLANGEX_H
 #define LIBCLANGEX_H
 
+#include "CXASTContext.h"
 #include "CXCodeGen.h"
 #include "CXCompilerInstance.h"
 #include "CXCompilerInvocation.h"
