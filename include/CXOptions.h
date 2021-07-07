@@ -17,7 +17,9 @@ CINDEX_LINKAGE void clang_TargetOptions_dispose(CXTargetOptions TO);
 
 CINDEX_LINKAGE void clang_TargetOptions_setTriple(CXTargetOptions TO, const char *TripleStr,
                                                   size_t Num);
-                                                  
+
+CINDEX_LINKAGE void clang_TargetOptions_PrintStats(CXTargetOptions TO);
+
 CINDEX_LINKAGE CXTargetInfo clang_TargetInfo_CreateTargetInfo(CXDiagnosticsEngine DE,
                                                               CXTargetOptions Opts);
 
@@ -68,6 +70,8 @@ clang_PreprocessorOptions_getMacroIncludesNum(CXPreprocessorOptions PPO);
 CINDEX_LINKAGE void clang_PreprocessorOptions_getMacroIncludes(CXPreprocessorOptions PPO,
                                                                const char **IncsOut,
                                                                size_t Num);
+
+CINDEX_LINKAGE void clang_PreprocessorOptions_PrintStats(CXPreprocessorOptions PPO);
 
 // FrontendOptions
 CINDEX_LINKAGE size_t clang_FrontendOptions_getModulesEmbedFilesNum(CXFrontendOptions Opts);

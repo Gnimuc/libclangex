@@ -70,6 +70,10 @@ CINDEX_LINKAGE void clang_CompilerInstance_setInvocation(CXCompilerInstance CI,
                                                          CXCompilerInvocation CInv);
 
 // Target
+CINDEX_LINKAGE bool clang_CompilerInstance_hasTarget(CXCompilerInstance CI);
+
+CINDEX_LINKAGE CXTargetInfo clang_CompilerInstance_getTarget(CXCompilerInstance CI);
+
 CINDEX_LINKAGE void clang_CompilerInstance_setTarget(CXCompilerInstance CI,
                                                      CXTargetInfo Info);
 

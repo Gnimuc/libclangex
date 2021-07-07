@@ -137,6 +137,15 @@ CXCompilerInvocation clang_CompilerInstance_getInvocation(CXCompilerInstance CI)
   return &Invocation;
 }
 
+bool clang_CompilerInstance_hasTarget(CXCompilerInstance CI) {
+  return static_cast<clang::CompilerInstance *>(CI)->hasTarget();
+}
+
+CXTargetInfo clang_CompilerInstance_getTarget(CXCompilerInstance CI) {
+  auto &Tgt = static_cast<clang::CompilerInstance *>(CI)->getTarget();
+  return &Tgt;
+}
+
 void clang_CompilerInstance_setTarget(CXCompilerInstance CI, CXTargetInfo Info) {
   static_cast<clang::CompilerInstance *>(CI)->setTarget(
       static_cast<clang::TargetInfo *>(Info));

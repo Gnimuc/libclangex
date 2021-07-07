@@ -29,6 +29,31 @@ void clang_TargetOptions_setTriple(CXTargetOptions TO, const char *TripleStr, si
   static_cast<clang::TargetOptions *>(TO)->Triple = std::string(TripleStr, Num);
 }
 
+void clang_TargetOptions_PrintStats(CXTargetOptions TO) {
+  auto Opts = static_cast<clang::TargetOptions *>(TO);
+  llvm::errs() << "\n*** TargetOptions Stats:\n";
+  llvm::errs() << "  Triple: " << Opts->Triple << "\n";
+  llvm::errs() << "  HostTriple: " << Opts->HostTriple << "\n";
+  llvm::errs() << "  CPU: " << Opts->CPU << "\n";
+  llvm::errs() << "  FPMath: " << Opts->FPMath << "\n";
+  llvm::errs() << "  ABI: " << Opts->ABI << "\n";
+  llvm::errs() << "  EABIVersion: " << static_cast<int>(Opts->EABIVersion) << "\n";
+  llvm::errs() << "  LinkerVersion: " << Opts->LinkerVersion << "\n";
+
+  llvm::errs() << "  FeaturesAsWritten: \n";
+  for (const auto &Feature : Opts->FeaturesAsWritten)
+    llvm::errs() << "    " << Feature << "\n";
+
+  llvm::errs() << "  Features: \n";
+  for (const auto &Feature : Opts->Features)
+    llvm::errs() << "    " << Feature << "\n";
+
+  llvm::errs() << "  ForceEnableInt128: " << Opts->ForceEnableInt128 << "\n";
+  llvm::errs() << "  NVPTXUseShortPointers: " << Opts->NVPTXUseShortPointers << "\n";
+  llvm::errs() << "  CodeModel: " << Opts->CodeModel << "\n";
+  llvm::errs() << "  SDKVersion: " << Opts->SDKVersion << "\n";
+}
+
 CXTargetInfo clang_TargetInfo_CreateTargetInfo(CXDiagnosticsEngine DE,
                                                CXTargetOptions Opts) {
   return clang::TargetInfo::CreateTargetInfo(
@@ -192,6 +217,37 @@ void clang_PreprocessorOptions_getMacroIncludes(CXPreprocessorOptions PPO,
     if (i < Num)
       IncsOut[i] = Inc.c_str();
   }
+}
+
+void clang_PreprocessorOptions_PrintStats(CXPreprocessorOptions PPO) {
+  auto Opts = static_cast<clang::PreprocessorOptions *>(PPO);
+  llvm::errs() << "\n*** PreprocessorOptions Stats:\n";
+  llvm::errs() << "  Macros: \n";
+  for (const auto &M : Opts->Macros)
+    llvm::errs() << "    " << M.first << "  (isUndef:" << M.second << ")\n";
+
+  llvm::errs() << "  Includes: \n";
+  for (const auto &Inc : Opts->Includes)
+    llvm::errs() << "    " << Inc << "\n";
+
+  llvm::errs() << "  MacroIncludes: \n";
+  for (const auto &Inc : Opts->MacroIncludes)
+    llvm::errs() << "    " << Inc << "\n";
+
+  llvm::errs() << "  ImplicitPCHInclude: " << Opts->ImplicitPCHInclude << "\n";
+
+  llvm::errs() << "  ChainedIncludes: \n";
+  for (const auto &Inc : Opts->ChainedIncludes)
+    llvm::errs() << "    " << Inc << "\n";
+
+  llvm::errs() << "  Options: \n";
+  llvm::errs() << "    UsePredefines: " << Opts->UsePredefines << "\n";
+  llvm::errs() << "    DetailedRecord: " << Opts->DetailedRecord << "\n";
+  llvm::errs() << "    SingleFileParseMode: " << Opts->SingleFileParseMode << "\n";
+
+  llvm::errs() << "  RemappedFiles: \n";
+  for (const auto &RF : Opts->RemappedFiles)
+    llvm::errs() << "    " << RF.first << "  ->  " << RF.second << "\n";
 }
 
 size_t clang_FrontendOptions_getModulesEmbedFilesNum(CXFrontendOptions Opts) {

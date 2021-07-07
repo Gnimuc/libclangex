@@ -1,6 +1,6 @@
 #include "CXFileManager.h"
-// #include "CXString.h"
 #include "clang/Basic/FileManager.h"
+#include "llvm/Support/Errc.h"
 #include "llvm/Support/MemoryBuffer.h"
 #include <cstdio>
 
@@ -43,7 +43,8 @@ CXMemoryBuffer clang_FileManager_getBufferForFile(CXFileManager FM, CXFileEntry 
   return MB->release();
 }
 
-// CXFileEntry clang_FileManager_getFile(CXFileManager FM, const char *Filename, bool OpenFile,
+// CXFileEntry clang_FileManager_getFile(CXFileManager FM, const char *Filename, bool
+// OpenFile,
 //                                       bool CacheFailure) {
 //   return const_cast<clang::FileEntry *>(*static_cast<clang::FileManager *>(FM)->getFile(
 //       llvm::StringRef(Filename), OpenFile, CacheFailure));
@@ -58,10 +59,19 @@ CXFileEntry clang_FileManager_getVirtualFile(CXFileManager FM, const char *Filen
 
 CXFileEntryRef clang_FileManager_getFileRef(CXFileManager FM, const char *Filename,
                                             bool OpenFile, bool CacheFailure) {
-  std::unique_ptr<clang::FileEntryRef> ptr = std::make_unique<clang::FileEntryRef>(
-      static_cast<clang::FileManager *>(FM)
-          ->getFileRef(Filename, OpenFile, CacheFailure)
-          .get());
+  auto File =
+      static_cast<clang::FileManager *>(FM)->getFileRef(Filename, OpenFile, CacheFailure);
+  if (!File) {
+    std::error_code EC = llvm::errorToErrorCode(File.takeError());
+    if (EC != llvm::errc::no_such_file_or_directory && EC != llvm::errc::invalid_argument &&
+        EC != llvm::errc::is_a_directory && EC != llvm::errc::not_a_directory) {
+      llvm::errs() << "Cannot open file: " << Filename << " " << EC.message() << "\n";
+    } else {
+      llvm::errs() << Filename << " " << EC.message() << "\n";
+    }
+    return nullptr;
+  }
+  std::unique_ptr<clang::FileEntryRef> ptr = std::make_unique<clang::FileEntryRef>(*File);
   return ptr.release();
 }
 

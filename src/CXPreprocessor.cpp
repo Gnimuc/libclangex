@@ -9,3 +9,7 @@ CXHeaderSearch clang_Preprocessor_getHeaderSearchInfo(CXPreprocessor PP) {
 void clang_HeaderSearch_PrintStats(CXHeaderSearch HS) {
   static_cast<clang::HeaderSearch *>(HS)->PrintStats();
 }
+
+void clang_Preprocessor_EnterMainSourceFile(CXPreprocessor PP) {
+  static_cast<clang::Preprocessor *>(PP)->EnterMainSourceFile();
+}

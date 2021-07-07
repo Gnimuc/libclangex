@@ -9,9 +9,11 @@
 extern "C" {
 #endif
 
+CINDEX_LINKAGE void clang_Preprocessor_EnterMainSourceFile(CXPreprocessor PP);
+
 CINDEX_LINKAGE CXHeaderSearch clang_Preprocessor_getHeaderSearchInfo(CXPreprocessor PP);
 
-CINDEX_LINKAGE void clang_HeaderSearch_PrintStats(void);
+CINDEX_LINKAGE void clang_HeaderSearch_PrintStats(CXHeaderSearch HS);
 
 #ifdef __cplusplus
 }
