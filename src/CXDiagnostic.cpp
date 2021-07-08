@@ -45,6 +45,15 @@ void clang_DiagnosticOptions_dispose(CXDiagnosticOptions DO) {
   delete static_cast<clang::DiagnosticOptions *>(DO);
 }
 
+void clang_DiagnosticOptions_setShowColors(CXDiagnosticOptions DO, bool ShowColors) {
+  static_cast<clang::DiagnosticOptions *>(DO)->ShowColors = ShowColors;
+}
+
+void clang_DiagnosticOptions_setShowPresumedLoc(CXDiagnosticOptions DO,
+                                                bool ShowPresumedLoc) {
+  static_cast<clang::DiagnosticOptions *>(DO)->ShowPresumedLoc = ShowPresumedLoc;
+}
+
 void clang_DiagnosticOptions_PrintStats(CXDiagnosticOptions DO) {
   auto Opts = static_cast<clang::DiagnosticOptions *>(DO);
   llvm::errs() << "\n*** DiagnosticOptions Stats:\n";
@@ -67,6 +76,10 @@ void clang_DiagnosticOptions_PrintStats(CXDiagnosticOptions DO) {
   llvm::errs() << "  VerifyPrefixes: \n";
   for (const auto &VP : Opts->VerifyPrefixes)
     llvm::errs() << "    " << VP << "\n";
+
+  llvm::errs() << "  Options: \n";
+  llvm::errs() << "    ShowColors: " << Opts->ShowColors << "\n";
+  llvm::errs() << "    ShowPresumedLoc: " << Opts->ShowPresumedLoc << "\n";
 }
 
 CXDiagnosticConsumer clang_DiagnosticConsumer_create(CXInit_Error *ErrorCode) {
@@ -136,4 +149,8 @@ CXDiagnosticsEngine clang_DiagnosticsEngine_create(CXDiagnosticIDs ID,
 
 void clang_DiagnosticsEngine_dispose(CXDiagnosticsEngine DE) {
   delete static_cast<clang::DiagnosticsEngine *>(DE);
+}
+
+void clang_DiagnosticsEngine_setShowColors(CXDiagnosticsEngine DE, bool ShowColors) {
+  static_cast<clang::DiagnosticsEngine *>(DE)->setShowColors(ShowColors);
 }

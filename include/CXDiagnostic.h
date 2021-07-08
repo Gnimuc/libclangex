@@ -21,13 +21,20 @@ CINDEX_LINKAGE void clang_DiagnosticOptions_dispose(CXDiagnosticOptions DO);
 
 CINDEX_LINKAGE void clang_DiagnosticOptions_PrintStats(CXDiagnosticOptions DO);
 
+CINDEX_LINKAGE void clang_DiagnosticOptions_setShowColors(CXDiagnosticOptions DO,
+                                                bool ShowColors);
+
+CINDEX_LINKAGE void clang_DiagnosticOptions_setShowPresumedLoc(CXDiagnosticOptions DO,
+                                                               bool ShowPresumedLoc);
+
 // DiagnosticConsumer
 CINDEX_LINKAGE CXDiagnosticConsumer
 clang_DiagnosticConsumer_create(CXInit_Error *ErrorCode);
 
 CINDEX_LINKAGE void clang_DiagnosticConsumer_dispose(CXDiagnosticConsumer DC);
 
-CINDEX_LINKAGE CXIgnoringDiagConsumer clang_IgnoringDiagConsumer_create(CXInit_Error *ErrorCode);
+CINDEX_LINKAGE CXIgnoringDiagConsumer
+clang_IgnoringDiagConsumer_create(CXInit_Error *ErrorCode);
 
 CINDEX_LINKAGE void clang_IgnoringDiagConsumer_dispose(CXIgnoringDiagConsumer DC);
 
@@ -39,6 +46,9 @@ CINDEX_LINKAGE CXDiagnosticsEngine clang_DiagnosticsEngine_create(CXDiagnosticID
                                                                   CXInit_Error *ErrorCode);
 
 CINDEX_LINKAGE void clang_DiagnosticsEngine_dispose(CXDiagnosticsEngine DE);
+
+CINDEX_LINKAGE void clang_DiagnosticsEngine_setShowColors(CXDiagnosticsEngine DE,
+                                                          bool ShowColors);
 
 #ifdef __cplusplus
 }
