@@ -134,6 +134,8 @@ clang_CompilerInstance_getPreprocessorOpts(CXCompilerInstance CI);
 
 CINDEX_LINKAGE CXTargetOptions clang_CompilerInstance_getTargetOpts(CXCompilerInstance CI);
 
+CINDEX_LINKAGE CXLangOptions clang_CompilerInstance_getLangOpts(CXCompilerInstance CI);
+
 #ifdef __cplusplus
 }
 #endif

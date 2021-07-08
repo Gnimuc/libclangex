@@ -20,6 +20,7 @@ typedef void *CXCodeGenOptions;
 typedef void *CXHeaderSearchOptions;
 typedef void *CXPreprocessorOptions;
 typedef void *CXFrontendOptions;
+typedef void *CXLangOptions;
 
 // Sema
 typedef void *CXSema;

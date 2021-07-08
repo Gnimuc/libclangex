@@ -82,6 +82,9 @@ CINDEX_LINKAGE void clang_FrontendOptions_getModulesEmbedFiles(CXFrontendOptions
 
 CINDEX_LINKAGE void clang_FrontendOptions_PrintStats(CXFrontendOptions FEO);
 
+// LangOptions
+CINDEX_LINKAGE void clang_LangOptions_PrintStats(CXLangOptions LO);
+
 #ifdef __cplusplus
 }
 #endif

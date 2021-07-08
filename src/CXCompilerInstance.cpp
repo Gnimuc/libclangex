@@ -254,3 +254,8 @@ CXTargetOptions clang_CompilerInstance_getTargetOpts(CXCompilerInstance CI) {
   auto &Opts = static_cast<clang::CompilerInstance *>(CI)->getTargetOpts();
   return &Opts;
 }
+
+CXLangOptions clang_CompilerInstance_getLangOpts(CXCompilerInstance CI) {
+  auto &Opts = static_cast<clang::CompilerInstance *>(CI)->getLangOpts();
+  return &Opts;
+}
