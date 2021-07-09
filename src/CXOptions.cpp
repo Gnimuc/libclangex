@@ -1,4 +1,6 @@
 #include "CXOptions.h"
+#include "clang/AST/DeclBase.h"
+#include "clang/AST/Stmt.h"
 #include "clang/Basic/CodeGenOptions.h"
 #include "clang/Basic/TargetInfo.h"
 #include "clang/Basic/TargetOptions.h"
@@ -328,3 +330,7 @@ void clang_LangOptions_PrintStats(CXLangOptions LO) {
   llvm::errs() << "    CPlusPlus20: " << Opts->CPlusPlus20 << "\n";
   llvm::errs() << "    ObjC: " << Opts->ObjC << "\n";
 }
+
+void clang_Decl_EnableStatistics(void) { clang::Decl::EnableStatistics(); }
+
+void clang_Stmt_EnableStatistics(void) { clang::Stmt::EnableStatistics(); }

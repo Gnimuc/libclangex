@@ -2,6 +2,7 @@
 #include "clang/Basic/Diagnostic.h"
 #include "clang/Basic/DiagnosticIDs.h"
 #include "clang/Basic/DiagnosticOptions.h"
+#include "clang/Frontend/TextDiagnosticPrinter.h"
 #include "llvm/ADT/IntrusiveRefCntPtr.h"
 #include "llvm/Support/raw_ostream.h"
 #include <cstdio>
@@ -120,6 +121,39 @@ CXIgnoringDiagConsumer clang_IgnoringDiagConsumer_create(CXInit_Error *ErrorCode
 
 void clang_IgnoringDiagConsumer_dispose(CXIgnoringDiagConsumer DC) {
   delete static_cast<clang::IgnoringDiagConsumer *>(DC);
+}
+
+CXTextDiagnosticPrinter clang_TextDiagnosticPrinter_create(CXDiagnosticOptions Opts,
+                                                           CXInit_Error *ErrorCode) {
+  CXInit_Error Err = CXInit_NoError;
+  std::unique_ptr<clang::TextDiagnosticPrinter> ptr =
+      std::make_unique<clang::TextDiagnosticPrinter>(
+          llvm::errs(), static_cast<clang::DiagnosticOptions *>(Opts));
+
+  if (!ptr) {
+    fprintf(stderr, "LIBCLANGEX ERROR: failed to create `clang::TextDiagnosticPrinter`\n");
+    Err = CXInit_CanNotCreate;
+  }
+
+  if (ErrorCode)
+    *ErrorCode = Err;
+
+  return ptr.release();
+}
+
+void clang_TextDiagnosticPrinter_dispose(CXTextDiagnosticPrinter DC) {
+  delete static_cast<clang::TextDiagnosticPrinter *>(DC);
+}
+
+void clang_TextDiagnosticPrinter_BeginSourceFile(CXTextDiagnosticPrinter DC,
+                                                 CXLangOptions LangOpts,
+                                                 CXPreprocessor PP) {
+  static_cast<clang::TextDiagnosticPrinter *>(DC)->BeginSourceFile(
+      *static_cast<clang::LangOptions *>(LangOpts), static_cast<clang::Preprocessor *>(PP));
+}
+
+void clang_TextDiagnosticPrinter_EndSourceFile(CXTextDiagnosticPrinter DC) {
+  static_cast<clang::TextDiagnosticPrinter *>(DC)->EndSourceFile();
 }
 
 CXDiagnosticsEngine clang_DiagnosticsEngine_create(CXDiagnosticIDs ID,

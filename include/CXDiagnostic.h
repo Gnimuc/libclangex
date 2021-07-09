@@ -22,7 +22,7 @@ CINDEX_LINKAGE void clang_DiagnosticOptions_dispose(CXDiagnosticOptions DO);
 CINDEX_LINKAGE void clang_DiagnosticOptions_PrintStats(CXDiagnosticOptions DO);
 
 CINDEX_LINKAGE void clang_DiagnosticOptions_setShowColors(CXDiagnosticOptions DO,
-                                                bool ShowColors);
+                                                          bool ShowColors);
 
 CINDEX_LINKAGE void clang_DiagnosticOptions_setShowPresumedLoc(CXDiagnosticOptions DO,
                                                                bool ShowPresumedLoc);
@@ -37,6 +37,17 @@ CINDEX_LINKAGE CXIgnoringDiagConsumer
 clang_IgnoringDiagConsumer_create(CXInit_Error *ErrorCode);
 
 CINDEX_LINKAGE void clang_IgnoringDiagConsumer_dispose(CXIgnoringDiagConsumer DC);
+
+CINDEX_LINKAGE CXTextDiagnosticPrinter
+clang_TextDiagnosticPrinter_create(CXDiagnosticOptions Opts, CXInit_Error *ErrorCode);
+
+CINDEX_LINKAGE void clang_TextDiagnosticPrinter_dispose(CXTextDiagnosticPrinter DC);
+
+CINDEX_LINKAGE void clang_TextDiagnosticPrinter_BeginSourceFile(CXTextDiagnosticPrinter DC,
+                                                                CXLangOptions LangOpts,
+                                                                CXPreprocessor PP);
+
+CINDEX_LINKAGE void clang_TextDiagnosticPrinter_EndSourceFile(CXTextDiagnosticPrinter DC);
 
 // DiagnosticsEngine
 CINDEX_LINKAGE CXDiagnosticsEngine clang_DiagnosticsEngine_create(CXDiagnosticIDs ID,

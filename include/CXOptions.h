@@ -85,6 +85,10 @@ CINDEX_LINKAGE void clang_FrontendOptions_PrintStats(CXFrontendOptions FEO);
 // LangOptions
 CINDEX_LINKAGE void clang_LangOptions_PrintStats(CXLangOptions LO);
 
+// Statistics
+CINDEX_LINKAGE void clang_Decl_EnableStatistics(void);
+CINDEX_LINKAGE void clang_Stmt_EnableStatistics(void);
+
 #ifdef __cplusplus
 }
 #endif

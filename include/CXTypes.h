@@ -25,6 +25,9 @@ typedef void *CXLangOptions;
 // Sema
 typedef void *CXSema;
 
+// Parser
+typedef void *CXParser;
+
 // Preprocessor
 typedef void *CXPreprocessor;
 typedef void *CXHeaderSearch;
@@ -61,6 +64,7 @@ typedef void *CXDiagnosticIDs;
 typedef void *CXDiagnosticOptions;
 typedef void *CXDiagnosticConsumer;
 typedef void *CXIgnoringDiagConsumer;
+typedef void *CXTextDiagnosticPrinter;
 typedef void *CXDiagnosticsEngine;
 
 // CodeGen

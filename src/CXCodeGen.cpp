@@ -16,3 +16,8 @@ CXCodeGenerator clang_CreateLLVMCodeGen(CXCompilerInstance CI, LLVMContextRef LL
 LLVMModuleRef clang_CodeGenerator_getLLVMModule(CXCodeGenerator CG) {
   return llvm::wrap(static_cast<clang::CodeGenerator *>(CG)->GetModule());
 }
+
+void clang_CodeGenerator_HandleTranslationUnit(CXCodeGenerator CG, CXASTContext Ctx) {
+  static_cast<clang::CodeGenerator *>(CG)->HandleTranslationUnit(
+      *static_cast<clang::ASTContext *>(Ctx));
+}

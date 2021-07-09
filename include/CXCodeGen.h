@@ -16,6 +16,8 @@ CINDEX_LINKAGE CXCodeGenerator clang_CreateLLVMCodeGen(CXCompilerInstance CI,
 
 CINDEX_LINKAGE LLVMModuleRef clang_CodeGenerator_getLLVMModule(CXCodeGenerator CG);
 
+CINDEX_LINKAGE void clang_CodeGenerator_HandleTranslationUnit(CXCodeGenerator CG, CXASTContext Ctx);
+
 #ifdef __cplusplus
 }
 #endif

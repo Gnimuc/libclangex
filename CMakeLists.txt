@@ -43,7 +43,9 @@ target_sources(${target} PRIVATE src/CXDriver.cpp)
 target_sources(${target} PRIVATE src/CXFileManager.cpp)
 target_sources(${target} PRIVATE src/CXMemoryBuffer.cpp)
 target_sources(${target} PRIVATE src/CXOptions.cpp)
+target_sources(${target} PRIVATE src/CXParser.cpp)
 target_sources(${target} PRIVATE src/CXPreprocessor.cpp)
+target_sources(${target} PRIVATE src/CXSema.cpp)
 target_sources(${target} PRIVATE src/CXSourceManager.cpp)
 
 # set(CMAKE_SKIP_RPATH ON)
@@ -77,7 +79,9 @@ set(pub_hdrs ${CMAKE_CURRENT_SOURCE_DIR}/include/libclangex.h
              ${CMAKE_CURRENT_SOURCE_DIR}/include/CXFileManager.h
              ${CMAKE_CURRENT_SOURCE_DIR}/include/CXMemoryBuffer.h
              ${CMAKE_CURRENT_SOURCE_DIR}/include/CXOptions.h
+             ${CMAKE_CURRENT_SOURCE_DIR}/include/CXParser.h
              ${CMAKE_CURRENT_SOURCE_DIR}/include/CXPreprocessor.h
+             ${CMAKE_CURRENT_SOURCE_DIR}/include/CXSema.h
              ${CMAKE_CURRENT_SOURCE_DIR}/include/CXSourceManager.h
              ${CMAKE_CURRENT_SOURCE_DIR}/include/CXTypes.h
             )
