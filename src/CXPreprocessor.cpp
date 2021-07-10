@@ -1,4 +1,5 @@
 #include "CXPreprocessor.h"
+#include "clang/Basic/Builtins.h"
 #include "clang/Lex/HeaderSearch.h"
 #include "clang/Lex/Preprocessor.h"
 
@@ -16,4 +17,10 @@ void clang_Preprocessor_EnterMainSourceFile(CXPreprocessor PP) {
 
 void clang_Preprocessor_PrintStats(CXPreprocessor PP) {
   static_cast<clang::Preprocessor *>(PP)->PrintStats();
+}
+
+void clang_Preprocessor_InitializeBuiltins(CXPreprocessor PP) {
+  auto Prep = static_cast<clang::Preprocessor *>(PP);
+  Prep->getBuiltinInfo().initializeBuiltins(Prep->getIdentifierTable(),
+                                            Prep->getLangOpts());
 }

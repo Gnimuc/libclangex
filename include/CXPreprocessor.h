@@ -17,6 +17,8 @@ CINDEX_LINKAGE void clang_Preprocessor_EnterMainSourceFile(CXPreprocessor PP);
 
 CINDEX_LINKAGE void clang_Preprocessor_PrintStats(CXPreprocessor PP);
 
+CINDEX_LINKAGE void clang_Preprocessor_InitializeBuiltins(CXPreprocessor PP);
+
 #ifdef __cplusplus
 }
 #endif
