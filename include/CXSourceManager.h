@@ -18,6 +18,8 @@ CINDEX_LINKAGE CXSourceManager clang_SourceManager_create(CXDiagnosticsEngine Di
 
 CINDEX_LINKAGE void clang_SourceManager_dispose(CXSourceManager SM);
 
+CINDEX_LINKAGE void clang_SourceManager_PrintStats(CXSourceManager SM);
+
 CINDEX_LINKAGE unsigned clang_FileID_getHashValue(CXFileID FID);
 
 CINDEX_LINKAGE void clang_FileID_dispose(CXFileID FID);

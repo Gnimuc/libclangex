@@ -12,6 +12,8 @@ CINDEX_LINKAGE void clang_Sema_setCollectStats(CXSema S, bool ShouldCollect);
 
 CINDEX_LINKAGE void clang_Sema_processWeakTopLevelDecls(CXSema Sema, CXCodeGenerator CodeGen);
 
+CINDEX_LINKAGE void clang_Sema_PrintStats(CXSema S);
+
 #ifdef __cplusplus
 }
 #endif

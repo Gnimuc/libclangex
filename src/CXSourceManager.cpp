@@ -28,6 +28,10 @@ void clang_SourceManager_dispose(CXSourceManager SM) {
   delete static_cast<clang::SourceManager *>(SM);
 }
 
+void clang_SourceManager_PrintStats(CXSourceManager SM) {
+  static_cast<clang::SourceManager *>(SM)->PrintStats();
+}
+
 CXFileID clang_SourceManager_createFileIDFromMemoryBuffer(CXSourceManager SM,
                                                           CXMemoryBuffer MB) {
   std::unique_ptr<clang::FileID> ptr =

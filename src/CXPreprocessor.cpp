@@ -13,3 +13,7 @@ void clang_HeaderSearch_PrintStats(CXHeaderSearch HS) {
 void clang_Preprocessor_EnterMainSourceFile(CXPreprocessor PP) {
   static_cast<clang::Preprocessor *>(PP)->EnterMainSourceFile();
 }
+
+void clang_Preprocessor_PrintStats(CXPreprocessor PP) {
+  static_cast<clang::Preprocessor *>(PP)->PrintStats();
+}

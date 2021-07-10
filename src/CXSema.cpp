@@ -12,3 +12,7 @@ void clang_Sema_processWeakTopLevelDecls(CXSema Sema, CXCodeGenerator CodeGen) {
   for (clang::Decl *D : S->WeakTopLevelDecls())
     CG->HandleTopLevelDecl(clang::DeclGroupRef(D));
 }
+
+void clang_Sema_PrintStats(CXSema S) {
+  static_cast<clang::Sema *>(S)->PrintStats();
+}
