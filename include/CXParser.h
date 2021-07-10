@@ -15,6 +15,8 @@ CINDEX_LINKAGE CXParser clang_Parser_create(CXPreprocessor PP, CXSema Actions,
 
 CINDEX_LINKAGE void clang_Parser_dispose(CXParser P);
 
+CINDEX_LINKAGE void clang_Parser_Initialize(CXParser P);
+
 CINDEX_LINKAGE bool
 clang_Parser_tryParseAndSkipInvalidOrParsedDecl(CXParser Parser, CXCodeGenerator CodeGen);
 

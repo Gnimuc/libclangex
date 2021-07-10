@@ -22,6 +22,10 @@ CXParser clang_Parser_create(CXPreprocessor PP, CXSema Actions, bool SkipFunctio
 
 void clang_Parser_dispose(CXParser P) { delete static_cast<clang::Parser *>(P); }
 
+void clang_Parser_Initialize(CXParser P) {
+  static_cast<clang::Parser *>(P)->Initialize();
+}
+
 bool clang_Parser_tryParseAndSkipInvalidOrParsedDecl(CXParser Parser,
                                                      CXCodeGenerator CodeGen) {
   auto P = static_cast<clang::Parser *>(Parser);
