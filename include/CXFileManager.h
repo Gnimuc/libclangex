@@ -44,11 +44,6 @@ CINDEX_LINKAGE CXFileEntry clang_FileEntryRef_getFileEntry(CXFileEntryRef FER);
 // CINDEX_LINKAGE CXFileEntry clang_FileManager_getFile(CXFileManager FM, const char *Filename,
 //                                                      bool OpenFile, bool CacheFailure);  // deprecated
 
-CINDEX_LINKAGE CXFileEntry clang_FileManager_getVirtualFile(CXFileManager FM,
-                                                            const char *Filename,
-                                                            unsigned Size,
-                                                            time_t ModificationTime);
-
 CINDEX_LINKAGE const char *clang_FileEntry_getName(CXFileEntry FE);
 
 CINDEX_LINKAGE const char *clang_FileEntry_tryGetRealPathName(CXFileEntry FE);
