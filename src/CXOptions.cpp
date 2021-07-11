@@ -106,7 +106,6 @@ void clang_CodeGenOptions_PrintStats(CXCodeGenOptions CGO) {
   llvm::errs() << "  FloatABI: " << Opts->FloatABI << "\n";
   llvm::errs() << "  LimitFloatPrecision: " << Opts->LimitFloatPrecision << "\n";
   llvm::errs() << "  MainFileName: " << Opts->MainFileName << "\n";
-  llvm::errs() << "  ThreadModel: " << Opts->ThreadModel << "\n";
   llvm::errs() << "  TrapFuncName: " << Opts->TrapFuncName << "\n";
 
   llvm::errs() << "  DependentLibraries: \n";
@@ -299,7 +298,6 @@ void clang_FrontendOptions_PrintStats(CXFrontendOptions FEO) {
   llvm::errs() << "  Options: \n";
   llvm::errs() << "    ShowHelp: " << Opts->ShowHelp << "\n";
   llvm::errs() << "    ShowStats: " << Opts->ShowStats << "\n";
-  llvm::errs() << "    ShowTimers: " << Opts->ShowTimers << "\n";
   llvm::errs() << "    PrintSupportedCPUs: " << Opts->PrintSupportedCPUs << "\n";
   llvm::errs() << "    ShowVersion: " << Opts->ShowVersion << "\n";
   llvm::errs() << "    SkipFunctionBodies: " << Opts->SkipFunctionBodies << "\n";
