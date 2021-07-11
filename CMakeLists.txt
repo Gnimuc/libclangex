@@ -58,6 +58,10 @@ else()
     message(STATUS "Build without LLVM assert.")
 endif()
 
+if (WIN32)
+    target_compile_definitions(${target} PUBLIC "_CINDEX_LIB_")
+endif(WIN32)
+
 set(pub_hdrs ${CMAKE_CURRENT_SOURCE_DIR}/include/libclangex.h
              ${CMAKE_CURRENT_SOURCE_DIR}/include/CXASTContext.h
              ${CMAKE_CURRENT_SOURCE_DIR}/include/CXCodeGen.h
