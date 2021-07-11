@@ -20,13 +20,6 @@ else()
     message(FATAL_ERROR "Cannot find LLVM directory. You may need to install `LLVM_full_jll`.")
 endif()
 
-# if(LLVM_SOURCE_PREFIX)
-#     set(LLVM_SOURCE_DIR "${LLVM_SOURCE_PREFIX}")
-#     message(STATUS "Found LLVM_SOURCE_DIR: " ${LLVM_SOURCE_DIR})
-# else()
-#     message(FATAL_ERROR "Please set `LLVM_SOURCE_PREFIX`")
-# endif()
-
 find_library(ClangCPP NAMES clang-cpp HINTS "${CLANG_DIR}/lib")
 message(STATUS "Found Clang: ${ClangCPP}")
 
@@ -48,15 +41,12 @@ target_sources(${target} PRIVATE src/CXPreprocessor.cpp)
 target_sources(${target} PRIVATE src/CXSema.cpp)
 target_sources(${target} PRIVATE src/CXSourceManager.cpp)
 
-# set(CMAKE_SKIP_RPATH ON)
-# set(CMAKE_INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/lib")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-rtti")
 
 target_include_directories(${target} PUBLIC
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
     $<BUILD_INTERFACE:${CLANG_DIR}/include>
     $<BUILD_INTERFACE:${LLVM_DIR}/include>
-    # $<BUILD_INTERFACE:${LLVM_SOURCE_DIR}>
     $<INSTALL_INTERFACE:include>)
     
 target_compile_features(${target} PRIVATE cxx_std_14)
