@@ -9,42 +9,23 @@
 extern "C" {
 #endif
 
-typedef void *CXIntrusiveRefCntPtr;
-
-typedef void *CXMemoryBuffer;
+// CompilerInstance
+typedef void *CXCompilerInstance;
 
 // Options
 typedef void *CXTargetOptions;
-typedef void *CXTargetInfo;
+typedef void *CXTargetInfo_;
 typedef void *CXCodeGenOptions;
 typedef void *CXHeaderSearchOptions;
 typedef void *CXPreprocessorOptions;
 typedef void *CXFrontendOptions;
 typedef void *CXLangOptions;
 
-// Sema
-typedef void *CXSema;
-
-// Parser
-typedef void *CXParser;
-
-// Preprocessor
-typedef void *CXPreprocessor;
-typedef void *CXHeaderSearch;
-
-typedef enum CXTranslationUnitKind {
-  CXTU_Complete,
-  CXTU_Prefix,
-  CXTU_Module
-} CXTranslationUnitKind;
-
-// AST
-typedef void *CXASTUnit;
-typedef void *CXASTContext;
-typedef void *CXASTConsumer;
-
-// CompilerInstance
-typedef void *CXCompilerInstance;
+// Diagnostic
+typedef void *CXDiagnosticIDs;
+typedef void *CXDiagnosticOptions;
+typedef void *CXDiagnosticConsumer;
+typedef void *CXDiagnosticsEngine;
 
 // CompilerInvocation
 typedef void *CXCompilerInvocation;
@@ -57,18 +38,35 @@ typedef void *CXFileEntryRef; // FIXME: make it a stack value instead of opaque 
 typedef void *CXFileManager;
 
 // SourceManager
+typedef void *CXMemoryBuffer;
 typedef void *CXSourceManager;
 
-// Diagnostic
-typedef void *CXDiagnosticIDs;
-typedef void *CXDiagnosticOptions;
-typedef void *CXDiagnosticConsumer;
-typedef void *CXIgnoringDiagConsumer;
-typedef void *CXTextDiagnosticPrinter;
-typedef void *CXDiagnosticsEngine;
+// Preprocessor
+typedef void *CXPreprocessor;
+typedef void *CXHeaderSearch;
+
+typedef enum CXTranslationUnitKind {
+  CXTU_Complete,
+  CXTU_Prefix,
+  CXTU_Module
+} CXTranslationUnitKind;
+
+// AST
+typedef void *CXASTContext;
+typedef void *CXASTConsumer;
 
 // CodeGen
 typedef void *CXCodeGenerator;
+
+// Sema
+typedef void *CXSema;
+
+// Parser
+typedef void *CXParser;
+
+// Action
+typedef void *CXFrontendAction;
+typedef void *CXCodeGenAction;
 
 #ifdef __cplusplus
 }

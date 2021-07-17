@@ -32,6 +32,7 @@ find_library(LLVM NAMES LLVM HINTS "${LLVM_DIR}/lib")
 message(STATUS "Found LLVM: ${LLVM}")
 
 target_sources(${target} PRIVATE src/libclangex.cpp)
+target_sources(${target} PRIVATE src/CXASTConsumer.cpp)
 target_sources(${target} PRIVATE src/CXASTContext.cpp)
 target_sources(${target} PRIVATE src/CXCodeGen.cpp)
 target_sources(${target} PRIVATE src/CXCompilerInstance.cpp)
@@ -68,6 +69,7 @@ if (WIN32)
 endif(WIN32)
 
 set(pub_hdrs ${CMAKE_CURRENT_SOURCE_DIR}/include/libclangex.h
+             ${CMAKE_CURRENT_SOURCE_DIR}/include/CXASTConsumer.h
              ${CMAKE_CURRENT_SOURCE_DIR}/include/CXASTContext.h
              ${CMAKE_CURRENT_SOURCE_DIR}/include/CXCodeGen.h
              ${CMAKE_CURRENT_SOURCE_DIR}/include/CXCompilerInstance.h

@@ -54,7 +54,7 @@ void clang_TargetOptions_PrintStats(CXTargetOptions TO) {
   llvm::errs() << "  SDKVersion: " << Opts->SDKVersion << "\n";
 }
 
-CXTargetInfo clang_TargetInfo_CreateTargetInfo(CXDiagnosticsEngine DE,
+CXTargetInfo_ clang_TargetInfo_CreateTargetInfo(CXDiagnosticsEngine DE,
                                                CXTargetOptions Opts) {
   return clang::TargetInfo::CreateTargetInfo(
       *static_cast<clang::DiagnosticsEngine *>(DE),

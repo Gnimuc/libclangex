@@ -29,25 +29,18 @@ CINDEX_LINKAGE void clang_DiagnosticOptions_setShowPresumedLoc(CXDiagnosticOptio
 
 // DiagnosticConsumer
 CINDEX_LINKAGE CXDiagnosticConsumer
-clang_DiagnosticConsumer_create(CXInit_Error *ErrorCode);
+clang_IgnoringDiagConsumer_create(CXInit_Error *ErrorCode);
+
+CINDEX_LINKAGE CXDiagnosticConsumer
+clang_TextDiagnosticPrinter_create(CXDiagnosticOptions Opts, CXInit_Error *ErrorCode);
 
 CINDEX_LINKAGE void clang_DiagnosticConsumer_dispose(CXDiagnosticConsumer DC);
 
-CINDEX_LINKAGE CXIgnoringDiagConsumer
-clang_IgnoringDiagConsumer_create(CXInit_Error *ErrorCode);
+CINDEX_LINKAGE void clang_DiagnosticConsumer_BeginSourceFile(CXDiagnosticConsumer DC,
+                                                             CXLangOptions LangOpts,
+                                                             CXPreprocessor PP);
 
-CINDEX_LINKAGE void clang_IgnoringDiagConsumer_dispose(CXIgnoringDiagConsumer DC);
-
-CINDEX_LINKAGE CXTextDiagnosticPrinter
-clang_TextDiagnosticPrinter_create(CXDiagnosticOptions Opts, CXInit_Error *ErrorCode);
-
-CINDEX_LINKAGE void clang_TextDiagnosticPrinter_dispose(CXTextDiagnosticPrinter DC);
-
-CINDEX_LINKAGE void clang_TextDiagnosticPrinter_BeginSourceFile(CXTextDiagnosticPrinter DC,
-                                                                CXLangOptions LangOpts,
-                                                                CXPreprocessor PP);
-
-CINDEX_LINKAGE void clang_TextDiagnosticPrinter_EndSourceFile(CXTextDiagnosticPrinter DC);
+CINDEX_LINKAGE void clang_DiagnosticConsumer_EndSourceFile(CXDiagnosticConsumer DC);
 
 // DiagnosticsEngine
 CINDEX_LINKAGE CXDiagnosticsEngine clang_DiagnosticsEngine_create(CXDiagnosticIDs ID,

@@ -29,10 +29,6 @@ CINDEX_LINKAGE void clang_CompilerInstance_createDiagnostics(CXCompilerInstance 
                                                              CXDiagnosticConsumer DC,
                                                              bool ShouldOwnClient);
 
-CINDEX_LINKAGE CXIntrusiveRefCntPtr clang_CompilerInstance_createDiagnosticsEngine(
-    CXDiagnosticOptions DO, CXDiagnosticConsumer DC, bool ShouldOwnClient,
-    CXCodeGenOptions CGO);
-
 // FileManager
 CINDEX_LINKAGE bool clang_CompilerInstance_hasFileManager(CXCompilerInstance CI);
 
@@ -72,10 +68,10 @@ CINDEX_LINKAGE void clang_CompilerInstance_setInvocation(CXCompilerInstance CI,
 // Target
 CINDEX_LINKAGE bool clang_CompilerInstance_hasTarget(CXCompilerInstance CI);
 
-CINDEX_LINKAGE CXTargetInfo clang_CompilerInstance_getTarget(CXCompilerInstance CI);
+CINDEX_LINKAGE CXTargetInfo_ clang_CompilerInstance_getTarget(CXCompilerInstance CI);
 
 CINDEX_LINKAGE void clang_CompilerInstance_setTarget(CXCompilerInstance CI,
-                                                     CXTargetInfo Info);
+                                                     CXTargetInfo_ Info);
 
 CINDEX_LINKAGE void clang_CompilerInstance_setTargetAndLangOpts(CXCompilerInstance CI);
 
@@ -113,8 +109,10 @@ CINDEX_LINKAGE void clang_CompilerInstance_createASTContext(CXCompilerInstance C
 // ASTConsumer
 CINDEX_LINKAGE bool clang_CompilerInstance_hasASTConsumer(CXCompilerInstance CI);
 
-CINDEX_LINKAGE void clang_CompilerInstance_setCodeGenerator(CXCompilerInstance CI,
-                                                            CXCodeGenerator CG);
+CINDEX_LINKAGE CXASTConsumer clang_CompilerInstance_getASTConsumer(CXCompilerInstance CI);
+
+CINDEX_LINKAGE void clang_CompilerInstance_setASTConsumer(CXCompilerInstance CI,
+                                                          CXASTConsumer CG);
 
 // Options
 CINDEX_LINKAGE CXCodeGenOptions
@@ -135,6 +133,10 @@ clang_CompilerInstance_getPreprocessorOpts(CXCompilerInstance CI);
 CINDEX_LINKAGE CXTargetOptions clang_CompilerInstance_getTargetOpts(CXCompilerInstance CI);
 
 CINDEX_LINKAGE CXLangOptions clang_CompilerInstance_getLangOpts(CXCompilerInstance CI);
+
+// Action
+CINDEX_LINKAGE bool clang_CompilerInstance_ExecuteAction(CXCompilerInstance CI,
+                                                         CXFrontendAction Act);
 
 #ifdef __cplusplus
 }

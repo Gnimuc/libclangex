@@ -7,6 +7,8 @@
 #include "llvm/Support/raw_ostream.h"
 #include <cstdio>
 
+// DiagnosticIDs
+
 CXDiagnosticIDs clang_DiagnosticIDs_create(CXInit_Error *ErrorCode) {
   CXInit_Error Err = CXInit_NoError;
   std::unique_ptr<clang::DiagnosticIDs> ptr = std::make_unique<clang::DiagnosticIDs>();
@@ -25,6 +27,8 @@ CXDiagnosticIDs clang_DiagnosticIDs_create(CXInit_Error *ErrorCode) {
 void clang_DiagnosticIDs_dispose(CXDiagnosticIDs ID) {
   delete static_cast<clang::DiagnosticIDs *>(ID);
 }
+
+// DiagnosticOptions
 
 CXDiagnosticOptions clang_DiagnosticOptions_create(CXInit_Error *ErrorCode) {
   CXInit_Error Err = CXInit_NoError;
@@ -83,29 +87,11 @@ void clang_DiagnosticOptions_PrintStats(CXDiagnosticOptions DO) {
   llvm::errs() << "    ShowPresumedLoc: " << Opts->ShowPresumedLoc << "\n";
 }
 
-CXDiagnosticConsumer clang_DiagnosticConsumer_create(CXInit_Error *ErrorCode) {
+// DiagnosticConsumer
+
+CXDiagnosticConsumer clang_IgnoringDiagConsumer_create(CXInit_Error *ErrorCode) {
   CXInit_Error Err = CXInit_NoError;
   std::unique_ptr<clang::DiagnosticConsumer> ptr =
-      std::make_unique<clang::DiagnosticConsumer>();
-
-  if (!ptr) {
-    fprintf(stderr, "LIBCLANGEX ERROR: failed to create `clang::DiagnosticConsumer`\n");
-    Err = CXInit_CanNotCreate;
-  }
-
-  if (ErrorCode)
-    *ErrorCode = Err;
-
-  return ptr.release();
-}
-
-void clang_DiagnosticConsumer_dispose(CXDiagnosticConsumer DC) {
-  delete static_cast<clang::DiagnosticConsumer *>(DC);
-}
-
-CXIgnoringDiagConsumer clang_IgnoringDiagConsumer_create(CXInit_Error *ErrorCode) {
-  CXInit_Error Err = CXInit_NoError;
-  std::unique_ptr<clang::IgnoringDiagConsumer> ptr =
       std::make_unique<clang::IgnoringDiagConsumer>();
 
   if (!ptr) {
@@ -119,14 +105,10 @@ CXIgnoringDiagConsumer clang_IgnoringDiagConsumer_create(CXInit_Error *ErrorCode
   return ptr.release();
 }
 
-void clang_IgnoringDiagConsumer_dispose(CXIgnoringDiagConsumer DC) {
-  delete static_cast<clang::IgnoringDiagConsumer *>(DC);
-}
-
-CXTextDiagnosticPrinter clang_TextDiagnosticPrinter_create(CXDiagnosticOptions Opts,
-                                                           CXInit_Error *ErrorCode) {
+CXDiagnosticConsumer clang_TextDiagnosticPrinter_create(CXDiagnosticOptions Opts,
+                                                        CXInit_Error *ErrorCode) {
   CXInit_Error Err = CXInit_NoError;
-  std::unique_ptr<clang::TextDiagnosticPrinter> ptr =
+  std::unique_ptr<clang::DiagnosticConsumer> ptr =
       std::make_unique<clang::TextDiagnosticPrinter>(
           llvm::errs(), static_cast<clang::DiagnosticOptions *>(Opts));
 
@@ -141,20 +123,21 @@ CXTextDiagnosticPrinter clang_TextDiagnosticPrinter_create(CXDiagnosticOptions O
   return ptr.release();
 }
 
-void clang_TextDiagnosticPrinter_dispose(CXTextDiagnosticPrinter DC) {
-  delete static_cast<clang::TextDiagnosticPrinter *>(DC);
+void clang_DiagnosticConsumer_dispose(CXDiagnosticConsumer DC) {
+  delete static_cast<clang::DiagnosticConsumer *>(DC);
 }
 
-void clang_TextDiagnosticPrinter_BeginSourceFile(CXTextDiagnosticPrinter DC,
-                                                 CXLangOptions LangOpts,
-                                                 CXPreprocessor PP) {
-  static_cast<clang::TextDiagnosticPrinter *>(DC)->BeginSourceFile(
+void clang_DiagnosticConsumer_BeginSourceFile(CXDiagnosticConsumer DC,
+                                              CXLangOptions LangOpts, CXPreprocessor PP) {
+  static_cast<clang::DiagnosticConsumer *>(DC)->BeginSourceFile(
       *static_cast<clang::LangOptions *>(LangOpts), static_cast<clang::Preprocessor *>(PP));
 }
 
-void clang_TextDiagnosticPrinter_EndSourceFile(CXTextDiagnosticPrinter DC) {
-  static_cast<clang::TextDiagnosticPrinter *>(DC)->EndSourceFile();
+void clang_DiagnosticConsumer_EndSourceFile(CXDiagnosticConsumer DC) {
+  static_cast<clang::DiagnosticConsumer *>(DC)->EndSourceFile();
 }
+
+// DiagnosticsEngine
 
 CXDiagnosticsEngine clang_DiagnosticsEngine_create(CXDiagnosticIDs ID,
                                                    CXDiagnosticOptions DO,

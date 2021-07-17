@@ -20,7 +20,7 @@ CINDEX_LINKAGE void clang_TargetOptions_setTriple(CXTargetOptions TO, const char
 
 CINDEX_LINKAGE void clang_TargetOptions_PrintStats(CXTargetOptions TO);
 
-CINDEX_LINKAGE CXTargetInfo clang_TargetInfo_CreateTargetInfo(CXDiagnosticsEngine DE,
+CINDEX_LINKAGE CXTargetInfo_ clang_TargetInfo_CreateTargetInfo(CXDiagnosticsEngine DE,
                                                               CXTargetOptions Opts);
 
 // CodeGenOptions

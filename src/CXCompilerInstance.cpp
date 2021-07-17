@@ -27,6 +27,8 @@ void clang_CompilerInstance_dispose(CXCompilerInstance CI) {
   delete static_cast<clang::CompilerInstance *>(CI);
 }
 
+// Diagnostics
+
 bool clang_CompilerInstance_hasDiagnostics(CXCompilerInstance CI) {
   return static_cast<clang::CompilerInstance *>(CI)->hasDiagnostics();
 }
@@ -54,17 +56,7 @@ void clang_CompilerInstance_createDiagnostics(CXCompilerInstance CI,
       static_cast<clang::DiagnosticConsumer *>(DC), ShouldOwnClient);
 }
 
-CXIntrusiveRefCntPtr clang_CompilerInstance_createDiagnosticsEngine(CXDiagnosticOptions DO,
-                                                                    CXDiagnosticConsumer DC,
-                                                                    bool ShouldOwnClient,
-                                                                    CXCodeGenOptions CGO) {
-  auto ptr = std::make_unique<llvm::IntrusiveRefCntPtr<clang::DiagnosticsEngine>>(
-      clang::CompilerInstance::createDiagnostics(
-          static_cast<clang::DiagnosticOptions *>(DO),
-          static_cast<clang::DiagnosticConsumer *>(DC), ShouldOwnClient,
-          static_cast<clang::CodeGenOptions *>(CGO)));
-  return ptr.release();
-}
+// FileManager
 
 bool clang_CompilerInstance_hasFileManager(CXCompilerInstance CI) {
   return static_cast<clang::CompilerInstance *>(CI)->hasFileManager();
@@ -101,6 +93,8 @@ CXFileManager clang_CompilerInstance_createFileManagerWithVOFS4PCH(
   return static_cast<clang::CompilerInstance *>(CI)->createFileManager(Overlay);
 }
 
+// SourceManager
+
 bool clang_CompilerInstance_hasSourceManager(CXCompilerInstance CI) {
   return static_cast<clang::CompilerInstance *>(CI)->hasSourceManager();
 }
@@ -121,6 +115,8 @@ void clang_CompilerInstance_createSourceManager(CXCompilerInstance CI,
   static_cast<clang::CompilerInstance *>(CI)->createSourceManager(*FM);
 }
 
+// Invocation
+
 bool clang_CompilerInstance_hasInvocation(CXCompilerInstance CI) {
   return static_cast<clang::CompilerInstance *>(CI)->hasInvocation();
 }
@@ -137,16 +133,18 @@ CXCompilerInvocation clang_CompilerInstance_getInvocation(CXCompilerInstance CI)
   return &Invocation;
 }
 
+// Target
+
 bool clang_CompilerInstance_hasTarget(CXCompilerInstance CI) {
   return static_cast<clang::CompilerInstance *>(CI)->hasTarget();
 }
 
-CXTargetInfo clang_CompilerInstance_getTarget(CXCompilerInstance CI) {
+CXTargetInfo_ clang_CompilerInstance_getTarget(CXCompilerInstance CI) {
   auto &Tgt = static_cast<clang::CompilerInstance *>(CI)->getTarget();
   return &Tgt;
 }
 
-void clang_CompilerInstance_setTarget(CXCompilerInstance CI, CXTargetInfo Info) {
+void clang_CompilerInstance_setTarget(CXCompilerInstance CI, CXTargetInfo_ Info) {
   static_cast<clang::CompilerInstance *>(CI)->setTarget(
       static_cast<clang::TargetInfo *>(Info));
 }
@@ -158,6 +156,8 @@ void clang_CompilerInstance_setTargetAndLangOpts(CXCompilerInstance CI) {
       std::make_shared<clang::TargetOptions>(compiler->getTargetOpts())));
   compiler->getTarget().adjust(compiler->getLangOpts());
 }
+
+// Preprocessor
 
 bool clang_CompilerInstance_hasPreprocessor(CXCompilerInstance CI) {
   return static_cast<clang::CompilerInstance *>(CI)->hasPreprocessor();
@@ -179,6 +179,8 @@ void clang_CompilerInstance_createPreprocessor(CXCompilerInstance CI,
       static_cast<clang::TranslationUnitKind>(TUKind));
 }
 
+// Sema
+
 bool clang_CompilerInstance_hasSema(CXCompilerInstance CI) {
   return static_cast<clang::CompilerInstance *>(CI)->hasSema();
 }
@@ -198,11 +200,13 @@ void clang_CompilerInstance_createSema(CXCompilerInstance CI,
       static_cast<clang::TranslationUnitKind>(TUKind), nullptr);
 }
 
+// ASTContext
+
 bool clang_CompilerInstance_hasASTContext(CXCompilerInstance CI) {
   return static_cast<clang::CompilerInstance *>(CI)->hasASTContext();
 }
 
-CXSema clang_CompilerInstance_getASTContext(CXCompilerInstance CI) {
+CXASTContext clang_CompilerInstance_getASTContext(CXCompilerInstance CI) {
   auto &Ctx = static_cast<clang::CompilerInstance *>(CI)->getASTContext();
   return &Ctx;
 }
@@ -216,14 +220,22 @@ void clang_CompilerInstance_createASTContext(CXCompilerInstance CI) {
   static_cast<clang::CompilerInstance *>(CI)->createASTContext();
 }
 
+// ASTConsumer
 bool clang_CompilerInstance_hasASTConsumer(CXCompilerInstance CI) {
   return static_cast<clang::CompilerInstance *>(CI)->hasASTConsumer();
 }
 
-void clang_CompilerInstance_setCodeGenerator(CXCompilerInstance CI, CXCodeGenerator CG) {
-  static_cast<clang::CompilerInstance *>(CI)->setASTConsumer(
-      std::unique_ptr<clang::ASTConsumer>(static_cast<clang::CodeGenerator *>(CG)));
+CXASTConsumer clang_CompilerInstance_getASTConsumer(CXCompilerInstance CI) {
+  auto &Csr = static_cast<clang::CompilerInstance *>(CI)->getASTConsumer();
+  return &Csr;
 }
+
+void clang_CompilerInstance_setASTConsumer(CXCompilerInstance CI, CXASTConsumer CG) {
+  static_cast<clang::CompilerInstance *>(CI)->setASTConsumer(
+      std::unique_ptr<clang::ASTConsumer>(static_cast<clang::ASTConsumer *>(CG)));
+}
+
+// Options
 
 CXCodeGenOptions clang_CompilerInstance_getCodeGenOpts(CXCompilerInstance CI) {
   auto &Opts = static_cast<clang::CompilerInstance *>(CI)->getCodeGenOpts();
@@ -258,4 +270,11 @@ CXTargetOptions clang_CompilerInstance_getTargetOpts(CXCompilerInstance CI) {
 CXLangOptions clang_CompilerInstance_getLangOpts(CXCompilerInstance CI) {
   auto &Opts = static_cast<clang::CompilerInstance *>(CI)->getLangOpts();
   return &Opts;
+}
+
+// Action
+
+bool clang_CompilerInstance_ExecuteAction(CXCompilerInstance CI, CXFrontendAction Act) {
+  return static_cast<clang::CompilerInstance *>(CI)->ExecuteAction(
+      *static_cast<clang::FrontendAction *>(Act));
 }

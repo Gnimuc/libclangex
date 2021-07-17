@@ -44,6 +44,8 @@ CXCompilerInvocation clang_CompilerInvocation_createFromCommandLine(
   return ptr.release();
 }
 
+// Options
+
 CXCodeGenOptions clang_CompilerInvocation_getCodeGenOpts(CXCompilerInvocation CI) {
   auto &Opts = static_cast<clang::CompilerInvocation *>(CI)->getCodeGenOpts();
   return &Opts;
