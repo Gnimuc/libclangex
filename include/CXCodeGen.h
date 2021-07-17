@@ -26,6 +26,8 @@ CINDEX_LINKAGE CXCodeGenAction clang_EmitObjAction_create(CXInit_Error *ErrorCod
 
 CINDEX_LINKAGE void clang_CodeGenAction_dispose(CXCodeGenAction CA);
 
+CINDEX_LINKAGE LLVMModuleRef clang_CodeGenAction_takeModule(CXCodeGenAction CA);
+
 #ifdef __cplusplus
 }
 #endif
