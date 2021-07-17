@@ -22,6 +22,12 @@ extern "C" {
 
 CINDEX_LINKAGE void clang_ParseAST(CXSema Sema, bool PrintStats, bool SkipFunctionBodies);
 
+// Statistics
+CINDEX_LINKAGE void clang_Decl_EnableStatistics(void);
+CINDEX_LINKAGE void clang_Stmt_EnableStatistics(void);
+CINDEX_LINKAGE void clang_Decl_PrintStats(void);
+CINDEX_LINKAGE void clang_Stmt_PrintStats(void);
+
 #ifdef __cplusplus
 }
 #endif

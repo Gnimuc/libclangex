@@ -1,6 +1,4 @@
 #include "CXOptions.h"
-#include "clang/AST/DeclBase.h"
-#include "clang/AST/Stmt.h"
 #include "clang/Basic/CodeGenOptions.h"
 #include "clang/Basic/TargetInfo.h"
 #include "clang/Basic/TargetOptions.h"
@@ -86,18 +84,6 @@ const char *clang_CodeGenOptions_getArgv0(CXCodeGenOptions CGO) {
   return static_cast<clang::CodeGenOptions *>(CGO)->Argv0;
 }
 
-size_t clang_CodeGenOptions_getCommandLineArgsNum(CXCodeGenOptions CGO) {
-  // return static_cast<clang::CodeGenOptions *>(CGO)->CommandLineArgs.size();
-  return 0; // seal the usage, see
-            // https://llvm.discourse.group/t/confused-about-the-usage-of-arrayref-in-clang/3807
-}
-
-void clang_CodeGenOptions_getCommandLineArgs(CXCodeGenOptions CGO, const char **ArgsOut,
-                                             size_t Num) {
-  auto CmdArgs = static_cast<clang::CodeGenOptions *>(CGO)->CommandLineArgs;
-  std::copy_n(CmdArgs.begin(), Num, ArgsOut);
-}
-
 void clang_CodeGenOptions_PrintStats(CXCodeGenOptions CGO) {
   auto Opts = static_cast<clang::CodeGenOptions *>(CGO);
   llvm::errs() << "\n*** CodeGenOptions Stats:\n";
@@ -178,20 +164,6 @@ void clang_HeaderSearchOptions_PrintStats(CXHeaderSearchOptions HSO) {
   llvm::errs() << "    UseDebugInfo: " << Opts->UseDebugInfo << "\n";
 }
 
-size_t clang_PreprocessorOptions_getChainedIncludesNum(CXPreprocessorOptions PPO) {
-  return static_cast<clang::PreprocessorOptions *>(PPO)->ChainedIncludes.size();
-}
-
-void clang_PreprocessorOptions_getChainedIncludes(CXPreprocessorOptions PPO,
-                                                  const char **IncsOut, size_t Num) {
-  auto &Incs = static_cast<clang::PreprocessorOptions *>(PPO)->ChainedIncludes;
-  for (auto &Inc : Incs) {
-    auto i = &Inc - &Incs[0];
-    if (i < Num)
-      IncsOut[i] = Inc.c_str();
-  }
-}
-
 size_t clang_PreprocessorOptions_getIncludesNum(CXPreprocessorOptions PPO) {
   return static_cast<clang::PreprocessorOptions *>(PPO)->Includes.size();
 }
@@ -199,20 +171,6 @@ size_t clang_PreprocessorOptions_getIncludesNum(CXPreprocessorOptions PPO) {
 void clang_PreprocessorOptions_getIncludes(CXPreprocessorOptions PPO, const char **IncsOut,
                                            size_t Num) {
   auto &Incs = static_cast<clang::PreprocessorOptions *>(PPO)->Includes;
-  for (auto &Inc : Incs) {
-    auto i = &Inc - &Incs[0];
-    if (i < Num)
-      IncsOut[i] = Inc.c_str();
-  }
-}
-
-size_t clang_PreprocessorOptions_getMacroIncludesNum(CXPreprocessorOptions PPO) {
-  return static_cast<clang::PreprocessorOptions *>(PPO)->MacroIncludes.size();
-}
-
-void clang_PreprocessorOptions_getMacroIncludes(CXPreprocessorOptions PPO,
-                                                const char **IncsOut, size_t Num) {
-  auto &Incs = static_cast<clang::PreprocessorOptions *>(PPO)->MacroIncludes;
   for (auto &Inc : Incs) {
     auto i = &Inc - &Incs[0];
     if (i < Num)
@@ -249,20 +207,6 @@ void clang_PreprocessorOptions_PrintStats(CXPreprocessorOptions PPO) {
   llvm::errs() << "  RemappedFiles: \n";
   for (const auto &RF : Opts->RemappedFiles)
     llvm::errs() << "    " << RF.first << "  ->  " << RF.second << "\n";
-}
-
-size_t clang_FrontendOptions_getModulesEmbedFilesNum(CXFrontendOptions Opts) {
-  return static_cast<clang::FrontendOptions *>(Opts)->ModulesEmbedFiles.size();
-}
-
-void clang_FrontendOptions_getModulesEmbedFiles(CXFrontendOptions Opts,
-                                                const char **FileNames, size_t Num) {
-  auto &Files = static_cast<clang::FrontendOptions *>(Opts)->ModulesEmbedFiles;
-  for (auto &File : Files) {
-    auto i = &File - &Files[0];
-    if (i < Num)
-      FileNames[i] = File.c_str();
-  }
 }
 
 void clang_FrontendOptions_PrintStats(CXFrontendOptions FEO) {
@@ -329,6 +273,3 @@ void clang_LangOptions_PrintStats(CXLangOptions LO) {
   llvm::errs() << "    ObjC: " << Opts->ObjC << "\n";
 }
 
-void clang_Decl_EnableStatistics(void) { clang::Decl::EnableStatistics(); }
-
-void clang_Stmt_EnableStatistics(void) { clang::Stmt::EnableStatistics(); }

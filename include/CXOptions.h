@@ -52,42 +52,18 @@ CINDEX_LINKAGE void clang_HeaderSearchOptions_SetResourceDir(CXHeaderSearchOptio
 CINDEX_LINKAGE void clang_HeaderSearchOptions_PrintStats(CXHeaderSearchOptions HSO);
 
 // PreprocessorOptions
-CINDEX_LINKAGE size_t
-clang_PreprocessorOptions_getChainedIncludesNum(CXPreprocessorOptions PPO);
-
-CINDEX_LINKAGE void clang_PreprocessorOptions_getChainedIncludes(CXPreprocessorOptions PPO,
-                                                                 const char **IncsOut,
-                                                                 size_t Num);
-
 CINDEX_LINKAGE size_t clang_PreprocessorOptions_getIncludesNum(CXPreprocessorOptions PPO);
 
 CINDEX_LINKAGE void clang_PreprocessorOptions_getIncludes(CXPreprocessorOptions PPO,
                                                           const char **IncsOut, size_t Num);
 
-CINDEX_LINKAGE size_t
-clang_PreprocessorOptions_getMacroIncludesNum(CXPreprocessorOptions PPO);
-
-CINDEX_LINKAGE void clang_PreprocessorOptions_getMacroIncludes(CXPreprocessorOptions PPO,
-                                                               const char **IncsOut,
-                                                               size_t Num);
-
 CINDEX_LINKAGE void clang_PreprocessorOptions_PrintStats(CXPreprocessorOptions PPO);
 
 // FrontendOptions
-CINDEX_LINKAGE size_t clang_FrontendOptions_getModulesEmbedFilesNum(CXFrontendOptions Opts);
-
-CINDEX_LINKAGE void clang_FrontendOptions_getModulesEmbedFiles(CXFrontendOptions Opts,
-                                                               const char **FileNames,
-                                                               size_t Num);
-
 CINDEX_LINKAGE void clang_FrontendOptions_PrintStats(CXFrontendOptions FEO);
 
 // LangOptions
 CINDEX_LINKAGE void clang_LangOptions_PrintStats(CXLangOptions LO);
-
-// Statistics
-CINDEX_LINKAGE void clang_Decl_EnableStatistics(void);
-CINDEX_LINKAGE void clang_Stmt_EnableStatistics(void);
 
 #ifdef __cplusplus
 }
