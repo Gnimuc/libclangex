@@ -54,6 +54,7 @@ typedef enum CXTranslationUnitKind {
 // AST
 typedef void *CXASTContext;
 typedef void *CXASTConsumer;
+typedef void *CXType_;
 
 // CodeGen
 typedef void *CXCodeGenerator;
