@@ -9,6 +9,7 @@ extern "C" {
 #endif
 
 CINDEX_LINKAGE void clang_ASTContext_PrintStats(CXASTContext Ctx);
+CINDEX_LINKAGE CXQualType clang_ASTContext_getPointerType(CXQualType OpaquePtr);
 
 // Builtin Types
 CINDEX_LINKAGE CXType_ clang_ASTContext_VoidTy_getTypePtrOrNull(CXASTContext Ctx);

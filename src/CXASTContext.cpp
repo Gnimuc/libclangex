@@ -5,6 +5,11 @@ void clang_ASTContext_PrintStats(CXASTContext Ctx) {
   static_cast<clang::ASTContext *>(Ctx)->PrintStats();
 }
 
+CXQualType clang_ASTContext_getPointerType(CXQualType OpaquePtr) {
+  static_cast<clang::ASTContext *>(Ctx)->getPointerType(
+      clang::QualType::getFromOpaquePtr(OpaquePtr));
+}
+
 // Builtin Types
 CXType_ clang_ASTContext_VoidTy_getTypePtrOrNull(CXASTContext Ctx) {
   return const_cast<clang::Type *>(

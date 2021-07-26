@@ -25,7 +25,7 @@ CINDEX_LINKAGE void clang_QualType_addVolatile(CXQualType OpaquePtr);
 CINDEX_LINKAGE void clang_QualType_addRestrict(CXQualType OpaquePtr);
 
 CINDEX_LINKAGE char *clang_QualType_getAsString(CXQualType OpaquePtr);
-CINDEX_LINKAGE void clang_QualType_addRestrict(char *);
+CINDEX_LINKAGE void clang_QualType_disposeString(char *);
 
 #ifdef __cplusplus
 }
