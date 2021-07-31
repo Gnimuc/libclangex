@@ -9,11 +9,21 @@
 extern "C" {
 #endif
 
+CINDEX_LINKAGE CXLexer clang_Lexer_create(CXFileID FID, CXMemoryBuffer FromFile,
+                                          CXSourceManager SM, CXLangOptions langOpts,
+                                          CXInit_Error *ErrorCode);
+
+CINDEX_LINKAGE void clang_Lexer_dispose(CXLexer Lex);
+
 CINDEX_LINKAGE CXHeaderSearch clang_Preprocessor_getHeaderSearchInfo(CXPreprocessor PP);
 
 CINDEX_LINKAGE void clang_HeaderSearch_PrintStats(CXHeaderSearch HS);
 
 CINDEX_LINKAGE void clang_Preprocessor_EnterMainSourceFile(CXPreprocessor PP);
+
+CINDEX_LINKAGE bool clang_Preprocessor_EnterSourceFile(CXPreprocessor PP, CXFileID FID);
+
+CINDEX_LINKAGE void clang_Preprocessor_EndSourceFile(CXPreprocessor PP);
 
 CINDEX_LINKAGE void clang_Preprocessor_PrintStats(CXPreprocessor PP);
 

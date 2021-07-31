@@ -1,7 +1,30 @@
 #include "CXPreprocessor.h"
 #include "clang/Basic/Builtins.h"
 #include "clang/Lex/HeaderSearch.h"
+#include "clang/Lex/Lexer.h"
 #include "clang/Lex/Preprocessor.h"
+
+CXLexer clang_Lexer_create(CXFileID FID, CXMemoryBuffer FromFile, CXSourceManager SM,
+                           CXLangOptions langOpts, CXInit_Error *ErrorCode) {
+  CXInit_Error Err = CXInit_NoError;
+  std::unique_ptr<clang::Lexer> ptr = std::make_unique<clang::Lexer>(
+      *static_cast<clang::FileID *>(FID),
+      llvm::MemoryBufferRef(*static_cast<llvm::MemoryBuffer *>(FromFile)),
+      *static_cast<clang::SourceManager *>(SM),
+      *static_cast<clang::LangOptions *>(langOpts));
+
+  if (!ptr) {
+    fprintf(stderr, "LIBCLANGEX ERROR: failed to create `clang::Lexer`\n");
+    Err = CXInit_CanNotCreate;
+  }
+
+  if (ErrorCode)
+    *ErrorCode = Err;
+
+  return ptr.release();
+}
+
+void clang_Lexer_dispose(CXLexer Lex) { delete static_cast<clang::Lexer *>(Lex); }
 
 CXHeaderSearch clang_Preprocessor_getHeaderSearchInfo(CXPreprocessor PP) {
   return &static_cast<clang::Preprocessor *>(PP)->getHeaderSearchInfo();
@@ -13,6 +36,15 @@ void clang_HeaderSearch_PrintStats(CXHeaderSearch HS) {
 
 void clang_Preprocessor_EnterMainSourceFile(CXPreprocessor PP) {
   static_cast<clang::Preprocessor *>(PP)->EnterMainSourceFile();
+}
+
+bool clang_Preprocessor_EnterSourceFile(CXPreprocessor PP, CXFileID FID) {
+  return static_cast<clang::Preprocessor *>(PP)->EnterSourceFile(
+      *static_cast<clang::FileID *>(FID), nullptr, clang::SourceLocation());
+}
+
+void clang_Preprocessor_EndSourceFile(CXPreprocessor PP) {
+  static_cast<clang::Preprocessor *>(PP)->EndSourceFile();
 }
 
 void clang_Preprocessor_PrintStats(CXPreprocessor PP) {

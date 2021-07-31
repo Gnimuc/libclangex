@@ -11,6 +11,11 @@ CXQualType clang_ASTContext_getPointerType(CXASTContext Ctx, CXQualType OpaquePt
       .getAsOpaquePtr();
 }
 
+// Decls
+CXTranslationUnitDecl clang_ASTContext_getTranslationUnitDecl(CXASTContext Ctx) {
+  return static_cast<clang::ASTContext *>(Ctx)->getTranslationUnitDecl();
+}
+
 // Builtin Types
 CXType_ clang_ASTContext_VoidTy_getTypePtrOrNull(CXASTContext Ctx) {
   return const_cast<clang::Type *>(

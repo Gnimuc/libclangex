@@ -14,15 +14,32 @@ CINDEX_LINKAGE CXCodeGenerator clang_CreateLLVMCodeGen(CXCompilerInstance CI,
                                                        LLVMContextRef LLVMCtx,
                                                        const char *ModuleName);
 
-CINDEX_LINKAGE LLVMModuleRef clang_CodeGenerator_getLLVMModule(CXCodeGenerator CG);
+CINDEX_LINKAGE CXCodeGenModule clang_CodeGenerator_CGM(CXCodeGenerator CG);
+
+CINDEX_LINKAGE LLVMModuleRef clang_CodeGenerator_GetModule(CXCodeGenerator CG);
+
+CINDEX_LINKAGE LLVMModuleRef clang_CodeGenerator_ReleaseModule(CXCodeGenerator CG);
+
+CINDEX_LINKAGE CXDecl clang_CodeGenerator_GetDeclForMangledName(CXCodeGenerator CG,
+                                                                const char *MangledName);
+
+CINDEX_LINKAGE LLVMModuleRef clang_CodeGenerator_StartModule(CXCodeGenerator CG,
+                                                             LLVMContextRef LLVMCtx,
+                                                             const char *ModuleName);
 
 // CodeGenActions
-CINDEX_LINKAGE CXCodeGenAction clang_EmitAssemblyAction_create(CXInit_Error *ErrorCode, LLVMContextRef LLVMCtx);
-CINDEX_LINKAGE CXCodeGenAction clang_EmitBCAction_create(CXInit_Error *ErrorCode, LLVMContextRef LLVMCtx);
-CINDEX_LINKAGE CXCodeGenAction clang_EmitLLVMAction_create(CXInit_Error *ErrorCode, LLVMContextRef LLVMCtx);
-CINDEX_LINKAGE CXCodeGenAction clang_EmitLLVMOnlyAction_create(CXInit_Error *ErrorCode, LLVMContextRef LLVMCtx);
-CINDEX_LINKAGE CXCodeGenAction clang_EmitCodeGenOnlyAction_create(CXInit_Error *ErrorCode, LLVMContextRef LLVMCtx);
-CINDEX_LINKAGE CXCodeGenAction clang_EmitObjAction_create(CXInit_Error *ErrorCode, LLVMContextRef LLVMCtx);
+CINDEX_LINKAGE CXCodeGenAction clang_EmitAssemblyAction_create(CXInit_Error *ErrorCode,
+                                                               LLVMContextRef LLVMCtx);
+CINDEX_LINKAGE CXCodeGenAction clang_EmitBCAction_create(CXInit_Error *ErrorCode,
+                                                         LLVMContextRef LLVMCtx);
+CINDEX_LINKAGE CXCodeGenAction clang_EmitLLVMAction_create(CXInit_Error *ErrorCode,
+                                                           LLVMContextRef LLVMCtx);
+CINDEX_LINKAGE CXCodeGenAction clang_EmitLLVMOnlyAction_create(CXInit_Error *ErrorCode,
+                                                               LLVMContextRef LLVMCtx);
+CINDEX_LINKAGE CXCodeGenAction clang_EmitCodeGenOnlyAction_create(CXInit_Error *ErrorCode,
+                                                                  LLVMContextRef LLVMCtx);
+CINDEX_LINKAGE CXCodeGenAction clang_EmitObjAction_create(CXInit_Error *ErrorCode,
+                                                          LLVMContextRef LLVMCtx);
 
 CINDEX_LINKAGE void clang_CodeGenAction_dispose(CXCodeGenAction CA);
 

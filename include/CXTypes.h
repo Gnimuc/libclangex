@@ -44,6 +44,7 @@ typedef void *CXSourceManager;
 // Preprocessor
 typedef void *CXPreprocessor;
 typedef void *CXHeaderSearch;
+typedef void *CXLexer;
 
 typedef enum CXTranslationUnitKind {
   CXTU_Complete,
@@ -56,19 +57,28 @@ typedef void *CXASTContext;
 typedef void *CXASTConsumer;
 typedef void *CXType_;
 typedef void *CXQualType;
+typedef void *CXTranslationUnitDecl;
+typedef void *CXDeclGroupRef;
+typedef void *CXDecl;
 
 // CodeGen
 typedef void *CXCodeGenerator;
+typedef void *CXCodeGenModule;
 
 // Sema
 typedef void *CXSema;
 
 // Parser
 typedef void *CXParser;
+// typedef void *CXScopeSpecifierParser;
 
 // Action
 typedef void *CXFrontendAction;
 typedef void *CXCodeGenAction;
+
+// Lookup
+typedef void *CXXScopeSpec;
+typedef void *CXNestedNameSpecifier;
 
 #ifdef __cplusplus
 }

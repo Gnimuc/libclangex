@@ -50,4 +50,4 @@ char *clang_QualType_getAsString(CXQualType OpaquePtr) {
   return ptr.release();
 }
 
-void clang_QualType_disposeString(char *str) { delete[] str; }
+void clang_QualType_disposeString(char *Str) { delete[] Str; }

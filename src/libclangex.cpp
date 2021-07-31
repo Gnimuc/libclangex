@@ -14,3 +14,7 @@ void clang_Stmt_EnableStatistics(void) { clang::Stmt::EnableStatistics(); }
 void clang_Decl_PrintStats(void) { clang::Decl::PrintStats(); }
 
 void clang_Stmt_PrintStats(void) { clang::Stmt::PrintStats(); }
+
+void clang_Decl_dumpColor(CXDecl DC) {
+  static_cast<clang::Decl *>(DC)->dumpColor();
+}

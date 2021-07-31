@@ -13,6 +13,10 @@ CINDEX_LINKAGE void clang_ASTContext_PrintStats(CXASTContext Ctx);
 CINDEX_LINKAGE CXQualType clang_ASTContext_getPointerType(CXASTContext Ctx,
                                                           CXQualType OpaquePtr);
 
+// Decls
+CINDEX_LINKAGE CXTranslationUnitDecl
+clang_ASTContext_getTranslationUnitDecl(CXASTContext Ctx);
+
 // Builtin Types
 CINDEX_LINKAGE CXType_ clang_ASTContext_VoidTy_getTypePtrOrNull(CXASTContext Ctx);
 CINDEX_LINKAGE CXType_ clang_ASTContext_BoolTy_getTypePtrOrNull(CXASTContext Ctx);
@@ -51,7 +55,6 @@ CINDEX_LINKAGE CXType_
 clang_ASTContext_Float128ComplexTy_getTypePtrOrNull(CXASTContext Ctx);
 CINDEX_LINKAGE CXType_ clang_ASTContext_VoidPtrTy_getTypePtrOrNull(CXASTContext Ctx);
 CINDEX_LINKAGE CXType_ clang_ASTContext_NullPtrTy_getTypePtrOrNull(CXASTContext Ctx);
-CINDEX_LINKAGE CXType_ clang_ASTContext_LongTy_getTypePtrOrNull(CXASTContext Ctx);
 
 #ifdef __cplusplus
 }
