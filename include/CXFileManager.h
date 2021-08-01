@@ -5,6 +5,7 @@
 #include "CXTypes.h"
 #include "clang-c/CXString.h"
 #include "clang-c/Platform.h"
+#include "llvm-c/Types.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -14,7 +15,7 @@ CINDEX_LINKAGE CXFileManager clang_FileManager_create(CXInit_Error *ErrorCode);
 
 CINDEX_LINKAGE void clang_FileManager_dispose(CXFileManager FM);
 
-CINDEX_LINKAGE CXMemoryBuffer clang_FileManager_getBufferForFile(
+CINDEX_LINKAGE LLVMMemoryBufferRef clang_FileManager_getBufferForFile(
     CXFileManager FM, CXFileEntry FE, bool isVolatile, bool RequiresNullTerminator);
 
 CINDEX_LINKAGE void clang_FileManager_PrintStats(CXFileManager FM);

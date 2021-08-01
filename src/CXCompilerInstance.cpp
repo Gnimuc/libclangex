@@ -78,16 +78,15 @@ CXFileManager clang_CompilerInstance_createFileManager(CXCompilerInstance CI) {
 
 CXFileManager clang_CompilerInstance_createFileManagerWithVOFS4PCH(
     CXCompilerInstance CI, const char *Path, time_t ModificationTime,
-    CXMemoryBuffer PCHBuffer) {
-  std::unique_ptr<llvm::MemoryBuffer> buffer(static_cast<llvm::MemoryBuffer *>(PCHBuffer));
-
+    LLVMMemoryBufferRef PCHBuffer) {
   llvm::IntrusiveRefCntPtr<llvm::vfs::OverlayFileSystem> Overlay(
       new llvm::vfs::OverlayFileSystem(llvm::vfs::createPhysicalFileSystem().release()));
 
   llvm::IntrusiveRefCntPtr<llvm::vfs::InMemoryFileSystem> PCHIMFS(
       new llvm::vfs::InMemoryFileSystem());
 
-  PCHIMFS->addFile(llvm::StringRef(Path), ModificationTime, std::move(buffer));
+  PCHIMFS->addFile(llvm::StringRef(Path), ModificationTime,
+                   std::move(std::unique_ptr<llvm::MemoryBuffer>(llvm::unwrap(PCHBuffer))));
   Overlay->pushOverlay(PCHIMFS);
 
   return static_cast<clang::CompilerInstance *>(CI)->createFileManager(Overlay);

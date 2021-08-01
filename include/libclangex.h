@@ -8,7 +8,6 @@
 #include "CXDiagnostic.h"
 #include "CXDriver.h"
 #include "CXFileManager.h"
-#include "CXMemoryBuffer.h"
 #include "CXOptions.h"
 #include "CXPreprocessor.h"
 #include "CXSema.h"

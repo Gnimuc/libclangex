@@ -6,6 +6,7 @@
 #include "CXFileManager.h"
 #include "CXTypes.h"
 #include "clang-c/Platform.h"
+#include "llvm-c/Types.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -24,8 +25,8 @@ CINDEX_LINKAGE unsigned clang_FileID_getHashValue(CXFileID FID);
 
 CINDEX_LINKAGE void clang_FileID_dispose(CXFileID FID);
 
-CINDEX_LINKAGE CXFileID clang_SourceManager_createFileIDFromMemoryBuffer(CXSourceManager SM,
-                                                                         CXMemoryBuffer MB);
+CINDEX_LINKAGE CXFileID clang_SourceManager_createFileIDFromMemoryBuffer(
+    CXSourceManager SM, LLVMMemoryBufferRef MB);
 
 CINDEX_LINKAGE
 CXFileID clang_SourceManager_createFileIDFromFileEntry(CXSourceManager SM, CXFileEntry FE);
@@ -36,7 +37,7 @@ CINDEX_LINKAGE void clang_SourceManager_setMainFileID(CXSourceManager SM, CXFile
 
 CINDEX_LINKAGE void clang_SourceManager_overrideFileContents(CXSourceManager SM,
                                                              CXFileEntry FE,
-                                                             CXMemoryBuffer MB);
+                                                             LLVMMemoryBufferRef MB);
 
 #ifdef __cplusplus
 }

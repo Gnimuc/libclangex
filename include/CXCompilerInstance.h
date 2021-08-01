@@ -4,6 +4,7 @@
 #include "CXError.h"
 #include "CXTypes.h"
 #include "clang-c/Platform.h"
+#include "llvm-c/Types.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -42,7 +43,7 @@ clang_CompilerInstance_createFileManager(CXCompilerInstance CI);
 
 CINDEX_LINKAGE CXFileManager clang_CompilerInstance_createFileManagerWithVOFS4PCH(
     CXCompilerInstance CI, const char *Path, time_t ModificationTime,
-    CXMemoryBuffer PCHBuffer);
+    LLVMMemoryBufferRef PCHBuffer);
 
 // SourceManager
 CINDEX_LINKAGE bool clang_CompilerInstance_hasSourceManager(CXCompilerInstance CI);

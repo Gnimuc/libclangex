@@ -35,12 +35,16 @@ void clang_FileManager_PrintStats(CXFileManager FM) {
   static_cast<clang::FileManager *>(FM)->PrintStats();
 }
 
-CXMemoryBuffer clang_FileManager_getBufferForFile(CXFileManager FM, CXFileEntry FE,
-                                                  bool isVolatile,
-                                                  bool RequiresNullTerminator) {
-  auto MB = static_cast<clang::FileManager *>(FM)->getBufferForFile(
+LLVMMemoryBufferRef clang_FileManager_getBufferForFile(CXFileManager FM, CXFileEntry FE,
+                                                       bool isVolatile,
+                                                       bool RequiresNullTerminator) {
+  auto buffer = static_cast<clang::FileManager *>(FM)->getBufferForFile(
       static_cast<clang::FileEntry *>(FE), isVolatile, RequiresNullTerminator);
-  return MB->release();
+  if (std::error_code EC = buffer.getError()) {
+    llvm::errs() << "Cannot get buffer for file. Error: " << EC.message() << "\n";
+    return nullptr;
+  }
+  return llvm::wrap(buffer->release());
 }
 
 CXFileEntryRef clang_FileManager_getFileRef(CXFileManager FM, const char *Filename,

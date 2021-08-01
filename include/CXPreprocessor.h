@@ -4,12 +4,13 @@
 #include "CXError.h"
 #include "CXTypes.h"
 #include "clang-c/Platform.h"
+#include "llvm-c/Types.h"
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-CINDEX_LINKAGE CXLexer clang_Lexer_create(CXFileID FID, CXMemoryBuffer FromFile,
+CINDEX_LINKAGE CXLexer clang_Lexer_create(CXFileID FID, LLVMMemoryBufferRef FromFile,
                                           CXSourceManager SM, CXLangOptions langOpts,
                                           CXInit_Error *ErrorCode);
 

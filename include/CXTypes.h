@@ -38,7 +38,6 @@ typedef void *CXFileEntryRef; // FIXME: make it a stack value instead of opaque 
 typedef void *CXFileManager;
 
 // SourceManager
-typedef void *CXMemoryBuffer;
 typedef void *CXSourceManager;
 
 // Preprocessor
