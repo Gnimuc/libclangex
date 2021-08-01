@@ -40,14 +40,17 @@ CXFileID clang_SourceManager_createFileIDFromMemoryBuffer(CXSourceManager SM,
   return ptr.release();
 }
 
-CXFileID clang_SourceManager_createFileIDFromFileEntry(CXSourceManager SM, CXFileEntry FE) {
+CXFileID clang_SourceManager_createFileIDFromFileEntry(CXSourceManager SM, CXFileEntry FE,
+                                                       CXSourceLocation_ Loc) {
   std::unique_ptr<clang::FileID> ptr =
       std::make_unique<clang::FileID>(static_cast<clang::SourceManager *>(SM)->createFileID(
-          static_cast<clang::FileEntry *>(FE), clang::SourceLocation(),
-          clang::SrcMgr::C_User));
+          static_cast<clang::FileEntry *>(FE),
+          clang::SourceLocation::getFromPtrEncoding(Loc), clang::SrcMgr::C_User));
   return ptr.release();
 }
 
+// this allocates because `static FileID get(int V)` is a private method and this is
+// intended.
 CXFileID clang_SourceManager_getMainFileID(CXSourceManager SM) {
   std::unique_ptr<clang::FileID> ptr = std::make_unique<clang::FileID>(
       static_cast<clang::SourceManager *>(SM)->getMainFileID());
@@ -71,3 +74,50 @@ void clang_SourceManager_overrideFileContents(CXSourceManager SM, CXFileEntry FE
       static_cast<clang::FileEntry *>(FE),
       std::unique_ptr<llvm::MemoryBuffer>(llvm::unwrap(MB)));
 }
+
+// SourceLocation
+CXSourceLocation_ clang_SourceLocation_createInvalid() {
+  return clang::SourceLocation().getPtrEncoding();
+}
+
+bool clang_SourceLocation_isFileID(CXSourceLocation_ Loc) {
+  return clang::SourceLocation::getFromPtrEncoding(Loc).isFileID();
+}
+
+bool clang_SourceLocation_isMacroID(CXSourceLocation_ Loc) {
+  return clang::SourceLocation::getFromPtrEncoding(Loc).isMacroID();
+}
+
+bool clang_SourceLocation_isValid(CXSourceLocation_ Loc) {
+  return clang::SourceLocation::getFromPtrEncoding(Loc).isValid();
+}
+
+bool clang_SourceLocation_isInvalid(CXSourceLocation_ Loc) {
+  return clang::SourceLocation::getFromPtrEncoding(Loc).isInvalid();
+}
+
+bool clang_SourceLocation_isPairOfFileLocations(CXSourceLocation_ Start,
+                                                CXSourceLocation_ End) {
+  return clang::SourceLocation::isPairOfFileLocations(
+      clang::SourceLocation::getFromPtrEncoding(Start),
+      clang::SourceLocation::getFromPtrEncoding(End));
+}
+
+unsigned clang_SourceLocation_getHashValue(CXSourceLocation_ Loc) {
+  return clang::SourceLocation::getFromPtrEncoding(Loc).getHashValue();
+}
+
+void clang_SourceLocation_dump(CXSourceLocation_ Loc, CXSourceManager SM) {
+  return clang::SourceLocation::getFromPtrEncoding(Loc).dump(
+      *static_cast<clang::SourceManager *>(SM));
+}
+
+char *clang_SourceLocation_printToString(CXSourceLocation_ Loc, CXSourceManager SM) {
+  auto str = clang::SourceLocation::getFromPtrEncoding(Loc).printToString(
+      *static_cast<clang::SourceManager *>(SM));
+  std::unique_ptr<char[]> ptr = std::make_unique<char[]>(str.size());
+  std::copy(str.begin(), str.end(), ptr.get());
+  return ptr.release();
+}
+
+void clang_SourceLocation_disposeString(char *Str) { delete[] Str; }

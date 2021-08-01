@@ -23,17 +23,6 @@ clang_Parser_tryParseAndSkipInvalidOrParsedDecl(CXParser Parser, CXCodeGenerator
 CINDEX_LINKAGE CXDeclGroupRef clang_Parser_parseOneTopLevelDecl(CXParser Parser,
                                                                 bool IsFirstDecl);
 
-// DeclGroup
-CINDEX_LINKAGE CXDeclGroupRef clang_DeclGroupRef_fromeDecl(CXDecl D);
-
-CINDEX_LINKAGE bool clang_DeclGroupRef_isNull(CXDeclGroupRef DG);
-
-CINDEX_LINKAGE bool clang_DeclGroupRef_isSingleDecl(CXDeclGroupRef DG);
-
-CINDEX_LINKAGE bool clang_DeclGroupRef_isDeclGroup(CXDeclGroupRef DG);
-
-CINDEX_LINKAGE CXDecl clang_DeclGroupRef_getSingleDecl(CXDeclGroupRef DG);
-
 #ifdef __cplusplus
 }
 #endif

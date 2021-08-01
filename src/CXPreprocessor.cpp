@@ -5,6 +5,8 @@
 #include "clang/Lex/Preprocessor.h"
 #include "llvm/Support/MemoryBuffer.h"
 
+// Lexer
+
 CXLexer clang_Lexer_create(CXFileID FID, LLVMMemoryBufferRef FromFile, CXSourceManager SM,
                            CXLangOptions langOpts, CXInit_Error *ErrorCode) {
   CXInit_Error Err = CXInit_NoError;
@@ -26,6 +28,8 @@ CXLexer clang_Lexer_create(CXFileID FID, LLVMMemoryBufferRef FromFile, CXSourceM
 
 void clang_Lexer_dispose(CXLexer Lex) { delete static_cast<clang::Lexer *>(Lex); }
 
+// Preprocessor
+
 CXHeaderSearch clang_Preprocessor_getHeaderSearchInfo(CXPreprocessor PP) {
   return &static_cast<clang::Preprocessor *>(PP)->getHeaderSearchInfo();
 }
@@ -38,9 +42,11 @@ void clang_Preprocessor_EnterMainSourceFile(CXPreprocessor PP) {
   static_cast<clang::Preprocessor *>(PP)->EnterMainSourceFile();
 }
 
-bool clang_Preprocessor_EnterSourceFile(CXPreprocessor PP, CXFileID FID) {
+bool clang_Preprocessor_EnterSourceFile(CXPreprocessor PP, CXFileID FID,
+                                        CXSourceLocation_ Loc) {
   return static_cast<clang::Preprocessor *>(PP)->EnterSourceFile(
-      *static_cast<clang::FileID *>(FID), nullptr, clang::SourceLocation());
+      *static_cast<clang::FileID *>(FID), nullptr,
+      clang::SourceLocation::getFromPtrEncoding(Loc));
 }
 
 void clang_Preprocessor_EndSourceFile(CXPreprocessor PP) {
@@ -56,3 +62,5 @@ void clang_Preprocessor_InitializeBuiltins(CXPreprocessor PP) {
   Prep->getBuiltinInfo().initializeBuiltins(Prep->getIdentifierTable(),
                                             Prep->getLangOpts());
 }
+
+// Token

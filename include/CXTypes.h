@@ -39,11 +39,13 @@ typedef void *CXFileManager;
 
 // SourceManager
 typedef void *CXSourceManager;
+typedef void *CXSourceLocation_;
 
 // Preprocessor
 typedef void *CXPreprocessor;
 typedef void *CXHeaderSearch;
 typedef void *CXLexer;
+typedef void *CXToken_;
 
 typedef enum CXTranslationUnitKind {
   CXTU_Complete,

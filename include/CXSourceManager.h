@@ -29,7 +29,8 @@ CINDEX_LINKAGE CXFileID clang_SourceManager_createFileIDFromMemoryBuffer(
     CXSourceManager SM, LLVMMemoryBufferRef MB);
 
 CINDEX_LINKAGE
-CXFileID clang_SourceManager_createFileIDFromFileEntry(CXSourceManager SM, CXFileEntry FE);
+CXFileID clang_SourceManager_createFileIDFromFileEntry(CXSourceManager SM, CXFileEntry FE,
+                                                       CXSourceLocation_ Loc);
 
 CINDEX_LINKAGE CXFileID clang_SourceManager_getMainFileID(CXSourceManager SM);
 
@@ -38,6 +39,29 @@ CINDEX_LINKAGE void clang_SourceManager_setMainFileID(CXSourceManager SM, CXFile
 CINDEX_LINKAGE void clang_SourceManager_overrideFileContents(CXSourceManager SM,
                                                              CXFileEntry FE,
                                                              LLVMMemoryBufferRef MB);
+
+// SourceLocation
+CINDEX_LINKAGE CXSourceLocation_ clang_SourceLocation_createInvalid();
+
+CINDEX_LINKAGE bool clang_SourceLocation_isFileID(CXSourceLocation_ Loc);
+
+CINDEX_LINKAGE bool clang_SourceLocation_isMacroID(CXSourceLocation_ Loc);
+
+CINDEX_LINKAGE bool clang_SourceLocation_isValid(CXSourceLocation_ Loc);
+
+CINDEX_LINKAGE bool clang_SourceLocation_isInvalid(CXSourceLocation_ Loc);
+
+CINDEX_LINKAGE bool clang_SourceLocation_isPairOfFileLocations(CXSourceLocation_ Start,
+                                                               CXSourceLocation_ End);
+
+CINDEX_LINKAGE unsigned clang_SourceLocation_getHashValue(CXSourceLocation_ Loc);
+
+CINDEX_LINKAGE void clang_SourceLocation_dump(CXSourceLocation_ Loc, CXSourceManager SM);
+
+CINDEX_LINKAGE char *clang_SourceLocation_printToString(CXSourceLocation_ Loc,
+                                                        CXSourceManager SM);
+
+CINDEX_LINKAGE void clang_SourceLocation_disposeString(char *Str);
 
 #ifdef __cplusplus
 }

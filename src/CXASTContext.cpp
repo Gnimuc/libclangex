@@ -1,5 +1,6 @@
 #include "CXASTContext.h"
 #include "clang/AST/ASTContext.h"
+#include "clang/AST/DeclGroup.h"
 
 void clang_ASTContext_PrintStats(CXASTContext Ctx) {
   static_cast<clang::ASTContext *>(Ctx)->PrintStats();
@@ -14,6 +15,26 @@ CXQualType clang_ASTContext_getPointerType(CXASTContext Ctx, CXQualType OpaquePt
 // Decls
 CXTranslationUnitDecl clang_ASTContext_getTranslationUnitDecl(CXASTContext Ctx) {
   return static_cast<clang::ASTContext *>(Ctx)->getTranslationUnitDecl();
+}
+
+CXDeclGroupRef clang_DeclGroupRef_fromeDecl(CXDecl D) {
+  return clang::DeclGroupRef(static_cast<clang::Decl *>(D)).getAsOpaquePtr();
+}
+
+bool clang_DeclGroupRef_isNull(CXDeclGroupRef DG) {
+  return clang::DeclGroupRef::getFromOpaquePtr(DG).isNull();
+}
+
+bool clang_DeclGroupRef_isSingleDecl(CXDeclGroupRef DG) {
+  return clang::DeclGroupRef::getFromOpaquePtr(DG).isSingleDecl();
+}
+
+bool clang_DeclGroupRef_isDeclGroup(CXDeclGroupRef DG) {
+  return clang::DeclGroupRef::getFromOpaquePtr(DG).isDeclGroup();
+}
+
+CXDecl clang_DeclGroupRef_getSingleDecl(CXDeclGroupRef DG) {
+  return clang::DeclGroupRef::getFromOpaquePtr(DG).getSingleDecl();
 }
 
 // Builtin Types

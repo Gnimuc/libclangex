@@ -17,6 +17,17 @@ CINDEX_LINKAGE CXQualType clang_ASTContext_getPointerType(CXASTContext Ctx,
 CINDEX_LINKAGE CXTranslationUnitDecl
 clang_ASTContext_getTranslationUnitDecl(CXASTContext Ctx);
 
+// DeclGroup
+CINDEX_LINKAGE CXDeclGroupRef clang_DeclGroupRef_fromeDecl(CXDecl D);
+
+CINDEX_LINKAGE bool clang_DeclGroupRef_isNull(CXDeclGroupRef DG);
+
+CINDEX_LINKAGE bool clang_DeclGroupRef_isSingleDecl(CXDeclGroupRef DG);
+
+CINDEX_LINKAGE bool clang_DeclGroupRef_isDeclGroup(CXDeclGroupRef DG);
+
+CINDEX_LINKAGE CXDecl clang_DeclGroupRef_getSingleDecl(CXDeclGroupRef DG);
+
 // Builtin Types
 CINDEX_LINKAGE CXType_ clang_ASTContext_VoidTy_getTypePtrOrNull(CXASTContext Ctx);
 CINDEX_LINKAGE CXType_ clang_ASTContext_BoolTy_getTypePtrOrNull(CXASTContext Ctx);
