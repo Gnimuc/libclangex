@@ -41,7 +41,7 @@ CINDEX_LINKAGE void clang_SourceManager_overrideFileContents(CXSourceManager SM,
                                                              LLVMMemoryBufferRef MB);
 
 // SourceLocation
-CINDEX_LINKAGE CXSourceLocation_ clang_SourceLocation_createInvalid();
+CINDEX_LINKAGE CXSourceLocation_ clang_SourceLocation_createInvalid(void);
 
 CINDEX_LINKAGE bool clang_SourceLocation_isFileID(CXSourceLocation_ Loc);
 

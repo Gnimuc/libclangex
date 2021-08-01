@@ -76,7 +76,7 @@ void clang_SourceManager_overrideFileContents(CXSourceManager SM, CXFileEntry FE
 }
 
 // SourceLocation
-CXSourceLocation_ clang_SourceLocation_createInvalid() {
+CXSourceLocation_ clang_SourceLocation_createInvalid(void) {
   return clang::SourceLocation().getPtrEncoding();
 }
 
@@ -115,7 +115,8 @@ void clang_SourceLocation_dump(CXSourceLocation_ Loc, CXSourceManager SM) {
 char *clang_SourceLocation_printToString(CXSourceLocation_ Loc, CXSourceManager SM) {
   auto str = clang::SourceLocation::getFromPtrEncoding(Loc).printToString(
       *static_cast<clang::SourceManager *>(SM));
-  std::unique_ptr<char[]> ptr = std::make_unique<char[]>(str.size());
+  std::unique_ptr<char[]> ptr = std::make_unique<char[]>(str.size()+1);
+  ptr[str.size()+1] = '\0';
   std::copy(str.begin(), str.end(), ptr.get());
   return ptr.release();
 }

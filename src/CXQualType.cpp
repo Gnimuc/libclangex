@@ -45,7 +45,8 @@ void clang_QualType_addRestrict(CXQualType OpaquePtr) {
 
 char *clang_QualType_getAsString(CXQualType OpaquePtr) {
   auto str = clang::QualType::getFromOpaquePtr(OpaquePtr).getAsString();
-  std::unique_ptr<char[]> ptr = std::make_unique<char[]>(str.size());
+  std::unique_ptr<char[]> ptr = std::make_unique<char[]>(str.size()+1);
+  ptr[str.size()+1] = '\0';
   std::copy(str.begin(), str.end(), ptr.get());
   return ptr.release();
 }
