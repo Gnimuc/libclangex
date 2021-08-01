@@ -1,4 +1,4 @@
-#include "CXCompilerInvocation.h"
+#include "clang-ex/CXCompilerInvocation.h"
 #include "clang/Frontend/CompilerInvocation.h"
 #include "clang/Frontend/Utils.h"
 #include "llvm/ADT/IntrusiveRefCntPtr.h"

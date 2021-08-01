@@ -1,4 +1,4 @@
-#include "CXSourceManager.h"
+#include "clang-ex/CXSourceManager.h"
 #include "clang/Basic/FileManager.h"
 #include "clang/Basic/SourceLocation.h"
 #include "clang/Basic/SourceManager.h"

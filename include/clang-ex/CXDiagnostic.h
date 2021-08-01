@@ -1,8 +1,8 @@
 #ifndef LIBCLANGEX_CXDIAGNOSTIC_H
 #define LIBCLANGEX_CXDIAGNOSTIC_H
 
-#include "CXError.h"
-#include "CXTypes.h"
+#include "clang-ex/CXError.h"
+#include "clang-ex/CXTypes.h"
 #include "clang-c/Platform.h"
 
 #ifdef __cplusplus

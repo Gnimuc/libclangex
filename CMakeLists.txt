@@ -31,21 +31,21 @@ message(STATUS "Found Clang: ${ClangCPP}")
 find_library(LLVM NAMES LLVM HINTS "${LLVM_DIR}/lib")
 message(STATUS "Found LLVM: ${LLVM}")
 
-target_sources(${target} PRIVATE src/libclangex.cpp)
-target_sources(${target} PRIVATE src/CXASTConsumer.cpp)
-target_sources(${target} PRIVATE src/CXASTContext.cpp)
-target_sources(${target} PRIVATE src/CXCodeGen.cpp)
-target_sources(${target} PRIVATE src/CXCompilerInstance.cpp)
-target_sources(${target} PRIVATE src/CXCompilerInvocation.cpp)
-target_sources(${target} PRIVATE src/CXDiagnostic.cpp)
-target_sources(${target} PRIVATE src/CXDriver.cpp)
-target_sources(${target} PRIVATE src/CXFileManager.cpp)
-target_sources(${target} PRIVATE src/CXOptions.cpp)
-target_sources(${target} PRIVATE src/CXParser.cpp)
-target_sources(${target} PRIVATE src/CXPreprocessor.cpp)
-target_sources(${target} PRIVATE src/CXQualType.cpp)
-target_sources(${target} PRIVATE src/CXSema.cpp)
-target_sources(${target} PRIVATE src/CXSourceManager.cpp)
+target_sources(${target} PRIVATE lib/libclangex.cpp)
+target_sources(${target} PRIVATE lib/CXASTConsumer.cpp)
+target_sources(${target} PRIVATE lib/CXASTContext.cpp)
+target_sources(${target} PRIVATE lib/CXCodeGen.cpp)
+target_sources(${target} PRIVATE lib/CXCompilerInstance.cpp)
+target_sources(${target} PRIVATE lib/CXCompilerInvocation.cpp)
+target_sources(${target} PRIVATE lib/CXDiagnostic.cpp)
+target_sources(${target} PRIVATE lib/CXDriver.cpp)
+target_sources(${target} PRIVATE lib/CXFileManager.cpp)
+target_sources(${target} PRIVATE lib/CXOptions.cpp)
+target_sources(${target} PRIVATE lib/CXParser.cpp)
+target_sources(${target} PRIVATE lib/CXPreprocessor.cpp)
+target_sources(${target} PRIVATE lib/CXQualType.cpp)
+target_sources(${target} PRIVATE lib/CXSema.cpp)
+target_sources(${target} PRIVATE lib/CXSourceManager.cpp)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-rtti")
 
@@ -68,23 +68,23 @@ if (WIN32)
     target_compile_definitions(${target} PUBLIC "_CINDEX_LIB_")
 endif(WIN32)
 
-set(pub_hdrs ${CMAKE_CURRENT_SOURCE_DIR}/include/libclangex.h
-             ${CMAKE_CURRENT_SOURCE_DIR}/include/CXASTConsumer.h
-             ${CMAKE_CURRENT_SOURCE_DIR}/include/CXASTContext.h
-             ${CMAKE_CURRENT_SOURCE_DIR}/include/CXCodeGen.h
-             ${CMAKE_CURRENT_SOURCE_DIR}/include/CXCompilerInstance.h
-             ${CMAKE_CURRENT_SOURCE_DIR}/include/CXCompilerInvocation.h
-             ${CMAKE_CURRENT_SOURCE_DIR}/include/CXDiagnostic.h
-             ${CMAKE_CURRENT_SOURCE_DIR}/include/CXDriver.h
-             ${CMAKE_CURRENT_SOURCE_DIR}/include/CXError.h
-             ${CMAKE_CURRENT_SOURCE_DIR}/include/CXFileManager.h
-             ${CMAKE_CURRENT_SOURCE_DIR}/include/CXOptions.h
-             ${CMAKE_CURRENT_SOURCE_DIR}/include/CXParser.h
-             ${CMAKE_CURRENT_SOURCE_DIR}/include/CXPreprocessor.h
-             ${CMAKE_CURRENT_SOURCE_DIR}/include/CXQualType.h
-             ${CMAKE_CURRENT_SOURCE_DIR}/include/CXSema.h
-             ${CMAKE_CURRENT_SOURCE_DIR}/include/CXSourceManager.h
-             ${CMAKE_CURRENT_SOURCE_DIR}/include/CXTypes.h
+set(pub_hdrs ${CMAKE_CURRENT_SOURCE_DIR}/include/clang-ex/libclangex.h
+             ${CMAKE_CURRENT_SOURCE_DIR}/include/clang-ex/CXASTConsumer.h
+             ${CMAKE_CURRENT_SOURCE_DIR}/include/clang-ex/CXASTContext.h
+             ${CMAKE_CURRENT_SOURCE_DIR}/include/clang-ex/CXCodeGen.h
+             ${CMAKE_CURRENT_SOURCE_DIR}/include/clang-ex/CXCompilerInstance.h
+             ${CMAKE_CURRENT_SOURCE_DIR}/include/clang-ex/CXCompilerInvocation.h
+             ${CMAKE_CURRENT_SOURCE_DIR}/include/clang-ex/CXDiagnostic.h
+             ${CMAKE_CURRENT_SOURCE_DIR}/include/clang-ex/CXDriver.h
+             ${CMAKE_CURRENT_SOURCE_DIR}/include/clang-ex/CXError.h
+             ${CMAKE_CURRENT_SOURCE_DIR}/include/clang-ex/CXFileManager.h
+             ${CMAKE_CURRENT_SOURCE_DIR}/include/clang-ex/CXOptions.h
+             ${CMAKE_CURRENT_SOURCE_DIR}/include/clang-ex/CXParser.h
+             ${CMAKE_CURRENT_SOURCE_DIR}/include/clang-ex/CXPreprocessor.h
+             ${CMAKE_CURRENT_SOURCE_DIR}/include/clang-ex/CXQualType.h
+             ${CMAKE_CURRENT_SOURCE_DIR}/include/clang-ex/CXSema.h
+             ${CMAKE_CURRENT_SOURCE_DIR}/include/clang-ex/CXSourceManager.h
+             ${CMAKE_CURRENT_SOURCE_DIR}/include/clang-ex/CXTypes.h
             )
 set_target_properties(${target} PROPERTIES PUBLIC_HEADER "${pub_hdrs}")
 set_target_properties(${target} PROPERTIES EXPORT_COMPILE_COMMANDS true) 
@@ -96,8 +96,8 @@ install(TARGETS ${target}
         RUNTIME DESTINATION bin
         LIBRARY DESTINATION lib
         ARCHIVE DESTINATION lib/static
-        INCLUDES DESTINATION include
-        PUBLIC_HEADER DESTINATION include)
+        INCLUDES DESTINATION include/clang-ex
+        PUBLIC_HEADER DESTINATION include/clang-ex)
 
 install(EXPORT ${target}Targets
         NAMESPACE ${target}::

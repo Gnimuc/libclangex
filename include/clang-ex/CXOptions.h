@@ -1,8 +1,8 @@
 #ifndef LIBCLANGEX_CXOPTIONS_H
 #define LIBCLANGEX_CXOPTIONS_H
 
-#include "CXError.h"
-#include "CXTypes.h"
+#include "clang-ex/CXError.h"
+#include "clang-ex/CXTypes.h"
 #include "clang-c/Platform.h"
 #include <stdint.h>
 

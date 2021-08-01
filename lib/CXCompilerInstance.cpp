@@ -1,5 +1,5 @@
-#include "CXCompilerInstance.h"
-#include "CXCodeGen.h"
+#include "clang-ex/CXCompilerInstance.h"
+#include "clang-ex/CXCodeGen.h"
 #include "clang/Basic/TargetInfo.h"
 #include "clang/CodeGen/ModuleBuilder.h"
 #include "clang/Frontend/CompilerInstance.h"

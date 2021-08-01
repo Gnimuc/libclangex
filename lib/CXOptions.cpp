@@ -1,4 +1,4 @@
-#include "CXOptions.h"
+#include "clang-ex/CXOptions.h"
 #include "clang/Basic/CodeGenOptions.h"
 #include "clang/Basic/TargetInfo.h"
 #include "clang/Basic/TargetOptions.h"

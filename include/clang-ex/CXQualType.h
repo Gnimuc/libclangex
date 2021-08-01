@@ -1,7 +1,7 @@
 #ifndef LIBCLANGEX_CXQUALTYPE_H
 #define LIBCLANGEX_CXQUALTYPE_H
 
-#include "CXTypes.h"
+#include "clang-ex/CXTypes.h"
 #include "clang-c/Platform.h"
 
 #ifdef __cplusplus

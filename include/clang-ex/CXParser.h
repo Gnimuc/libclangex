@@ -1,8 +1,8 @@
 #ifndef LIBCLANGEX_CXPARSER_H
 #define LIBCLANGEX_CXPARSER_H
 
-#include "CXError.h"
-#include "CXTypes.h"
+#include "clang-ex/CXError.h"
+#include "clang-ex/CXTypes.h"
 #include "clang-c/Platform.h"
 
 #ifdef __cplusplus

@@ -1,4 +1,4 @@
-#include "CXFileManager.h"
+#include "clang-ex/CXFileManager.h"
 #include "clang/Basic/FileManager.h"
 #include "llvm/Support/Errc.h"
 #include "llvm/Support/MemoryBuffer.h"

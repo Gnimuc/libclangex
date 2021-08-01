@@ -1,4 +1,4 @@
-#include "CXDiagnostic.h"
+#include "clang-ex/CXDiagnostic.h"
 #include "clang/Basic/Diagnostic.h"
 #include "clang/Basic/DiagnosticIDs.h"
 #include "clang/Basic/DiagnosticOptions.h"

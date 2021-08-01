@@ -1,10 +1,10 @@
 #ifndef LIBCLANGEX_CXSOURCEMANAGER_H
 #define LIBCLANGEX_CXSOURCEMANAGER_H
 
-#include "CXDiagnostic.h"
-#include "CXError.h"
-#include "CXFileManager.h"
-#include "CXTypes.h"
+#include "clang-ex/CXDiagnostic.h"
+#include "clang-ex/CXError.h"
+#include "clang-ex/CXFileManager.h"
+#include "clang-ex/CXTypes.h"
 #include "clang-c/Platform.h"
 #include "llvm-c/Types.h"
 

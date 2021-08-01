@@ -1,4 +1,4 @@
-#include "CXSema.h"
+#include "clang-ex/CXSema.h"
 #include "clang/Sema/Sema.h"
 
 void clang_Sema_setCollectStats(CXSema S, bool ShouldCollect) {

@@ -1,4 +1,4 @@
-#include "CXQualType.h"
+#include "clang-ex/CXQualType.h"
 #include "clang/AST/Type.h"
 
 CXType_ clang_QualType_getTypePtr(CXQualType OpaquePtr) {
