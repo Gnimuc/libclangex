@@ -33,6 +33,10 @@ CINDEX_LINKAGE void clang_Preprocessor_PrintStats(CXPreprocessor PP);
 
 CINDEX_LINKAGE void clang_Preprocessor_InitializeBuiltins(CXPreprocessor PP);
 
+CINDEX_LINKAGE void clang_Preprocessor_enableIncrementalProcessing(CXPreprocessor PP);
+
+CINDEX_LINKAGE bool clang_Preprocessor_isIncrementalProcessingEnabled(CXPreprocessor PP);
+
 // Token
 
 #ifdef __cplusplus

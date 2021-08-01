@@ -17,11 +17,10 @@ CINDEX_LINKAGE void clang_Parser_dispose(CXParser P);
 
 CINDEX_LINKAGE void clang_Parser_Initialize(CXParser P);
 
-CINDEX_LINKAGE bool
-clang_Parser_tryParseAndSkipInvalidOrParsedDecl(CXParser Parser, CXCodeGenerator CodeGen);
-
 CINDEX_LINKAGE CXDeclGroupRef clang_Parser_parseOneTopLevelDecl(CXParser Parser,
                                                                 bool IsFirstDecl);
+
+CINDEX_LINKAGE void clang_ParseAST(CXSema Sema, bool PrintStats, bool SkipFunctionBodies);
 
 #ifdef __cplusplus
 }

@@ -1,6 +1,7 @@
 #include "CXASTContext.h"
 #include "clang/AST/ASTContext.h"
 #include "clang/AST/DeclGroup.h"
+#include "clang/AST/Stmt.h"
 
 void clang_ASTContext_PrintStats(CXASTContext Ctx) {
   static_cast<clang::ASTContext *>(Ctx)->PrintStats();
@@ -36,6 +37,16 @@ bool clang_DeclGroupRef_isDeclGroup(CXDeclGroupRef DG) {
 CXDecl clang_DeclGroupRef_getSingleDecl(CXDeclGroupRef DG) {
   return clang::DeclGroupRef::getFromOpaquePtr(DG).getSingleDecl();
 }
+
+void clang_Decl_EnableStatistics(void) { clang::Decl::EnableStatistics(); }
+
+void clang_Stmt_EnableStatistics(void) { clang::Stmt::EnableStatistics(); }
+
+void clang_Decl_PrintStats(void) { clang::Decl::PrintStats(); }
+
+void clang_Stmt_PrintStats(void) { clang::Stmt::PrintStats(); }
+
+void clang_Decl_dumpColor(CXDecl DC) { static_cast<clang::Decl *>(DC)->dumpColor(); }
 
 // Builtin Types
 CXType_ clang_ASTContext_VoidTy_getTypePtrOrNull(CXASTContext Ctx) {

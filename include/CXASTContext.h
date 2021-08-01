@@ -28,6 +28,16 @@ CINDEX_LINKAGE bool clang_DeclGroupRef_isDeclGroup(CXDeclGroupRef DG);
 
 CINDEX_LINKAGE CXDecl clang_DeclGroupRef_getSingleDecl(CXDeclGroupRef DG);
 
+CINDEX_LINKAGE void clang_Decl_EnableStatistics(void);
+
+CINDEX_LINKAGE void clang_Stmt_EnableStatistics(void);
+
+CINDEX_LINKAGE void clang_Decl_PrintStats(void);
+
+CINDEX_LINKAGE void clang_Stmt_PrintStats(void);
+
+CINDEX_LINKAGE void clang_Decl_dumpColor(CXDecl DC);
+
 // Builtin Types
 CINDEX_LINKAGE CXType_ clang_ASTContext_VoidTy_getTypePtrOrNull(CXASTContext Ctx);
 CINDEX_LINKAGE CXType_ clang_ASTContext_BoolTy_getTypePtrOrNull(CXASTContext Ctx);

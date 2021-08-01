@@ -63,4 +63,12 @@ void clang_Preprocessor_InitializeBuiltins(CXPreprocessor PP) {
                                             Prep->getLangOpts());
 }
 
+void clang_Preprocessor_enableIncrementalProcessing(CXPreprocessor PP) {
+  static_cast<clang::Preprocessor *>(PP)->enableIncrementalProcessing();
+}
+
+bool clang_Preprocessor_isIncrementalProcessingEnabled(CXPreprocessor PP) {
+  return static_cast<clang::Preprocessor *>(PP)->isIncrementalProcessingEnabled();
+}
+
 // Token
