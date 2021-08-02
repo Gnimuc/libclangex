@@ -46,6 +46,7 @@ typedef void *CXPreprocessor;
 typedef void *CXHeaderSearch;
 typedef void *CXLexer;
 typedef void *CXToken_;
+typedef void *CXAnnotationValue;
 
 typedef enum CXTranslationUnitKind {
   CXTranslationUnitKind_TU_Complete,
@@ -101,6 +102,19 @@ typedef enum CXDeclaratorContext {
   CXDeclaratorContext_RequiresExpr
 } CXDeclaratorContext;
 
+typedef enum CXDeclSpecContext {
+  CXDeclSpecContext_DSC_normal,
+  CXDeclSpecContext_DSC_class,
+  CXDeclSpecContext_DSC_type_specifier,
+  CXDeclSpecContext_DSC_trailing,
+  CXDeclSpecContext_DSC_alias_declaration,
+  CXDeclSpecContext_DSC_top_level,
+  CXDeclSpecContext_DSC_template_param,
+  CXDeclSpecContext_DSC_template_type_arg,
+  CXDeclSpecContext_DSC_objc_method_result,
+  CXDeclSpecContext_DSC_condition
+} CXDeclSpecContext;
+
 // Parser
 typedef void *CXParser;
 // typedef void *CXScopeSpecifierParser;
@@ -110,8 +124,6 @@ typedef void *CXFrontendAction;
 typedef void *CXCodeGenAction;
 
 // Lookup
-typedef void *CXXScopeSpec;
-typedef void *CXNestedNameSpecifier;
 
 #ifdef __cplusplus
 }

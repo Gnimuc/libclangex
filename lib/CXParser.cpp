@@ -24,8 +24,16 @@ void clang_Parser_dispose(CXParser P) { delete static_cast<clang::Parser *>(P); 
 
 void clang_Parser_Initialize(CXParser P) { static_cast<clang::Parser *>(P)->Initialize(); }
 
-void clang_ParseAST(CXSema Sema, bool PrintStats, bool SkipFunctionBodies) {
-  clang::ParseAST(*static_cast<clang::Sema *>(Sema), PrintStats, SkipFunctionBodies);
+CXToken_ clang_Parser_getCurToken(CXParser P) {
+  return const_cast<clang::Token *>(&static_cast<clang::Parser *>(P)->getCurToken());
+}
+
+CXSourceLocation_ clang_Parser_ConsumeToken(CXParser P) {
+  return static_cast<clang::Parser *>(P)->ConsumeToken().getPtrEncoding();
+}
+
+bool clang_Parser_TryAnnotateCXXScopeToken(CXParser P, bool EnteringContext) {
+  return static_cast<clang::Parser *>(P)->TryAnnotateCXXScopeToken(EnteringContext);
 }
 
 CXDeclGroupRef clang_Parser_parseOneTopLevelDecl(CXParser Parser, bool IsFirstDecl) {
@@ -35,4 +43,8 @@ CXDeclGroupRef clang_Parser_parseOneTopLevelDecl(CXParser Parser, bool IsFirstDe
     return ADecl.get().getAsOpaquePtr();
   else
     return nullptr;
+}
+
+void clang_ParseAST(CXSema Sema, bool PrintStats, bool SkipFunctionBodies) {
+  clang::ParseAST(*static_cast<clang::Sema *>(Sema), PrintStats, SkipFunctionBodies);
 }

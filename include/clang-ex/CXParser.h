@@ -17,6 +17,12 @@ CINDEX_LINKAGE void clang_Parser_dispose(CXParser P);
 
 CINDEX_LINKAGE void clang_Parser_Initialize(CXParser P);
 
+CINDEX_LINKAGE CXToken_ clang_Parser_getCurToken(CXParser P);
+
+CINDEX_LINKAGE CXSourceLocation_ clang_Parser_ConsumeToken(CXParser P);
+
+CINDEX_LINKAGE bool clang_Parser_TryAnnotateCXXScopeToken(CXParser P, bool EnteringContext);
+
 CINDEX_LINKAGE CXDeclGroupRef clang_Parser_parseOneTopLevelDecl(CXParser Parser,
                                                                 bool IsFirstDecl);
 
