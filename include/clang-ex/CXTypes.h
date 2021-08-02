@@ -48,9 +48,9 @@ typedef void *CXLexer;
 typedef void *CXToken_;
 
 typedef enum CXTranslationUnitKind {
-  CXTU_Complete,
-  CXTU_Prefix,
-  CXTU_Module
+  CXTranslationUnitKind_TU_Complete,
+  CXTranslationUnitKind_TU_Prefix,
+  CXTranslationUnitKind_TU_Module
 } CXTranslationUnitKind;
 
 // AST
@@ -70,6 +70,36 @@ typedef void *CXCodeGenModule;
 
 // Sema
 typedef void *CXSema;
+
+typedef enum CXDeclaratorContext {
+  CXDeclaratorContext_File,
+  CXDeclaratorContext_Prototype,
+  CXDeclaratorContext_ObjCResult,
+  CXDeclaratorContext_ObjCParameter,
+  CXDeclaratorContext_KNRTypeList,
+  CXDeclaratorContext_TypeName,
+  CXDeclaratorContext_FunctionalCast,
+  CXDeclaratorContext_Member,
+  CXDeclaratorContext_Block,
+  CXDeclaratorContext_ForInit,
+  CXDeclaratorContext_SelectionInit,
+  CXDeclaratorContext_Condition,
+  CXDeclaratorContext_TemplateParam,
+  CXDeclaratorContext_CXXNew,
+  CXDeclaratorContext_CXXCatch,
+  CXDeclaratorContext_ObjCCatch,
+  CXDeclaratorContext_BlockLiteral,
+  CXDeclaratorContext_LambdaExpr,
+  CXDeclaratorContext_LambdaExprParameter,
+  CXDeclaratorContext_ConversionId,
+  CXDeclaratorContext_TrailingReturn,
+  CXDeclaratorContext_TrailingReturnVar,
+  CXDeclaratorContext_TemplateArg,
+  CXDeclaratorContext_TemplateTypeArg,
+  CXDeclaratorContext_AliasDecl,
+  CXDeclaratorContext_AliasTemplate,
+  CXDeclaratorContext_RequiresExpr
+} CXDeclaratorContext;
 
 // Parser
 typedef void *CXParser;
