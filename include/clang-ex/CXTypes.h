@@ -61,6 +61,8 @@ typedef void *CXQualType;
 typedef void *CXTranslationUnitDecl;
 typedef void *CXDeclGroupRef;
 typedef void *CXDecl;
+typedef void *CXNestedNameSpecifier;
+typedef void *CXCXXScopeSpec;
 
 // CodeGen
 typedef void *CXCodeGenerator;

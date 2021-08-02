@@ -1,6 +1,7 @@
 #include "clang-ex/CXASTContext.h"
 #include "clang/AST/ASTContext.h"
 #include "clang/AST/DeclGroup.h"
+#include "clang/AST/NestedNameSpecifier.h"
 #include "clang/AST/Stmt.h"
 
 void clang_ASTContext_PrintStats(CXASTContext Ctx) {
@@ -11,6 +12,19 @@ CXQualType clang_ASTContext_getPointerType(CXASTContext Ctx, CXQualType OpaquePt
   return static_cast<clang::ASTContext *>(Ctx)
       ->getPointerType(clang::QualType::getFromOpaquePtr(OpaquePtr))
       .getAsOpaquePtr();
+}
+
+// NestedNameSpecifier
+CXNestedNameSpecifier clang_NestedNameSpecifier_getPrefix(CXNestedNameSpecifier NNS) {
+  return static_cast<clang::NestedNameSpecifier *>(NNS)->getPrefix();
+}
+
+bool clang_NestedNameSpecifier_containsErrors(CXNestedNameSpecifier NNS) {
+  return static_cast<clang::NestedNameSpecifier *>(NNS)->containsErrors();
+}
+
+void clang_NestedNameSpecifier_dump(CXNestedNameSpecifier NNS) {
+  static_cast<clang::NestedNameSpecifier *>(NNS)->dump();
 }
 
 // Decls

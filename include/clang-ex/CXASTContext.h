@@ -13,6 +13,14 @@ CINDEX_LINKAGE void clang_ASTContext_PrintStats(CXASTContext Ctx);
 CINDEX_LINKAGE CXQualType clang_ASTContext_getPointerType(CXASTContext Ctx,
                                                           CXQualType OpaquePtr);
 
+// NestedNameSpecifier
+CINDEX_LINKAGE CXNestedNameSpecifier
+clang_NestedNameSpecifier_getPrefix(CXNestedNameSpecifier NNS);
+
+CINDEX_LINKAGE bool clang_NestedNameSpecifier_containsErrors(CXNestedNameSpecifier NNS);
+
+CINDEX_LINKAGE void clang_NestedNameSpecifier_dump(CXNestedNameSpecifier NNS);
+
 // Decls
 CINDEX_LINKAGE CXTranslationUnitDecl
 clang_ASTContext_getTranslationUnitDecl(CXASTContext Ctx);
