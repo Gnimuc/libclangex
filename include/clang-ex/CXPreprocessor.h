@@ -37,6 +37,12 @@ CINDEX_LINKAGE void clang_Preprocessor_enableIncrementalProcessing(CXPreprocesso
 
 CINDEX_LINKAGE bool clang_Preprocessor_isIncrementalProcessingEnabled(CXPreprocessor PP);
 
+CINDEX_LINKAGE void clang_Preprocessor_DumpToken(CXPreprocessor PP, CXToken_ Tok,
+                                                 bool DumpFlags);
+
+CINDEX_LINKAGE void clang_Preprocessor_DumpLocation(CXPreprocessor PP,
+                                                    CXSourceLocation_ Loc);
+
 // Token
 CINDEX_LINKAGE CXAnnotationValue clang_Token_getAnnotationValue(CXToken_ Tok);
 

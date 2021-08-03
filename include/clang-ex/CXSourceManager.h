@@ -40,6 +40,12 @@ CINDEX_LINKAGE void clang_SourceManager_overrideFileContents(CXSourceManager SM,
                                                              CXFileEntry FE,
                                                              LLVMMemoryBufferRef MB);
 
+CINDEX_LINKAGE CXSourceLocation_
+clang_SourceManager_getLocForStartOfFile(CXSourceManager SM, CXFileID FID);
+
+CINDEX_LINKAGE CXSourceLocation_ clang_SourceManager_getLocForEndOfFile(CXSourceManager SM,
+                                                                        CXFileID FID);
+
 // SourceLocation
 CINDEX_LINKAGE CXSourceLocation_ clang_SourceLocation_createInvalid(void);
 
@@ -62,6 +68,9 @@ CINDEX_LINKAGE char *clang_SourceLocation_printToString(CXSourceLocation_ Loc,
                                                         CXSourceManager SM);
 
 CINDEX_LINKAGE void clang_SourceLocation_disposeString(char *Str);
+
+CINDEX_LINKAGE CXSourceLocation_
+clang_SourceLocation_getLocWithOffset(CXSourceLocation_ Loc, int Offset);
 
 #ifdef __cplusplus
 }

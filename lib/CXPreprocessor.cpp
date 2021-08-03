@@ -71,6 +71,16 @@ bool clang_Preprocessor_isIncrementalProcessingEnabled(CXPreprocessor PP) {
   return static_cast<clang::Preprocessor *>(PP)->isIncrementalProcessingEnabled();
 }
 
+void clang_Preprocessor_DumpToken(CXPreprocessor PP, CXToken_ Tok, bool DumpFlags) {
+  static_cast<clang::Preprocessor *>(PP)->DumpToken(*static_cast<clang::Token *>(Tok),
+                                                    DumpFlags);
+}
+
+void clang_Preprocessor_DumpLocation(CXPreprocessor PP, CXSourceLocation_ Loc) {
+  static_cast<clang::Preprocessor *>(PP)->DumpLocation(
+      clang::SourceLocation::getFromPtrEncoding(Loc));
+}
+
 // Token
 CXAnnotationValue clang_Token_getAnnotationValue(CXToken_ Tok) {
   return static_cast<clang::Token *>(Tok)->getAnnotationValue();
@@ -115,4 +125,3 @@ bool clang_Token_isKind_kw_enum(CXToken_ Tok) {
 bool clang_Token_isKind_kw_typename(CXToken_ Tok) {
   return static_cast<clang::Token *>(Tok)->is(clang::tok::kw_typename);
 }
-

@@ -71,6 +71,7 @@ typedef void *CXCodeGenModule;
 
 // Sema
 typedef void *CXSema;
+typedef void *CXScope;
 
 typedef enum CXDeclaratorContext {
   CXDeclaratorContext_File,
@@ -117,7 +118,6 @@ typedef enum CXDeclSpecContext {
 
 // Parser
 typedef void *CXParser;
-// typedef void *CXScopeSpecifierParser;
 
 // Action
 typedef void *CXFrontendAction;
