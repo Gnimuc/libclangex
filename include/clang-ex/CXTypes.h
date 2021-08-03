@@ -62,8 +62,12 @@ typedef void *CXQualType;
 typedef void *CXTranslationUnitDecl;
 typedef void *CXDeclGroupRef;
 typedef void *CXDecl;
+typedef void *CXNamedDecl;
 typedef void *CXNestedNameSpecifier;
 typedef void *CXCXXScopeSpec;
+typedef void *CXIdentifierTable;
+typedef void *CXIdentifierInfo;
+typedef void *CXDeclarationName;
 
 // CodeGen
 typedef void *CXCodeGenerator;
@@ -72,6 +76,7 @@ typedef void *CXCodeGenModule;
 // Sema
 typedef void *CXSema;
 typedef void *CXScope;
+typedef void *CXLookupResult;
 
 typedef enum CXDeclaratorContext {
   CXDeclaratorContext_File,
@@ -124,6 +129,24 @@ typedef void *CXFrontendAction;
 typedef void *CXCodeGenAction;
 
 // Lookup
+typedef enum CXLookupNameKind {
+  CXLookupNameKind_LookupOrdinaryName = 0,
+  CXLookupNameKind_LookupTagName,
+  CXLookupNameKind_LookupLabel,
+  CXLookupNameKind_LookupMemberName,
+  CXLookupNameKind_LookupOperatorName,
+  CXLookupNameKind_LookupDestructorName,
+  CXLookupNameKind_LookupNestedNameSpecifierName,
+  CXLookupNameKind_LookupNamespaceName,
+  CXLookupNameKind_LookupUsingDeclName,
+  CXLookupNameKind_LookupRedeclarationWithLinkage,
+  CXLookupNameKind_LookupLocalFriendName,
+  CXLookupNameKind_LookupObjCProtocolName,
+  CXLookupNameKind_LookupObjCImplicitSelfParam,
+  CXLookupNameKind_LookupOMPReductionName,
+  CXLookupNameKind_LookupOMPMapperName,
+  CXLookupNameKind_LookupAnyName
+} CXLookupNameKind;
 
 #ifdef __cplusplus
 }

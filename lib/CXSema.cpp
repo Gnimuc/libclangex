@@ -1,5 +1,6 @@
 #include "clang-ex/CXSema.h"
 #include "clang/Basic/SourceLocation.h"
+#include "clang/Sema/Lookup.h"
 #include "clang/Sema/Sema.h"
 
 void clang_Sema_setCollectStats(CXSema S, bool ShouldCollect) {
@@ -16,6 +17,13 @@ void clang_Sema_RestoreNestedNameSpecifierAnnotation(
       clang::SourceRange(clang::SourceLocation::getFromPtrEncoding(AnnotationRange_begin),
                          clang::SourceLocation::getFromPtrEncoding(AnnotationRange_end)),
       *static_cast<clang::CXXScopeSpec *>(SS));
+}
+
+bool clang_Sema_LookupParsedName(CXSema S, CXLookupResult R, CXScope Sp, CXCXXScopeSpec SS,
+                                 bool AllowBuiltinCreation, bool EnteringContext) {
+  return static_cast<clang::Sema *>(S)->LookupParsedName(
+      *static_cast<clang::LookupResult *>(R), static_cast<clang::Scope *>(Sp),
+      static_cast<clang::CXXScopeSpec *>(SS), AllowBuiltinCreation, EnteringContext);
 }
 
 // CXXScopeSpec
@@ -74,4 +82,53 @@ bool clang_CXXScopeSpec_isInvalid(CXCXXScopeSpec SS) {
 
 bool clang_CXXScopeSpec_isValid(CXCXXScopeSpec SS) {
   return static_cast<clang::CXXScopeSpec *>(SS)->isValid();
+}
+
+// Scope
+void clang_Scope_dump(CXScope S) { static_cast<clang::Scope *>(S)->dump(); }
+
+CXScope clang_Scope_getParent(CXScope S) {
+  return static_cast<clang::Scope *>(S)->getParent();
+}
+
+unsigned clang_Scope_getDepth(CXScope S) {
+  return static_cast<clang::Scope *>(S)->getDepth();
+}
+
+// Lookup
+CXLookupResult clang_LookupResult_create(CXSema S, CXDeclarationName Name,
+                                         CXSourceLocation_ NameLoc,
+                                         CXLookupNameKind LookupKind,
+                                         CXInit_Error *ErrorCode) {
+  CXInit_Error Err = CXInit_NoError;
+  std::unique_ptr<clang::LookupResult> ptr = std::make_unique<clang::LookupResult>(
+      *static_cast<clang::Sema *>(S), clang::DeclarationName::getFromOpaquePtr(Name),
+      clang::SourceLocation::getFromPtrEncoding(NameLoc),
+      static_cast<clang::Sema::LookupNameKind>(LookupKind));
+
+  if (!ptr) {
+    fprintf(stderr, "LIBCLANGEX ERROR: failed to create `clang::LookupResult`\n");
+    Err = CXInit_CanNotCreate;
+  }
+
+  if (ErrorCode)
+    *ErrorCode = Err;
+
+  return ptr.release();
+}
+
+void clang_LookupResult_dispose(CXLookupResult LR) {
+  delete static_cast<clang::LookupResult *>(LR);
+}
+
+void clang_LookupResult_dump(CXLookupResult LR) {
+  static_cast<clang::LookupResult *>(LR)->dump();
+}
+
+bool clang_LookupResult_empty(CXLookupResult LR) {
+  return static_cast<clang::LookupResult *>(LR)->empty();
+}
+
+CXNamedDecl clang_LookupResult_getRepresentativeDecl(CXLookupResult LR) {
+  return static_cast<clang::LookupResult *>(LR)->getRepresentativeDecl();
 }

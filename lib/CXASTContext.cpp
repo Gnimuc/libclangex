@@ -14,6 +14,43 @@ CXQualType clang_ASTContext_getPointerType(CXASTContext Ctx, CXQualType OpaquePt
       .getAsOpaquePtr();
 }
 
+CXIdentifierTable clang_ASTContext_getIdents(CXASTContext Ctx) {
+  return &static_cast<clang::ASTContext *>(Ctx)->Idents;
+}
+
+// IdentifierTable
+void clang_IdentifierTable_PrintStats(CXIdentifierTable IT) {
+  static_cast<clang::IdentifierTable *>(IT)->PrintStats();
+}
+
+CXIdentifierInfo clang_IdentifierTable_get(CXIdentifierTable Idents, const char *Name) {
+  return &static_cast<clang::IdentifierTable *>(Idents)->get(llvm::StringRef(Name));
+}
+
+// DeclarationName
+CXDeclarationName clang_DeclarationName_createFromIdentifierInfo(CXIdentifierInfo IDInfo) {
+  return clang::DeclarationName(static_cast<clang::IdentifierInfo *>(IDInfo))
+      .getAsOpaquePtr();
+}
+
+void clang_DeclarationName_dump(CXDeclarationName DN) {
+  clang::DeclarationName::getFromOpaquePtr(DN).dump();
+}
+
+bool clang_DeclarationName_isEmpty(CXDeclarationName DN) {
+  return clang::DeclarationName::getFromOpaquePtr(DN).isEmpty();
+}
+
+char *clang_DeclarationName_getAsString(CXDeclarationName DN) {
+  auto str = clang::DeclarationName::getFromOpaquePtr(DN).getAsString();
+  std::unique_ptr<char[]> ptr = std::make_unique<char[]>(str.size() + 1);
+  ptr[str.size() + 1] = '\0';
+  std::copy(str.begin(), str.end(), ptr.get());
+  return ptr.release();
+}
+
+void clang_DeclarationName_disposeString(char *Str) { delete[] Str; }
+
 // NestedNameSpecifier
 CXNestedNameSpecifier clang_NestedNameSpecifier_getPrefix(CXNestedNameSpecifier NNS) {
   return static_cast<clang::NestedNameSpecifier *>(NNS)->getPrefix();

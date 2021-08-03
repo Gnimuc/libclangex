@@ -13,6 +13,26 @@ CINDEX_LINKAGE void clang_ASTContext_PrintStats(CXASTContext Ctx);
 CINDEX_LINKAGE CXQualType clang_ASTContext_getPointerType(CXASTContext Ctx,
                                                           CXQualType OpaquePtr);
 
+CINDEX_LINKAGE CXIdentifierTable clang_ASTContext_getIdents(CXASTContext Ctx);
+
+// IdentifierTable
+CINDEX_LINKAGE void clang_IdentifierTable_PrintStats(CXIdentifierTable IT);
+
+CINDEX_LINKAGE CXIdentifierInfo clang_IdentifierTable_get(CXIdentifierTable Idents,
+                                                          const char *Name);
+
+// DeclarationName
+CINDEX_LINKAGE CXDeclarationName
+clang_DeclarationName_createFromIdentifierInfo(CXIdentifierInfo IDInfo);
+
+CINDEX_LINKAGE void clang_DeclarationName_dump(CXDeclarationName DN);
+
+CINDEX_LINKAGE bool clang_DeclarationName_isEmpty(CXDeclarationName DN);
+
+CINDEX_LINKAGE char *clang_DeclarationName_getAsString(CXDeclarationName DN);
+
+CINDEX_LINKAGE void clang_DeclarationName_disposeString(char *Str);
+
 // NestedNameSpecifier
 CINDEX_LINKAGE CXNestedNameSpecifier
 clang_NestedNameSpecifier_getPrefix(CXNestedNameSpecifier NNS);
