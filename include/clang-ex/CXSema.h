@@ -27,6 +27,8 @@ CINDEX_LINKAGE CXCXXScopeSpec clang_CXXScopeSpec_create(CXInit_Error *ErrorCode)
 
 CINDEX_LINKAGE void clang_CXXScopeSpec_dispose(CXCXXScopeSpec SS);
 
+CINDEX_LINKAGE void clang_CXXScopeSpec_clear(CXCXXScopeSpec SS);
+
 CINDEX_LINKAGE CXNestedNameSpecifier clang_CXXScopeSpec_getScopeRep(CXCXXScopeSpec SS);
 
 CINDEX_LINKAGE CXSourceLocation_ clang_CXXScopeSpec_getBeginLoc(CXCXXScopeSpec SS);
@@ -60,6 +62,13 @@ CINDEX_LINKAGE CXLookupResult clang_LookupResult_create(CXSema S, CXDeclarationN
                                                         CXInit_Error *ErrorCode);
 
 CINDEX_LINKAGE void clang_LookupResult_dispose(CXLookupResult LR);
+
+CINDEX_LINKAGE void clang_LookupResult_clear(CXLookupResult LR,
+                                             CXLookupNameKind LookupKind);
+
+CINDEX_LINKAGE void clang_LookupResult_setLookupName(CXLookupResult LR, CXDeclarationName DN);
+
+CINDEX_LINKAGE CXDeclarationName clang_LookupResult_getLookupName(CXLookupResult LR);
 
 CINDEX_LINKAGE void clang_LookupResult_dump(CXLookupResult LR);
 

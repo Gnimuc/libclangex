@@ -28,6 +28,11 @@ CXIdentifierInfo clang_IdentifierTable_get(CXIdentifierTable Idents, const char 
 }
 
 // DeclarationName
+CXDeclarationName clang_DeclarationName_create(void) {
+  return clang::DeclarationName()
+      .getAsOpaquePtr();
+}
+
 CXDeclarationName clang_DeclarationName_createFromIdentifierInfo(CXIdentifierInfo IDInfo) {
   return clang::DeclarationName(static_cast<clang::IdentifierInfo *>(IDInfo))
       .getAsOpaquePtr();

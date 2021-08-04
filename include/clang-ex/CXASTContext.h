@@ -22,8 +22,15 @@ CINDEX_LINKAGE CXIdentifierInfo clang_IdentifierTable_get(CXIdentifierTable Iden
                                                           const char *Name);
 
 // DeclarationName
+CINDEX_LINKAGE CXDeclarationName clang_DeclarationName_create(void);
+
 CINDEX_LINKAGE CXDeclarationName
 clang_DeclarationName_createFromIdentifierInfo(CXIdentifierInfo IDInfo);
+
+CINDEX_LINKAGE void clang_LookupResult_setLookupName(CXLookupResult LR,
+                                                     CXDeclarationName DN);
+
+CINDEX_LINKAGE CXDeclarationName clang_LookupResult_getLookupName(CXLookupResult LR);
 
 CINDEX_LINKAGE void clang_DeclarationName_dump(CXDeclarationName DN);
 

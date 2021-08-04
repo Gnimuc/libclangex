@@ -46,6 +46,10 @@ void clang_CXXScopeSpec_dispose(CXCXXScopeSpec SS) {
   delete static_cast<clang::CXXScopeSpec *>(SS);
 }
 
+void clang_CXXScopeSpec_clear(CXCXXScopeSpec SS) {
+  static_cast<clang::CXXScopeSpec *>(SS)->clear();
+}
+
 CXNestedNameSpecifier clang_CXXScopeSpec_getScopeRep(CXCXXScopeSpec SS) {
   return static_cast<clang::CXXScopeSpec *>(SS)->getScopeRep();
 }
@@ -119,6 +123,20 @@ CXLookupResult clang_LookupResult_create(CXSema S, CXDeclarationName Name,
 
 void clang_LookupResult_dispose(CXLookupResult LR) {
   delete static_cast<clang::LookupResult *>(LR);
+}
+
+void clang_LookupResult_clear(CXLookupResult LR, CXLookupNameKind LookupKind) {
+  static_cast<clang::LookupResult *>(LR)->clear(
+      static_cast<clang::Sema::LookupNameKind>(LookupKind));
+}
+
+void clang_LookupResult_setLookupName(CXLookupResult LR, CXDeclarationName DN) {
+  static_cast<clang::LookupResult *>(LR)->setLookupName(
+      clang::DeclarationName::getFromOpaquePtr(DN));
+}
+
+CXDeclarationName clang_LookupResult_getLookupName(CXLookupResult LR) {
+  return static_cast<clang::LookupResult *>(LR)->getLookupName().getAsOpaquePtr();
 }
 
 void clang_LookupResult_dump(CXLookupResult LR) {
