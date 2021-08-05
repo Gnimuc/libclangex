@@ -63,6 +63,9 @@ CINDEX_LINKAGE bool clang_DeclGroupRef_isDeclGroup(CXDeclGroupRef DG);
 
 CINDEX_LINKAGE CXDecl clang_DeclGroupRef_getSingleDecl(CXDeclGroupRef DG);
 
+// Decl
+CINDEX_LINKAGE CXSourceLocation_ clang_Decl_getLocation(CXDecl DC);
+
 CINDEX_LINKAGE void clang_Decl_EnableStatistics(void);
 
 CINDEX_LINKAGE void clang_Stmt_EnableStatistics(void);
@@ -72,6 +75,82 @@ CINDEX_LINKAGE void clang_Decl_PrintStats(void);
 CINDEX_LINKAGE void clang_Stmt_PrintStats(void);
 
 CINDEX_LINKAGE void clang_Decl_dumpColor(CXDecl DC);
+
+// NamedDecl
+CINDEX_LINKAGE CXIdentifierInfo clang_NamedDecl_getIdentifier(CXNamedDecl ND);
+
+CINDEX_LINKAGE const char *clang_NamedDecl_getName(CXNamedDecl ND);
+
+CINDEX_LINKAGE void clang_NamedDecl_setDeclName(CXNamedDecl ND, CXDeclarationName DN);
+
+CINDEX_LINKAGE bool clang_NamedDecl_hasLinkage(CXNamedDecl ND);
+
+CINDEX_LINKAGE bool clang_NamedDecl_isCXXClassMember(CXNamedDecl ND);
+
+CINDEX_LINKAGE bool clang_NamedDecl_isCXXInstanceMember(CXNamedDecl ND);
+
+CINDEX_LINKAGE bool clang_NamedDecl_hasExternalFormalLinkage(CXNamedDecl ND);
+
+CINDEX_LINKAGE bool clang_NamedDecl_isExternallyVisible(CXNamedDecl ND);
+
+CINDEX_LINKAGE bool clang_NamedDecl_isExternallyDeclarable(CXNamedDecl ND);
+
+CINDEX_LINKAGE CXNamedDecl clang_NamedDecl_getUnderlyingDecl(CXNamedDecl ND);
+
+CINDEX_LINKAGE CXNamedDecl clang_NamedDecl_getMostRecentDecl(CXNamedDecl ND);
+
+// TypeDecl
+CINDEX_LINKAGE CXType_ clang_TypeDecl_getTypeForDecl(CXTypeDecl TD);
+
+CINDEX_LINKAGE void clang_TypeDecl_setTypeForDecl(CXTypeDecl TD, CXType_ Ty);
+
+CINDEX_LINKAGE CXSourceLocation_ clang_TypeDecl_getBeginLoc(CXTypeDecl TD);
+
+CINDEX_LINKAGE void clang_TypeDecl_setLocStart(CXTypeDecl TD, CXSourceLocation_ Loc);
+
+// TagDecl
+CINDEX_LINKAGE CXTagDecl clang_TypeDecl_getCanonicalDecl(CXTypeDecl TD);
+
+CINDEX_LINKAGE CXTagDecl clang_TypeDecl_getCanonicalDecl(CXTagDecl TD);
+
+CINDEX_LINKAGE bool clang_TypeDecl_isThisDeclarationADefinition(CXTagDecl TD);
+
+CINDEX_LINKAGE bool clang_TypeDecl_isCompleteDefinition(CXTagDecl TD);
+
+CINDEX_LINKAGE void clang_TypeDecl_setCompleteDefinition(CXTagDecl TD, bool V);
+
+CINDEX_LINKAGE bool clang_TypeDecl_isBeingDefined(CXTagDecl TD);
+
+CINDEX_LINKAGE bool clang_TypeDecl_isFreeStanding(CXTagDecl TD);
+
+CINDEX_LINKAGE void clang_TypeDecl_startDefinition(CXTagDecl TD);
+
+CINDEX_LINKAGE CXTagDecl clang_TypeDecl_getDefinition(CXTagDecl TD);
+
+CINDEX_LINKAGE const char *clang_TypeDecl_getKindName(CXTagDecl TD);
+
+CINDEX_LINKAGE bool clang_TypeDecl_isStruct(CXTagDecl TD);
+
+CINDEX_LINKAGE bool clang_TypeDecl_isInterface(CXTagDecl TD);
+
+CINDEX_LINKAGE bool clang_TypeDecl_isClass(CXTagDecl TD);
+
+CINDEX_LINKAGE bool clang_TypeDecl_isUnion(CXTagDecl TD);
+
+CINDEX_LINKAGE bool clang_TypeDecl_isEnum(CXTagDecl TD);
+
+CINDEX_LINKAGE bool clang_TypeDecl_hasNameForLinkage(CXTagDecl TD);
+
+CINDEX_LINKAGE CXNestedNameSpecifier clang_TypeDecl_getQualifier(CXTagDecl TD);
+
+CINDEX_LINKAGE unsigned clang_TypeDecl_getNumTemplateParameterLists(CXTagDecl TD);
+
+CINDEX_LINKAGE CXTemplateParameterList
+clang_TypeDecl_getTemplateParameterList(CXTagDecl TD, unsigned i);
+
+// TemplateParameterList
+CINDEX_LINKAGE CXNamedDecl clang_TemplateParameterList_getParam(CXTagDecl TPL,
+                                                                unsigned Idx);
 
 // Builtin Types
 CINDEX_LINKAGE CXType_ clang_ASTContext_VoidTy_getTypePtrOrNull(CXASTContext Ctx);
