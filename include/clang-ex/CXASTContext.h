@@ -109,43 +109,43 @@ CINDEX_LINKAGE CXSourceLocation_ clang_TypeDecl_getBeginLoc(CXTypeDecl TD);
 CINDEX_LINKAGE void clang_TypeDecl_setLocStart(CXTypeDecl TD, CXSourceLocation_ Loc);
 
 // TagDecl
-CINDEX_LINKAGE CXTagDecl clang_TypeDecl_getCanonicalDecl(CXTypeDecl TD);
+CINDEX_LINKAGE CXTagDecl clang_TagDecl_getCanonicalDecl(CXTagDecl TD);
 
-CINDEX_LINKAGE CXTagDecl clang_TypeDecl_getCanonicalDecl(CXTagDecl TD);
+CINDEX_LINKAGE CXTagDecl clang_TagDecl_getCanonicalDecl(CXTagDecl TD);
 
-CINDEX_LINKAGE bool clang_TypeDecl_isThisDeclarationADefinition(CXTagDecl TD);
+CINDEX_LINKAGE bool clang_TagDecl_isThisDeclarationADefinition(CXTagDecl TD);
 
-CINDEX_LINKAGE bool clang_TypeDecl_isCompleteDefinition(CXTagDecl TD);
+CINDEX_LINKAGE bool clang_TagDecl_isCompleteDefinition(CXTagDecl TD);
 
-CINDEX_LINKAGE void clang_TypeDecl_setCompleteDefinition(CXTagDecl TD, bool V);
+CINDEX_LINKAGE void clang_TagDecl_setCompleteDefinition(CXTagDecl TD, bool V);
 
-CINDEX_LINKAGE bool clang_TypeDecl_isBeingDefined(CXTagDecl TD);
+CINDEX_LINKAGE bool clang_TagDecl_isBeingDefined(CXTagDecl TD);
 
-CINDEX_LINKAGE bool clang_TypeDecl_isFreeStanding(CXTagDecl TD);
+CINDEX_LINKAGE bool clang_TagDecl_isFreeStanding(CXTagDecl TD);
 
-CINDEX_LINKAGE void clang_TypeDecl_startDefinition(CXTagDecl TD);
+CINDEX_LINKAGE void clang_TagDecl_startDefinition(CXTagDecl TD);
 
-CINDEX_LINKAGE CXTagDecl clang_TypeDecl_getDefinition(CXTagDecl TD);
+CINDEX_LINKAGE CXTagDecl clang_TagDecl_getDefinition(CXTagDecl TD);
 
-CINDEX_LINKAGE const char *clang_TypeDecl_getKindName(CXTagDecl TD);
+CINDEX_LINKAGE const char *clang_TagDecl_getKindName(CXTagDecl TD);
 
-CINDEX_LINKAGE bool clang_TypeDecl_isStruct(CXTagDecl TD);
+CINDEX_LINKAGE bool clang_TagDecl_isStruct(CXTagDecl TD);
 
-CINDEX_LINKAGE bool clang_TypeDecl_isInterface(CXTagDecl TD);
+CINDEX_LINKAGE bool clang_TagDecl_isInterface(CXTagDecl TD);
 
-CINDEX_LINKAGE bool clang_TypeDecl_isClass(CXTagDecl TD);
+CINDEX_LINKAGE bool clang_TagDecl_isClass(CXTagDecl TD);
 
-CINDEX_LINKAGE bool clang_TypeDecl_isUnion(CXTagDecl TD);
+CINDEX_LINKAGE bool clang_TagDecl_isUnion(CXTagDecl TD);
 
-CINDEX_LINKAGE bool clang_TypeDecl_isEnum(CXTagDecl TD);
+CINDEX_LINKAGE bool clang_TagDecl_isEnum(CXTagDecl TD);
 
-CINDEX_LINKAGE bool clang_TypeDecl_hasNameForLinkage(CXTagDecl TD);
+CINDEX_LINKAGE bool clang_TagDecl_hasNameForLinkage(CXTagDecl TD);
 
-CINDEX_LINKAGE CXNestedNameSpecifier clang_TypeDecl_getQualifier(CXTagDecl TD);
+CINDEX_LINKAGE CXNestedNameSpecifier clang_TagDecl_getQualifier(CXTagDecl TD);
 
-CINDEX_LINKAGE unsigned clang_TypeDecl_getNumTemplateParameterLists(CXTagDecl TD);
+CINDEX_LINKAGE unsigned clang_TagDecl_getNumTemplateParameterLists(CXTagDecl TD);
 
-CINDEX_LINKAGE CXTemplateParameterList clang_TypeDecl_getTemplateParameterList(CXTagDecl TD,
+CINDEX_LINKAGE CXTemplateParameterList clang_TagDecl_getTemplateParameterList(CXTagDecl TD,
                                                                                unsigned i);
 
 // TemplateParameterList
@@ -178,7 +178,8 @@ CINDEX_LINKAGE CXCXXRecordDecl clang_CXXRecordDecl_getPreviousDecl(CXCXXRecordDe
 
 CINDEX_LINKAGE CXCXXRecordDecl clang_CXXRecordDecl_getMostRecentDecl(CXCXXRecordDecl CXXRD);
 
-CINDEX_LINKAGE CXCXXRecordDecl clang_CXXRecordDecl_getMostRecentNonInjectedDecl(CXCXXRecordDecl CXXRD);
+CINDEX_LINKAGE CXCXXRecordDecl
+clang_CXXRecordDecl_getMostRecentNonInjectedDecl(CXCXXRecordDecl CXXRD);
 
 CINDEX_LINKAGE CXCXXRecordDecl clang_CXXRecordDecl_getDefinition(CXCXXRecordDecl CXXRD);
 
@@ -193,13 +194,11 @@ clang_CXXRecordDecl_getGenericLambdaTemplateParameterList(CXCXXRecordDecl CXXRD)
 
 CINDEX_LINKAGE bool clang_CXXRecordDecl_isAggregate(CXCXXRecordDecl CXXRD);
 
-CINDEX_LINKAGE bool clang_CXXRecordDecl_isPOD(CXCXXRecordDecl CXXRD) ;
+CINDEX_LINKAGE bool clang_CXXRecordDecl_isPOD(CXCXXRecordDecl CXXRD);
 
 CINDEX_LINKAGE bool clang_CXXRecordDecl_isCLike(CXCXXRecordDecl CXXRD);
 
 CINDEX_LINKAGE bool clang_CXXRecordDecl_isEmpty(CXCXXRecordDecl CXXRD);
-
-
 
 // Builtin Types
 CINDEX_LINKAGE CXType_ clang_ASTContext_VoidTy_getTypePtrOrNull(CXASTContext Ctx);

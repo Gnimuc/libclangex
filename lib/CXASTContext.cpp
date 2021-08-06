@@ -180,75 +180,75 @@ void clang_TypeDecl_setLocStart(CXTypeDecl TD, CXSourceLocation_ Loc) {
 }
 
 // TagDecl
-CXTagDecl clang_TypeDecl_getCanonicalDecl(CXTagDecl TD) {
+CXTagDecl clang_TagDecl_getCanonicalDecl(CXTagDecl TD) {
   return static_cast<clang::TagDecl *>(TD)->getCanonicalDecl();
 }
 
-bool clang_TypeDecl_isThisDeclarationADefinition(CXTagDecl TD) {
+bool clang_TagDecl_isThisDeclarationADefinition(CXTagDecl TD) {
   return static_cast<clang::TagDecl *>(TD)->isThisDeclarationADefinition();
 }
 
-bool clang_TypeDecl_isCompleteDefinition(CXTagDecl TD) {
+bool clang_TagDecl_isCompleteDefinition(CXTagDecl TD) {
   return static_cast<clang::TagDecl *>(TD)->isCompleteDefinition();
 }
 
-void clang_TypeDecl_setCompleteDefinition(CXTagDecl TD, bool V) {
+void clang_TagDecl_setCompleteDefinition(CXTagDecl TD, bool V) {
   static_cast<clang::TagDecl *>(TD)->setCompleteDefinition(V);
 }
 
-bool clang_TypeDecl_isBeingDefined(CXTagDecl TD) {
+bool clang_TagDecl_isBeingDefined(CXTagDecl TD) {
   return static_cast<clang::TagDecl *>(TD)->isBeingDefined();
 }
 
-bool clang_TypeDecl_isFreeStanding(CXTagDecl TD) {
+bool clang_TagDecl_isFreeStanding(CXTagDecl TD) {
   return static_cast<clang::TagDecl *>(TD)->isFreeStanding();
 }
 
-void clang_TypeDecl_startDefinition(CXTagDecl TD) {
+void clang_TagDecl_startDefinition(CXTagDecl TD) {
   static_cast<clang::TagDecl *>(TD)->startDefinition();
 }
 
-CXTagDecl clang_TypeDecl_getDefinition(CXTagDecl TD) {
+CXTagDecl clang_TagDecl_getDefinition(CXTagDecl TD) {
   return static_cast<clang::TagDecl *>(TD)->getDefinition();
 }
 
-const char *clang_TypeDecl_getKindName(CXTagDecl TD) {
+const char *clang_TagDecl_getKindName(CXTagDecl TD) {
   return static_cast<clang::TagDecl *>(TD)->getKindName().data();
 }
 
-bool clang_TypeDecl_isStruct(CXTagDecl TD) {
+bool clang_TagDecl_isStruct(CXTagDecl TD) {
   return static_cast<clang::TagDecl *>(TD)->isStruct();
 }
 
-bool clang_TypeDecl_isInterface(CXTagDecl TD) {
+bool clang_TagDecl_isInterface(CXTagDecl TD) {
   return static_cast<clang::TagDecl *>(TD)->isInterface();
 }
 
-bool clang_TypeDecl_isClass(CXTagDecl TD) {
+bool clang_TagDecl_isClass(CXTagDecl TD) {
   return static_cast<clang::TagDecl *>(TD)->isClass();
 }
 
-bool clang_TypeDecl_isUnion(CXTagDecl TD) {
+bool clang_TagDecl_isUnion(CXTagDecl TD) {
   return static_cast<clang::TagDecl *>(TD)->isUnion();
 }
 
-bool clang_TypeDecl_isEnum(CXTagDecl TD) {
+bool clang_TagDecl_isEnum(CXTagDecl TD) {
   return static_cast<clang::TagDecl *>(TD)->isEnum();
 }
 
-bool clang_TypeDecl_hasNameForLinkage(CXTagDecl TD) {
+bool clang_TagDecl_hasNameForLinkage(CXTagDecl TD) {
   return static_cast<clang::TagDecl *>(TD)->hasNameForLinkage();
 }
 
-CXNestedNameSpecifier clang_TypeDecl_getQualifier(CXTagDecl TD) {
+CXNestedNameSpecifier clang_TagDecl_getQualifier(CXTagDecl TD) {
   return static_cast<clang::TagDecl *>(TD)->getQualifier();
 }
 
-unsigned clang_TypeDecl_getNumTemplateParameterLists(CXTagDecl TD) {
+unsigned clang_TagDecl_getNumTemplateParameterLists(CXTagDecl TD) {
   return static_cast<clang::TagDecl *>(TD)->getNumTemplateParameterLists();
 }
 
-CXTemplateParameterList clang_TypeDecl_getTemplateParameterList(CXTagDecl TD, unsigned i) {
+CXTemplateParameterList clang_TagDecl_getTemplateParameterList(CXTagDecl TD, unsigned i) {
   return static_cast<clang::TagDecl *>(TD)->getTemplateParameterList(i);
 }
 
