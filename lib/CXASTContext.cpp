@@ -1,5 +1,6 @@
 #include "clang-ex/CXASTContext.h"
 #include "clang/AST/ASTContext.h"
+#include "clang/AST/DeclCXX.h"
 #include "clang/AST/DeclGroup.h"
 #include "clang/AST/DeclTemplate.h"
 #include "clang/AST/NestedNameSpecifier.h"
@@ -254,6 +255,98 @@ CXTemplateParameterList clang_TypeDecl_getTemplateParameterList(CXTagDecl TD, un
 // TemplateParameterList
 CXNamedDecl clang_TemplateParameterList_getParam(CXTagDecl TPL, unsigned Idx) {
   return static_cast<clang::TemplateParameterList *>(TPL)->getParam(Idx);
+}
+
+// RecordDecl
+CXRecordDecl clang_RecordDecl_getPreviousDecl(CXRecordDecl RD) {
+  return static_cast<clang::RecordDecl *>(RD)->getPreviousDecl();
+}
+
+CXRecordDecl clang_RecordDecl_getMostRecentDecl(CXRecordDecl RD) {
+  return static_cast<clang::RecordDecl *>(RD)->getMostRecentDecl();
+}
+
+bool clang_RecordDecl_hasFlexibleArrayMember(CXRecordDecl RD) {
+  return static_cast<clang::RecordDecl *>(RD)->hasFlexibleArrayMember();
+}
+
+bool clang_RecordDecl_isAnonymousStructOrUnion(CXRecordDecl RD) {
+  return static_cast<clang::RecordDecl *>(RD)->isAnonymousStructOrUnion();
+}
+
+bool clang_RecordDecl_isInjectedClassName(CXRecordDecl RD) {
+  return static_cast<clang::RecordDecl *>(RD)->isInjectedClassName();
+}
+
+bool clang_RecordDecl_isLambda(CXRecordDecl RD) {
+  return static_cast<clang::RecordDecl *>(RD)->isLambda();
+}
+
+bool clang_RecordDecl_isCapturedRecord(CXRecordDecl RD) {
+  return static_cast<clang::RecordDecl *>(RD)->isCapturedRecord();
+}
+
+CXRecordDecl clang_RecordDecl_getDefinition(CXRecordDecl RD) {
+  return static_cast<clang::RecordDecl *>(RD)->getDefinition();
+}
+
+bool clang_RecordDecl_isOrContainsUnion(CXRecordDecl RD) {
+  return static_cast<clang::RecordDecl *>(RD)->isOrContainsUnion();
+}
+
+// CXXRecordDecl
+CXCXXRecordDecl clang_CXXRecordDecl_getCanonicalDecl(CXCXXRecordDecl CXXRD) {
+  return static_cast<clang::CXXRecordDecl *>(CXXRD)->getCanonicalDecl();
+}
+
+CXCXXRecordDecl clang_CXXRecordDecl_getPreviousDecl(CXCXXRecordDecl CXXRD) {
+  return static_cast<clang::CXXRecordDecl *>(CXXRD)->getPreviousDecl();
+}
+
+CXCXXRecordDecl clang_CXXRecordDecl_getMostRecentDecl(CXCXXRecordDecl CXXRD) {
+  return static_cast<clang::CXXRecordDecl *>(CXXRD)->getMostRecentDecl();
+}
+
+CXCXXRecordDecl clang_CXXRecordDecl_getMostRecentNonInjectedDecl(CXCXXRecordDecl CXXRD) {
+  return static_cast<clang::CXXRecordDecl *>(CXXRD)->getMostRecentNonInjectedDecl();
+}
+
+CXCXXRecordDecl clang_CXXRecordDecl_getDefinition(CXCXXRecordDecl CXXRD) {
+  return static_cast<clang::CXXRecordDecl *>(CXXRD)->getDefinition();
+}
+
+bool clang_CXXRecordDecl_hasDefinition(CXCXXRecordDecl CXXRD) {
+  return static_cast<clang::CXXRecordDecl *>(CXXRD)->hasDefinition();
+}
+
+bool clang_CXXRecordDecl_isLambda(CXCXXRecordDecl CXXRD) {
+  return static_cast<clang::CXXRecordDecl *>(CXXRD)->isLambda();
+}
+
+bool clang_CXXRecordDecl_isGenericLambda(CXCXXRecordDecl CXXRD) {
+  return static_cast<clang::CXXRecordDecl *>(CXXRD)->isGenericLambda();
+}
+
+CXTemplateParameterList
+clang_CXXRecordDecl_getGenericLambdaTemplateParameterList(CXCXXRecordDecl CXXRD) {
+  return static_cast<clang::CXXRecordDecl *>(CXXRD)
+      ->getGenericLambdaTemplateParameterList();
+}
+
+bool clang_CXXRecordDecl_isAggregate(CXCXXRecordDecl CXXRD) {
+  return static_cast<clang::CXXRecordDecl *>(CXXRD)->isAggregate();
+}
+
+bool clang_CXXRecordDecl_isPOD(CXCXXRecordDecl CXXRD) {
+  return static_cast<clang::CXXRecordDecl *>(CXXRD)->isPOD();
+}
+
+bool clang_CXXRecordDecl_isCLike(CXCXXRecordDecl CXXRD) {
+  return static_cast<clang::CXXRecordDecl *>(CXXRD)->isCLike();
+}
+
+bool clang_CXXRecordDecl_isEmpty(CXCXXRecordDecl CXXRD) {
+  return static_cast<clang::CXXRecordDecl *>(CXXRD)->isEmpty();
 }
 
 // Builtin Types

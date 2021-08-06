@@ -145,12 +145,61 @@ CINDEX_LINKAGE CXNestedNameSpecifier clang_TypeDecl_getQualifier(CXTagDecl TD);
 
 CINDEX_LINKAGE unsigned clang_TypeDecl_getNumTemplateParameterLists(CXTagDecl TD);
 
-CINDEX_LINKAGE CXTemplateParameterList
-clang_TypeDecl_getTemplateParameterList(CXTagDecl TD, unsigned i);
+CINDEX_LINKAGE CXTemplateParameterList clang_TypeDecl_getTemplateParameterList(CXTagDecl TD,
+                                                                               unsigned i);
 
 // TemplateParameterList
 CINDEX_LINKAGE CXNamedDecl clang_TemplateParameterList_getParam(CXTagDecl TPL,
                                                                 unsigned Idx);
+
+// RecordDecl
+CINDEX_LINKAGE CXRecordDecl clang_RecordDecl_getPreviousDecl(CXRecordDecl RD);
+
+CINDEX_LINKAGE CXRecordDecl clang_RecordDecl_getMostRecentDecl(CXRecordDecl RD);
+
+CINDEX_LINKAGE bool clang_RecordDecl_hasFlexibleArrayMember(CXRecordDecl RD);
+
+CINDEX_LINKAGE bool clang_RecordDecl_isAnonymousStructOrUnion(CXRecordDecl RD);
+
+CINDEX_LINKAGE bool clang_RecordDecl_isInjectedClassName(CXRecordDecl RD);
+
+CINDEX_LINKAGE bool clang_RecordDecl_isLambda(CXRecordDecl RD);
+
+CINDEX_LINKAGE bool clang_RecordDecl_isCapturedRecord(CXRecordDecl RD);
+
+CINDEX_LINKAGE CXRecordDecl clang_RecordDecl_getDefinition(CXRecordDecl RD);
+
+CINDEX_LINKAGE bool clang_RecordDecl_isOrContainsUnion(CXRecordDecl RD);
+
+// CXXRecordDecl
+CINDEX_LINKAGE CXCXXRecordDecl clang_CXXRecordDecl_getCanonicalDecl(CXCXXRecordDecl CXXRD);
+
+CINDEX_LINKAGE CXCXXRecordDecl clang_CXXRecordDecl_getPreviousDecl(CXCXXRecordDecl CXXRD);
+
+CINDEX_LINKAGE CXCXXRecordDecl clang_CXXRecordDecl_getMostRecentDecl(CXCXXRecordDecl CXXRD);
+
+CINDEX_LINKAGE CXCXXRecordDecl clang_CXXRecordDecl_getMostRecentNonInjectedDecl(CXCXXRecordDecl CXXRD);
+
+CINDEX_LINKAGE CXCXXRecordDecl clang_CXXRecordDecl_getDefinition(CXCXXRecordDecl CXXRD);
+
+CINDEX_LINKAGE bool clang_CXXRecordDecl_hasDefinition(CXCXXRecordDecl CXXRD);
+
+CINDEX_LINKAGE bool clang_CXXRecordDecl_isLambda(CXCXXRecordDecl CXXRD);
+
+CINDEX_LINKAGE bool clang_CXXRecordDecl_isGenericLambda(CXCXXRecordDecl CXXRD);
+
+CINDEX_LINKAGE CXTemplateParameterList
+clang_CXXRecordDecl_getGenericLambdaTemplateParameterList(CXCXXRecordDecl CXXRD);
+
+CINDEX_LINKAGE bool clang_CXXRecordDecl_isAggregate(CXCXXRecordDecl CXXRD);
+
+CINDEX_LINKAGE bool clang_CXXRecordDecl_isPOD(CXCXXRecordDecl CXXRD) ;
+
+CINDEX_LINKAGE bool clang_CXXRecordDecl_isCLike(CXCXXRecordDecl CXXRD);
+
+CINDEX_LINKAGE bool clang_CXXRecordDecl_isEmpty(CXCXXRecordDecl CXXRD);
+
+
 
 // Builtin Types
 CINDEX_LINKAGE CXType_ clang_ASTContext_VoidTy_getTypePtrOrNull(CXASTContext Ctx);

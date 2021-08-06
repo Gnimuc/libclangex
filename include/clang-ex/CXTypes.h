@@ -66,6 +66,8 @@ typedef void *CXNamedDecl;
 typedef void *CXTypeDecl;
 typedef void *CXTagDecl;
 typedef void *CXTemplateParameterList;
+typedef void *CXRecordDecl;
+typedef void *CXCXXRecordDecl;
 typedef void *CXNestedNameSpecifier;
 typedef void *CXCXXScopeSpec;
 typedef void *CXIdentifierTable;
