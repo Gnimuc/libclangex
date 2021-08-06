@@ -356,6 +356,20 @@ CXNamedDecl clang_NamedDecl_getMostRecentDecl(CXNamedDecl ND) {
   return static_cast<clang::NamedDecl *>(ND)->getMostRecentDecl();
 }
 
+// ValueDecl
+CXQualType clang_ValueDecl_getType(CXValueDecl VD) {
+  return static_cast<clang::ValueDecl *>(VD)->getType().getAsOpaquePtr();
+}
+
+void clang_ValueDecl_setType(CXValueDecl VD, CXQualType OpaquePtr) {
+  static_cast<clang::ValueDecl *>(VD)->setType(
+      clang::QualType::getFromOpaquePtr(OpaquePtr));
+}
+
+bool clang_ValueDecl_isWeak(CXValueDecl VD) {
+  return static_cast<clang::ValueDecl *>(VD)->isWeak();
+}
+
 // TypeDecl
 CXType_ clang_TypeDecl_getTypeForDecl(CXTypeDecl TD) {
   return const_cast<clang::Type *>(static_cast<clang::TypeDecl *>(TD)->getTypeForDecl());
@@ -372,6 +386,24 @@ CXSourceLocation_ clang_TypeDecl_getBeginLoc(CXTypeDecl TD) {
 void clang_TypeDecl_setLocStart(CXTypeDecl TD, CXSourceLocation_ Loc) {
   static_cast<clang::TypeDecl *>(TD)->setLocStart(
       clang::SourceLocation::getFromPtrEncoding(Loc));
+}
+
+// TypedefNameDecl
+CXQualType clang_TypedefNameDecl_getUnderlyingType(CXTypedefNameDecl TND) {
+  return static_cast<clang::TypedefNameDecl *>(TND)->getUnderlyingType().getAsOpaquePtr();
+}
+
+CXTypedefNameDecl clang_TypedefNameDecl_getCanonicalDecl(CXTypedefNameDecl TND) {
+  return static_cast<clang::TypedefNameDecl *>(TND)->getCanonicalDecl();
+}
+
+CXTagDecl clang_TypedefNameDecl_getAnonDeclWithTypedefName(CXTypedefNameDecl TND,
+                                                           bool AnyRedecl) {
+  return static_cast<clang::TypedefNameDecl *>(TND)->getAnonDeclWithTypedefName(AnyRedecl);
+}
+
+bool clang_TypedefNameDecl_isTransparentTag(CXTypedefNameDecl TND) {
+  return static_cast<clang::TypedefNameDecl *>(TND)->isTransparentTag();
 }
 
 // TagDecl
@@ -433,6 +465,10 @@ bool clang_TagDecl_isEnum(CXTagDecl TD) {
 
 bool clang_TagDecl_hasNameForLinkage(CXTagDecl TD) {
   return static_cast<clang::TagDecl *>(TD)->hasNameForLinkage();
+}
+
+CXTypedefNameDecl clang_TagDecl_getTypedefNameForAnonDecl(CXTagDecl TD) {
+  return static_cast<clang::TagDecl *>(TD)->getTypedefNameForAnonDecl();
 }
 
 CXNestedNameSpecifier clang_TagDecl_getQualifier(CXTagDecl TD) {

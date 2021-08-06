@@ -196,6 +196,13 @@ CINDEX_LINKAGE CXNamedDecl clang_NamedDecl_getUnderlyingDecl(CXNamedDecl ND);
 
 CINDEX_LINKAGE CXNamedDecl clang_NamedDecl_getMostRecentDecl(CXNamedDecl ND);
 
+// ValueDecl
+CINDEX_LINKAGE CXQualType clang_ValueDecl_getType(CXValueDecl VD);
+
+CINDEX_LINKAGE void clang_ValueDecl_setType(CXValueDecl VD, CXQualType OpaquePtr);
+
+CINDEX_LINKAGE bool clang_ValueDecl_isWeak(CXValueDecl VD);
+
 // TypeDecl
 CINDEX_LINKAGE CXType_ clang_TypeDecl_getTypeForDecl(CXTypeDecl TD);
 
@@ -204,6 +211,17 @@ CINDEX_LINKAGE void clang_TypeDecl_setTypeForDecl(CXTypeDecl TD, CXType_ Ty);
 CINDEX_LINKAGE CXSourceLocation_ clang_TypeDecl_getBeginLoc(CXTypeDecl TD);
 
 CINDEX_LINKAGE void clang_TypeDecl_setLocStart(CXTypeDecl TD, CXSourceLocation_ Loc);
+
+// TypedefNameDecl
+CINDEX_LINKAGE CXQualType clang_TypedefNameDecl_getUnderlyingType(CXTypedefNameDecl TND);
+
+CINDEX_LINKAGE CXTypedefNameDecl
+clang_TypedefNameDecl_getCanonicalDecl(CXTypedefNameDecl TND);
+
+CINDEX_LINKAGE CXTagDecl
+clang_TypedefNameDecl_getAnonDeclWithTypedefName(CXTypedefNameDecl TND, bool AnyRedecl);
+
+CINDEX_LINKAGE bool clang_TypedefNameDecl_isTransparentTag(CXTypedefNameDecl TND);
 
 // TagDecl
 CINDEX_LINKAGE CXTagDecl clang_TagDecl_getCanonicalDecl(CXTagDecl TD);
@@ -237,6 +255,8 @@ CINDEX_LINKAGE bool clang_TagDecl_isUnion(CXTagDecl TD);
 CINDEX_LINKAGE bool clang_TagDecl_isEnum(CXTagDecl TD);
 
 CINDEX_LINKAGE bool clang_TagDecl_hasNameForLinkage(CXTagDecl TD);
+
+CINDEX_LINKAGE CXTypedefNameDecl clang_TagDecl_getTypedefNameForAnonDecl(CXTagDecl TD);
 
 CINDEX_LINKAGE CXNestedNameSpecifier clang_TagDecl_getQualifier(CXTagDecl TD);
 
