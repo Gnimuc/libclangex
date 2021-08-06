@@ -101,6 +101,91 @@ CXSourceLocation_ clang_Decl_getLocation(CXDecl DC) {
   return static_cast<clang::Decl *>(DC)->getLocation().getPtrEncoding();
 }
 
+CXSourceLocation_ clang_Decl_getBeginLoc(CXDecl DC) {
+  return static_cast<clang::Decl *>(DC)->getBeginLoc().getPtrEncoding();
+}
+
+CXSourceLocation_ clang_Decl_getEndLoc(CXDecl DC) {
+  return static_cast<clang::Decl *>(DC)->getEndLoc().getPtrEncoding();
+}
+
+const char *clang_Decl_getDeclKindName(CXDecl DC) {
+  return static_cast<clang::Decl *>(DC)->getDeclKindName();
+}
+
+CXDecl clang_Decl_getNextDeclInContext(CXDecl DC) {
+  return static_cast<clang::Decl *>(DC)->getNextDeclInContext();
+}
+
+CXDeclContext clang_Decl_getDeclContext(CXDecl DC) {
+  return static_cast<clang::Decl *>(DC)->getDeclContext();
+}
+
+CXDecl clang_Decl_getNonClosureContext(CXDecl DC) {
+  return static_cast<clang::Decl *>(DC)->getNonClosureContext();
+}
+
+CXTranslationUnitDecl clang_Decl_getTranslationUnitDecl(CXDecl DC) {
+  return static_cast<clang::Decl *>(DC)->getTranslationUnitDecl();
+}
+
+bool clang_Decl_isInAnonymousNamespace(CXDecl DC) {
+  return static_cast<clang::Decl *>(DC)->isInAnonymousNamespace();
+}
+
+bool clang_Decl_isInStdNamespace(CXDecl DC) {
+  return static_cast<clang::Decl *>(DC)->isInStdNamespace();
+}
+
+CXASTContext clang_Decl_getASTContext(CXDecl DC) {
+  return &static_cast<clang::Decl *>(DC)->getASTContext();
+}
+
+CXLangOptions clang_Decl_getLangOpts(CXDecl DC) {
+  return const_cast<clang::LangOptions *>(&static_cast<clang::Decl *>(DC)->getLangOpts());
+}
+
+CXDeclContext clang_Decl_getLexicalDeclContext(CXDecl DC) {
+  return static_cast<clang::Decl *>(DC)->getLexicalDeclContext();
+}
+
+bool clang_Decl_isTemplated(CXDecl DC) {
+  return static_cast<clang::Decl *>(DC)->isTemplated();
+}
+
+bool clang_Decl_isCanonicalDecl(CXDecl DC) {
+  return static_cast<clang::Decl *>(DC)->isCanonicalDecl();
+}
+
+CXDecl clang_Decl_getPreviousDecl(CXDecl DC) {
+  return static_cast<clang::Decl *>(DC)->getPreviousDecl();
+}
+
+bool clang_Decl_isFirstDecl(CXDecl DC) {
+  return static_cast<clang::Decl *>(DC)->isFirstDecl();
+}
+
+CXDecl clang_Decl_getMostRecentDecl(CXDecl DC) {
+  return static_cast<clang::Decl *>(DC)->getMostRecentDecl();
+}
+
+bool clang_Decl_isTemplateParameter(CXDecl DC) {
+  return static_cast<clang::Decl *>(DC)->isTemplateParameter();
+}
+
+bool clang_Decl_isTemplateDecl(CXDecl DC) {
+  return static_cast<clang::Decl *>(DC)->isTemplateDecl();
+}
+
+CXTemplateDecl clang_Decl_getDescribedTemplate(CXDecl DC) {
+  return static_cast<clang::Decl *>(DC)->getDescribedTemplate();
+}
+
+CXTemplateParameterList clang_Decl_getDescribedTemplateParams(CXDecl DC) {
+  return const_cast<clang::TemplateParameterList *>(
+      static_cast<clang::Decl *>(DC)->getDescribedTemplateParams());
+}
+
 void clang_Decl_EnableStatistics(void) { clang::Decl::EnableStatistics(); }
 
 void clang_Stmt_EnableStatistics(void) { clang::Stmt::EnableStatistics(); }
@@ -253,8 +338,20 @@ CXTemplateParameterList clang_TagDecl_getTemplateParameterList(CXTagDecl TD, uns
 }
 
 // TemplateParameterList
-CXNamedDecl clang_TemplateParameterList_getParam(CXTagDecl TPL, unsigned Idx) {
+CXNamedDecl clang_TemplateParameterList_getParam(CXTemplateParameterList TPL,
+                                                 unsigned Idx) {
   return static_cast<clang::TemplateParameterList *>(TPL)->getParam(Idx);
+}
+
+unsigned clang_TemplateParameterList_size(CXTemplateParameterList TPL) {
+  return static_cast<clang::TemplateParameterList *>(TPL)->size();
+}
+
+// TemplateDecl
+void clang_TemplateDecl_init(CXTemplateDecl TD, CXNamedDecl ND,
+                             CXTemplateParameterList TP) {
+  static_cast<clang::TemplateDecl *>(TD)->init(
+      static_cast<clang::NamedDecl *>(ND), static_cast<clang::TemplateParameterList *>(ND));
 }
 
 // RecordDecl

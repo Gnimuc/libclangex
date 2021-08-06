@@ -66,6 +66,48 @@ CINDEX_LINKAGE CXDecl clang_DeclGroupRef_getSingleDecl(CXDeclGroupRef DG);
 // Decl
 CINDEX_LINKAGE CXSourceLocation_ clang_Decl_getLocation(CXDecl DC);
 
+CINDEX_LINKAGE CXSourceLocation_ clang_Decl_getBeginLoc(CXDecl DC);
+
+CINDEX_LINKAGE CXSourceLocation_ clang_Decl_getEndLoc(CXDecl DC);
+
+CINDEX_LINKAGE const char *clang_Decl_getDeclKindName(CXDecl DC);
+
+CINDEX_LINKAGE CXDecl clang_Decl_getNextDeclInContext(CXDecl DC);
+
+CINDEX_LINKAGE CXDeclContext clang_Decl_getDeclContext(CXDecl DC);
+
+CINDEX_LINKAGE CXDecl clang_Decl_getNonClosureContext(CXDecl DC);
+
+CINDEX_LINKAGE CXTranslationUnitDecl clang_Decl_getTranslationUnitDecl(CXDecl DC);
+
+CINDEX_LINKAGE bool clang_Decl_isInAnonymousNamespace(CXDecl DC);
+
+CINDEX_LINKAGE bool clang_Decl_isInStdNamespace(CXDecl DC);
+
+CINDEX_LINKAGE CXASTContext clang_Decl_getASTContext(CXDecl DC);
+
+CINDEX_LINKAGE CXLangOptions clang_Decl_getLangOpts(CXDecl DC);
+
+CINDEX_LINKAGE CXDeclContext clang_Decl_getLexicalDeclContext(CXDecl DC);
+
+CINDEX_LINKAGE bool clang_Decl_isTemplated(CXDecl DC);
+
+CINDEX_LINKAGE bool clang_Decl_isCanonicalDecl(CXDecl DC);
+
+CINDEX_LINKAGE CXDecl clang_Decl_getPreviousDecl(CXDecl DC);
+
+CINDEX_LINKAGE bool clang_Decl_isFirstDecl(CXDecl DC);
+
+CINDEX_LINKAGE CXDecl clang_Decl_getMostRecentDecl(CXDecl DC);
+
+CINDEX_LINKAGE bool clang_Decl_isTemplateParameter(CXDecl DC);
+
+CINDEX_LINKAGE bool clang_Decl_isTemplateDecl(CXDecl DC);
+
+CINDEX_LINKAGE CXTemplateDecl clang_Decl_getDescribedTemplate(CXDecl DC);
+
+CINDEX_LINKAGE CXTemplateParameterList clang_Decl_getDescribedTemplateParams(CXDecl DC);
+
 CINDEX_LINKAGE void clang_Decl_EnableStatistics(void);
 
 CINDEX_LINKAGE void clang_Stmt_EnableStatistics(void);
@@ -146,11 +188,17 @@ CINDEX_LINKAGE CXNestedNameSpecifier clang_TagDecl_getQualifier(CXTagDecl TD);
 CINDEX_LINKAGE unsigned clang_TagDecl_getNumTemplateParameterLists(CXTagDecl TD);
 
 CINDEX_LINKAGE CXTemplateParameterList clang_TagDecl_getTemplateParameterList(CXTagDecl TD,
-                                                                               unsigned i);
+                                                                              unsigned i);
 
 // TemplateParameterList
-CINDEX_LINKAGE CXNamedDecl clang_TemplateParameterList_getParam(CXTagDecl TPL,
+CINDEX_LINKAGE CXNamedDecl clang_TemplateParameterList_getParam(CXTemplateParameterList TPL,
                                                                 unsigned Idx);
+
+CINDEX_LINKAGE unsigned clang_TemplateParameterList_size(CXTemplateParameterList TPL);
+
+// TemplateDecl
+CINDEX_LINKAGE void clang_TemplateDecl_init(CXTemplateDecl TD, CXNamedDecl ND,
+                                            CXTemplateParameterList TP);
 
 // RecordDecl
 CINDEX_LINKAGE CXRecordDecl clang_RecordDecl_getPreviousDecl(CXRecordDecl RD);
