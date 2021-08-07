@@ -5,6 +5,8 @@
 #include "clang/AST/DeclTemplate.h"
 #include "clang/AST/NestedNameSpecifier.h"
 #include "clang/AST/Stmt.h"
+#include "clang/AST/TemplateBase.h"
+#include "llvm/ExecutionEngine/GenericValue.h"
 
 void clang_ASTContext_PrintStats(CXASTContext Ctx) {
   static_cast<clang::ASTContext *>(Ctx)->PrintStats();
@@ -493,11 +495,167 @@ unsigned clang_TemplateParameterList_size(CXTemplateParameterList TPL) {
   return static_cast<clang::TemplateParameterList *>(TPL)->size();
 }
 
+// TemplateArgument
+CXTemplateArgument clang_TemplateArgument_constructFromQualType(CXQualType OpaquePtr,
+                                                                bool isNullPtr) {
+  std::unique_ptr<clang::TemplateArgument> ptr = std::make_unique<clang::TemplateArgument>(
+      clang::QualType::getFromOpaquePtr(OpaquePtr), isNullPtr);
+  return ptr.release();
+}
+
+CXTemplateArgument clang_TemplateArgument_constructFromValueDecl(CXValueDecl VD,
+                                                                 CXQualType OpaquePtr) {
+  std::unique_ptr<clang::TemplateArgument> ptr = std::make_unique<clang::TemplateArgument>(
+      static_cast<clang::ValueDecl *>(VD), clang::QualType::getFromOpaquePtr(OpaquePtr));
+  return ptr.release();
+}
+
+CXTemplateArgument clang_TemplateArgument_constructFromIntegral(CXASTContext Ctx,
+                                                                LLVMGenericValueRef Val,
+                                                                CXQualType OpaquePtr) {
+  std::unique_ptr<clang::TemplateArgument> ptr = std::make_unique<clang::TemplateArgument>(
+      *static_cast<clang::ASTContext *>(Ctx),
+      llvm::APSInt(reinterpret_cast<llvm::GenericValue *>(Val)->IntVal),
+      clang::QualType::getFromOpaquePtr(OpaquePtr));
+  return ptr.release();
+}
+
+void clang_TemplateArgument_dispose(CXTemplateArgument TA) {
+  delete static_cast<clang::TemplateArgument *>(TA);
+}
+
+bool clang_TemplateArgument_isNull(CXTemplateArgument TA) {
+  return static_cast<clang::TemplateArgument *>(TA)->isNull();
+}
+
+bool clang_TemplateArgument_isDependent(CXTemplateArgument TA) {
+  return static_cast<clang::TemplateArgument *>(TA)->isDependent();
+}
+
+bool clang_TemplateArgument_isInstantiationDependent(CXTemplateArgument TA) {
+  return static_cast<clang::TemplateArgument *>(TA)->isInstantiationDependent();
+}
+
+CXQualType clang_TemplateArgument_getAsType(CXTemplateArgument TA) {
+  return static_cast<clang::TemplateArgument *>(TA)->getAsType().getAsOpaquePtr();
+}
+
+CXValueDecl clang_TemplateArgument_getAsDecl(CXTemplateArgument TA) {
+  return static_cast<clang::TemplateArgument *>(TA)->getAsDecl();
+}
+
+CXQualType clang_TemplateArgument_getParamTypeForDecl(CXTemplateArgument TA) {
+  return static_cast<clang::TemplateArgument *>(TA)->getParamTypeForDecl().getAsOpaquePtr();
+}
+
+CXQualType clang_TemplateArgument_getNullPtrType(CXTemplateArgument TA) {
+  return static_cast<clang::TemplateArgument *>(TA)->getNullPtrType().getAsOpaquePtr();
+}
+
+LLVMGenericValueRef clang_TemplateArgument_getAsIntegral(CXTemplateArgument TA) {
+  llvm::GenericValue *GenVal = new llvm::GenericValue();
+  GenVal->IntVal = static_cast<clang::TemplateArgument *>(TA)->getAsIntegral();
+  return reinterpret_cast<LLVMGenericValueRef>(GenVal);
+}
+
+CXQualType clang_TemplateArgument_getIntegralType(CXTemplateArgument TA) {
+  return static_cast<clang::TemplateArgument *>(TA)->getIntegralType().getAsOpaquePtr();
+}
+
+void clang_TemplateArgument_setIntegralType(CXTemplateArgument TA, CXQualType OpaquePtr) {
+  return static_cast<clang::TemplateArgument *>(TA)->setIntegralType(
+      clang::QualType::getFromOpaquePtr(OpaquePtr));
+}
+
+CXQualType clang_TemplateArgument_getNonTypeTemplateArgumentType(CXTemplateArgument TA) {
+  return static_cast<clang::TemplateArgument *>(TA)
+      ->getNonTypeTemplateArgumentType()
+      .getAsOpaquePtr();
+}
+
+void clang_TemplateArgument_dump(CXTemplateArgument TA) {
+  return static_cast<clang::TemplateArgument *>(TA)->dump();
+}
+
+// TemplateArgumentList
+CXTemplateArgumentList clang_TemplateArgumentList_CreateCopy(CXASTContext Context,
+                                                             CXTemplateArgument Args,
+                                                             size_t ArgNum) {
+  return clang::TemplateArgumentList::CreateCopy(
+      *static_cast<clang::ASTContext *>(Context),
+      llvm::makeArrayRef(static_cast<clang::TemplateArgument *>(Args), ArgNum));
+}
+
+unsigned clang_TemplateArgumentList_size(CXTemplateArgumentList TAL) {
+  return static_cast<clang::TemplateArgumentList *>(TAL)->size();
+}
+
+CXTemplateArgument clang_TemplateArgumentList_data(CXTemplateArgumentList TAL) {
+  return const_cast<clang::TemplateArgument *>(
+      static_cast<clang::TemplateArgumentList *>(TAL)->data());
+}
+
+CXTemplateArgument clang_TemplateArgumentList_get(CXTemplateArgumentList TAL,
+                                                  unsigned Idx) {
+  return const_cast<clang::TemplateArgument *>(
+      &static_cast<clang::TemplateArgumentList *>(TAL)->get(Idx));
+}
+
 // TemplateDecl
 void clang_TemplateDecl_init(CXTemplateDecl TD, CXNamedDecl ND,
                              CXTemplateParameterList TP) {
   static_cast<clang::TemplateDecl *>(TD)->init(
       static_cast<clang::NamedDecl *>(ND), static_cast<clang::TemplateParameterList *>(ND));
+}
+
+// RedeclarableTemplateDecl
+CXRedeclarableTemplateDecl
+clang_RedeclarableTemplateDecl_getCanonicalDecl(CXRedeclarableTemplateDecl RTD) {
+  return static_cast<clang::RedeclarableTemplateDecl *>(RTD)->getCanonicalDecl();
+}
+
+bool clang_RedeclarableTemplateDecl_isMemberSpecialization(CXRedeclarableTemplateDecl RTD) {
+  return static_cast<clang::RedeclarableTemplateDecl *>(RTD)->isMemberSpecialization();
+}
+
+void clang_RedeclarableTemplateDecl_setMemberSpecialization(
+    CXRedeclarableTemplateDecl RTD) {
+  static_cast<clang::RedeclarableTemplateDecl *>(RTD)->setMemberSpecialization();
+}
+
+// ClassTemplateDecl
+CXCXXRecordDecl clang_ClassTemplateDecl_getTemplatedDecl(CXClassTemplateDecl CTD) {
+  return static_cast<clang::ClassTemplateDecl *>(CTD)->getTemplatedDecl();
+}
+
+bool clang_ClassTemplateDecl_isThisDeclarationADefinition(CXClassTemplateDecl CTD) {
+  return static_cast<clang::ClassTemplateDecl *>(CTD)->isThisDeclarationADefinition();
+}
+
+CXClassTemplateSpecializationDecl
+clang_ClassTemplateDecl_findSpecialization(CXClassTemplateDecl CTD,
+                                           CXTemplateArgumentList TAL, void *InsertPos) {
+  return static_cast<clang::ClassTemplateDecl *>(CTD)->findSpecialization(
+      static_cast<clang::TemplateArgumentList *>(TAL)->asArray(), InsertPos);
+}
+
+void clang_ClassTemplateDecl_AddSpecialization(CXClassTemplateDecl CTD,
+                                               CXClassTemplateSpecializationDecl CTSD,
+                                               void *InsertPos) {
+  return static_cast<clang::ClassTemplateDecl *>(CTD)->AddSpecialization(
+      static_cast<clang::ClassTemplateSpecializationDecl *>(CTSD), InsertPos);
+}
+
+CXClassTemplateDecl clang_ClassTemplateDecl_getCanonicalDecl(CXClassTemplateDecl CTD) {
+  return static_cast<clang::ClassTemplateDecl *>(CTD)->getCanonicalDecl();
+}
+
+CXClassTemplateDecl clang_ClassTemplateDecl_getPreviousDecl(CXClassTemplateDecl CTD) {
+  return static_cast<clang::ClassTemplateDecl *>(CTD)->getPreviousDecl();
+}
+
+CXClassTemplateDecl clang_ClassTemplateDecl_getMostRecentDecl(CXClassTemplateDecl CTD) {
+  return static_cast<clang::ClassTemplateDecl *>(CTD)->getMostRecentDecl();
 }
 
 // RecordDecl
@@ -590,6 +748,21 @@ bool clang_CXXRecordDecl_isCLike(CXCXXRecordDecl CXXRD) {
 
 bool clang_CXXRecordDecl_isEmpty(CXCXXRecordDecl CXXRD) {
   return static_cast<clang::CXXRecordDecl *>(CXXRD)->isEmpty();
+}
+
+// TemplateName
+
+// ClassTemplateSpecializationDecl
+CXTemplateArgumentList clang_ClassTemplateSpecializationDecl_getTemplateArgs(
+    CXClassTemplateSpecializationDecl CTSD) {
+  return const_cast<clang::TemplateArgumentList *>(
+      &static_cast<clang::ClassTemplateSpecializationDecl *>(CTSD)->getTemplateArgs());
+}
+
+void clang_ClassTemplateSpecializationDecl_setTemplateArgs(
+    CXClassTemplateSpecializationDecl CTSD, CXTemplateArgumentList TAL) {
+  static_cast<clang::ClassTemplateSpecializationDecl *>(CTSD)->setTemplateArgs(
+      static_cast<clang::TemplateArgumentList *>(TAL));
 }
 
 // Builtin Types

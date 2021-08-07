@@ -3,6 +3,8 @@
 
 #include "clang-ex/CXTypes.h"
 #include "clang-c/Platform.h"
+#include "llvm-c/ExecutionEngine.h"
+#include "llvm-c/Types.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -271,9 +273,86 @@ CINDEX_LINKAGE CXNamedDecl clang_TemplateParameterList_getParam(CXTemplateParame
 
 CINDEX_LINKAGE unsigned clang_TemplateParameterList_size(CXTemplateParameterList TPL);
 
+// TemplateArgumentList
+CINDEX_LINKAGE CXTemplateArgumentList clang_TemplateArgumentList_CreateCopy(
+    CXASTContext Context, CXTemplateArgument Args, size_t ArgNum);
+
+CINDEX_LINKAGE unsigned clang_TemplateArgumentList_size(CXTemplateArgumentList TAL);
+
+CINDEX_LINKAGE CXTemplateArgument
+clang_TemplateArgumentList_data(CXTemplateArgumentList TAL);
+
+CINDEX_LINKAGE CXTemplateArgument clang_TemplateArgumentList_get(CXTemplateArgumentList TAL,
+                                                                 unsigned Idx);
+
+// TemplateArgument
+CINDEX_LINKAGE CXTemplateArgument
+clang_TemplateArgument_constructFromQualType(CXQualType OpaquePtr, bool isNullPtr);
+
+CINDEX_LINKAGE CXTemplateArgument
+clang_TemplateArgument_constructFromValueDecl(CXValueDecl VD, CXQualType OpaquePtr);
+
+CINDEX_LINKAGE CXTemplateArgument clang_TemplateArgument_constructFromIntegral(
+    CXASTContext Ctx, LLVMGenericValueRef Val, CXQualType OpaquePtr);
+
+CINDEX_LINKAGE void clang_TemplateArgument_dispose(CXTemplateArgument TA);
+
+CINDEX_LINKAGE bool clang_TemplateArgument_isNull(CXTemplateArgument TA);
+
+CINDEX_LINKAGE bool clang_TemplateArgument_isDependent(CXTemplateArgument TA);
+
+CINDEX_LINKAGE bool clang_TemplateArgument_isInstantiationDependent(CXTemplateArgument TA);
+
+CINDEX_LINKAGE CXQualType clang_TemplateArgument_getAsType(CXTemplateArgument TA);
+
+CINDEX_LINKAGE CXValueDecl clang_TemplateArgument_getAsDecl(CXTemplateArgument TA);
+
+CINDEX_LINKAGE CXQualType clang_TemplateArgument_getParamTypeForDecl(CXTemplateArgument TA);
+
+CINDEX_LINKAGE CXQualType clang_TemplateArgument_getNullPtrType(CXTemplateArgument TA);
+
+CINDEX_LINKAGE LLVMGenericValueRef
+clang_TemplateArgument_getAsIntegral(CXTemplateArgument TA);
+
+CINDEX_LINKAGE CXQualType clang_TemplateArgument_getIntegralType(CXTemplateArgument TA);
+
+CINDEX_LINKAGE void clang_TemplateArgument_setIntegralType(CXTemplateArgument TA,
+                                                           CXQualType OpaquePtr);
+
+CINDEX_LINKAGE CXQualType
+clang_TemplateArgument_getNonTypeTemplateArgumentType(CXTemplateArgument TA);
+
+CINDEX_LINKAGE void clang_TemplateArgument_dump(CXTemplateArgument TA);
+
 // TemplateDecl
 CINDEX_LINKAGE void clang_TemplateDecl_init(CXTemplateDecl TD, CXNamedDecl ND,
                                             CXTemplateParameterList TP);
+
+// RedeclarableTemplateDecl
+CINDEX_LINKAGE CXRedeclarableTemplateDecl
+clang_RedeclarableTemplateDecl_getCanonicalDecl(CXRedeclarableTemplateDecl RTD);
+
+CINDEX_LINKAGE bool
+clang_RedeclarableTemplateDecl_isMemberSpecialization(CXRedeclarableTemplateDecl RTD);
+
+CINDEX_LINKAGE void
+clang_RedeclarableTemplateDecl_setMemberSpecialization(CXRedeclarableTemplateDecl RTD);
+
+// ClassTemplateDecl
+CINDEX_LINKAGE CXCXXRecordDecl
+clang_ClassTemplateDecl_getTemplatedDecl(CXClassTemplateDecl CTD);
+
+CINDEX_LINKAGE bool
+clang_ClassTemplateDecl_isThisDeclarationADefinition(CXClassTemplateDecl CTD);
+
+CINDEX_LINKAGE CXClassTemplateSpecializationDecl clang_ClassTemplateDecl_findSpecialization(
+    CXClassTemplateDecl CTD, CXTemplateArgumentList TAL, void *InsertPos);
+
+CINDEX_LINKAGE void clang_ClassTemplateDecl_AddSpecialization(
+    CXClassTemplateDecl CTD, CXClassTemplateSpecializationDecl CTSD, void *InsertPos);
+
+CINDEX_LINKAGE CXClassTemplateDecl
+clang_ClassTemplateDecl_getCanonicalDecl(CXClassTemplateDecl CTD);
 
 // RecordDecl
 CINDEX_LINKAGE CXRecordDecl clang_RecordDecl_getPreviousDecl(CXRecordDecl RD);
@@ -322,6 +401,15 @@ CINDEX_LINKAGE bool clang_CXXRecordDecl_isPOD(CXCXXRecordDecl CXXRD);
 CINDEX_LINKAGE bool clang_CXXRecordDecl_isCLike(CXCXXRecordDecl CXXRD);
 
 CINDEX_LINKAGE bool clang_CXXRecordDecl_isEmpty(CXCXXRecordDecl CXXRD);
+
+// TemplateName
+
+// ClassTemplateSpecializationDecl
+CINDEX_LINKAGE CXTemplateArgumentList clang_ClassTemplateSpecializationDecl_getTemplateArgs(
+    CXClassTemplateSpecializationDecl CTSD);
+
+CINDEX_LINKAGE void clang_ClassTemplateSpecializationDecl_setTemplateArgs(
+    CXClassTemplateSpecializationDecl CTSD, CXTemplateArgumentList TAL);
 
 // Builtin Types
 CINDEX_LINKAGE CXType_ clang_ASTContext_VoidTy_getTypePtrOrNull(CXASTContext Ctx);

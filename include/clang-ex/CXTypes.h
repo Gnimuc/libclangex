@@ -70,14 +70,28 @@ typedef void *CXTypeDecl;
 typedef void *CXTypedefNameDecl;
 typedef void *CXTagDecl;
 typedef void *CXTemplateDecl;
+typedef void *CXRedeclarableTemplateDecl;
+typedef void *CXClassTemplateDecl;
 typedef void *CXTemplateParameterList;
+typedef void *CXTemplateArgumentList;
 typedef void *CXRecordDecl;
 typedef void *CXCXXRecordDecl;
+typedef void *CXClassTemplateSpecializationDecl;
 typedef void *CXNestedNameSpecifier;
 typedef void *CXCXXScopeSpec;
 typedef void *CXIdentifierTable;
 typedef void *CXIdentifierInfo;
 typedef void *CXDeclarationName;
+typedef void *CXTemplateName;
+typedef void *CXTemplateArgument;
+
+typedef enum CXTagTypeKind {
+  CXTagTypeKind_TTK_Struct,
+  CXTagTypeKind_TTK_Interface,
+  CXTagTypeKind_TTK_Union,
+  CXTagTypeKind_TTK_Class,
+  CXTagTypeKind_TTK_Enum
+} CXTagTypeKind;
 
 // CodeGen
 typedef void *CXCodeGenerator;
