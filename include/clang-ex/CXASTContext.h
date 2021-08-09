@@ -66,6 +66,12 @@ CINDEX_LINKAGE bool clang_DeclGroupRef_isDeclGroup(CXDeclGroupRef DG);
 CINDEX_LINKAGE CXDecl clang_DeclGroupRef_getSingleDecl(CXDeclGroupRef DG);
 
 // DeclContext
+CINDEX_LINKAGE CXTagDecl clang_DeclContext_castToTagDecl(CXDeclContext DC);
+
+CINDEX_LINKAGE CXRecordDecl clang_DeclContext_castToRecordDecl(CXDeclContext DC);
+
+CINDEX_LINKAGE CXCXXRecordDecl clang_DeclContext_castToCXXRecordDecl(CXDeclContext DC);
+
 CINDEX_LINKAGE const char *clang_DeclContext_getDeclKindName(CXDeclContext DC);
 
 CINDEX_LINKAGE CXDeclContext clang_DeclContext_getParent(CXDeclContext DC);
@@ -175,6 +181,11 @@ CINDEX_LINKAGE void clang_Stmt_PrintStats(void);
 
 CINDEX_LINKAGE void clang_Decl_dumpColor(CXDecl DC);
 
+// Decl Cast
+CINDEX_LINKAGE CXClassTemplateDecl clang_Decl_castToClassTemplateDecl(CXDecl DC);
+
+CINDEX_LINKAGE CXValueDecl clang_Decl_castToValueDecl(CXDecl DC);
+
 // NamedDecl
 CINDEX_LINKAGE CXIdentifierInfo clang_NamedDecl_getIdentifier(CXNamedDecl ND);
 
@@ -226,6 +237,8 @@ clang_TypedefNameDecl_getAnonDeclWithTypedefName(CXTypedefNameDecl TND, bool Any
 CINDEX_LINKAGE bool clang_TypedefNameDecl_isTransparentTag(CXTypedefNameDecl TND);
 
 // TagDecl
+CINDEX_LINKAGE CXDeclContext clang_TagDecl_castToDeclContext(CXTagDecl TD);
+
 CINDEX_LINKAGE CXTagDecl clang_TagDecl_getCanonicalDecl(CXTagDecl TD);
 
 CINDEX_LINKAGE CXTagDecl clang_TagDecl_getCanonicalDecl(CXTagDecl TD);

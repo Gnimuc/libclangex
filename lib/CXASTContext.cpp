@@ -7,6 +7,7 @@
 #include "clang/AST/Stmt.h"
 #include "clang/AST/TemplateBase.h"
 #include "llvm/ExecutionEngine/GenericValue.h"
+#include "llvm/Support/Casting.h"
 
 void clang_ASTContext_PrintStats(CXASTContext Ctx) {
   static_cast<clang::ASTContext *>(Ctx)->PrintStats();
@@ -99,6 +100,18 @@ CXDecl clang_DeclGroupRef_getSingleDecl(CXDeclGroupRef DG) {
 }
 
 // DeclContext
+CXTagDecl clang_DeclContext_castToTagDecl(CXDeclContext DC) {
+  return llvm::dyn_cast<clang::TagDecl>(static_cast<clang::DeclContext *>(DC));
+}
+
+CXRecordDecl clang_DeclContext_castToRecordDecl(CXDeclContext DC) {
+  return llvm::dyn_cast<clang::RecordDecl>(static_cast<clang::DeclContext *>(DC));
+}
+
+CXCXXRecordDecl clang_DeclContext_castToCXXRecordDecl(CXDeclContext DC) {
+  return llvm::dyn_cast<clang::CXXRecordDecl>(static_cast<clang::DeclContext *>(DC));
+}
+
 const char *clang_DeclContext_getDeclKindName(CXDeclContext DC) {
   return static_cast<clang::DeclContext *>(DC)->getDeclKindName();
 }
@@ -308,6 +321,15 @@ void clang_Stmt_PrintStats(void) { clang::Stmt::PrintStats(); }
 
 void clang_Decl_dumpColor(CXDecl DC) { static_cast<clang::Decl *>(DC)->dumpColor(); }
 
+// Decl Cast
+CXClassTemplateDecl clang_Decl_castToClassTemplateDecl(CXDecl DC) {
+  return llvm::dyn_cast<clang::ClassTemplateDecl>(static_cast<clang::Decl *>(DC));
+}
+
+CXValueDecl clang_Decl_castToValueDecl(CXDecl DC) {
+  return llvm::dyn_cast<clang::ValueDecl>(static_cast<clang::Decl *>(DC));
+}
+
 // NamedDecl
 CXIdentifierInfo clang_NamedDecl_getIdentifier(CXNamedDecl ND) {
   return static_cast<clang::NamedDecl *>(ND)->getIdentifier();
@@ -409,6 +431,10 @@ bool clang_TypedefNameDecl_isTransparentTag(CXTypedefNameDecl TND) {
 }
 
 // TagDecl
+CXDeclContext clang_TagDecl_castToDeclContext(CXTagDecl TD) {
+  return llvm::dyn_cast<clang::DeclContext>(static_cast<clang::TagDecl *>(TD));
+}
+
 CXTagDecl clang_TagDecl_getCanonicalDecl(CXTagDecl TD) {
   return static_cast<clang::TagDecl *>(TD)->getCanonicalDecl();
 }
