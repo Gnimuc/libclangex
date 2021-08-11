@@ -19,8 +19,33 @@ CXQualType clang_ASTContext_getPointerType(CXASTContext Ctx, CXQualType OpaquePt
       .getAsOpaquePtr();
 }
 
+CXQualType clang_ASTContext_getLValueReferenceType(CXASTContext Ctx, CXQualType OpaquePtr) {
+  return static_cast<clang::ASTContext *>(Ctx)
+      ->getLValueReferenceType(clang::QualType::getFromOpaquePtr(OpaquePtr))
+      .getAsOpaquePtr();
+}
+
+CXQualType clang_ASTContext_getRValueReferenceType(CXASTContext Ctx, CXQualType OpaquePtr) {
+  return static_cast<clang::ASTContext *>(Ctx)
+      ->getRValueReferenceType(clang::QualType::getFromOpaquePtr(OpaquePtr))
+      .getAsOpaquePtr();
+}
+
+CXQualType clang_ASTContext_getMemberPointerType(CXASTContext Ctx, CXQualType OpaquePtr,
+                                                 CXType_ Cls) {
+  return static_cast<clang::ASTContext *>(Ctx)
+      ->getMemberPointerType(clang::QualType::getFromOpaquePtr(OpaquePtr),
+                             static_cast<clang::Type *>(Cls))
+      .getAsOpaquePtr();
+}
+
 CXIdentifierTable clang_ASTContext_getIdents(CXASTContext Ctx) {
   return &static_cast<clang::ASTContext *>(Ctx)->Idents;
+}
+
+uint64_t clang_ASTContext_getTypeSize(CXASTContext Ctx, CXQualType OpaquePtr) {
+  return static_cast<clang::ASTContext *>(Ctx)->getTypeSize(
+      clang::QualType::getFromOpaquePtr(OpaquePtr));
 }
 
 // IdentifierTable

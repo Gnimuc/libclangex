@@ -15,7 +15,19 @@ CINDEX_LINKAGE void clang_ASTContext_PrintStats(CXASTContext Ctx);
 CINDEX_LINKAGE CXQualType clang_ASTContext_getPointerType(CXASTContext Ctx,
                                                           CXQualType OpaquePtr);
 
+CINDEX_LINKAGE CXQualType clang_ASTContext_getLValueReferenceType(CXASTContext Ctx,
+                                                                  CXQualType OpaquePtr);
+
+CINDEX_LINKAGE CXQualType clang_ASTContext_getRValueReferenceType(CXASTContext Ctx,
+                                                                  CXQualType OpaquePtr);
+
+CINDEX_LINKAGE CXQualType clang_ASTContext_getMemberPointerType(CXASTContext Ctx, CXQualType OpaquePtr,
+                                                 CXType_ Cls);
+
 CINDEX_LINKAGE CXIdentifierTable clang_ASTContext_getIdents(CXASTContext Ctx);
+
+CINDEX_LINKAGE uint64_t clang_ASTContext_getTypeSize(CXASTContext Ctx,
+                                                     CXQualType OpaquePtr);
 
 // IdentifierTable
 CINDEX_LINKAGE void clang_IdentifierTable_PrintStats(CXIdentifierTable IT);
