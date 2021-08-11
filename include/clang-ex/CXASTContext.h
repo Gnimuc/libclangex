@@ -21,8 +21,9 @@ CINDEX_LINKAGE CXQualType clang_ASTContext_getLValueReferenceType(CXASTContext C
 CINDEX_LINKAGE CXQualType clang_ASTContext_getRValueReferenceType(CXASTContext Ctx,
                                                                   CXQualType OpaquePtr);
 
-CINDEX_LINKAGE CXQualType clang_ASTContext_getMemberPointerType(CXASTContext Ctx, CXQualType OpaquePtr,
-                                                 CXType_ Cls);
+CINDEX_LINKAGE CXQualType clang_ASTContext_getMemberPointerType(CXASTContext Ctx,
+                                                                CXQualType OpaquePtr,
+                                                                CXType_ Cls);
 
 CINDEX_LINKAGE CXIdentifierTable clang_ASTContext_getIdents(CXASTContext Ctx);
 
@@ -165,6 +166,12 @@ CINDEX_LINKAGE CXLangOptions clang_Decl_getLangOpts(CXDecl DC);
 
 CINDEX_LINKAGE CXDeclContext clang_Decl_getLexicalDeclContext(CXDecl DC);
 
+CINDEX_LINKAGE bool clang_Decl_isOutOfLine(CXDecl DC);
+
+CINDEX_LINKAGE void clang_Decl_setDeclContext(CXDecl DC, CXDeclContext Ctx);
+
+CINDEX_LINKAGE void clang_Decl_setLexicalDeclContext(CXDecl DC, CXDeclContext Ctx);
+
 CINDEX_LINKAGE bool clang_Decl_isTemplated(CXDecl DC);
 
 CINDEX_LINKAGE bool clang_Decl_isCanonicalDecl(CXDecl DC);
@@ -221,6 +228,8 @@ CINDEX_LINKAGE CXNamedDecl clang_NamedDecl_getUnderlyingDecl(CXNamedDecl ND);
 
 CINDEX_LINKAGE CXNamedDecl clang_NamedDecl_getMostRecentDecl(CXNamedDecl ND);
 
+CINDEX_LINKAGE bool clang_NamedDecl_isOutOfLine(CXNamedDecl ND);
+
 // ValueDecl
 CINDEX_LINKAGE CXQualType clang_ValueDecl_getType(CXValueDecl VD);
 
@@ -270,6 +279,8 @@ CINDEX_LINKAGE void clang_TagDecl_startDefinition(CXTagDecl TD);
 CINDEX_LINKAGE CXTagDecl clang_TagDecl_getDefinition(CXTagDecl TD);
 
 CINDEX_LINKAGE const char *clang_TagDecl_getKindName(CXTagDecl TD);
+
+CINDEX_LINKAGE CXTagTypeKind clang_TagDecl_getTagKind(CXTagDecl TD);
 
 CINDEX_LINKAGE bool clang_TagDecl_isStruct(CXTagDecl TD);
 
@@ -430,6 +441,14 @@ CINDEX_LINKAGE bool clang_CXXRecordDecl_isEmpty(CXCXXRecordDecl CXXRD);
 // TemplateName
 
 // ClassTemplateSpecializationDecl
+CINDEX_LINKAGE CXClassTemplateSpecializationDecl
+clang_ClassTemplateSpecializationDecl_Create(CXASTContext Context, CXTagTypeKind TK,
+                                             CXDeclContext DC, CXSourceLocation_ StartLoc,
+                                             CXSourceLocation_ IdLoc,
+                                             CXClassTemplateDecl SpecializedTemplate,
+                                             CXTemplateArgumentList Args,
+                                             CXClassTemplateSpecializationDecl PrevDecl);
+
 CINDEX_LINKAGE CXTemplateArgumentList clang_ClassTemplateSpecializationDecl_getTemplateArgs(
     CXClassTemplateSpecializationDecl CTSD);
 

@@ -299,6 +299,20 @@ CXDeclContext clang_Decl_getLexicalDeclContext(CXDecl DC) {
   return static_cast<clang::Decl *>(DC)->getLexicalDeclContext();
 }
 
+bool clang_Decl_isOutOfLine(CXDecl DC) {
+  return static_cast<clang::Decl *>(DC)->isOutOfLine();
+}
+
+void clang_Decl_setDeclContext(CXDecl DC, CXDeclContext Ctx) {
+  return static_cast<clang::Decl *>(DC)->setDeclContext(
+      static_cast<clang::DeclContext *>(Ctx));
+}
+
+void clang_Decl_setLexicalDeclContext(CXDecl DC, CXDeclContext Ctx) {
+  return static_cast<clang::Decl *>(DC)->setLexicalDeclContext(
+      static_cast<clang::DeclContext *>(Ctx));
+}
+
 bool clang_Decl_isTemplated(CXDecl DC) {
   return static_cast<clang::Decl *>(DC)->isTemplated();
 }
@@ -405,6 +419,10 @@ CXNamedDecl clang_NamedDecl_getMostRecentDecl(CXNamedDecl ND) {
   return static_cast<clang::NamedDecl *>(ND)->getMostRecentDecl();
 }
 
+bool clang_NamedDecl_isOutOfLine(CXNamedDecl ND) {
+  return static_cast<clang::NamedDecl *>(ND)->isOutOfLine();
+}
+
 // ValueDecl
 CXQualType clang_ValueDecl_getType(CXValueDecl VD) {
   return static_cast<clang::ValueDecl *>(VD)->getType().getAsOpaquePtr();
@@ -494,6 +512,10 @@ CXTagDecl clang_TagDecl_getDefinition(CXTagDecl TD) {
 
 const char *clang_TagDecl_getKindName(CXTagDecl TD) {
   return static_cast<clang::TagDecl *>(TD)->getKindName().data();
+}
+
+CXTagTypeKind clang_TagDecl_getTagKind(CXTagDecl TD) {
+  return static_cast<CXTagTypeKind>(static_cast<clang::TagDecl *>(TD)->getTagKind());
 }
 
 bool clang_TagDecl_isStruct(CXTagDecl TD) {
@@ -804,6 +826,20 @@ bool clang_CXXRecordDecl_isEmpty(CXCXXRecordDecl CXXRD) {
 // TemplateName
 
 // ClassTemplateSpecializationDecl
+CXClassTemplateSpecializationDecl clang_ClassTemplateSpecializationDecl_Create(
+    CXASTContext Context, CXTagTypeKind TK, CXDeclContext DC, CXSourceLocation_ StartLoc,
+    CXSourceLocation_ IdLoc, CXClassTemplateDecl SpecializedTemplate,
+    CXTemplateArgumentList Args, CXClassTemplateSpecializationDecl PrevDecl) {
+  return clang::ClassTemplateSpecializationDecl::Create(
+      *static_cast<clang::ASTContext *>(Context), static_cast<clang::TagTypeKind>(TK),
+      static_cast<clang::DeclContext *>(DC),
+      clang::SourceLocation::getFromPtrEncoding(StartLoc),
+      clang::SourceLocation::getFromPtrEncoding(IdLoc),
+      static_cast<clang::ClassTemplateDecl *>(SpecializedTemplate),
+      static_cast<clang::TemplateArgumentList *>(Args)->asArray(),
+      static_cast<clang::ClassTemplateSpecializationDecl *>(PrevDecl));
+}
+
 CXTemplateArgumentList clang_ClassTemplateSpecializationDecl_getTemplateArgs(
     CXClassTemplateSpecializationDecl CTSD) {
   return const_cast<clang::TemplateArgumentList *>(

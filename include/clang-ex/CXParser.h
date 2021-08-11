@@ -37,6 +37,10 @@ CINDEX_LINKAGE CXSourceLocation_ clang_Parser_ConsumeAnyToken(CXParser P);
 
 CINDEX_LINKAGE bool clang_Parser_TryAnnotateCXXScopeToken(CXParser P, bool EnteringContext);
 
+CINDEX_LINKAGE bool
+clang_Parser_TryAnnotateTypeOrScopeTokenAfterScopeSpec(CXParser P, CXCXXScopeSpec SS,
+                                                       bool IsNewScope);
+
 CINDEX_LINKAGE CXDeclGroupRef clang_Parser_parseOneTopLevelDecl(CXParser Parser,
                                                                 bool IsFirstDecl);
 
