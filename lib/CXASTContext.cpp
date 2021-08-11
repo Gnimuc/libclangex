@@ -423,6 +423,11 @@ bool clang_NamedDecl_isOutOfLine(CXNamedDecl ND) {
   return static_cast<clang::NamedDecl *>(ND)->isOutOfLine();
 }
 
+// NamedDecl Cast
+CXTypeDecl clang_NamedDecl_castToTypeDecl(CXNamedDecl ND) {
+  return llvm::dyn_cast<clang::TypeDecl>(static_cast<clang::NamedDecl *>(ND));
+}
+
 // ValueDecl
 CXQualType clang_ValueDecl_getType(CXValueDecl VD) {
   return static_cast<clang::ValueDecl *>(VD)->getType().getAsOpaquePtr();

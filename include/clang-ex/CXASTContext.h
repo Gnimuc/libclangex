@@ -230,6 +230,9 @@ CINDEX_LINKAGE CXNamedDecl clang_NamedDecl_getMostRecentDecl(CXNamedDecl ND);
 
 CINDEX_LINKAGE bool clang_NamedDecl_isOutOfLine(CXNamedDecl ND);
 
+// NamedDecl Cast
+CINDEX_LINKAGE CXTypeDecl clang_NamedDecl_castToTypeDecl(CXNamedDecl ND);
+
 // ValueDecl
 CINDEX_LINKAGE CXQualType clang_ValueDecl_getType(CXValueDecl VD);
 

@@ -31,6 +31,18 @@ bool clang_QualType_isVolatileQualified(CXQualType OpaquePtr) {
   return clang::QualType::getFromOpaquePtr(OpaquePtr).isVolatileQualified();
 }
 
+CXQualType clang_QualType_withConst(CXQualType OpaquePtr) {
+  return clang::QualType::getFromOpaquePtr(OpaquePtr).withConst().getAsOpaquePtr();
+}
+
+CXQualType clang_QualType_withVolatile(CXQualType OpaquePtr) {
+  return clang::QualType::getFromOpaquePtr(OpaquePtr).withVolatile().getAsOpaquePtr();
+}
+
+CXQualType clang_QualType_withRestrict(CXQualType OpaquePtr) {
+  return clang::QualType::getFromOpaquePtr(OpaquePtr).withRestrict().getAsOpaquePtr();
+}
+
 void clang_QualType_addConst(CXQualType OpaquePtr) {
   clang::QualType::getFromOpaquePtr(OpaquePtr).addConst();
 }
@@ -45,10 +57,14 @@ void clang_QualType_addRestrict(CXQualType OpaquePtr) {
 
 char *clang_QualType_getAsString(CXQualType OpaquePtr) {
   auto str = clang::QualType::getFromOpaquePtr(OpaquePtr).getAsString();
-  std::unique_ptr<char[]> ptr = std::make_unique<char[]>(str.size()+1);
-  ptr[str.size()+1] = '\0';
+  std::unique_ptr<char[]> ptr = std::make_unique<char[]>(str.size() + 1);
+  ptr[str.size() + 1] = '\0';
   std::copy(str.begin(), str.end(), ptr.get());
   return ptr.release();
 }
 
 void clang_QualType_disposeString(char *Str) { delete[] Str; }
+
+void clang_QualType_dump(CXQualType OpaquePtr) {
+  clang::QualType::getFromOpaquePtr(OpaquePtr).dump();
+}

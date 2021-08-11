@@ -26,6 +26,13 @@ bool clang_Sema_LookupParsedName(CXSema S, CXLookupResult R, CXScope Sp, CXCXXSc
       static_cast<clang::CXXScopeSpec *>(SS), AllowBuiltinCreation, EnteringContext);
 }
 
+bool clang_Sema_LookupName(CXSema S, CXLookupResult R, CXScope Sp,
+                           bool AllowBuiltinCreation) {
+  return static_cast<clang::Sema *>(S)->LookupName(*static_cast<clang::LookupResult *>(R),
+                                                   static_cast<clang::Scope *>(Sp),
+                                                   AllowBuiltinCreation);
+}
+
 // CXXScopeSpec
 CXCXXScopeSpec clang_CXXScopeSpec_create(CXInit_Error *ErrorCode) {
   CXInit_Error Err = CXInit_NoError;

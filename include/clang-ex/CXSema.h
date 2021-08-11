@@ -22,6 +22,9 @@ CINDEX_LINKAGE bool clang_Sema_LookupParsedName(CXSema S, CXLookupResult R, CXSc
                                                 bool AllowBuiltinCreation,
                                                 bool EnteringContext);
 
+CINDEX_LINKAGE bool clang_Sema_LookupName(CXSema S, CXLookupResult R, CXScope Sp,
+                                          bool AllowBuiltinCreation);
+
 // CXXScopeSpec
 CINDEX_LINKAGE CXCXXScopeSpec clang_CXXScopeSpec_create(CXInit_Error *ErrorCode);
 
@@ -66,7 +69,8 @@ CINDEX_LINKAGE void clang_LookupResult_dispose(CXLookupResult LR);
 CINDEX_LINKAGE void clang_LookupResult_clear(CXLookupResult LR,
                                              CXLookupNameKind LookupKind);
 
-CINDEX_LINKAGE void clang_LookupResult_setLookupName(CXLookupResult LR, CXDeclarationName DN);
+CINDEX_LINKAGE void clang_LookupResult_setLookupName(CXLookupResult LR,
+                                                     CXDeclarationName DN);
 
 CINDEX_LINKAGE CXDeclarationName clang_LookupResult_getLookupName(CXLookupResult LR);
 
