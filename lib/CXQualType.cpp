@@ -75,6 +75,10 @@ bool clang_QualType_hasLocalQualifiers(CXQualType OpaquePtr) {
   return clang::QualType::getFromOpaquePtr(OpaquePtr).hasLocalQualifiers();
 }
 
+unsigned clang_QualType_getCVRQualifiers(CXQualType OpaquePtr) {
+  return clang::QualType::getFromOpaquePtr(OpaquePtr).getCVRQualifiers();
+}
+
 char *clang_QualType_getAsString(CXQualType OpaquePtr) {
   auto str = clang::QualType::getFromOpaquePtr(OpaquePtr).getAsString();
   std::unique_ptr<char[]> ptr = std::make_unique<char[]>(str.size() + 1);
@@ -582,6 +586,10 @@ bool clang_Type_isVisibilityExplicit(CXType_ T) {
 
 bool clang_Type_isLinkageValid(CXType_ T) {
   return static_cast<clang::Type *>(T)->isLinkageValid();
+}
+
+CXQualType clang_Type_getCanonicalTypeInternal(CXType_ T) {
+  return static_cast<clang::Type *>(T)->getCanonicalTypeInternal().getAsOpaquePtr();
 }
 
 void clang_Type_dump(CXType_ T) { return static_cast<clang::Type *>(T)->dump(); }

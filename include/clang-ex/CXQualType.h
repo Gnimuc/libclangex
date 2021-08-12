@@ -34,6 +34,8 @@ CINDEX_LINKAGE bool clang_QualType_isLocalRestrictQualified(CXQualType OpaquePtr
 CINDEX_LINKAGE bool clang_QualType_isLocalVolatileQualified(CXQualType OpaquePtr);
 CINDEX_LINKAGE bool clang_QualType_hasLocalQualifiers(CXQualType OpaquePtr);
 
+CINDEX_LINKAGE unsigned clang_QualType_getCVRQualifiers(CXQualType OpaquePtr);
+
 CINDEX_LINKAGE char *clang_QualType_getAsString(CXQualType OpaquePtr);
 CINDEX_LINKAGE void clang_QualType_disposeString(char *Str);
 
@@ -283,6 +285,8 @@ CINDEX_LINKAGE bool clang_Type_isSpecifierType(CXType_ T);
 CINDEX_LINKAGE bool clang_Type_isVisibilityExplicit(CXType_ T);
 
 CINDEX_LINKAGE bool clang_Type_isLinkageValid(CXType_ T);
+
+CINDEX_LINKAGE CXQualType clang_Type_getCanonicalTypeInternal(CXType_ T);
 
 CINDEX_LINKAGE void clang_Type_dump(CXType_ T);
 

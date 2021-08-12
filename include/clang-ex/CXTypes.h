@@ -94,9 +94,32 @@ typedef enum CXTagTypeKind {
 // Type
 typedef void *CXType_;
 typedef void *CXQualType;
+typedef void *CXComplexType;
+typedef void *CXPointerType;
+typedef void *CXReferenceType;
+typedef void *CXLValueReferenceType;
+typedef void *CXRValueReferenceType;
+typedef void *CXMemberPointerType;
+typedef void *CXArrayType;
+typedef void *CXConstantArrayType;
+typedef void *CXIncompleteArrayType;
+typedef void *CXVariableArrayType;
+typedef void *CXDependentSizedArrayType;
+typedef void *CXFunctionType;
+typedef void *CXFunctionNoProtoType;
+typedef void *CXFunctionProtoType;
+typedef void *CXTypedefType;
 typedef void *CXTagType;
 typedef void *CXRecordType;
-typedef void *CXComplexType;
+typedef void *CXEnumType;
+typedef void *CXTemplateTypeParmType;
+typedef void *CXSubstTemplateTypeParmType;
+typedef void *CXSubstTemplateTypeParmPackType;
+typedef void *CXTemplateSpecializationType;
+typedef void *CXTypeWithKeyword;
+typedef void *CXElaboratedType;
+typedef void *CXDependentNameType;
+typedef void *CXDependentTemplateSpecializationType;
 typedef void *CXDeducedType;
 
 // CodeGen
