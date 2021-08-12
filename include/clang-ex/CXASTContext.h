@@ -33,7 +33,8 @@ CINDEX_LINKAGE CXQualType clang_ASTContext_getTypeDeclType(CXASTContext Ctx,
                                                            CXTypeDecl Decl,
                                                            CXTypeDecl PrevDecl);
 
-CINDEX_LINKAGE CXQualType clang_ASTContext_getRecordType(CXASTContext Ctx, CXRecordDecl Decl);
+CINDEX_LINKAGE CXQualType clang_ASTContext_getRecordType(CXASTContext Ctx,
+                                                         CXRecordDecl Decl);
 
 // IdentifierTable
 CINDEX_LINKAGE void clang_IdentifierTable_PrintStats(CXIdentifierTable IT);

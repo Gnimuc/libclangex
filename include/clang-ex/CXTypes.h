@@ -57,8 +57,6 @@ typedef enum CXTranslationUnitKind {
 // AST
 typedef void *CXASTContext;
 typedef void *CXASTConsumer;
-typedef void *CXType_;
-typedef void *CXQualType;
 typedef void *CXTranslationUnitDecl;
 typedef void *CXDeclGroupRef;
 typedef void *CXDecl;
@@ -92,6 +90,14 @@ typedef enum CXTagTypeKind {
   CXTagTypeKind_TTK_Class,
   CXTagTypeKind_TTK_Enum
 } CXTagTypeKind;
+
+// Type
+typedef void *CXType_;
+typedef void *CXQualType;
+typedef void *CXTagType;
+typedef void *CXRecordType;
+typedef void *CXComplexType;
+typedef void *CXDeducedType;
 
 // CodeGen
 typedef void *CXCodeGenerator;
