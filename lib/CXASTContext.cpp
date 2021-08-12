@@ -43,9 +43,22 @@ CXIdentifierTable clang_ASTContext_getIdents(CXASTContext Ctx) {
   return &static_cast<clang::ASTContext *>(Ctx)->Idents;
 }
 
-uint64_t clang_ASTContext_getTypeSize(CXASTContext Ctx, CXQualType OpaquePtr) {
-  return static_cast<clang::ASTContext *>(Ctx)->getTypeSize(
-      clang::QualType::getFromOpaquePtr(OpaquePtr));
+uint64_t clang_ASTContext_getTypeSize(CXASTContext Ctx, CXType_ T) {
+  return static_cast<clang::ASTContext *>(Ctx)->getTypeSize(static_cast<clang::Type *>(T));
+}
+
+CXQualType clang_ASTContext_getTypeDeclType(CXASTContext Ctx, CXTypeDecl Decl,
+                                            CXTypeDecl PrevDecl) {
+  return static_cast<clang::ASTContext *>(Ctx)
+      ->getTypeDeclType(static_cast<clang::TypeDecl *>(Decl),
+                        static_cast<clang::TypeDecl *>(PrevDecl))
+      .getAsOpaquePtr();
+}
+
+CXQualType clang_ASTContext_getRecordType(CXASTContext Ctx, CXRecordDecl Decl) {
+  return static_cast<clang::ASTContext *>(Ctx)
+      ->getRecordType(static_cast<clang::RecordDecl *>(Decl))
+      .getAsOpaquePtr();
 }
 
 // IdentifierTable

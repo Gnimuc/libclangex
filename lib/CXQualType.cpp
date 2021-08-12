@@ -31,6 +31,10 @@ bool clang_QualType_isVolatileQualified(CXQualType OpaquePtr) {
   return clang::QualType::getFromOpaquePtr(OpaquePtr).isVolatileQualified();
 }
 
+bool clang_QualType_hasQualifiers(CXQualType OpaquePtr) {
+  return clang::QualType::getFromOpaquePtr(OpaquePtr).hasQualifiers();
+}
+
 CXQualType clang_QualType_withConst(CXQualType OpaquePtr) {
   return clang::QualType::getFromOpaquePtr(OpaquePtr).withConst().getAsOpaquePtr();
 }
@@ -55,6 +59,22 @@ void clang_QualType_addRestrict(CXQualType OpaquePtr) {
   clang::QualType::getFromOpaquePtr(OpaquePtr).addRestrict();
 }
 
+bool clang_QualType_isLocalConstQualified(CXQualType OpaquePtr) {
+  return clang::QualType::getFromOpaquePtr(OpaquePtr).isLocalConstQualified();
+}
+
+bool clang_QualType_isLocalRestrictQualified(CXQualType OpaquePtr) {
+  return clang::QualType::getFromOpaquePtr(OpaquePtr).isLocalRestrictQualified();
+}
+
+bool clang_QualType_isLocalVolatileQualified(CXQualType OpaquePtr) {
+  return clang::QualType::getFromOpaquePtr(OpaquePtr).isLocalVolatileQualified();
+}
+
+bool clang_QualType_hasLocalQualifiers(CXQualType OpaquePtr) {
+  return clang::QualType::getFromOpaquePtr(OpaquePtr).hasLocalQualifiers();
+}
+
 char *clang_QualType_getAsString(CXQualType OpaquePtr) {
   auto str = clang::QualType::getFromOpaquePtr(OpaquePtr).getAsString();
   std::unique_ptr<char[]> ptr = std::make_unique<char[]>(str.size() + 1);
@@ -67,4 +87,18 @@ void clang_QualType_disposeString(char *Str) { delete[] Str; }
 
 void clang_QualType_dump(CXQualType OpaquePtr) {
   clang::QualType::getFromOpaquePtr(OpaquePtr).dump();
+}
+
+CXQualType clang_QualType_getCanonicalType(CXQualType OpaquePtr) {
+  return clang::QualType::getFromOpaquePtr(OpaquePtr).getCanonicalType().getAsOpaquePtr();
+}
+
+CXQualType clang_QualType_getLocalUnqualifiedType(CXQualType OpaquePtr) {
+  return clang::QualType::getFromOpaquePtr(OpaquePtr)
+      .getLocalUnqualifiedType()
+      .getAsOpaquePtr();
+}
+
+CXQualType clang_QualType_getUnqualifiedType(CXQualType OpaquePtr) {
+  return clang::QualType::getFromOpaquePtr(OpaquePtr).getUnqualifiedType().getAsOpaquePtr();
 }

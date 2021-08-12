@@ -27,8 +27,13 @@ CINDEX_LINKAGE CXQualType clang_ASTContext_getMemberPointerType(CXASTContext Ctx
 
 CINDEX_LINKAGE CXIdentifierTable clang_ASTContext_getIdents(CXASTContext Ctx);
 
-CINDEX_LINKAGE uint64_t clang_ASTContext_getTypeSize(CXASTContext Ctx,
-                                                     CXQualType OpaquePtr);
+CINDEX_LINKAGE uint64_t clang_ASTContext_getTypeSize(CXASTContext Ctx, CXType_ T);
+
+CINDEX_LINKAGE CXQualType clang_ASTContext_getTypeDeclType(CXASTContext Ctx,
+                                                           CXTypeDecl Decl,
+                                                           CXTypeDecl PrevDecl);
+
+CINDEX_LINKAGE CXQualType clang_ASTContext_getRecordType(CXASTContext Ctx, CXRecordDecl Decl);
 
 // IdentifierTable
 CINDEX_LINKAGE void clang_IdentifierTable_PrintStats(CXIdentifierTable IT);
