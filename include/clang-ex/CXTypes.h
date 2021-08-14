@@ -67,6 +67,7 @@ typedef void *CXValueDecl;
 typedef void *CXTypeDecl;
 typedef void *CXTypedefNameDecl;
 typedef void *CXTagDecl;
+typedef void *CXEnumDecl;
 typedef void *CXTemplateDecl;
 typedef void *CXRedeclarableTemplateDecl;
 typedef void *CXClassTemplateDecl;

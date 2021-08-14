@@ -8,6 +8,8 @@
 extern "C" {
 #endif
 
+CINDEX_LINKAGE CXQualType clang_QualType_constructFromTypePtr(CXType_ Ptr, unsigned Quals);
+
 CINDEX_LINKAGE CXType_ clang_QualType_getTypePtr(CXQualType OpaquePtr);
 
 CINDEX_LINKAGE CXType_ clang_QualType_getTypePtrOrNull(CXQualType OpaquePtr);
@@ -289,6 +291,82 @@ CINDEX_LINKAGE bool clang_Type_isLinkageValid(CXType_ T);
 CINDEX_LINKAGE CXQualType clang_Type_getCanonicalTypeInternal(CXType_ T);
 
 CINDEX_LINKAGE void clang_Type_dump(CXType_ T);
+
+// isa
+CINDEX_LINKAGE bool clang_isa_BuiltinType(CXType_ T);
+
+CINDEX_LINKAGE bool clang_isa_ComplexType(CXType_ T);
+
+CINDEX_LINKAGE bool clang_isa_PointerType(CXType_ T);
+
+CINDEX_LINKAGE bool clang_isa_ReferenceType(CXType_ T);
+
+CINDEX_LINKAGE bool clang_isa_LValueReferenceType(CXType_ T);
+
+CINDEX_LINKAGE bool clang_isa_RValueReferenceType(CXType_ T);
+
+CINDEX_LINKAGE bool clang_isa_MemberPointerType(CXType_ T);
+
+CINDEX_LINKAGE bool clang_isa_ArrayType(CXType_ T);
+
+CINDEX_LINKAGE bool clang_isa_ConstantArrayType(CXType_ T);
+
+CINDEX_LINKAGE bool clang_isa_IncompleteArrayType(CXType_ T);
+
+CINDEX_LINKAGE bool clang_isa_VariableArrayType(CXType_ T);
+
+CINDEX_LINKAGE bool clang_isa_DependentSizedArrayType(CXType_ T);
+
+CINDEX_LINKAGE bool clang_isa_FunctionType(CXType_ T);
+
+CINDEX_LINKAGE bool clang_isa_FunctionNoProtoType(CXType_ T);
+
+CINDEX_LINKAGE bool clang_isa_FunctionProtoType(CXType_ T);
+
+CINDEX_LINKAGE bool clang_isa_UnresolvedUsingType(CXType_ T);
+
+CINDEX_LINKAGE bool clang_isa_TypedefType(CXType_ T);
+
+CINDEX_LINKAGE bool clang_isa_DecltypeType(CXType_ T);
+
+CINDEX_LINKAGE bool clang_isa_DependentDecltypeType(CXType_ T);
+
+CINDEX_LINKAGE bool clang_isa_TagType(CXType_ T);
+
+CINDEX_LINKAGE bool clang_isa_RecordType(CXType_ T);
+
+CINDEX_LINKAGE bool clang_isa_EnumType(CXType_ T);
+
+CINDEX_LINKAGE bool clang_isa_TemplateTypeParmType(CXType_ T);
+
+CINDEX_LINKAGE bool clang_isa_SubstTemplateTypeParmType(CXType_ T);
+
+CINDEX_LINKAGE bool clang_isa_SubstTemplateTypeParmPackType(CXType_ T);
+
+CINDEX_LINKAGE bool clang_isa_DeducedType(CXType_ T);
+
+CINDEX_LINKAGE bool clang_isa_AutoType(CXType_ T);
+
+CINDEX_LINKAGE bool clang_isa_DeducedTemplateSpecializationType(CXType_ T);
+
+CINDEX_LINKAGE bool clang_isa_TemplateSpecializationType(CXType_ T);
+
+CINDEX_LINKAGE bool clang_isa_ElaboratedType(CXType_ T);
+
+CINDEX_LINKAGE bool clang_isa_DependentNameType(CXType_ T);
+
+CINDEX_LINKAGE bool clang_isa_DependentTemplateSpecializationType(CXType_ T);
+
+// PointerType
+CINDEX_LINKAGE CXQualType clang_PointerType_getPointeeType(CXPointerType T);
+
+// EnumType
+CINDEX_LINKAGE CXEnumDecl clang_EnumType_getDecl(CXEnumType T);
+
+// FunctionProtoType
+CINDEX_LINKAGE unsigned clang_FunctionProtoType_getNumParams(CXFunctionProtoType T);
+
+CINDEX_LINKAGE CXQualType clang_FunctionProtoType_getParamType(CXFunctionProtoType T, unsigned i);
 
 #ifdef __cplusplus
 }

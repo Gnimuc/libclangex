@@ -1,6 +1,10 @@
 #include "clang-ex/CXQualType.h"
 #include "clang/AST/Type.h"
 
+CXQualType clang_QualType_constructFromTypePtr(CXType_ Ptr, unsigned Quals) {
+  return clang::QualType(static_cast<clang::Type *>(Ptr), Quals).getAsOpaquePtr();
+}
+
 CXType_ clang_QualType_getTypePtr(CXQualType OpaquePtr) {
   return const_cast<clang::Type *>(
       clang::QualType::getFromOpaquePtr(OpaquePtr).getTypePtr());
@@ -593,3 +597,281 @@ CXQualType clang_Type_getCanonicalTypeInternal(CXType_ T) {
 }
 
 void clang_Type_dump(CXType_ T) { return static_cast<clang::Type *>(T)->dump(); }
+
+// classof
+bool clang_BuiltinType_classof(CXType_ T) {
+  return clang::BuiltinType::classof(static_cast<clang::Type *>(T));
+}
+
+bool clang_ComplexType_classof(CXType_ T) {
+  return clang::ComplexType::classof(static_cast<clang::Type *>(T));
+}
+
+bool clang_PointerType_classof(CXType_ T) {
+  return clang::PointerType::classof(static_cast<clang::Type *>(T));
+}
+
+bool clang_ReferenceType_classof(CXType_ T) {
+  return clang::ReferenceType::classof(static_cast<clang::Type *>(T));
+}
+
+bool clang_LValueReferenceType_classof(CXType_ T) {
+  return clang::LValueReferenceType::classof(static_cast<clang::Type *>(T));
+}
+
+bool clang_RValueReferenceType_classof(CXType_ T) {
+  return clang::RValueReferenceType::classof(static_cast<clang::Type *>(T));
+}
+
+bool clang_MemberPointerType_classof(CXType_ T) {
+  return clang::MemberPointerType::classof(static_cast<clang::Type *>(T));
+}
+
+bool clang_ArrayType_classof(CXType_ T) {
+  return clang::ArrayType::classof(static_cast<clang::Type *>(T));
+}
+
+bool clang_ConstantArrayType_classof(CXType_ T) {
+  return clang::ConstantArrayType::classof(static_cast<clang::Type *>(T));
+}
+
+bool clang_IncompleteArrayType_classof(CXType_ T) {
+  return clang::IncompleteArrayType::classof(static_cast<clang::Type *>(T));
+}
+
+bool clang_VariableArrayType_classof(CXType_ T) {
+  return clang::VariableArrayType::classof(static_cast<clang::Type *>(T));
+}
+
+bool clang_DependentSizedArrayType_classof(CXType_ T) {
+  return clang::DependentSizedArrayType::classof(static_cast<clang::Type *>(T));
+}
+
+bool clang_FunctionType_classof(CXType_ T) {
+  return clang::FunctionType::classof(static_cast<clang::Type *>(T));
+}
+
+bool clang_FunctionNoProtoType_classof(CXType_ T) {
+  return clang::FunctionNoProtoType::classof(static_cast<clang::Type *>(T));
+}
+
+bool clang_FunctionProtoType_classof(CXType_ T) {
+  return clang::FunctionProtoType::classof(static_cast<clang::Type *>(T));
+}
+
+bool clang_UnresolvedUsingType_classof(CXType_ T) {
+  return clang::UnresolvedUsingType::classof(static_cast<clang::Type *>(T));
+}
+
+bool clang_TypedefType_classof(CXType_ T) {
+  return clang::TypedefType::classof(static_cast<clang::Type *>(T));
+}
+
+bool clang_DecltypeType_classof(CXType_ T) {
+  return clang::DecltypeType::classof(static_cast<clang::Type *>(T));
+}
+
+bool clang_DependentDecltypeType_classof(CXType_ T) {
+  return clang::DependentDecltypeType::classof(static_cast<clang::Type *>(T));
+}
+
+bool clang_TagType_classof(CXType_ T) {
+  return clang::TagType::classof(static_cast<clang::Type *>(T));
+}
+
+bool clang_RecordType_classof(CXType_ T) {
+  return clang::RecordType::classof(static_cast<clang::Type *>(T));
+}
+
+bool clang_EnumType_classof(CXType_ T) {
+  return clang::EnumType::classof(static_cast<clang::Type *>(T));
+}
+
+bool clang_TemplateTypeParmType_classof(CXType_ T) {
+  return clang::TemplateTypeParmType::classof(static_cast<clang::Type *>(T));
+}
+
+bool clang_SubstTemplateTypeParmType_classof(CXType_ T) {
+  return clang::SubstTemplateTypeParmType::classof(static_cast<clang::Type *>(T));
+}
+
+bool clang_SubstTemplateTypeParmPackType_classof(CXType_ T) {
+  return clang::SubstTemplateTypeParmPackType::classof(static_cast<clang::Type *>(T));
+}
+
+bool clang_DeducedType_classof(CXType_ T) {
+  return clang::DeducedType::classof(static_cast<clang::Type *>(T));
+}
+
+bool clang_AutoType_classof(CXType_ T) {
+  return clang::AutoType::classof(static_cast<clang::Type *>(T));
+}
+
+bool clang_DeducedTemplateSpecializationType_classof(CXType_ T) {
+  return clang::DeducedTemplateSpecializationType::classof(static_cast<clang::Type *>(T));
+}
+
+bool clang_TemplateSpecializationType_classof(CXType_ T) {
+  return clang::TemplateSpecializationType::classof(static_cast<clang::Type *>(T));
+}
+
+bool clang_ElaboratedType_classof(CXType_ T) {
+  return clang::ElaboratedType::classof(static_cast<clang::Type *>(T));
+}
+
+bool clang_DependentNameType_classof(CXType_ T) {
+  return clang::DependentNameType::classof(static_cast<clang::Type *>(T));
+}
+
+bool clang_DependentTemplateSpecializationType_classof(CXType_ T) {
+  return clang::DependentTemplateSpecializationType::classof(static_cast<clang::Type *>(T));
+}
+
+// isa
+bool clang_isa_BuiltinType(CXType_ T) {
+  return llvm::isa<clang::BuiltinType>(static_cast<clang::Type *>(T));
+}
+
+bool clang_isa_ComplexType(CXType_ T) {
+  return llvm::isa<clang::ComplexType>(static_cast<clang::Type *>(T));
+}
+
+bool clang_isa_PointerType(CXType_ T) {
+  return llvm::isa<clang::PointerType>(static_cast<clang::Type *>(T));
+}
+
+bool clang_isa_ReferenceType(CXType_ T) {
+  return llvm::isa<clang::ReferenceType>(static_cast<clang::Type *>(T));
+}
+
+bool clang_isa_LValueReferenceType(CXType_ T) {
+  return llvm::isa<clang::LValueReferenceType>(static_cast<clang::Type *>(T));
+}
+
+bool clang_isa_RValueReferenceType(CXType_ T) {
+  return llvm::isa<clang::RValueReferenceType>(static_cast<clang::Type *>(T));
+}
+
+bool clang_isa_MemberPointerType(CXType_ T) {
+  return llvm::isa<clang::MemberPointerType>(static_cast<clang::Type *>(T));
+}
+
+bool clang_isa_ArrayType(CXType_ T) {
+  return llvm::isa<clang::ArrayType>(static_cast<clang::Type *>(T));
+}
+
+bool clang_isa_ConstantArrayType(CXType_ T) {
+  return llvm::isa<clang::ConstantArrayType>(static_cast<clang::Type *>(T));
+}
+
+bool clang_isa_IncompleteArrayType(CXType_ T) {
+  return llvm::isa<clang::IncompleteArrayType>(static_cast<clang::Type *>(T));
+}
+
+bool clang_isa_VariableArrayType(CXType_ T) {
+  return llvm::isa<clang::VariableArrayType>(static_cast<clang::Type *>(T));
+}
+
+bool clang_isa_DependentSizedArrayType(CXType_ T) {
+  return llvm::isa<clang::DependentSizedArrayType>(static_cast<clang::Type *>(T));
+}
+
+bool clang_isa_FunctionType(CXType_ T) {
+  return llvm::isa<clang::FunctionType>(static_cast<clang::Type *>(T));
+}
+
+bool clang_isa_FunctionNoProtoType(CXType_ T) {
+  return llvm::isa<clang::FunctionNoProtoType>(static_cast<clang::Type *>(T));
+}
+
+bool clang_isa_FunctionProtoType(CXType_ T) {
+  return llvm::isa<clang::FunctionProtoType>(static_cast<clang::Type *>(T));
+}
+
+bool clang_isa_UnresolvedUsingType(CXType_ T) {
+  return llvm::isa<clang::UnresolvedUsingType>(static_cast<clang::Type *>(T));
+}
+
+bool clang_isa_TypedefType(CXType_ T) {
+  return llvm::isa<clang::TypedefType>(static_cast<clang::Type *>(T));
+}
+
+bool clang_isa_DecltypeType(CXType_ T) {
+  return llvm::isa<clang::DecltypeType>(static_cast<clang::Type *>(T));
+}
+
+bool clang_isa_DependentDecltypeType(CXType_ T) {
+  return llvm::isa<clang::DependentDecltypeType>(static_cast<clang::Type *>(T));
+}
+
+bool clang_isa_TagType(CXType_ T) {
+  return llvm::isa<clang::TagType>(static_cast<clang::Type *>(T));
+}
+
+bool clang_isa_RecordType(CXType_ T) {
+  return llvm::isa<clang::RecordType>(static_cast<clang::Type *>(T));
+}
+
+bool clang_isa_EnumType(CXType_ T) {
+  return llvm::isa<clang::EnumType>(static_cast<clang::Type *>(T));
+}
+
+bool clang_isa_TemplateTypeParmType(CXType_ T) {
+  return llvm::isa<clang::TemplateTypeParmType>(static_cast<clang::Type *>(T));
+}
+
+bool clang_isa_SubstTemplateTypeParmType(CXType_ T) {
+  return llvm::isa<clang::SubstTemplateTypeParmType>(static_cast<clang::Type *>(T));
+}
+
+bool clang_isa_SubstTemplateTypeParmPackType(CXType_ T) {
+  return llvm::isa<clang::SubstTemplateTypeParmPackType>(static_cast<clang::Type *>(T));
+}
+
+bool clang_isa_DeducedType(CXType_ T) {
+  return llvm::isa<clang::DeducedType>(static_cast<clang::Type *>(T));
+}
+
+bool clang_isa_AutoType(CXType_ T) {
+  return llvm::isa<clang::AutoType>(static_cast<clang::Type *>(T));
+}
+
+bool clang_isa_DeducedTemplateSpecializationType(CXType_ T) {
+  return llvm::isa<clang::DeducedTemplateSpecializationType>(static_cast<clang::Type *>(T));
+}
+
+bool clang_isa_TemplateSpecializationType(CXType_ T) {
+  return llvm::isa<clang::TemplateSpecializationType>(static_cast<clang::Type *>(T));
+}
+
+bool clang_isa_ElaboratedType(CXType_ T) {
+  return llvm::isa<clang::ElaboratedType>(static_cast<clang::Type *>(T));
+}
+
+bool clang_isa_DependentNameType(CXType_ T) {
+  return llvm::isa<clang::DependentNameType>(static_cast<clang::Type *>(T));
+}
+
+bool clang_isa_DependentTemplateSpecializationType(CXType_ T) {
+  return llvm::isa<clang::DependentTemplateSpecializationType>(
+      static_cast<clang::Type *>(T));
+}
+
+// PointerType
+CXQualType clang_PointerType_getPointeeType(CXPointerType T) {
+  return static_cast<clang::PointerType *>(T)->getPointeeType().getAsOpaquePtr();
+}
+
+// EnumType
+CXEnumDecl clang_EnumType_getDecl(CXEnumType T) {
+  return static_cast<clang::EnumType *>(T)->getDecl();
+}
+
+// FunctionProtoType
+unsigned clang_FunctionProtoType_getNumParams(CXFunctionProtoType T) {
+  return static_cast<clang::FunctionProtoType *>(T)->getNumParams();
+}
+
+CXQualType clang_FunctionProtoType_getParamType(CXFunctionProtoType T, unsigned i) {
+  return static_cast<clang::FunctionProtoType *>(T)->getParamType(i).getAsOpaquePtr();
+}

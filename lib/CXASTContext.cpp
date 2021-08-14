@@ -576,6 +576,30 @@ CXTemplateParameterList clang_TagDecl_getTemplateParameterList(CXTagDecl TD, uns
   return static_cast<clang::TagDecl *>(TD)->getTemplateParameterList(i);
 }
 
+// EnumDecl
+CXEnumDecl clang_EnumDecl_getCanonicalDecl(CXEnumDecl ED) {
+  return static_cast<clang::EnumDecl *>(ED)->getCanonicalDecl();
+}
+
+CXEnumDecl clang_EnumDecl_getPreviousDecl(CXEnumDecl ED) {
+  return static_cast<clang::EnumDecl *>(ED)->getPreviousDecl();
+}
+
+CXEnumDecl clang_EnumDecl_getMostRecentDecl(CXEnumDecl ED) {
+  return static_cast<clang::EnumDecl *>(ED)->getMostRecentDecl();
+}
+
+CXEnumDecl clang_EnumDecl_getDefinition(CXEnumDecl ED) {
+  return static_cast<clang::EnumDecl *>(ED)->getDefinition();
+}
+
+CXQualType clang_EnumDecl_getIntegerType(CXEnumDecl ED) {
+  return static_cast<clang::EnumDecl *>(ED)->getIntegerType().getAsOpaquePtr();
+}
+
+
+
+
 // TemplateParameterList
 CXNamedDecl clang_TemplateParameterList_getParam(CXTemplateParameterList TPL,
                                                  unsigned Idx) {
