@@ -1,4 +1,6 @@
 #include "clang-ex/CXQualType.h"
+#include "clang/AST/Decl.h"
+#include "clang/AST/TemplateBase.h"
 #include "clang/AST/Type.h"
 
 CXQualType clang_QualType_constructFromTypePtr(CXType_ Ptr, unsigned Quals) {
@@ -130,9 +132,9 @@ bool clang_Type_isBuiltinType(CXType_ T) {
   return static_cast<clang::Type *>(T)->isBuiltinType();
 }
 
-// bool clang_Type_isIntegerType(CXType_ T) {
-//   return static_cast<clang::Type *>(T)->isIntegerType();
-// }
+bool clang_Type_isIntegerType(CXType_ T) {
+  return static_cast<clang::Type *>(T)->isIntegerType();
+}
 
 bool clang_Type_isEnumeralType(CXType_ T) {
   return static_cast<clang::Type *>(T)->isEnumeralType();
@@ -170,9 +172,9 @@ bool clang_Type_isAnyCharacterType(CXType_ T) {
   return static_cast<clang::Type *>(T)->isAnyCharacterType();
 }
 
-// bool clang_Type_isIntegralOrEnumerationType(CXType_ T) {
-//   return static_cast<clang::Type *>(T)->isIntegralOrEnumerationType();
-// }
+bool clang_Type_isIntegralOrEnumerationType(CXType_ T) {
+  return static_cast<clang::Type *>(T)->isIntegralOrEnumerationType();
+}
 
 bool clang_Type_isIntegralOrUnscopedEnumerationType(CXType_ T) {
   return static_cast<clang::Type *>(T)->isIntegralOrUnscopedEnumerationType();
@@ -226,9 +228,9 @@ bool clang_Type_isVoidType(CXType_ T) {
   return static_cast<clang::Type *>(T)->isVoidType();
 }
 
-// bool clang_Type_isScalarType(CXType_ T) {
-//   return static_cast<clang::Type *>(T)->isScalarType();
-// }
+bool clang_Type_isScalarType(CXType_ T) {
+  return static_cast<clang::Type *>(T)->isScalarType();
+}
 
 bool clang_Type_isAggregateType(CXType_ T) {
   return static_cast<clang::Type *>(T)->isAggregateType();
@@ -458,9 +460,9 @@ bool clang_Type_hasObjCPointerRepresentation(CXType_ T) {
   return static_cast<clang::Type *>(T)->hasObjCPointerRepresentation();
 }
 
-// bool clang_Type_hasIntegerRepresentation(CXType_ T) {
-//   return static_cast<clang::Type *>(T)->hasIntegerRepresentation();
-// }
+bool clang_Type_hasIntegerRepresentation(CXType_ T) {
+  return static_cast<clang::Type *>(T)->hasIntegerRepresentation();
+}
 
 bool clang_Type_hasSignedIntegerRepresentation(CXType_ T) {
   return static_cast<clang::Type *>(T)->hasSignedIntegerRepresentation();
@@ -483,10 +485,10 @@ CXRecordType clang_Type_getAsUnionType(CXType_ T) {
   return const_cast<clang::RecordType *>(static_cast<clang::Type *>(T)->getAsUnionType());
 }
 
-// CXComplexType clang_Type_getAsComplexIntegerType(CXType_ T) {
-//   return const_cast<clang::ComplexType *>(
-//       static_cast<clang::Type *>(T)->getAsComplexIntegerType());
-// }
+CXComplexType clang_Type_getAsComplexIntegerType(CXType_ T) {
+  return const_cast<clang::ComplexType *>(
+      static_cast<clang::Type *>(T)->getAsComplexIntegerType());
+}
 
 CXCXXRecordDecl clang_Type_getAsCXXRecordDecl(CXType_ T) {
   return static_cast<clang::Type *>(T)->getAsCXXRecordDecl();
@@ -556,9 +558,9 @@ bool clang_Type_isFixedPointType(CXType_ T) {
   return static_cast<clang::Type *>(T)->isFixedPointType();
 }
 
-// bool clang_Type_isFixedPointOrIntegerType(CXType_ T) {
-//   return static_cast<clang::Type *>(T)->isFixedPointOrIntegerType();
-// }
+bool clang_Type_isFixedPointOrIntegerType(CXType_ T) {
+  return static_cast<clang::Type *>(T)->isFixedPointOrIntegerType();
+}
 
 bool clang_Type_isSaturatedFixedPointType(CXType_ T) {
   return static_cast<clang::Type *>(T)->isSaturatedFixedPointType();
@@ -862,9 +864,23 @@ CXQualType clang_PointerType_getPointeeType(CXPointerType T) {
   return static_cast<clang::PointerType *>(T)->getPointeeType().getAsOpaquePtr();
 }
 
+// MemberPointerType
+CXQualType clang_MemberPointerType_getPointeeType(CXMemberPointerType T) {
+  return static_cast<clang::MemberPointerType *>(T)->getPointeeType().getAsOpaquePtr();
+}
+
+CXType_ clang_MemberPointerType_getClass(CXMemberPointerType T) {
+  return const_cast<clang::Type *>(static_cast<clang::MemberPointerType *>(T)->getClass());
+}
+
 // EnumType
 CXEnumDecl clang_EnumType_getDecl(CXEnumType T) {
   return static_cast<clang::EnumType *>(T)->getDecl();
+}
+
+// FunctionType
+CXQualType clang_FunctionType_getReturnType(CXFunctionType T) {
+  return static_cast<clang::FunctionType *>(T)->getReturnType().getAsOpaquePtr();
 }
 
 // FunctionProtoType
@@ -874,4 +890,55 @@ unsigned clang_FunctionProtoType_getNumParams(CXFunctionProtoType T) {
 
 CXQualType clang_FunctionProtoType_getParamType(CXFunctionProtoType T, unsigned i) {
   return static_cast<clang::FunctionProtoType *>(T)->getParamType(i).getAsOpaquePtr();
+}
+
+// ReferenceType
+CXQualType clang_ReferenceType_getPointeeType(CXReferenceType T) {
+  return static_cast<clang::ReferenceType *>(T)->getPointeeType().getAsOpaquePtr();
+}
+
+// ElaboratedType
+CXQualType clang_ElaboratedType_desugar(CXElaboratedType T) {
+  return static_cast<clang::ElaboratedType *>(T)->desugar().getAsOpaquePtr();
+}
+
+// TemplateSpecializationType
+bool clang_TemplateSpecializationType_isCurrentInstantiation(
+    CXTemplateSpecializationType T) {
+  return static_cast<clang::TemplateSpecializationType *>(T)->isCurrentInstantiation();
+}
+
+bool clang_TemplateSpecializationType_isTypeAlias(CXTemplateSpecializationType T) {
+  return static_cast<clang::TemplateSpecializationType *>(T)->isTypeAlias();
+}
+
+CXQualType clang_TemplateSpecializationType_getAliasedType(CXTemplateSpecializationType T) {
+  return static_cast<clang::TemplateSpecializationType *>(T)
+      ->getAliasedType()
+      .getAsOpaquePtr();
+}
+
+CXTemplateName
+clang_TemplateSpecializationType_getTemplateName(CXTemplateSpecializationType T) {
+  return static_cast<clang::TemplateSpecializationType *>(T)
+      ->getTemplateName()
+      .getAsVoidPointer();
+}
+
+unsigned clang_TemplateSpecializationType_getNumArgs(CXTemplateSpecializationType T) {
+  return static_cast<clang::TemplateSpecializationType *>(T)->getNumArgs();
+}
+
+CXTemplateArgument clang_TemplateSpecializationType_getArg(CXTemplateSpecializationType T,
+                                                           unsigned Idx) {
+  return const_cast<clang::TemplateArgument *>(
+      &static_cast<clang::TemplateSpecializationType *>(T)->getArg(Idx));
+}
+
+bool clang_TemplateSpecializationType_isSugared(CXTemplateSpecializationType T) {
+  return static_cast<clang::TemplateSpecializationType *>(T)->isSugared();
+}
+
+CXQualType clang_TemplateSpecializationType_desugar(CXTemplateSpecializationType T) {
+  return static_cast<clang::TemplateSpecializationType *>(T)->desugar().getAsOpaquePtr();
 }

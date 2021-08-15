@@ -597,9 +597,6 @@ CXQualType clang_EnumDecl_getIntegerType(CXEnumDecl ED) {
   return static_cast<clang::EnumDecl *>(ED)->getIntegerType().getAsOpaquePtr();
 }
 
-
-
-
 // TemplateParameterList
 CXNamedDecl clang_TemplateParameterList_getParam(CXTemplateParameterList TPL,
                                                  unsigned Idx) {
@@ -639,6 +636,11 @@ void clang_TemplateArgument_dispose(CXTemplateArgument TA) {
   delete static_cast<clang::TemplateArgument *>(TA);
 }
 
+CXTemplateArgument_ArgKind clang_TemplateArgument_getKind(CXTemplateArgument TA) {
+  return static_cast<CXTemplateArgument_ArgKind>(
+      static_cast<clang::TemplateArgument *>(TA)->getKind());
+}
+
 bool clang_TemplateArgument_isNull(CXTemplateArgument TA) {
   return static_cast<clang::TemplateArgument *>(TA)->isNull();
 }
@@ -665,6 +667,21 @@ CXQualType clang_TemplateArgument_getParamTypeForDecl(CXTemplateArgument TA) {
 
 CXQualType clang_TemplateArgument_getNullPtrType(CXTemplateArgument TA) {
   return static_cast<clang::TemplateArgument *>(TA)->getNullPtrType().getAsOpaquePtr();
+}
+
+CXTemplateName clang_TemplateArgument_getAsTemplate(CXTemplateArgument TA) {
+  return static_cast<clang::TemplateArgument *>(TA)->getAsTemplate().getAsVoidPointer();
+}
+
+CXTemplateName
+clang_TemplateArgument_getAsTemplateOrTemplatePattern(CXTemplateArgument TA) {
+  return static_cast<clang::TemplateArgument *>(TA)
+      ->getAsTemplateOrTemplatePattern()
+      .getAsVoidPointer();
+}
+
+unsigned clang_TemplateArgument_getNumTemplateExpansions(CXTemplateArgument TA) {
+  return *static_cast<clang::TemplateArgument *>(TA)->getNumTemplateExpansions();
 }
 
 LLVMGenericValueRef clang_TemplateArgument_getAsIntegral(CXTemplateArgument TA) {
@@ -866,6 +883,44 @@ bool clang_CXXRecordDecl_isEmpty(CXCXXRecordDecl CXXRD) {
 }
 
 // TemplateName
+bool clang_TemplateName_isNull(CXTemplateName TN) {
+  return clang::TemplateName::getFromVoidPointer(TN).isNull();
+}
+
+CXTemplateName_NameKind clang_TemplateName_getKind(CXTemplateName TN) {
+  return static_cast<CXTemplateName_NameKind>(
+      clang::TemplateName::getFromVoidPointer(TN).getKind());
+}
+
+CXTemplateDecl clang_TemplateName_getAsTemplateDecl(CXTemplateName TN) {
+  return clang::TemplateName::getFromVoidPointer(TN).getAsTemplateDecl();
+}
+
+CXTemplateName clang_TemplateName_getUnderlying(CXTemplateName TN) {
+  return clang::TemplateName::getFromVoidPointer(TN).getUnderlying().getAsVoidPointer();
+}
+
+CXTemplateName clang_TemplateName_getNameToSubstitute(CXTemplateName TN) {
+  return clang::TemplateName::getFromVoidPointer(TN)
+      .getNameToSubstitute()
+      .getAsVoidPointer();
+}
+
+bool clang_TemplateName_isDependent(CXTemplateName TN) {
+  return clang::TemplateName::getFromVoidPointer(TN).isDependent();
+}
+
+bool clang_TemplateName_isInstantiationDependent(CXTemplateName TN) {
+  return clang::TemplateName::getFromVoidPointer(TN).isInstantiationDependent();
+}
+
+bool clang_TemplateName_containsUnexpandedParameterPack(CXTemplateName TN) {
+  return clang::TemplateName::getFromVoidPointer(TN).containsUnexpandedParameterPack();
+}
+
+void clang_TemplateName_dump(CXTemplateName TN) {
+  return clang::TemplateName::getFromVoidPointer(TN).dump();
+}
 
 // ClassTemplateSpecializationDecl
 CXClassTemplateSpecializationDecl clang_ClassTemplateSpecializationDecl_Create(

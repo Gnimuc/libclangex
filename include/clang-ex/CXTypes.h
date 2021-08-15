@@ -92,6 +92,28 @@ typedef enum CXTagTypeKind {
   CXTagTypeKind_TTK_Enum
 } CXTagTypeKind;
 
+typedef enum CXTemplateName_NameKind {
+  CXTemplateName_NameKind_Template,
+  CXTemplateName_NameKind_OverloadedTemplate,
+  CXTemplateName_NameKind_AssumedTemplate,
+  CXTemplateName_NameKind_QualifiedTemplate,
+  CXTemplateName_NameKind_DependentTemplate,
+  CXTemplateName_NameKind_SubstTemplateTemplateParm,
+  CXTemplateName_NameKind_SubstTemplateTemplateParmPack
+} CXTemplateName_NameKind;
+
+typedef enum CXTemplateArgument_ArgKind {
+  CXTemplateArgument_ArgKind_Null = 0,
+  CXTemplateArgument_ArgKind_Type,
+  CXTemplateArgument_ArgKind_Declaration,
+  CXTemplateArgument_ArgKind_NullPtr,
+  CXTemplateArgument_ArgKind_Integral,
+  CXTemplateArgument_ArgKind_Template,
+  CXTemplateArgument_ArgKind_TemplateExpansion,
+  CXTemplateArgument_ArgKind_Expression,
+  CXTemplateArgument_ArgKind_Pack
+} CXTemplateArgument_ArgKind;
+
 // Type
 typedef void *CXType_;
 typedef void *CXQualType;

@@ -60,7 +60,7 @@ CINDEX_LINKAGE bool clang_Type_isSizelessBuiltinType(CXType_ T);
 
 CINDEX_LINKAGE bool clang_Type_isBuiltinType(CXType_ T);
 
-// CINDEX_LINKAGE bool clang_Type_isIntegerType(CXType_ T);
+CINDEX_LINKAGE bool clang_Type_isIntegerType(CXType_ T);
 
 CINDEX_LINKAGE bool clang_Type_isEnumeralType(CXType_ T);
 
@@ -80,7 +80,7 @@ CINDEX_LINKAGE bool clang_Type_isChar32Type(CXType_ T);
 
 CINDEX_LINKAGE bool clang_Type_isAnyCharacterType(CXType_ T);
 
-// CINDEX_LINKAGE bool clang_Type_isIntegralOrEnumerationType(CXType_ T);
+CINDEX_LINKAGE bool clang_Type_isIntegralOrEnumerationType(CXType_ T);
 
 CINDEX_LINKAGE bool clang_Type_isIntegralOrUnscopedEnumerationType(CXType_ T);
 
@@ -108,7 +108,7 @@ CINDEX_LINKAGE bool clang_Type_isArithmeticType(CXType_ T);
 
 CINDEX_LINKAGE bool clang_Type_isVoidType(CXType_ T);
 
-// CINDEX_LINKAGE bool clang_Type_isScalarType(CXType_ T);
+CINDEX_LINKAGE bool clang_Type_isScalarType(CXType_ T);
 
 CINDEX_LINKAGE bool clang_Type_isAggregateType(CXType_ T);
 
@@ -224,7 +224,7 @@ CINDEX_LINKAGE bool clang_Type_hasPointerRepresentation(CXType_ T);
 
 CINDEX_LINKAGE bool clang_Type_hasObjCPointerRepresentation(CXType_ T);
 
-// CINDEX_LINKAGE bool clang_Type_hasIntegerRepresentation(CXType_ T);
+CINDEX_LINKAGE bool clang_Type_hasIntegerRepresentation(CXType_ T);
 
 CINDEX_LINKAGE bool clang_Type_hasSignedIntegerRepresentation(CXType_ T);
 
@@ -236,7 +236,7 @@ CINDEX_LINKAGE CXRecordType clang_Type_getAsStructureType(CXType_ T);
 
 CINDEX_LINKAGE CXRecordType clang_Type_getAsUnionType(CXType_ T);
 
-// CINDEX_LINKAGE CXComplexType clang_Type_getAsComplexIntegerType(CXType_ T);
+CINDEX_LINKAGE CXComplexType clang_Type_getAsComplexIntegerType(CXType_ T);
 
 CINDEX_LINKAGE CXCXXRecordDecl clang_Type_getAsCXXRecordDecl(CXType_ T);
 
@@ -270,7 +270,7 @@ CINDEX_LINKAGE bool clang_Type_isUnsignedIntegerOrEnumerationType(CXType_ T);
 
 CINDEX_LINKAGE bool clang_Type_isFixedPointType(CXType_ T);
 
-// CINDEX_LINKAGE bool clang_Type_isFixedPointOrIntegerType(CXType_ T);
+CINDEX_LINKAGE bool clang_Type_isFixedPointOrIntegerType(CXType_ T);
 
 CINDEX_LINKAGE bool clang_Type_isSaturatedFixedPointType(CXType_ T);
 
@@ -360,13 +360,53 @@ CINDEX_LINKAGE bool clang_isa_DependentTemplateSpecializationType(CXType_ T);
 // PointerType
 CINDEX_LINKAGE CXQualType clang_PointerType_getPointeeType(CXPointerType T);
 
+// MemberPointerType
+CINDEX_LINKAGE CXQualType clang_MemberPointerType_getPointeeType(CXMemberPointerType T);
+
+CINDEX_LINKAGE CXType_ clang_MemberPointerType_getClass(CXMemberPointerType T);
+
 // EnumType
 CINDEX_LINKAGE CXEnumDecl clang_EnumType_getDecl(CXEnumType T);
+
+// FunctionType
+CINDEX_LINKAGE CXQualType clang_FunctionType_getReturnType(CXFunctionType T);
 
 // FunctionProtoType
 CINDEX_LINKAGE unsigned clang_FunctionProtoType_getNumParams(CXFunctionProtoType T);
 
-CINDEX_LINKAGE CXQualType clang_FunctionProtoType_getParamType(CXFunctionProtoType T, unsigned i);
+CINDEX_LINKAGE CXQualType clang_FunctionProtoType_getParamType(CXFunctionProtoType T,
+                                                               unsigned i);
+
+// ReferenceType
+CINDEX_LINKAGE CXQualType clang_ReferenceType_getPointeeType(CXReferenceType T);
+
+// ElaboratedType
+CINDEX_LINKAGE CXQualType clang_ElaboratedType_desugar(CXElaboratedType T);
+
+// TemplateSpecializationType
+CINDEX_LINKAGE bool
+clang_TemplateSpecializationType_isCurrentInstantiation(CXTemplateSpecializationType T);
+
+CINDEX_LINKAGE bool
+clang_TemplateSpecializationType_isTypeAlias(CXTemplateSpecializationType T);
+
+CINDEX_LINKAGE CXQualType
+clang_TemplateSpecializationType_getAliasedType(CXTemplateSpecializationType T);
+
+CINDEX_LINKAGE CXTemplateName
+clang_TemplateSpecializationType_getTemplateName(CXTemplateSpecializationType T);
+
+CINDEX_LINKAGE unsigned
+clang_TemplateSpecializationType_getNumArgs(CXTemplateSpecializationType T);
+
+CINDEX_LINKAGE CXTemplateArgument
+clang_TemplateSpecializationType_getArg(CXTemplateSpecializationType T, unsigned Idx);
+
+CINDEX_LINKAGE bool
+clang_TemplateSpecializationType_isSugared(CXTemplateSpecializationType T);
+
+CINDEX_LINKAGE CXQualType
+clang_TemplateSpecializationType_desugar(CXTemplateSpecializationType T);
 
 #ifdef __cplusplus
 }

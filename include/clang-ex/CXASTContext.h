@@ -323,9 +323,6 @@ CINDEX_LINKAGE CXEnumDecl clang_EnumDecl_getDefinition(CXEnumDecl ED);
 
 CINDEX_LINKAGE CXQualType clang_EnumDecl_getIntegerType(CXEnumDecl ED);
 
-
-
-
 // TemplateParameterList
 CINDEX_LINKAGE CXNamedDecl clang_TemplateParameterList_getParam(CXTemplateParameterList TPL,
                                                                 unsigned Idx);
@@ -356,6 +353,9 @@ CINDEX_LINKAGE CXTemplateArgument clang_TemplateArgument_constructFromIntegral(
 
 CINDEX_LINKAGE void clang_TemplateArgument_dispose(CXTemplateArgument TA);
 
+CINDEX_LINKAGE CXTemplateArgument_ArgKind
+clang_TemplateArgument_getKind(CXTemplateArgument TA);
+
 CINDEX_LINKAGE bool clang_TemplateArgument_isNull(CXTemplateArgument TA);
 
 CINDEX_LINKAGE bool clang_TemplateArgument_isDependent(CXTemplateArgument TA);
@@ -369,6 +369,14 @@ CINDEX_LINKAGE CXValueDecl clang_TemplateArgument_getAsDecl(CXTemplateArgument T
 CINDEX_LINKAGE CXQualType clang_TemplateArgument_getParamTypeForDecl(CXTemplateArgument TA);
 
 CINDEX_LINKAGE CXQualType clang_TemplateArgument_getNullPtrType(CXTemplateArgument TA);
+
+CINDEX_LINKAGE CXTemplateName clang_TemplateArgument_getAsTemplate(CXTemplateArgument TA);
+
+CINDEX_LINKAGE CXTemplateName
+clang_TemplateArgument_getAsTemplateOrTemplatePattern(CXTemplateArgument TA);
+
+CINDEX_LINKAGE unsigned
+clang_TemplateArgument_getNumTemplateExpansions(CXTemplateArgument TA);
 
 CINDEX_LINKAGE LLVMGenericValueRef
 clang_TemplateArgument_getAsIntegral(CXTemplateArgument TA);
@@ -462,6 +470,23 @@ CINDEX_LINKAGE bool clang_CXXRecordDecl_isCLike(CXCXXRecordDecl CXXRD);
 CINDEX_LINKAGE bool clang_CXXRecordDecl_isEmpty(CXCXXRecordDecl CXXRD);
 
 // TemplateName
+CINDEX_LINKAGE bool clang_TemplateName_isNull(CXTemplateName TN);
+
+CINDEX_LINKAGE CXTemplateName_NameKind clang_TemplateName_getKind(CXTemplateName TN);
+
+CINDEX_LINKAGE CXTemplateDecl clang_TemplateName_getAsTemplateDecl(CXTemplateName TN);
+
+CINDEX_LINKAGE CXTemplateName clang_TemplateName_getUnderlying(CXTemplateName TN);
+
+CINDEX_LINKAGE CXTemplateName clang_TemplateName_getNameToSubstitute(CXTemplateName TN);
+
+CINDEX_LINKAGE bool clang_TemplateName_isDependent(CXTemplateName TN);
+
+CINDEX_LINKAGE bool clang_TemplateName_isInstantiationDependent(CXTemplateName TN);
+
+CINDEX_LINKAGE bool clang_TemplateName_containsUnexpandedParameterPack(CXTemplateName TN);
+
+CINDEX_LINKAGE void clang_TemplateName_dump(CXTemplateName TN);
 
 // ClassTemplateSpecializationDecl
 CINDEX_LINKAGE CXClassTemplateSpecializationDecl
