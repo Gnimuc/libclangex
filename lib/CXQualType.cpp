@@ -865,6 +865,123 @@ bool clang_isa_DependentTemplateSpecializationType(CXType_ T) {
       static_cast<clang::Type *>(T));
 }
 
+// BuiltinTypes
+bool clang_isa_BuiltinType_Void(CXType_ T) {
+  return static_cast<clang::BuiltinType *>(T)->getKind() == clang::BuiltinType::Void;
+}
+
+bool clang_isa_BuiltinType_Bool(CXType_ T) {
+  return static_cast<clang::BuiltinType *>(T)->getKind() == clang::BuiltinType::Bool;
+}
+
+bool clang_isa_BuiltinType_Char_U(CXType_ T) {
+  return static_cast<clang::BuiltinType *>(T)->getKind() == clang::BuiltinType::Char_U;
+}
+
+bool clang_isa_BuiltinType_UChar(CXType_ T) {
+  return static_cast<clang::BuiltinType *>(T)->getKind() == clang::BuiltinType::UChar;
+}
+
+bool clang_isa_BuiltinType_WChar_U(CXType_ T) {
+  return static_cast<clang::BuiltinType *>(T)->getKind() == clang::BuiltinType::WChar_U;
+}
+
+bool clang_isa_BuiltinType_Char8(CXType_ T) {
+  return static_cast<clang::BuiltinType *>(T)->getKind() == clang::BuiltinType::Char8;
+}
+
+bool clang_isa_BuiltinType_Char16(CXType_ T) {
+  return static_cast<clang::BuiltinType *>(T)->getKind() == clang::BuiltinType::Char16;
+}
+
+bool clang_isa_BuiltinType_Char32(CXType_ T) {
+  return static_cast<clang::BuiltinType *>(T)->getKind() == clang::BuiltinType::Char32;
+}
+
+bool clang_isa_BuiltinType_UShort(CXType_ T) {
+  return static_cast<clang::BuiltinType *>(T)->getKind() == clang::BuiltinType::UShort;
+}
+
+bool clang_isa_BuiltinType_UInt(CXType_ T) {
+  return static_cast<clang::BuiltinType *>(T)->getKind() == clang::BuiltinType::UInt;
+}
+
+bool clang_isa_BuiltinType_ULong(CXType_ T) {
+  return static_cast<clang::BuiltinType *>(T)->getKind() == clang::BuiltinType::ULong;
+}
+
+bool clang_isa_BuiltinType_ULongLong(CXType_ T) {
+  return static_cast<clang::BuiltinType *>(T)->getKind() == clang::BuiltinType::ULongLong;
+}
+
+bool clang_isa_BuiltinType_UInt128(CXType_ T) {
+  return static_cast<clang::BuiltinType *>(T)->getKind() == clang::BuiltinType::UInt128;
+}
+
+bool clang_isa_BuiltinType_Char_S(CXType_ T) {
+  return static_cast<clang::BuiltinType *>(T)->getKind() == clang::BuiltinType::Char_S;
+}
+
+bool clang_isa_BuiltinType_SChar(CXType_ T) {
+  return static_cast<clang::BuiltinType *>(T)->getKind() == clang::BuiltinType::SChar;
+}
+
+bool clang_isa_BuiltinType_WChar_S(CXType_ T) {
+  return static_cast<clang::BuiltinType *>(T)->getKind() == clang::BuiltinType::WChar_S;
+}
+
+bool clang_isa_BuiltinType_Short(CXType_ T) {
+  return static_cast<clang::BuiltinType *>(T)->getKind() == clang::BuiltinType::Short;
+}
+
+bool clang_isa_BuiltinType_Int(CXType_ T) {
+  return static_cast<clang::BuiltinType *>(T)->getKind() == clang::BuiltinType::Int;
+}
+
+bool clang_isa_BuiltinType_Long(CXType_ T) {
+  return static_cast<clang::BuiltinType *>(T)->getKind() == clang::BuiltinType::Long;
+}
+
+bool clang_isa_BuiltinType_LongLong(CXType_ T) {
+  return static_cast<clang::BuiltinType *>(T)->getKind() == clang::BuiltinType::LongLong;
+}
+
+bool clang_isa_BuiltinType_Int128(CXType_ T) {
+  return static_cast<clang::BuiltinType *>(T)->getKind() == clang::BuiltinType::Int128;
+}
+
+bool clang_isa_BuiltinType_Half(CXType_ T) {
+  return static_cast<clang::BuiltinType *>(T)->getKind() == clang::BuiltinType::Half;
+}
+
+bool clang_isa_BuiltinType_Float(CXType_ T) {
+  return static_cast<clang::BuiltinType *>(T)->getKind() == clang::BuiltinType::Float;
+}
+
+bool clang_isa_BuiltinType_Double(CXType_ T) {
+  return static_cast<clang::BuiltinType *>(T)->getKind() == clang::BuiltinType::Double;
+}
+
+bool clang_isa_BuiltinType_LongDouble(CXType_ T) {
+  return static_cast<clang::BuiltinType *>(T)->getKind() == clang::BuiltinType::LongDouble;
+}
+
+bool clang_isa_BuiltinType_Float16(CXType_ T) {
+  return static_cast<clang::BuiltinType *>(T)->getKind() == clang::BuiltinType::Float16;
+}
+
+bool clang_isa_BuiltinType_BFloat16(CXType_ T) {
+  return static_cast<clang::BuiltinType *>(T)->getKind() == clang::BuiltinType::BFloat16;
+}
+
+bool clang_isa_BuiltinType_Float128(CXType_ T) {
+  return static_cast<clang::BuiltinType *>(T)->getKind() == clang::BuiltinType::Float128;
+}
+
+bool clang_isa_BuiltinType_NullPtr(CXType_ T) {
+  return static_cast<clang::BuiltinType *>(T)->getKind() == clang::BuiltinType::NullPtr;
+}
+
 // PointerType
 CXQualType clang_PointerType_getPointeeType(CXPointerType T) {
   return static_cast<clang::PointerType *>(T)->getPointeeType().getAsOpaquePtr();

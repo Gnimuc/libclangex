@@ -357,6 +357,65 @@ CINDEX_LINKAGE bool clang_isa_DependentNameType(CXType_ T);
 
 CINDEX_LINKAGE bool clang_isa_DependentTemplateSpecializationType(CXType_ T);
 
+// BuiltinTypes
+CINDEX_LINKAGE bool clang_isa_BuiltinType_Void(CXType_ T);
+
+CINDEX_LINKAGE bool clang_isa_BuiltinType_Bool(CXType_ T);
+
+CINDEX_LINKAGE bool clang_isa_BuiltinType_Char_U(CXType_ T);
+
+CINDEX_LINKAGE bool clang_isa_BuiltinType_UChar(CXType_ T);
+
+CINDEX_LINKAGE bool clang_isa_BuiltinType_WChar_U(CXType_ T);
+
+CINDEX_LINKAGE bool clang_isa_BuiltinType_Char8(CXType_ T);
+
+CINDEX_LINKAGE bool clang_isa_BuiltinType_Char16(CXType_ T);
+
+CINDEX_LINKAGE bool clang_isa_BuiltinType_Char32(CXType_ T);
+
+CINDEX_LINKAGE bool clang_isa_BuiltinType_UShort(CXType_ T);
+
+CINDEX_LINKAGE bool clang_isa_BuiltinType_UInt(CXType_ T);
+
+CINDEX_LINKAGE bool clang_isa_BuiltinType_ULong(CXType_ T);
+
+CINDEX_LINKAGE bool clang_isa_BuiltinType_ULongLong(CXType_ T);
+
+CINDEX_LINKAGE bool clang_isa_BuiltinType_UInt128(CXType_ T);
+
+CINDEX_LINKAGE bool clang_isa_BuiltinType_Char_S(CXType_ T);
+
+CINDEX_LINKAGE bool clang_isa_BuiltinType_SChar(CXType_ T);
+
+CINDEX_LINKAGE bool clang_isa_BuiltinType_WChar_S(CXType_ T);
+
+CINDEX_LINKAGE bool clang_isa_BuiltinType_Short(CXType_ T);
+
+CINDEX_LINKAGE bool clang_isa_BuiltinType_Int(CXType_ T);
+
+CINDEX_LINKAGE bool clang_isa_BuiltinType_Long(CXType_ T);
+
+CINDEX_LINKAGE bool clang_isa_BuiltinType_LongLong(CXType_ T);
+
+CINDEX_LINKAGE bool clang_isa_BuiltinType_Int128(CXType_ T);
+
+CINDEX_LINKAGE bool clang_isa_BuiltinType_Half(CXType_ T);
+
+CINDEX_LINKAGE bool clang_isa_BuiltinType_Float(CXType_ T);
+
+CINDEX_LINKAGE bool clang_isa_BuiltinType_Double(CXType_ T);
+
+CINDEX_LINKAGE bool clang_isa_BuiltinType_LongDouble(CXType_ T);
+
+CINDEX_LINKAGE bool clang_isa_BuiltinType_Float16(CXType_ T);
+
+CINDEX_LINKAGE bool clang_isa_BuiltinType_BFloat16(CXType_ T);
+
+CINDEX_LINKAGE bool clang_isa_BuiltinType_Float128(CXType_ T);
+
+CINDEX_LINKAGE bool clang_isa_BuiltinType_NullPtr(CXType_ T);
+
 // PointerType
 CINDEX_LINKAGE CXQualType clang_PointerType_getPointeeType(CXPointerType T);
 
