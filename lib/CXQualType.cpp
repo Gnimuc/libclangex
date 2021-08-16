@@ -53,16 +53,22 @@ CXQualType clang_QualType_withRestrict(CXQualType OpaquePtr) {
   return clang::QualType::getFromOpaquePtr(OpaquePtr).withRestrict().getAsOpaquePtr();
 }
 
-void clang_QualType_addConst(CXQualType OpaquePtr) {
-  clang::QualType::getFromOpaquePtr(OpaquePtr).addConst();
+CXQualType clang_QualType_addConst(CXQualType OpaquePtr) {
+  clang::QualType T = clang::QualType::getFromOpaquePtr(OpaquePtr);
+  T.addConst();
+  return T.getAsOpaquePtr();
 }
 
-void clang_QualType_addVolatile(CXQualType OpaquePtr) {
-  clang::QualType::getFromOpaquePtr(OpaquePtr).addVolatile();
+CXQualType clang_QualType_addVolatile(CXQualType OpaquePtr) {
+  clang::QualType T = clang::QualType::getFromOpaquePtr(OpaquePtr);
+  T.addVolatile();
+  return T.getAsOpaquePtr();
 }
 
-void clang_QualType_addRestrict(CXQualType OpaquePtr) {
-  clang::QualType::getFromOpaquePtr(OpaquePtr).addRestrict();
+CXQualType clang_QualType_addRestrict(CXQualType OpaquePtr) {
+  clang::QualType T = clang::QualType::getFromOpaquePtr(OpaquePtr);
+  T.addRestrict();
+  return T.getAsOpaquePtr();
 }
 
 bool clang_QualType_isLocalConstQualified(CXQualType OpaquePtr) {
@@ -871,6 +877,11 @@ CXQualType clang_MemberPointerType_getPointeeType(CXMemberPointerType T) {
 
 CXType_ clang_MemberPointerType_getClass(CXMemberPointerType T) {
   return const_cast<clang::Type *>(static_cast<clang::MemberPointerType *>(T)->getClass());
+}
+
+// TypedefType
+CXQualType clang_TypedefType_desugar(CXTypedefType T) {
+  return static_cast<clang::TypedefType *>(T)->desugar().getAsOpaquePtr();
 }
 
 // EnumType

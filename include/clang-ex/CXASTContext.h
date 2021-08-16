@@ -216,6 +216,8 @@ CINDEX_LINKAGE CXIdentifierInfo clang_NamedDecl_getIdentifier(CXNamedDecl ND);
 
 CINDEX_LINKAGE const char *clang_NamedDecl_getName(CXNamedDecl ND);
 
+CINDEX_LINKAGE CXDeclarationName clang_NamedDecl_getDeclName(CXNamedDecl ND);
+
 CINDEX_LINKAGE void clang_NamedDecl_setDeclName(CXNamedDecl ND, CXDeclarationName DN);
 
 CINDEX_LINKAGE bool clang_NamedDecl_hasLinkage(CXNamedDecl ND);

@@ -27,9 +27,9 @@ CINDEX_LINKAGE CXQualType clang_QualType_withConst(CXQualType OpaquePtr);
 CINDEX_LINKAGE CXQualType clang_QualType_withVolatile(CXQualType OpaquePtr);
 CINDEX_LINKAGE CXQualType clang_QualType_withRestrict(CXQualType OpaquePtr);
 
-CINDEX_LINKAGE void clang_QualType_addConst(CXQualType OpaquePtr);
-CINDEX_LINKAGE void clang_QualType_addVolatile(CXQualType OpaquePtr);
-CINDEX_LINKAGE void clang_QualType_addRestrict(CXQualType OpaquePtr);
+CINDEX_LINKAGE CXQualType clang_QualType_addConst(CXQualType OpaquePtr);
+CINDEX_LINKAGE CXQualType clang_QualType_addVolatile(CXQualType OpaquePtr);
+CINDEX_LINKAGE CXQualType clang_QualType_addRestrict(CXQualType OpaquePtr);
 
 CINDEX_LINKAGE bool clang_QualType_isLocalConstQualified(CXQualType OpaquePtr);
 CINDEX_LINKAGE bool clang_QualType_isLocalRestrictQualified(CXQualType OpaquePtr);
@@ -364,6 +364,9 @@ CINDEX_LINKAGE CXQualType clang_PointerType_getPointeeType(CXPointerType T);
 CINDEX_LINKAGE CXQualType clang_MemberPointerType_getPointeeType(CXMemberPointerType T);
 
 CINDEX_LINKAGE CXType_ clang_MemberPointerType_getClass(CXMemberPointerType T);
+
+// TypedefType
+CINDEX_LINKAGE CXQualType clang_TypedefType_desugar(CXTypedefType T);
 
 // EnumType
 CINDEX_LINKAGE CXEnumDecl clang_EnumType_getDecl(CXEnumType T);
