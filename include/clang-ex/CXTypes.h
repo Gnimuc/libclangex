@@ -3,6 +3,7 @@
 
 #include "clang-c/Platform.h"
 #include <stdbool.h>
+#include <stdint.h>
 #include <time.h>
 
 #ifdef __cplusplus
@@ -84,36 +85,6 @@ typedef void *CXDeclarationName;
 typedef void *CXTemplateName;
 typedef void *CXTemplateArgument;
 
-typedef enum CXTagTypeKind {
-  CXTagTypeKind_TTK_Struct,
-  CXTagTypeKind_TTK_Interface,
-  CXTagTypeKind_TTK_Union,
-  CXTagTypeKind_TTK_Class,
-  CXTagTypeKind_TTK_Enum
-} CXTagTypeKind;
-
-typedef enum CXTemplateName_NameKind {
-  CXTemplateName_NameKind_Template,
-  CXTemplateName_NameKind_OverloadedTemplate,
-  CXTemplateName_NameKind_AssumedTemplate,
-  CXTemplateName_NameKind_QualifiedTemplate,
-  CXTemplateName_NameKind_DependentTemplate,
-  CXTemplateName_NameKind_SubstTemplateTemplateParm,
-  CXTemplateName_NameKind_SubstTemplateTemplateParmPack
-} CXTemplateName_NameKind;
-
-typedef enum CXTemplateArgument_ArgKind {
-  CXTemplateArgument_ArgKind_Null = 0,
-  CXTemplateArgument_ArgKind_Type,
-  CXTemplateArgument_ArgKind_Declaration,
-  CXTemplateArgument_ArgKind_NullPtr,
-  CXTemplateArgument_ArgKind_Integral,
-  CXTemplateArgument_ArgKind_Template,
-  CXTemplateArgument_ArgKind_TemplateExpansion,
-  CXTemplateArgument_ArgKind_Expression,
-  CXTemplateArgument_ArgKind_Pack
-} CXTemplateArgument_ArgKind;
-
 // Type
 typedef void *CXType_;
 typedef void *CXQualType;
@@ -154,75 +125,12 @@ typedef void *CXSema;
 typedef void *CXScope;
 typedef void *CXLookupResult;
 
-typedef enum CXDeclaratorContext {
-  CXDeclaratorContext_File,
-  CXDeclaratorContext_Prototype,
-  CXDeclaratorContext_ObjCResult,
-  CXDeclaratorContext_ObjCParameter,
-  CXDeclaratorContext_KNRTypeList,
-  CXDeclaratorContext_TypeName,
-  CXDeclaratorContext_FunctionalCast,
-  CXDeclaratorContext_Member,
-  CXDeclaratorContext_Block,
-  CXDeclaratorContext_ForInit,
-  CXDeclaratorContext_SelectionInit,
-  CXDeclaratorContext_Condition,
-  CXDeclaratorContext_TemplateParam,
-  CXDeclaratorContext_CXXNew,
-  CXDeclaratorContext_CXXCatch,
-  CXDeclaratorContext_ObjCCatch,
-  CXDeclaratorContext_BlockLiteral,
-  CXDeclaratorContext_LambdaExpr,
-  CXDeclaratorContext_LambdaExprParameter,
-  CXDeclaratorContext_ConversionId,
-  CXDeclaratorContext_TrailingReturn,
-  CXDeclaratorContext_TrailingReturnVar,
-  CXDeclaratorContext_TemplateArg,
-  CXDeclaratorContext_TemplateTypeArg,
-  CXDeclaratorContext_AliasDecl,
-  CXDeclaratorContext_AliasTemplate,
-  CXDeclaratorContext_RequiresExpr
-} CXDeclaratorContext;
-
-typedef enum CXDeclSpecContext {
-  CXDeclSpecContext_DSC_normal,
-  CXDeclSpecContext_DSC_class,
-  CXDeclSpecContext_DSC_type_specifier,
-  CXDeclSpecContext_DSC_trailing,
-  CXDeclSpecContext_DSC_alias_declaration,
-  CXDeclSpecContext_DSC_top_level,
-  CXDeclSpecContext_DSC_template_param,
-  CXDeclSpecContext_DSC_template_type_arg,
-  CXDeclSpecContext_DSC_objc_method_result,
-  CXDeclSpecContext_DSC_condition
-} CXDeclSpecContext;
-
 // Parser
 typedef void *CXParser;
 
 // Action
 typedef void *CXFrontendAction;
 typedef void *CXCodeGenAction;
-
-// Lookup
-typedef enum CXLookupNameKind {
-  CXLookupNameKind_LookupOrdinaryName = 0,
-  CXLookupNameKind_LookupTagName,
-  CXLookupNameKind_LookupLabel,
-  CXLookupNameKind_LookupMemberName,
-  CXLookupNameKind_LookupOperatorName,
-  CXLookupNameKind_LookupDestructorName,
-  CXLookupNameKind_LookupNestedNameSpecifierName,
-  CXLookupNameKind_LookupNamespaceName,
-  CXLookupNameKind_LookupUsingDeclName,
-  CXLookupNameKind_LookupRedeclarationWithLinkage,
-  CXLookupNameKind_LookupLocalFriendName,
-  CXLookupNameKind_LookupObjCProtocolName,
-  CXLookupNameKind_LookupObjCImplicitSelfParam,
-  CXLookupNameKind_LookupOMPReductionName,
-  CXLookupNameKind_LookupOMPMapperName,
-  CXLookupNameKind_LookupAnyName
-} CXLookupNameKind;
 
 #ifdef __cplusplus
 }
