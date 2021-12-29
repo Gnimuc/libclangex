@@ -59,5 +59,4 @@ endif(WIN32)
 
 target_link_libraries(clangex LINK_PUBLIC ${ClangCPP} ${LLVM})
 
-include(cmake/public_headers.cmake)
 include(cmake/install_config.cmake)

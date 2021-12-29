@@ -12,8 +12,10 @@ install(TARGETS clangex
         RUNTIME DESTINATION bin
         LIBRARY DESTINATION lib
         ARCHIVE DESTINATION lib/static
-        INCLUDES DESTINATION include/clang-ex
-        PUBLIC_HEADER DESTINATION include/clang-ex)
+        INCLUDES DESTINATION include/clang-ex)
+
+install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/include/clang-ex/ DESTINATION include/clang-ex
+        FILES_MATCHING PATTERN "*.h")
 
 # Install CMake targets
 install(EXPORT clangexTargets
