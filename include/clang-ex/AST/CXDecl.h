@@ -16,66 +16,9 @@ typedef enum CXTagTypeKind {
   CXTagTypeKind_TTK_Enum
 } CXTagTypeKind;
 
-CINDEX_LINKAGE CXSourceLocation_ clang_Decl_getLocation(CXDecl DC);
-
-CINDEX_LINKAGE CXSourceLocation_ clang_Decl_getBeginLoc(CXDecl DC);
-
-CINDEX_LINKAGE CXSourceLocation_ clang_Decl_getEndLoc(CXDecl DC);
-
-CINDEX_LINKAGE const char *clang_Decl_getDeclKindName(CXDecl DC);
-
-CINDEX_LINKAGE CXDecl clang_Decl_getNextDeclInContext(CXDecl DC);
-
-CINDEX_LINKAGE CXDeclContext clang_Decl_getDeclContext(CXDecl DC);
-
-CINDEX_LINKAGE CXDecl clang_Decl_getNonClosureContext(CXDecl DC);
-
-CINDEX_LINKAGE CXTranslationUnitDecl clang_Decl_getTranslationUnitDecl(CXDecl DC);
-
-CINDEX_LINKAGE bool clang_Decl_isInAnonymousNamespace(CXDecl DC);
-
-CINDEX_LINKAGE bool clang_Decl_isInStdNamespace(CXDecl DC);
-
-CINDEX_LINKAGE CXASTContext clang_Decl_getASTContext(CXDecl DC);
-
-CINDEX_LINKAGE CXLangOptions clang_Decl_getLangOpts(CXDecl DC);
-
-CINDEX_LINKAGE CXDeclContext clang_Decl_getLexicalDeclContext(CXDecl DC);
-
-CINDEX_LINKAGE bool clang_Decl_isOutOfLine(CXDecl DC);
-
-CINDEX_LINKAGE void clang_Decl_setDeclContext(CXDecl DC, CXDeclContext Ctx);
-
-CINDEX_LINKAGE void clang_Decl_setLexicalDeclContext(CXDecl DC, CXDeclContext Ctx);
-
-CINDEX_LINKAGE bool clang_Decl_isTemplated(CXDecl DC);
-
-CINDEX_LINKAGE bool clang_Decl_isCanonicalDecl(CXDecl DC);
-
-CINDEX_LINKAGE CXDecl clang_Decl_getPreviousDecl(CXDecl DC);
-
-CINDEX_LINKAGE bool clang_Decl_isFirstDecl(CXDecl DC);
-
-CINDEX_LINKAGE CXDecl clang_Decl_getMostRecentDecl(CXDecl DC);
-
-CINDEX_LINKAGE bool clang_Decl_isTemplateParameter(CXDecl DC);
-
-CINDEX_LINKAGE bool clang_Decl_isTemplateDecl(CXDecl DC);
-
-CINDEX_LINKAGE CXTemplateDecl clang_Decl_getDescribedTemplate(CXDecl DC);
-
-CINDEX_LINKAGE CXTemplateParameterList clang_Decl_getDescribedTemplateParams(CXDecl DC);
-
-CINDEX_LINKAGE void clang_Decl_EnableStatistics(void);
-
-CINDEX_LINKAGE void clang_Decl_PrintStats(void);
-
-CINDEX_LINKAGE void clang_Decl_dumpColor(CXDecl DC);
-
-// Decl Cast
-CINDEX_LINKAGE CXClassTemplateDecl clang_Decl_castToClassTemplateDecl(CXDecl DC);
-
-CINDEX_LINKAGE CXValueDecl clang_Decl_castToValueDecl(CXDecl DC);
+// TranslationUnitDecl
+CINDEX_LINKAGE CXASTContext
+clang_TranslationUnitDecl_getASTContext(CXTranslationUnitDecl TUD);
 
 // NamedDecl
 CINDEX_LINKAGE CXIdentifierInfo clang_NamedDecl_getIdentifier(CXNamedDecl ND);
