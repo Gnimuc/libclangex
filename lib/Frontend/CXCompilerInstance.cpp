@@ -47,6 +47,13 @@ CXDiagnosticConsumer clang_CompilerInstance_getDiagnosticClient(CXCompilerInstan
   return &DC;
 }
 
+void clang_CompilerInstance_createDiagnostics(CXCompilerInstance CI,
+                                              CXDiagnosticConsumer DC,
+                                              bool ShouldOwnClient) {
+  return static_cast<clang::CompilerInstance *>(CI)->createDiagnostics(
+      static_cast<clang::DiagnosticConsumer *>(DC), ShouldOwnClient);
+}
+
 // FileManager
 bool clang_CompilerInstance_hasFileManager(CXCompilerInstance CI) {
   return static_cast<clang::CompilerInstance *>(CI)->hasFileManager();
