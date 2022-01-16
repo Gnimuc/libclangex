@@ -1,6 +1,10 @@
 #ifndef LIBCLANGEX_CXDECL_H
 #define LIBCLANGEX_CXDECL_H
 
+#include "clang-ex/AST/CXType.h"
+#include "clang-ex/Basic/CXLinkage.h"
+#include "clang-ex/Basic/CXPragmaKinds.h"
+#include "clang-ex/Basic/CXVisibility.h"
 #include "clang-ex/CXTypes.h"
 #include "clang-c/Platform.h"
 
@@ -8,17 +12,31 @@
 extern "C" {
 #endif
 
-typedef enum CXTagTypeKind {
-  CXTagTypeKind_TTK_Struct,
-  CXTagTypeKind_TTK_Interface,
-  CXTagTypeKind_TTK_Union,
-  CXTagTypeKind_TTK_Class,
-  CXTagTypeKind_TTK_Enum
-} CXTagTypeKind;
-
 // TranslationUnitDecl
 CINDEX_LINKAGE CXASTContext
 clang_TranslationUnitDecl_getASTContext(CXTranslationUnitDecl TUD);
+
+CINDEX_LINKAGE CXNamespaceDecl
+clang_TranslationUnitDecl_getAnonymousNamespace(CXTranslationUnitDecl TUD);
+
+CINDEX_LINKAGE void
+clang_TranslationUnitDecl_setAnonymousNamespace(CXTranslationUnitDecl TUD,
+                                                CXNamespaceDecl ND);
+
+// PragmaCommentDecl
+CINDEX_LINKAGE CXPragmaMSCommentKind
+clang_PragmaCommentDecl_getCommentKind(CXPragmaCommentDecl PCD);
+
+CINDEX_LINKAGE const char *clang_PragmaCommentDecl_getArg(CXPragmaCommentDecl PCD);
+
+// PragmaDetectMismatchDecl
+CINDEX_LINKAGE const char *
+clang_PragmaDetectMismatchDecl_getName(CXPragmaDetectMismatchDecl PDMD);
+
+CINDEX_LINKAGE const char *
+clang_PragmaDetectMismatchDecl_getValue(CXPragmaDetectMismatchDecl PDMD);
+
+// ExternCContextDecl
 
 // NamedDecl
 CINDEX_LINKAGE CXIdentifierInfo clang_NamedDecl_getIdentifier(CXNamedDecl ND);
@@ -29,11 +47,18 @@ CINDEX_LINKAGE CXDeclarationName clang_NamedDecl_getDeclName(CXNamedDecl ND);
 
 CINDEX_LINKAGE void clang_NamedDecl_setDeclName(CXNamedDecl ND, CXDeclarationName DN);
 
+CINDEX_LINKAGE bool clang_NamedDecl_declarationReplaces(CXNamedDecl ND, CXNamedDecl OldD,
+                                                        bool IsKnownNewer);
+
 CINDEX_LINKAGE bool clang_NamedDecl_hasLinkage(CXNamedDecl ND);
 
 CINDEX_LINKAGE bool clang_NamedDecl_isCXXClassMember(CXNamedDecl ND);
 
 CINDEX_LINKAGE bool clang_NamedDecl_isCXXInstanceMember(CXNamedDecl ND);
+
+CINDEX_LINKAGE CXLinkage clang_NamedDecl_getLinkageInternal(CXNamedDecl ND);
+
+CINDEX_LINKAGE CXLinkage clang_NamedDecl_getFormalLinkage(CXNamedDecl ND);
 
 CINDEX_LINKAGE bool clang_NamedDecl_hasExternalFormalLinkage(CXNamedDecl ND);
 
@@ -41,14 +66,78 @@ CINDEX_LINKAGE bool clang_NamedDecl_isExternallyVisible(CXNamedDecl ND);
 
 CINDEX_LINKAGE bool clang_NamedDecl_isExternallyDeclarable(CXNamedDecl ND);
 
+CINDEX_LINKAGE CXVisibility clang_NamedDecl_getVisibility(CXNamedDecl ND);
+
+// getLinkageAndVisibility
+// getExplicitVisibility
+
+CINDEX_LINKAGE bool clang_NamedDecl_isLinkageValid(CXNamedDecl ND);
+
+CINDEX_LINKAGE bool clang_NamedDecl_hasLinkageBeenComputed(CXNamedDecl ND);
+
 CINDEX_LINKAGE CXNamedDecl clang_NamedDecl_getUnderlyingDecl(CXNamedDecl ND);
 
 CINDEX_LINKAGE CXNamedDecl clang_NamedDecl_getMostRecentDecl(CXNamedDecl ND);
 
-CINDEX_LINKAGE bool clang_NamedDecl_isOutOfLine(CXNamedDecl ND);
+// getObjCFStringFormattingFamily
+
+CINDEX_LINKAGE CXNamedDecl clang_NamedDecl_getUnderlyingDecl(CXNamedDecl ND);
+
+CINDEX_LINKAGE CXNamedDecl clang_NamedDecl_getMostRecentDecl(CXNamedDecl ND);
 
 // NamedDecl Cast
 CINDEX_LINKAGE CXTypeDecl clang_NamedDecl_castToTypeDecl(CXNamedDecl ND);
+
+// LabelDecl
+// getStmt
+// setStmt
+
+CINDEX_LINKAGE bool clang_LabelDecl_isGnuLocal(CXLabelDecl LD);
+
+CINDEX_LINKAGE void clang_LabelDecl_setLocStart(CXLabelDecl LD, CXSourceLocation_ Loc);
+
+// getSourceRange
+
+CINDEX_LINKAGE bool clang_LabelDecl_isMSAsmLabel(CXLabelDecl LD);
+
+CINDEX_LINKAGE bool clang_LabelDecl_isResolvedMSAsmLabel(CXLabelDecl LD);
+
+// setMSAsmLabel
+
+CINDEX_LINKAGE const char *clang_LabelDecl_getMSAsmLabel(CXLabelDecl LD);
+
+CINDEX_LINKAGE void clang_LabelDecl_setMSAsmLabelResolved(CXLabelDecl LD);
+
+// NamespaceDecl
+CINDEX_LINKAGE bool clang_NamespaceDecl_isAnonymousNamespace(CXNamespaceDecl ND);
+
+CINDEX_LINKAGE bool clang_NamespaceDecl_isInline(CXNamespaceDecl ND);
+
+CINDEX_LINKAGE void clang_NamespaceDecl_setInline(CXNamespaceDecl ND, bool Inline);
+
+CINDEX_LINKAGE CXNamespaceDecl clang_NamespaceDecl_getOriginalNamespace(CXNamespaceDecl ND);
+
+CINDEX_LINKAGE bool clang_NamespaceDecl_isOriginalNamespace(CXNamespaceDecl ND);
+
+CINDEX_LINKAGE CXNamespaceDecl
+clang_NamespaceDecl_getAnonymousNamespace(CXNamespaceDecl ND);
+
+CINDEX_LINKAGE void clang_NamespaceDecl_setAnonymousNamespace(CXNamespaceDecl ND,
+                                                              CXNamespaceDecl D);
+
+CINDEX_LINKAGE CXNamespaceDecl clang_NamespaceDecl_getCanonicalDecl(CXNamespaceDecl ND);
+
+// getSourceRange
+
+CINDEX_LINKAGE CXSourceLocation_ clang_NamespaceDecl_getBeginLoc(CXNamespaceDecl ND);
+
+CINDEX_LINKAGE CXSourceLocation_ clang_NamespaceDecl_getRBraceLoc(CXNamespaceDecl ND);
+
+CINDEX_LINKAGE void clang_NamespaceDecl_setLocStart(CXNamespaceDecl ND,
+                                                    CXSourceLocation_ Loc);
+
+CINDEX_LINKAGE void clang_NamespaceDecl_setRBraceLoc(CXNamespaceDecl ND,
+                                                     CXSourceLocation_ Loc);
 
 // ValueDecl
 CINDEX_LINKAGE CXQualType clang_ValueDecl_getType(CXValueDecl VD);

@@ -1,8 +1,9 @@
-#include "clang-ex/AST/CXQualType.h"
+#include "clang-ex/AST/CXType.h"
 #include "clang/AST/Decl.h"
 #include "clang/AST/TemplateBase.h"
 #include "clang/AST/Type.h"
 
+// QualType
 CXQualType clang_QualType_constructFromTypePtr(CXType_ Ptr, unsigned Quals) {
   return clang::QualType(static_cast<clang::Type *>(Ptr), Quals).getAsOpaquePtr();
 }

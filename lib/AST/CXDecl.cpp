@@ -6,6 +6,37 @@ CXASTContext clang_TranslationUnitDecl_getASTContext(CXTranslationUnitDecl TUD) 
   return &static_cast<clang::TranslationUnitDecl *>(TUD)->getASTContext();
 }
 
+CXNamespaceDecl clang_TranslationUnitDecl_getAnonymousNamespace(CXTranslationUnitDecl TUD) {
+  return static_cast<clang::TranslationUnitDecl *>(TUD)->getAnonymousNamespace();
+}
+
+void clang_TranslationUnitDecl_setAnonymousNamespace(CXTranslationUnitDecl TUD,
+                                                     CXNamespaceDecl ND) {
+  static_cast<clang::TranslationUnitDecl *>(TUD)->setAnonymousNamespace(
+      static_cast<clang::NamespaceDecl *>(ND));
+}
+
+// PragmaCommentDecl
+CXPragmaMSCommentKind clang_PragmaCommentDecl_getCommentKind(CXPragmaCommentDecl PCD) {
+  return static_cast<CXPragmaMSCommentKind>(
+      static_cast<clang::PragmaCommentDecl *>(PCD)->getCommentKind());
+}
+
+const char *clang_PragmaCommentDecl_getArg(CXPragmaCommentDecl PCD) {
+  return static_cast<clang::PragmaCommentDecl *>(PCD)->getArg().data();
+}
+
+// PragmaDetectMismatchDecl
+const char *clang_PragmaDetectMismatchDecl_getName(CXPragmaDetectMismatchDecl PDMD) {
+  return static_cast<clang::PragmaDetectMismatchDecl *>(PDMD)->getName().data();
+}
+
+const char *clang_PragmaDetectMismatchDecl_getValue(CXPragmaDetectMismatchDecl PDMD) {
+  return static_cast<clang::PragmaDetectMismatchDecl *>(PDMD)->getValue().data();
+}
+
+// ExternCContextDecl
+
 // NamedDecl
 CXIdentifierInfo clang_NamedDecl_getIdentifier(CXNamedDecl ND) {
   return static_cast<clang::NamedDecl *>(ND)->getIdentifier();
@@ -24,6 +55,12 @@ void clang_NamedDecl_setDeclName(CXNamedDecl ND, CXDeclarationName DN) {
       clang::DeclarationName::getFromOpaquePtr(DN));
 }
 
+bool clang_NamedDecl_declarationReplaces(CXNamedDecl ND, CXNamedDecl OldD,
+                                         bool IsKnownNewer) {
+  return static_cast<clang::NamedDecl *>(ND)->declarationReplaces(
+      static_cast<clang::NamedDecl *>(OldD), IsKnownNewer);
+}
+
 bool clang_NamedDecl_hasLinkage(CXNamedDecl ND) {
   return static_cast<clang::NamedDecl *>(ND)->hasLinkage();
 }
@@ -34,6 +71,14 @@ bool clang_NamedDecl_isCXXClassMember(CXNamedDecl ND) {
 
 bool clang_NamedDecl_isCXXInstanceMember(CXNamedDecl ND) {
   return static_cast<clang::NamedDecl *>(ND)->isCXXInstanceMember();
+}
+
+CXLinkage clang_NamedDecl_getLinkageInternal(CXNamedDecl ND) {
+  return static_cast<CXLinkage>(static_cast<clang::NamedDecl *>(ND)->getLinkageInternal());
+}
+
+CXLinkage clang_NamedDecl_getFormalLinkage(CXNamedDecl ND) {
+  return static_cast<CXLinkage>(static_cast<clang::NamedDecl *>(ND)->getFormalLinkage());
 }
 
 bool clang_NamedDecl_hasExternalFormalLinkage(CXNamedDecl ND) {
@@ -48,6 +93,21 @@ bool clang_NamedDecl_isExternallyDeclarable(CXNamedDecl ND) {
   return static_cast<clang::NamedDecl *>(ND)->isExternallyDeclarable();
 }
 
+CXVisibility clang_NamedDecl_getVisibility(CXNamedDecl ND) {
+  return static_cast<CXVisibility>(static_cast<clang::NamedDecl *>(ND)->getVisibility());
+}
+
+// getLinkageAndVisibility
+// getExplicitVisibility
+
+bool clang_NamedDecl_isLinkageValid(CXNamedDecl ND) {
+  return static_cast<clang::NamedDecl *>(ND)->isLinkageValid();
+}
+
+bool clang_NamedDecl_hasLinkageBeenComputed(CXNamedDecl ND) {
+  return static_cast<clang::NamedDecl *>(ND)->hasLinkageBeenComputed();
+}
+
 CXNamedDecl clang_NamedDecl_getUnderlyingDecl(CXNamedDecl ND) {
   return static_cast<clang::NamedDecl *>(ND)->getUnderlyingDecl();
 }
@@ -56,13 +116,98 @@ CXNamedDecl clang_NamedDecl_getMostRecentDecl(CXNamedDecl ND) {
   return static_cast<clang::NamedDecl *>(ND)->getMostRecentDecl();
 }
 
-bool clang_NamedDecl_isOutOfLine(CXNamedDecl ND) {
-  return static_cast<clang::NamedDecl *>(ND)->isOutOfLine();
-}
+// getObjCFStringFormattingFamily
 
 // NamedDecl Cast
 CXTypeDecl clang_NamedDecl_castToTypeDecl(CXNamedDecl ND) {
   return llvm::dyn_cast<clang::TypeDecl>(static_cast<clang::NamedDecl *>(ND));
+}
+
+// LabelDecl
+// getStmt
+// setStmt
+
+bool clang_LabelDecl_isGnuLocal(CXLabelDecl LD) {
+  return static_cast<clang::LabelDecl *>(LD)->isGnuLocal();
+}
+
+void clang_LabelDecl_setLocStart(CXLabelDecl LD, CXSourceLocation_ Loc) {
+  static_cast<clang::LabelDecl *>(LD)->setLocStart(
+      clang::SourceLocation::getFromPtrEncoding(Loc));
+}
+
+// getSourceRange
+
+bool clang_LabelDecl_isMSAsmLabel(CXLabelDecl LD) {
+  return static_cast<clang::LabelDecl *>(LD)->isMSAsmLabel();
+}
+
+bool clang_LabelDecl_isResolvedMSAsmLabel(CXLabelDecl LD) {
+  return static_cast<clang::LabelDecl *>(LD)->isResolvedMSAsmLabel();
+}
+
+// setMSAsmLabel
+
+const char *clang_LabelDecl_getMSAsmLabel(CXLabelDecl LD) {
+  return static_cast<clang::LabelDecl *>(LD)->getMSAsmLabel().data();
+}
+
+void clang_LabelDecl_setMSAsmLabelResolved(CXLabelDecl LD) {
+  static_cast<clang::LabelDecl *>(LD)->setMSAsmLabelResolved();
+}
+
+// NamespaceDecl
+bool clang_NamespaceDecl_isAnonymousNamespace(CXNamespaceDecl ND) {
+  return static_cast<clang::NamespaceDecl *>(ND)->isAnonymousNamespace();
+}
+
+bool clang_NamespaceDecl_isInline(CXNamespaceDecl ND) {
+  return static_cast<clang::NamespaceDecl *>(ND)->isInline();
+}
+
+void clang_NamespaceDecl_setInline(CXNamespaceDecl ND, bool Inline) {
+  return static_cast<clang::NamespaceDecl *>(ND)->setInline(Inline);
+}
+
+CXNamespaceDecl clang_NamespaceDecl_getOriginalNamespace(CXNamespaceDecl ND) {
+  return static_cast<clang::NamespaceDecl *>(ND)->getOriginalNamespace();
+}
+
+bool clang_NamespaceDecl_isOriginalNamespace(CXNamespaceDecl ND) {
+  return static_cast<clang::NamespaceDecl *>(ND)->isOriginalNamespace();
+}
+
+CXNamespaceDecl clang_NamespaceDecl_getAnonymousNamespace(CXNamespaceDecl ND) {
+  return static_cast<clang::NamespaceDecl *>(ND)->getAnonymousNamespace();
+}
+
+void clang_NamespaceDecl_setAnonymousNamespace(CXNamespaceDecl ND, CXNamespaceDecl D) {
+  static_cast<clang::NamespaceDecl *>(ND)->setAnonymousNamespace(
+      static_cast<clang::NamespaceDecl *>(D));
+}
+
+CXNamespaceDecl clang_NamespaceDecl_getCanonicalDecl(CXNamespaceDecl ND) {
+  return static_cast<clang::NamespaceDecl *>(ND)->getCanonicalDecl();
+}
+
+// getSourceRange
+
+CXSourceLocation_ clang_NamespaceDecl_getBeginLoc(CXNamespaceDecl ND) {
+  return static_cast<clang::NamespaceDecl *>(ND)->getBeginLoc().getPtrEncoding();
+}
+
+CXSourceLocation_ clang_NamespaceDecl_getRBraceLoc(CXNamespaceDecl ND) {
+  return static_cast<clang::NamespaceDecl *>(ND)->getRBraceLoc().getPtrEncoding();
+}
+
+void clang_NamespaceDecl_setLocStart(CXNamespaceDecl ND, CXSourceLocation_ Loc) {
+  static_cast<clang::NamespaceDecl *>(ND)->setLocStart(
+      clang::SourceLocation::getFromPtrEncoding(Loc));
+}
+
+void clang_NamespaceDecl_setRBraceLoc(CXNamespaceDecl ND, CXSourceLocation_ Loc) {
+  static_cast<clang::NamespaceDecl *>(ND)->setRBraceLoc(
+      clang::SourceLocation::getFromPtrEncoding(Loc));
 }
 
 // ValueDecl

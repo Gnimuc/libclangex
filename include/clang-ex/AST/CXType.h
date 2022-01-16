@@ -470,6 +470,26 @@ clang_TemplateSpecializationType_isSugared(CXTemplateSpecializationType T);
 CINDEX_LINKAGE CXQualType
 clang_TemplateSpecializationType_desugar(CXTemplateSpecializationType T);
 
+// TagTypeKind
+typedef enum CXTagTypeKind {
+  CXTagTypeKind_TTK_Struct,
+  CXTagTypeKind_TTK_Interface,
+  CXTagTypeKind_TTK_Union,
+  CXTagTypeKind_TTK_Class,
+  CXTagTypeKind_TTK_Enum
+} CXTagTypeKind;
+
+// ElaboratedTypeKeyword
+enum CXElaboratedTypeKeyword {
+  CXElaboratedTypeKeyword_ETK_Struct,
+  CXElaboratedTypeKeyword_ETK_Interface,
+  CXElaboratedTypeKeyword_ETK_Union,
+  CXElaboratedTypeKeyword_ETK_Class,
+  CXElaboratedTypeKeyword_ETK_Enum,
+  CXElaboratedTypeKeyword_ETK_Typename,
+  CXElaboratedTypeKeyword_ETK_None
+};
+
 #ifdef __cplusplus
 }
 #endif
