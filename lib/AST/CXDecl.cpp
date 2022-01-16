@@ -124,8 +124,13 @@ CXTypeDecl clang_NamedDecl_castToTypeDecl(CXNamedDecl ND) {
 }
 
 // LabelDecl
-// getStmt
-// setStmt
+CXLabelStmt clang_LabelDecl_getStmt(CXLabelDecl LD) {
+  return static_cast<clang::LabelDecl *>(LD)->getStmt();
+}
+
+void clang_LabelDecl_setStmt(CXLabelDecl LD, CXLabelStmt T) {
+  static_cast<clang::LabelDecl *>(LD)->setStmt(static_cast<clang::LabelStmt *>(T));
+}
 
 bool clang_LabelDecl_isGnuLocal(CXLabelDecl LD) {
   return static_cast<clang::LabelDecl *>(LD)->isGnuLocal();
@@ -222,6 +227,69 @@ void clang_ValueDecl_setType(CXValueDecl VD, CXQualType OpaquePtr) {
 
 bool clang_ValueDecl_isWeak(CXValueDecl VD) {
   return static_cast<clang::ValueDecl *>(VD)->isWeak();
+}
+
+// DeclaratorDecl
+CXTypeSourceInfo clang_DeclaratorDecl_getTypeSourceInfo(CXDeclaratorDecl DD) {
+  return static_cast<clang::DeclaratorDecl *>(DD)->getTypeSourceInfo();
+}
+
+void clang_DeclaratorDecl_setTypeSourceInfo(CXDeclaratorDecl DD, CXTypeSourceInfo TI) {
+  static_cast<clang::DeclaratorDecl *>(DD)->setTypeSourceInfo(
+      static_cast<clang::TypeSourceInfo *>(TI));
+}
+
+CXSourceLocation_ clang_DeclaratorDecl_getInnerLocStart(CXDeclaratorDecl DD) {
+  return static_cast<clang::DeclaratorDecl *>(DD)->getInnerLocStart().getPtrEncoding();
+}
+
+void clang_DeclaratorDecl_setInnerLocStart(CXDeclaratorDecl DD, CXSourceLocation_ Loc) {
+  static_cast<clang::DeclaratorDecl *>(DD)->setInnerLocStart(
+      clang::SourceLocation::getFromPtrEncoding(Loc));
+}
+
+CXSourceLocation_ clang_DeclaratorDecl_getOuterLocStart(CXDeclaratorDecl DD) {
+  return static_cast<clang::DeclaratorDecl *>(DD)->getOuterLocStart().getPtrEncoding();
+}
+
+CXSourceLocation_ clang_DeclaratorDecl_getBeginLoc(CXDeclaratorDecl DD) {
+  return static_cast<clang::DeclaratorDecl *>(DD)->getBeginLoc().getPtrEncoding();
+}
+
+CXNestedNameSpecifier clang_DeclaratorDecl_getQualifier(CXDeclaratorDecl DD) {
+  return static_cast<clang::DeclaratorDecl *>(DD)->getQualifier();
+}
+
+// getQualifierLoc
+// setQualifierInfo
+
+CXExpr clang_DeclaratorDecl_getTrailingRequiresClause(CXDeclaratorDecl DD) {
+  return static_cast<clang::DeclaratorDecl *>(DD)->getTrailingRequiresClause();
+}
+
+void clang_DeclaratorDecl_setTrailingRequiresClause(CXDeclaratorDecl DD,
+                                                    CXExpr TrailingRequiresClause) {
+  return static_cast<clang::DeclaratorDecl *>(DD)->setTrailingRequiresClause(
+      static_cast<clang::Expr *>(TrailingRequiresClause));
+}
+
+unsigned clang_DeclaratorDecl_getNumTemplateParameterLists(CXDeclaratorDecl DD) {
+  return static_cast<clang::DeclaratorDecl *>(DD)->getNumTemplateParameterLists();
+}
+
+CXTemplateParameterList clang_DeclaratorDecl_getTemplateParameterList(CXDeclaratorDecl DD,
+                                                                      unsigned index) {
+  return static_cast<clang::DeclaratorDecl *>(DD)->getTemplateParameterList(index);
+}
+
+// setTemplateParameterListsInfo
+
+CXSourceLocation_ clang_DeclaratorDecl_getTypeSpecStartLoc(CXDeclaratorDecl DD) {
+  return static_cast<clang::DeclaratorDecl *>(DD)->getTypeSpecStartLoc().getPtrEncoding();
+}
+
+CXSourceLocation_ clang_DeclaratorDecl_getTypeSpecEndLoc(CXDeclaratorDecl DD) {
+  return static_cast<clang::DeclaratorDecl *>(DD)->getTypeSpecEndLoc().getPtrEncoding();
 }
 
 // TypeDecl

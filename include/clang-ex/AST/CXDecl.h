@@ -81,16 +81,13 @@ CINDEX_LINKAGE CXNamedDecl clang_NamedDecl_getMostRecentDecl(CXNamedDecl ND);
 
 // getObjCFStringFormattingFamily
 
-CINDEX_LINKAGE CXNamedDecl clang_NamedDecl_getUnderlyingDecl(CXNamedDecl ND);
-
-CINDEX_LINKAGE CXNamedDecl clang_NamedDecl_getMostRecentDecl(CXNamedDecl ND);
-
 // NamedDecl Cast
 CINDEX_LINKAGE CXTypeDecl clang_NamedDecl_castToTypeDecl(CXNamedDecl ND);
 
 // LabelDecl
-// getStmt
-// setStmt
+CINDEX_LINKAGE CXLabelStmt clang_LabelDecl_getStmt(CXLabelDecl LD);
+
+CINDEX_LINKAGE void clang_LabelDecl_setStmt(CXLabelDecl LD, CXLabelStmt T);
 
 CINDEX_LINKAGE bool clang_LabelDecl_isGnuLocal(CXLabelDecl LD);
 
@@ -145,6 +142,46 @@ CINDEX_LINKAGE CXQualType clang_ValueDecl_getType(CXValueDecl VD);
 CINDEX_LINKAGE void clang_ValueDecl_setType(CXValueDecl VD, CXQualType OpaquePtr);
 
 CINDEX_LINKAGE bool clang_ValueDecl_isWeak(CXValueDecl VD);
+
+// DeclaratorDecl
+CINDEX_LINKAGE CXTypeSourceInfo clang_DeclaratorDecl_getTypeSourceInfo(CXDeclaratorDecl DD);
+
+CINDEX_LINKAGE void clang_DeclaratorDecl_setTypeSourceInfo(CXDeclaratorDecl DD,
+                                                           CXTypeSourceInfo TI);
+
+CINDEX_LINKAGE CXSourceLocation_ clang_DeclaratorDecl_getInnerLocStart(CXDeclaratorDecl DD);
+
+CINDEX_LINKAGE void clang_DeclaratorDecl_setInnerLocStart(CXDeclaratorDecl DD,
+                                                          CXSourceLocation_ Loc);
+
+CINDEX_LINKAGE CXSourceLocation_ clang_DeclaratorDecl_getOuterLocStart(CXDeclaratorDecl DD);
+
+CINDEX_LINKAGE CXSourceLocation_ clang_DeclaratorDecl_getBeginLoc(CXDeclaratorDecl DD);
+
+CINDEX_LINKAGE CXNestedNameSpecifier clang_DeclaratorDecl_getQualifier(CXDeclaratorDecl DD);
+
+// getQualifierLoc
+// setQualifierInfo
+
+CINDEX_LINKAGE CXExpr clang_DeclaratorDecl_getTrailingRequiresClause(CXDeclaratorDecl DD);
+
+CINDEX_LINKAGE void
+clang_DeclaratorDecl_setTrailingRequiresClause(CXDeclaratorDecl DD,
+                                               CXExpr TrailingRequiresClause);
+
+CINDEX_LINKAGE unsigned
+clang_DeclaratorDecl_getNumTemplateParameterLists(CXDeclaratorDecl DD);
+
+CINDEX_LINKAGE CXTemplateParameterList
+clang_DeclaratorDecl_getTemplateParameterList(CXDeclaratorDecl DD, unsigned index);
+
+// setTemplateParameterListsInfo
+
+CINDEX_LINKAGE CXSourceLocation_
+clang_DeclaratorDecl_getTypeSpecStartLoc(CXDeclaratorDecl DD);
+
+CINDEX_LINKAGE CXSourceLocation_
+clang_DeclaratorDecl_getTypeSpecEndLoc(CXDeclaratorDecl DD);
 
 // TypeDecl
 CINDEX_LINKAGE CXType_ clang_TypeDecl_getTypeForDecl(CXTypeDecl TD);
