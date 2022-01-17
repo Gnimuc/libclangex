@@ -618,6 +618,104 @@ bool clang_VarDecl_isNoDestroy(CXVarDecl VD, CXASTContext AST) {
 
 // needsDestruction
 
+// ImplicitParamDecl
+CXImplicitParamDecl_ImplicitParamKind
+clang_VarDecl_getParameterKind(CXImplicitParamDecl IPD) {
+  return static_cast<CXImplicitParamDecl_ImplicitParamKind>(
+      static_cast<clang::ImplicitParamDecl *>(IPD)->getParameterKind());
+}
+
+// ParmVarDecl
+void clang_ParmVarDecl_setObjCMethodScopeInfo(CXParmVarDecl PVD, unsigned parameterIndex) {
+  static_cast<clang::ParmVarDecl *>(PVD)->setObjCMethodScopeInfo(parameterIndex);
+}
+
+void clang_ParmVarDecl_setScopeInfo(CXParmVarDecl PVD, unsigned scopeDepth,
+                                    unsigned parameterIndex) {
+  static_cast<clang::ParmVarDecl *>(PVD)->setScopeInfo(scopeDepth, parameterIndex);
+}
+
+bool clang_ParmVarDecl_isObjCMethodParameter(CXParmVarDecl PVD) {
+  return static_cast<clang::ParmVarDecl *>(PVD)->isObjCMethodParameter();
+}
+
+bool clang_ParmVarDecl_isDestroyedInCallee(CXParmVarDecl PVD) {
+  return static_cast<clang::ParmVarDecl *>(PVD)->isDestroyedInCallee();
+}
+
+unsigned clang_ParmVarDecl_getFunctionScopeDepth(CXParmVarDecl PVD) {
+  return static_cast<clang::ParmVarDecl *>(PVD)->getFunctionScopeDepth();
+}
+
+unsigned clang_ParmVarDecl_getFunctionScopeIndex(CXParmVarDecl PVD) {
+  return static_cast<clang::ParmVarDecl *>(PVD)->getFunctionScopeIndex();
+}
+
+// getObjCDeclQualifier
+// setObjCDeclQualifier
+
+bool clang_ParmVarDecl_isKNRPromoted(CXParmVarDecl PVD) {
+  return static_cast<clang::ParmVarDecl *>(PVD)->isKNRPromoted();
+}
+
+void clang_ParmVarDecl_setKNRPromoted(CXParmVarDecl PVD, bool promoted) {
+  static_cast<clang::ParmVarDecl *>(PVD)->setKNRPromoted(promoted);
+}
+
+CXExpr clang_ParmVarDecl_getDefaultArg(CXParmVarDecl PVD) {
+  return static_cast<clang::ParmVarDecl *>(PVD)->getDefaultArg();
+}
+
+void clang_ParmVarDecl_setDefaultArg(CXParmVarDecl PVD, CXExpr defarg) {
+  static_cast<clang::ParmVarDecl *>(PVD)->setDefaultArg(static_cast<clang::Expr *>(defarg));
+}
+
+// getDefaultArgRange
+
+void clang_ParmVarDecl_setUninstantiatedDefaultArg(CXParmVarDecl PVD, CXExpr arg) {
+  static_cast<clang::ParmVarDecl *>(PVD)->setUninstantiatedDefaultArg(
+      static_cast<clang::Expr *>(arg));
+}
+
+CXExpr clang_ParmVarDecl_getUninstantiatedDefaultArg(CXParmVarDecl PVD) {
+  return static_cast<clang::ParmVarDecl *>(PVD)->getUninstantiatedDefaultArg();
+}
+
+bool clang_ParmVarDecl_hasDefaultArg(CXParmVarDecl PVD) {
+  return static_cast<clang::ParmVarDecl *>(PVD)->hasDefaultArg();
+}
+
+bool clang_ParmVarDecl_hasUnparsedDefaultArg(CXParmVarDecl PVD) {
+  return static_cast<clang::ParmVarDecl *>(PVD)->hasUnparsedDefaultArg();
+}
+
+bool clang_ParmVarDecl_hasUninstantiatedDefaultArg(CXParmVarDecl PVD) {
+  return static_cast<clang::ParmVarDecl *>(PVD)->hasUninstantiatedDefaultArg();
+}
+
+void clang_ParmVarDecl_setUnparsedDefaultArg(CXParmVarDecl PVD) {
+  static_cast<clang::ParmVarDecl *>(PVD)->setUnparsedDefaultArg();
+}
+
+bool clang_ParmVarDecl_hasInheritedDefaultArg(CXParmVarDecl PVD) {
+  return static_cast<clang::ParmVarDecl *>(PVD)->hasInheritedDefaultArg();
+}
+
+void clang_ParmVarDecl_setHasInheritedDefaultArg(CXParmVarDecl PVD, bool I) {
+  static_cast<clang::ParmVarDecl *>(PVD)->setHasInheritedDefaultArg(I);
+}
+
+CXQualType clang_ParmVarDecl_getOriginalType(CXParmVarDecl PVD) {
+  return static_cast<clang::ParmVarDecl *>(PVD)->getOriginalType().getAsOpaquePtr();
+}
+
+void clang_ParmVarDecl_setOwningFunction(CXParmVarDecl PVD, CXDeclContext FD) {
+  static_cast<clang::ParmVarDecl *>(PVD)->setOwningFunction(
+      static_cast<clang::DeclContext *>(FD));
+}
+
+// FunctionDecl
+
 // TypeDecl
 CXType_ clang_TypeDecl_getTypeForDecl(CXTypeDecl TD) {
   return const_cast<clang::Type *>(static_cast<clang::TypeDecl *>(TD)->getTypeForDecl());

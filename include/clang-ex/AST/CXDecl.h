@@ -359,6 +359,71 @@ CINDEX_LINKAGE bool clang_VarDecl_isNoDestroy(CXVarDecl VD, CXASTContext AST);
 
 // needsDestruction
 
+// ImplicitParamDecl
+enum CXImplicitParamDecl_ImplicitParamKind : unsigned {
+  CXImplicitParamDecl_ImplicitParamKind_ObjCSelf,
+  CXImplicitParamDecl_ImplicitParamKind_ObjCCmd,
+  CXImplicitParamDecl_ImplicitParamKind_CXXThis,
+  CXImplicitParamDecl_ImplicitParamKind_CXXVTT,
+  CXImplicitParamDecl_ImplicitParamKind_CapturedContext,
+  CXImplicitParamDecl_ImplicitParamKind_Other,
+};
+
+CINDEX_LINKAGE CXImplicitParamDecl_ImplicitParamKind
+clang_VarDecl_getParameterKind(CXImplicitParamDecl IPD);
+
+// ParmVarDecl
+CINDEX_LINKAGE void clang_ParmVarDecl_setObjCMethodScopeInfo(CXParmVarDecl PVD,
+                                                             unsigned parameterIndex);
+
+CINDEX_LINKAGE void clang_ParmVarDecl_setScopeInfo(CXParmVarDecl PVD, unsigned scopeDepth,
+                                                   unsigned parameterIndex);
+
+CINDEX_LINKAGE bool clang_ParmVarDecl_isObjCMethodParameter(CXParmVarDecl PVD);
+
+CINDEX_LINKAGE bool clang_ParmVarDecl_isDestroyedInCallee(CXParmVarDecl PVD);
+
+CINDEX_LINKAGE unsigned clang_ParmVarDecl_getFunctionScopeDepth(CXParmVarDecl PVD);
+
+CINDEX_LINKAGE unsigned clang_ParmVarDecl_getFunctionScopeIndex(CXParmVarDecl PVD);
+
+// getObjCDeclQualifier
+// setObjCDeclQualifier
+
+CINDEX_LINKAGE bool clang_ParmVarDecl_isKNRPromoted(CXParmVarDecl PVD);
+
+CINDEX_LINKAGE void clang_ParmVarDecl_setKNRPromoted(CXParmVarDecl PVD, bool promoted);
+
+CINDEX_LINKAGE CXExpr clang_ParmVarDecl_getDefaultArg(CXParmVarDecl PVD);
+
+CINDEX_LINKAGE void clang_ParmVarDecl_setDefaultArg(CXParmVarDecl PVD, CXExpr defarg);
+
+// getDefaultArgRange
+
+CINDEX_LINKAGE void clang_ParmVarDecl_setUninstantiatedDefaultArg(CXParmVarDecl PVD,
+                                                                  CXExpr arg);
+
+CINDEX_LINKAGE CXExpr clang_ParmVarDecl_getUninstantiatedDefaultArg(CXParmVarDecl PVD);
+
+CINDEX_LINKAGE bool clang_ParmVarDecl_hasDefaultArg(CXParmVarDecl PVD);
+
+CINDEX_LINKAGE bool clang_ParmVarDecl_hasUnparsedDefaultArg(CXParmVarDecl PVD);
+
+CINDEX_LINKAGE bool clang_ParmVarDecl_hasUninstantiatedDefaultArg(CXParmVarDecl PVD);
+
+CINDEX_LINKAGE void clang_ParmVarDecl_setUnparsedDefaultArg(CXParmVarDecl PVD);
+
+CINDEX_LINKAGE bool clang_ParmVarDecl_hasInheritedDefaultArg(CXParmVarDecl PVD);
+
+CINDEX_LINKAGE void clang_ParmVarDecl_setHasInheritedDefaultArg(CXParmVarDecl PVD, bool I);
+
+CINDEX_LINKAGE CXQualType clang_ParmVarDecl_getOriginalType(CXParmVarDecl PVD);
+
+CINDEX_LINKAGE void clang_ParmVarDecl_setOwningFunction(CXParmVarDecl PVD,
+                                                        CXDeclContext FD);
+
+// FunctionDecl
+
 // TypeDecl
 CINDEX_LINKAGE CXType_ clang_TypeDecl_getTypeForDecl(CXTypeDecl TD);
 
