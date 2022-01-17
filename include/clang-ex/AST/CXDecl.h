@@ -4,6 +4,7 @@
 #include "clang-ex/AST/CXType.h"
 #include "clang-ex/Basic/CXLinkage.h"
 #include "clang-ex/Basic/CXPragmaKinds.h"
+#include "clang-ex/Basic/CXSpecifiers.h"
 #include "clang-ex/Basic/CXVisibility.h"
 #include "clang-ex/CXTypes.h"
 #include "clang-c/Platform.h"
@@ -182,6 +183,181 @@ clang_DeclaratorDecl_getTypeSpecStartLoc(CXDeclaratorDecl DD);
 
 CINDEX_LINKAGE CXSourceLocation_
 clang_DeclaratorDecl_getTypeSpecEndLoc(CXDeclaratorDecl DD);
+
+// VarDecl
+
+// getSourceRange
+
+CINDEX_LINKAGE CXStorageClass clang_VarDecl_getStorageClass(CXVarDecl VD);
+
+CINDEX_LINKAGE void clang_VarDecl_setStorageClass(CXVarDecl VD, CXStorageClass SC);
+
+CINDEX_LINKAGE void clang_VarDecl_setTSCSpec(CXVarDecl VD,
+                                             CXThreadStorageClassSpecifier TSC);
+
+CINDEX_LINKAGE CXThreadStorageClassSpecifier clang_VarDecl_getTSCSpec(CXVarDecl VD);
+
+// getTLSKind
+
+CINDEX_LINKAGE bool clang_VarDecl_hasLocalStorage(CXVarDecl VD);
+
+CINDEX_LINKAGE bool clang_VarDecl_isStaticLocal(CXVarDecl VD);
+
+CINDEX_LINKAGE bool clang_VarDecl_hasExternalStorage(CXVarDecl VD);
+
+CINDEX_LINKAGE bool clang_VarDecl_hasGlobalStorage(CXVarDecl VD);
+
+CINDEX_LINKAGE CXStorageDuration clang_VarDecl_getStorageDuration(CXVarDecl VD);
+
+CINDEX_LINKAGE CXLanguageLinkage clang_VarDecl_getLanguageLinkage(CXVarDecl VD);
+
+CINDEX_LINKAGE bool clang_VarDecl_isExternC(CXVarDecl VD);
+
+CINDEX_LINKAGE bool clang_VarDecl_isInExternCContext(CXVarDecl VD);
+
+CINDEX_LINKAGE bool clang_VarDecl_isInExternCXXContext(CXVarDecl VD);
+
+CINDEX_LINKAGE bool clang_VarDecl_isLocalVarDecl(CXVarDecl VD);
+
+CINDEX_LINKAGE bool clang_VarDecl_isLocalVarDeclOrParm(CXVarDecl VD);
+
+CINDEX_LINKAGE bool clang_VarDecl_isFunctionOrMethodVarDecl(CXVarDecl VD);
+
+CINDEX_LINKAGE bool clang_VarDecl_isStaticDataMember(CXVarDecl VD);
+
+CINDEX_LINKAGE CXVarDecl clang_VarDecl_getCanonicalDecl(CXVarDecl VD);
+
+// isThisDeclarationADefinition
+// hasDefinition
+
+CINDEX_LINKAGE CXVarDecl clang_VarDecl_getActingDefinition(CXVarDecl VD);
+
+CINDEX_LINKAGE CXVarDecl clang_VarDecl_getDefinition(CXVarDecl VD);
+
+CINDEX_LINKAGE bool clang_VarDecl_isOutOfLine(CXVarDecl VD);
+
+CINDEX_LINKAGE bool clang_VarDecl_isFileVarDecl(CXVarDecl VD);
+
+CINDEX_LINKAGE CXExpr clang_VarDecl_getAnyInitializer(CXVarDecl VD);
+
+CINDEX_LINKAGE bool clang_VarDecl_hasInit(CXVarDecl VD);
+
+CINDEX_LINKAGE CXExpr clang_VarDecl_getInit(CXVarDecl VD);
+
+// getInitAddress
+
+CINDEX_LINKAGE void clang_VarDecl_setInit(CXVarDecl VD, CXExpr I);
+
+CINDEX_LINKAGE CXVarDecl clang_VarDecl_getInitializingDeclaration(CXVarDecl VD);
+
+CINDEX_LINKAGE bool clang_VarDecl_mightBeUsableInConstantExpressions(CXVarDecl VD,
+                                                                     CXASTContext C);
+
+CINDEX_LINKAGE bool clang_VarDecl_isUsableInConstantExpressions(CXVarDecl VD,
+                                                                CXASTContext C);
+
+CINDEX_LINKAGE CXEvaluatedStmt clang_VarDecl_ensureEvaluatedStmt(CXVarDecl VD);
+
+CINDEX_LINKAGE CXEvaluatedStmt clang_VarDecl_getEvaluatedStmt(CXVarDecl VD);
+
+// evaluateValue
+// getEvaluatedValue
+// evaluateDestruction
+
+CINDEX_LINKAGE bool clang_VarDecl_hasConstantInitialization(CXVarDecl VD);
+
+CINDEX_LINKAGE bool clang_VarDecl_hasICEInitializer(CXVarDecl VD, CXASTContext Context);
+
+// checkForConstantInitialization
+// setInitStyle
+// getInitStyle
+
+CINDEX_LINKAGE bool clang_VarDecl_isDirectInit(CXVarDecl VD);
+
+CINDEX_LINKAGE bool clang_VarDecl_isThisDeclarationADemotedDefinition(CXVarDecl VD);
+
+CINDEX_LINKAGE void clang_VarDecl_demoteThisDefinitionToDeclaration(CXVarDecl VD);
+
+CINDEX_LINKAGE bool clang_VarDecl_isExceptionVariable(CXVarDecl VD);
+
+CINDEX_LINKAGE void clang_VarDecl_setExceptionVariable(CXVarDecl VD, bool EV);
+
+CINDEX_LINKAGE bool clang_VarDecl_isNRVOVariable(CXVarDecl VD);
+
+CINDEX_LINKAGE void clang_VarDecl_setNRVOVariable(CXVarDecl VD, bool NRVO);
+
+CINDEX_LINKAGE bool clang_VarDecl_isCXXForRangeDecl(CXVarDecl VD);
+
+CINDEX_LINKAGE void clang_VarDecl_setCXXForRangeDecl(CXVarDecl VD, bool FRD);
+
+CINDEX_LINKAGE bool clang_VarDecl_isObjCForDecl(CXVarDecl VD);
+
+CINDEX_LINKAGE void clang_VarDecl_setObjCForDecl(CXVarDecl VD, bool FRD);
+
+CINDEX_LINKAGE bool clang_VarDecl_isARCPseudoStrong(CXVarDecl VD);
+
+CINDEX_LINKAGE void clang_VarDecl_setARCPseudoStrong(CXVarDecl VD, bool PS);
+
+CINDEX_LINKAGE bool clang_VarDecl_isInline(CXVarDecl VD);
+
+CINDEX_LINKAGE bool clang_VarDecl_isInlineSpecified(CXVarDecl VD);
+
+CINDEX_LINKAGE void clang_VarDecl_setInlineSpecified(CXVarDecl VD);
+
+CINDEX_LINKAGE void clang_VarDecl_setImplicitlyInline(CXVarDecl VD);
+
+CINDEX_LINKAGE bool clang_VarDecl_isConstexpr(CXVarDecl VD);
+
+CINDEX_LINKAGE void clang_VarDecl_setConstexpr(CXVarDecl VD, bool IC);
+
+CINDEX_LINKAGE bool clang_VarDecl_isInitCapture(CXVarDecl VD);
+
+CINDEX_LINKAGE void clang_VarDecl_setInitCapture(CXVarDecl VD, bool IC);
+
+CINDEX_LINKAGE bool clang_VarDecl_isParameterPack(CXVarDecl VD);
+
+CINDEX_LINKAGE bool clang_VarDecl_isPreviousDeclInSameBlockScope(CXVarDecl VD);
+
+CINDEX_LINKAGE void clang_VarDecl_setPreviousDeclInSameBlockScope(CXVarDecl VD, bool Same);
+
+CINDEX_LINKAGE bool clang_VarDecl_isEscapingByref(CXVarDecl VD);
+
+CINDEX_LINKAGE bool clang_VarDecl_isNonEscapingByref(CXVarDecl VD);
+
+CINDEX_LINKAGE void clang_VarDecl_setEscapingByref(CXVarDecl VD);
+
+CINDEX_LINKAGE CXVarDecl clang_VarDecl_getTemplateInstantiationPattern(CXVarDecl VD);
+
+CINDEX_LINKAGE CXVarDecl clang_VarDecl_getInstantiatedFromStaticDataMember(CXVarDecl VD);
+
+CINDEX_LINKAGE CXTemplateSpecializationKind
+clang_VarDecl_getTemplateSpecializationKind(CXVarDecl VD);
+
+CINDEX_LINKAGE CXTemplateSpecializationKind
+clang_VarDecl_getTemplateSpecializationKindForInstantiation(CXVarDecl VD);
+
+CINDEX_LINKAGE CXSourceLocation_ clang_VarDecl_getPointOfInstantiation(CXVarDecl VD);
+
+// getMemberSpecializationInfo
+
+CINDEX_LINKAGE void
+clang_VarDecl_setTemplateSpecializationKind(CXVarDecl VD, CXTemplateSpecializationKind TSK,
+                                            CXSourceLocation_ PointOfInstantiation);
+
+CINDEX_LINKAGE void
+clang_VarDecl_setInstantiationOfStaticDataMember(CXVarDecl VD, CXVarDecl VD2,
+                                                 CXTemplateSpecializationKind TSK);
+
+CINDEX_LINKAGE CXVarTemplateDecl clang_VarDecl_getDescribedVarTemplate(CXVarDecl VD);
+
+CINDEX_LINKAGE void clang_VarDecl_setDescribedVarTemplate(CXVarDecl VD,
+                                                          CXVarTemplateDecl Template);
+
+CINDEX_LINKAGE bool clang_VarDecl_isKnownToBeDefined(CXVarDecl VD);
+
+CINDEX_LINKAGE bool clang_VarDecl_isNoDestroy(CXVarDecl VD, CXASTContext AST);
+
+// needsDestruction
 
 // TypeDecl
 CINDEX_LINKAGE CXType_ clang_TypeDecl_getTypeForDecl(CXTypeDecl TD);

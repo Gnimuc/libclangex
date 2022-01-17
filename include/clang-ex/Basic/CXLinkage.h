@@ -15,6 +15,12 @@ enum CXLinkage : unsigned char {
   CXLinkage_ExternalLinkage
 };
 
+enum CXLanguageLinkage {
+  CXLanguageLinkage_CLanguageLinkage,
+  CXLanguageLinkage_CXXLanguageLinkage,
+  CXLanguageLinkage_NoLanguageLinkage
+};
+
 #ifdef __cplusplus
 }
 #endif

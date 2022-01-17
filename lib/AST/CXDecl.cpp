@@ -292,6 +292,332 @@ CXSourceLocation_ clang_DeclaratorDecl_getTypeSpecEndLoc(CXDeclaratorDecl DD) {
   return static_cast<clang::DeclaratorDecl *>(DD)->getTypeSpecEndLoc().getPtrEncoding();
 }
 
+// VarDecl
+
+// getSourceRange
+
+CXStorageClass clang_VarDecl_getStorageClass(CXVarDecl VD) {
+  return static_cast<CXStorageClass>(static_cast<clang::VarDecl *>(VD)->getStorageClass());
+}
+
+void clang_VarDecl_setStorageClass(CXVarDecl VD, CXStorageClass SC) {
+  static_cast<clang::VarDecl *>(VD)->setStorageClass(static_cast<clang::StorageClass>(SC));
+}
+
+void clang_VarDecl_setTSCSpec(CXVarDecl VD, CXThreadStorageClassSpecifier TSC) {
+  static_cast<clang::VarDecl *>(VD)->setTSCSpec(
+      static_cast<clang::ThreadStorageClassSpecifier>(TSC));
+}
+
+CXThreadStorageClassSpecifier clang_VarDecl_getTSCSpec(CXVarDecl VD) {
+  return static_cast<CXThreadStorageClassSpecifier>(
+      static_cast<clang::VarDecl *>(VD)->getTSCSpec());
+}
+
+// getTLSKind
+
+bool clang_VarDecl_hasLocalStorage(CXVarDecl VD) {
+  return static_cast<clang::VarDecl *>(VD)->hasLocalStorage();
+}
+
+bool clang_VarDecl_isStaticLocal(CXVarDecl VD) {
+  return static_cast<clang::VarDecl *>(VD)->isStaticLocal();
+}
+
+bool clang_VarDecl_hasExternalStorage(CXVarDecl VD) {
+  return static_cast<clang::VarDecl *>(VD)->hasExternalStorage();
+}
+
+bool clang_VarDecl_hasGlobalStorage(CXVarDecl VD) {
+  return static_cast<clang::VarDecl *>(VD)->hasGlobalStorage();
+}
+
+CXStorageDuration clang_VarDecl_getStorageDuration(CXVarDecl VD) {
+  return static_cast<CXStorageDuration>(
+      static_cast<clang::VarDecl *>(VD)->getStorageDuration());
+}
+
+CXLanguageLinkage clang_VarDecl_getLanguageLinkage(CXVarDecl VD) {
+  return static_cast<CXLanguageLinkage>(
+      static_cast<clang::VarDecl *>(VD)->getLanguageLinkage());
+}
+
+bool clang_VarDecl_isExternC(CXVarDecl VD) {
+  return static_cast<clang::VarDecl *>(VD)->isExternC();
+}
+
+bool clang_VarDecl_isInExternCContext(CXVarDecl VD) {
+  return static_cast<clang::VarDecl *>(VD)->isInExternCContext();
+}
+
+bool clang_VarDecl_isInExternCXXContext(CXVarDecl VD) {
+  return static_cast<clang::VarDecl *>(VD)->isInExternCXXContext();
+}
+
+bool clang_VarDecl_isLocalVarDecl(CXVarDecl VD) {
+  return static_cast<clang::VarDecl *>(VD)->isLocalVarDecl();
+}
+
+bool clang_VarDecl_isLocalVarDeclOrParm(CXVarDecl VD) {
+  return static_cast<clang::VarDecl *>(VD)->isLocalVarDeclOrParm();
+}
+
+bool clang_VarDecl_isFunctionOrMethodVarDecl(CXVarDecl VD) {
+  return static_cast<clang::VarDecl *>(VD)->isFunctionOrMethodVarDecl();
+}
+
+bool clang_VarDecl_isStaticDataMember(CXVarDecl VD) {
+  return static_cast<clang::VarDecl *>(VD)->isStaticDataMember();
+}
+
+CXVarDecl clang_VarDecl_getCanonicalDecl(CXVarDecl VD) {
+  return static_cast<clang::VarDecl *>(VD)->getCanonicalDecl();
+}
+
+// isThisDeclarationADefinition
+// hasDefinition
+
+CXVarDecl clang_VarDecl_getActingDefinition(CXVarDecl VD) {
+  return static_cast<clang::VarDecl *>(VD)->getActingDefinition();
+}
+
+CXVarDecl clang_VarDecl_getDefinition(CXVarDecl VD) {
+  return static_cast<clang::VarDecl *>(VD)->getDefinition();
+}
+
+bool clang_VarDecl_isOutOfLine(CXVarDecl VD) {
+  return static_cast<clang::VarDecl *>(VD)->isOutOfLine();
+}
+
+bool clang_VarDecl_isFileVarDecl(CXVarDecl VD) {
+  return static_cast<clang::VarDecl *>(VD)->isFileVarDecl();
+}
+
+CXExpr clang_VarDecl_getAnyInitializer(CXVarDecl VD) {
+  return const_cast<clang::Expr *>(static_cast<clang::VarDecl *>(VD)->getAnyInitializer());
+}
+
+bool clang_VarDecl_hasInit(CXVarDecl VD) {
+  return static_cast<clang::VarDecl *>(VD)->hasInit();
+}
+
+CXExpr clang_VarDecl_getInit(CXVarDecl VD) {
+  return static_cast<clang::VarDecl *>(VD)->getInit();
+}
+
+// getInitAddress
+
+void clang_VarDecl_setInit(CXVarDecl VD, CXExpr I) {
+  static_cast<clang::VarDecl *>(VD)->setInit(static_cast<clang::Expr *>(I));
+}
+
+CXVarDecl clang_VarDecl_getInitializingDeclaration(CXVarDecl VD) {
+  return static_cast<clang::VarDecl *>(VD)->getInitializingDeclaration();
+}
+
+bool clang_VarDecl_mightBeUsableInConstantExpressions(CXVarDecl VD, CXASTContext C) {
+  return static_cast<clang::VarDecl *>(VD)->mightBeUsableInConstantExpressions(
+      *static_cast<clang::ASTContext *>(C));
+}
+
+bool clang_VarDecl_isUsableInConstantExpressions(CXVarDecl VD, CXASTContext C) {
+  return static_cast<clang::VarDecl *>(VD)->isUsableInConstantExpressions(
+      *static_cast<clang::ASTContext *>(C));
+}
+
+CXEvaluatedStmt clang_VarDecl_ensureEvaluatedStmt(CXVarDecl VD) {
+  return static_cast<clang::VarDecl *>(VD)->ensureEvaluatedStmt();
+}
+
+CXEvaluatedStmt clang_VarDecl_getEvaluatedStmt(CXVarDecl VD) {
+  return static_cast<clang::VarDecl *>(VD)->getEvaluatedStmt();
+}
+
+// evaluateValue
+// getEvaluatedValue
+// evaluateDestruction
+
+bool clang_VarDecl_hasConstantInitialization(CXVarDecl VD) {
+  return static_cast<clang::VarDecl *>(VD)->hasConstantInitialization();
+}
+
+bool clang_VarDecl_hasICEInitializer(CXVarDecl VD, CXASTContext Context) {
+  return static_cast<clang::VarDecl *>(VD)->hasICEInitializer(
+      *static_cast<clang::ASTContext *>(Context));
+}
+
+// checkForConstantInitialization
+// setInitStyle
+// getInitStyle
+
+bool clang_VarDecl_isDirectInit(CXVarDecl VD) {
+  return static_cast<clang::VarDecl *>(VD)->isDirectInit();
+}
+
+bool clang_VarDecl_isThisDeclarationADemotedDefinition(CXVarDecl VD) {
+  return static_cast<clang::VarDecl *>(VD)->isThisDeclarationADemotedDefinition();
+}
+
+void clang_VarDecl_demoteThisDefinitionToDeclaration(CXVarDecl VD) {
+  static_cast<clang::VarDecl *>(VD)->demoteThisDefinitionToDeclaration();
+}
+
+bool clang_VarDecl_isExceptionVariable(CXVarDecl VD) {
+  return static_cast<clang::VarDecl *>(VD)->isExceptionVariable();
+}
+
+void clang_VarDecl_setExceptionVariable(CXVarDecl VD, bool EV) {
+  static_cast<clang::VarDecl *>(VD)->setExceptionVariable(EV);
+}
+
+bool clang_VarDecl_isNRVOVariable(CXVarDecl VD) {
+  return static_cast<clang::VarDecl *>(VD)->isNRVOVariable();
+}
+
+void clang_VarDecl_setNRVOVariable(CXVarDecl VD, bool NRVO) {
+  static_cast<clang::VarDecl *>(VD)->setNRVOVariable(NRVO);
+}
+
+bool clang_VarDecl_isCXXForRangeDecl(CXVarDecl VD) {
+  return static_cast<clang::VarDecl *>(VD)->isCXXForRangeDecl();
+}
+
+void clang_VarDecl_setCXXForRangeDecl(CXVarDecl VD, bool FRD) {
+  static_cast<clang::VarDecl *>(VD)->setCXXForRangeDecl(FRD);
+}
+
+bool clang_VarDecl_isObjCForDecl(CXVarDecl VD) {
+  return static_cast<clang::VarDecl *>(VD)->isObjCForDecl();
+}
+
+void clang_VarDecl_setObjCForDecl(CXVarDecl VD, bool FRD) {
+  static_cast<clang::VarDecl *>(VD)->setObjCForDecl(FRD);
+}
+
+bool clang_VarDecl_isARCPseudoStrong(CXVarDecl VD) {
+  return static_cast<clang::VarDecl *>(VD)->isARCPseudoStrong();
+}
+
+void clang_VarDecl_setARCPseudoStrong(CXVarDecl VD, bool PS) {
+  static_cast<clang::VarDecl *>(VD)->setARCPseudoStrong(PS);
+}
+
+bool clang_VarDecl_isInline(CXVarDecl VD) {
+  return static_cast<clang::VarDecl *>(VD)->isInline();
+}
+
+bool clang_VarDecl_isInlineSpecified(CXVarDecl VD) {
+  return static_cast<clang::VarDecl *>(VD)->isInlineSpecified();
+}
+
+void clang_VarDecl_setInlineSpecified(CXVarDecl VD) {
+  static_cast<clang::VarDecl *>(VD)->setInlineSpecified();
+}
+
+void clang_VarDecl_setImplicitlyInline(CXVarDecl VD) {
+  static_cast<clang::VarDecl *>(VD)->setImplicitlyInline();
+}
+
+bool clang_VarDecl_isConstexpr(CXVarDecl VD) {
+  return static_cast<clang::VarDecl *>(VD)->isConstexpr();
+}
+
+void clang_VarDecl_setConstexpr(CXVarDecl VD, bool IC) {
+  static_cast<clang::VarDecl *>(VD)->setConstexpr(IC);
+}
+
+bool clang_VarDecl_isInitCapture(CXVarDecl VD) {
+  return static_cast<clang::VarDecl *>(VD)->isInitCapture();
+}
+
+void clang_VarDecl_setInitCapture(CXVarDecl VD, bool IC) {
+  static_cast<clang::VarDecl *>(VD)->setInitCapture(IC);
+}
+
+bool clang_VarDecl_isParameterPack(CXVarDecl VD) {
+  return static_cast<clang::VarDecl *>(VD)->isParameterPack();
+}
+
+bool clang_VarDecl_isPreviousDeclInSameBlockScope(CXVarDecl VD) {
+  return static_cast<clang::VarDecl *>(VD)->isPreviousDeclInSameBlockScope();
+}
+
+void clang_VarDecl_setPreviousDeclInSameBlockScope(CXVarDecl VD, bool Same) {
+  static_cast<clang::VarDecl *>(VD)->setPreviousDeclInSameBlockScope(Same);
+}
+
+bool clang_VarDecl_isEscapingByref(CXVarDecl VD) {
+  return static_cast<clang::VarDecl *>(VD)->isEscapingByref();
+}
+
+bool clang_VarDecl_isNonEscapingByref(CXVarDecl VD) {
+  return static_cast<clang::VarDecl *>(VD)->isNonEscapingByref();
+}
+
+void clang_VarDecl_setEscapingByref(CXVarDecl VD) {
+  static_cast<clang::VarDecl *>(VD)->setEscapingByref();
+}
+
+CXVarDecl clang_VarDecl_getTemplateInstantiationPattern(CXVarDecl VD) {
+  return static_cast<clang::VarDecl *>(VD)->getTemplateInstantiationPattern();
+}
+
+CXVarDecl clang_VarDecl_getInstantiatedFromStaticDataMember(CXVarDecl VD) {
+  return static_cast<clang::VarDecl *>(VD)->getInstantiatedFromStaticDataMember();
+}
+
+CXTemplateSpecializationKind clang_VarDecl_getTemplateSpecializationKind(CXVarDecl VD) {
+  return static_cast<CXTemplateSpecializationKind>(
+      static_cast<clang::VarDecl *>(VD)->getTemplateSpecializationKind());
+}
+
+CXTemplateSpecializationKind
+clang_VarDecl_getTemplateSpecializationKindForInstantiation(CXVarDecl VD) {
+  return static_cast<CXTemplateSpecializationKind>(
+      static_cast<clang::VarDecl *>(VD)->getTemplateSpecializationKindForInstantiation());
+}
+
+CXSourceLocation_ clang_VarDecl_getPointOfInstantiation(CXVarDecl VD) {
+  return static_cast<clang::VarDecl *>(VD)->getPointOfInstantiation().getPtrEncoding();
+}
+
+// getMemberSpecializationInfo
+
+void clang_VarDecl_setTemplateSpecializationKind(CXVarDecl VD,
+                                                 CXTemplateSpecializationKind TSK,
+                                                 CXSourceLocation_ PointOfInstantiation) {
+  static_cast<clang::VarDecl *>(VD)->setTemplateSpecializationKind(
+      static_cast<clang::TemplateSpecializationKind>(TSK),
+      clang::SourceLocation::getFromPtrEncoding(PointOfInstantiation));
+}
+
+void clang_VarDecl_setInstantiationOfStaticDataMember(CXVarDecl VD, CXVarDecl VD2,
+                                                      CXTemplateSpecializationKind TSK) {
+  static_cast<clang::VarDecl *>(VD)->setInstantiationOfStaticDataMember(
+      static_cast<clang::VarDecl *>(VD2),
+      static_cast<clang::TemplateSpecializationKind>(TSK));
+}
+
+CXVarTemplateDecl clang_VarDecl_getDescribedVarTemplate(CXVarDecl VD) {
+  return static_cast<clang::VarDecl *>(VD)->getDescribedVarTemplate();
+}
+
+void clang_VarDecl_setDescribedVarTemplate(CXVarDecl VD, CXVarTemplateDecl Template) {
+  static_cast<clang::VarDecl *>(VD)->setDescribedVarTemplate(
+      static_cast<clang::VarTemplateDecl *>(Template));
+}
+
+bool clang_VarDecl_isKnownToBeDefined(CXVarDecl VD) {
+  return static_cast<clang::VarDecl *>(VD)->isKnownToBeDefined();
+}
+
+bool clang_VarDecl_isNoDestroy(CXVarDecl VD, CXASTContext AST) {
+  return static_cast<clang::VarDecl *>(VD)->isNoDestroy(
+      *static_cast<clang::ASTContext *>(AST));
+}
+
+// needsDestruction
+
 // TypeDecl
 CXType_ clang_TypeDecl_getTypeForDecl(CXTypeDecl TD) {
   return const_cast<clang::Type *>(static_cast<clang::TypeDecl *>(TD)->getTypeForDecl());

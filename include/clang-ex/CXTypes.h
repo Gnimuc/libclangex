@@ -27,6 +27,7 @@ typedef void *CXLabelDecl;
 typedef void *CXNamespaceDecl;
 typedef void *CXValueDecl;
 typedef void *CXDeclaratorDecl;
+typedef void *CXEvaluatedStmt;
 typedef void *CXVarDecl;
 typedef void *CXImplicitParamDecl;
 typedef void *CXParmVarDecl;
