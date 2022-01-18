@@ -36,6 +36,12 @@ enum CXStorageClass {
   CXStorageClass_SC_Register
 };
 
+enum CXInClassInitStyle {
+  CXInClassInitStyle_ICIS_NoInit,
+  CXInClassInitStyle_ICIS_CopyInit,
+  CXInClassInitStyle_ICIS_ListInit
+};
+
 enum CXStorageDuration {
   CXStorageDuration_SD_FullExpression,
   CXStorageDuration_SD_Automatic,

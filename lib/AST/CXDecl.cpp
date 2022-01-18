@@ -1243,6 +1243,98 @@ unsigned clang_FunctionDecl_getODRHash(CXFunctionDecl FD) {
   return static_cast<clang::FunctionDecl *>(FD)->getODRHash();
 }
 
+// FieldDecl
+unsigned clang_FieldDecl_getFieldIndex(CXFieldDecl FD) {
+  return static_cast<clang::FieldDecl *>(FD)->getFieldIndex();
+}
+
+bool clang_FieldDecl_isMutable(CXFieldDecl FD) {
+  return static_cast<clang::FieldDecl *>(FD)->isMutable();
+}
+
+bool clang_FieldDecl_isBitField(CXFieldDecl FD) {
+  return static_cast<clang::FieldDecl *>(FD)->isBitField();
+}
+
+bool clang_FieldDecl_isUnnamedBitfield(CXFieldDecl FD) {
+  return static_cast<clang::FieldDecl *>(FD)->isUnnamedBitfield();
+}
+
+bool clang_FieldDecl_isAnonymousStructOrUnion(CXFieldDecl FD) {
+  return static_cast<clang::FieldDecl *>(FD)->isAnonymousStructOrUnion();
+}
+
+CXExpr clang_FieldDecl_getBitWidth(CXFieldDecl FD) {
+  return static_cast<clang::FieldDecl *>(FD)->getBitWidth();
+}
+
+unsigned clang_FieldDecl_getBitWidthValue(CXFieldDecl FD, CXASTContext Ctx) {
+  return static_cast<clang::FieldDecl *>(FD)->getBitWidthValue(
+      *static_cast<clang::ASTContext *>(Ctx));
+}
+
+// setBitWidth
+
+void clang_FieldDecl_removeBitWidth(CXFieldDecl FD) {
+  static_cast<clang::FieldDecl *>(FD)->removeBitWidth();
+}
+
+bool clang_FieldDecl_isZeroLengthBitField(CXFieldDecl FD, CXASTContext Ctx) {
+  return static_cast<clang::FieldDecl *>(FD)->isZeroLengthBitField(
+      *static_cast<clang::ASTContext *>(Ctx));
+}
+
+bool clang_FieldDecl_isZeroSize(CXFieldDecl FD, CXASTContext Ctx) {
+  return static_cast<clang::FieldDecl *>(FD)->isZeroSize(
+      *static_cast<clang::ASTContext *>(Ctx));
+}
+
+CXInClassInitStyle clang_FieldDecl_getInClassInitStyle(CXFieldDecl FD) {
+  return static_cast<CXInClassInitStyle>(
+      static_cast<clang::FieldDecl *>(FD)->getInClassInitStyle());
+}
+
+bool clang_FieldDecl_hasInClassInitializer(CXFieldDecl FD) {
+  return static_cast<clang::FieldDecl *>(FD)->hasInClassInitializer();
+}
+
+CXExpr clang_FieldDecl_getInClassInitializer(CXFieldDecl FD) {
+  return static_cast<clang::FieldDecl *>(FD)->getInClassInitializer();
+}
+
+void clang_FieldDecl_setInClassInitializer(CXFieldDecl FD, CXExpr Init) {
+  static_cast<clang::FieldDecl *>(FD)->setInClassInitializer(
+      static_cast<clang::Expr *>(Init));
+}
+
+void clang_FieldDecl_removeInClassInitializer(CXFieldDecl FD) {
+  static_cast<clang::FieldDecl *>(FD)->removeInClassInitializer();
+}
+
+bool clang_FieldDecl_hasCapturedVLAType(CXFieldDecl FD) {
+  return static_cast<clang::FieldDecl *>(FD)->hasCapturedVLAType();
+}
+
+CXVariableArrayType clang_FieldDecl_getCapturedVLAType(CXFieldDecl FD) {
+  return const_cast<clang::VariableArrayType *>(
+      static_cast<clang::FieldDecl *>(FD)->getCapturedVLAType());
+}
+
+void clang_FieldDecl_setCapturedVLAType(CXFieldDecl FD, CXVariableArrayType VLAType) {
+  static_cast<clang::FieldDecl *>(FD)->setCapturedVLAType(
+      static_cast<clang::VariableArrayType *>(VLAType));
+}
+
+CXRecordDecl clang_FieldDecl_getParent(CXFieldDecl FD) {
+  return static_cast<clang::FieldDecl *>(FD)->getParent();
+}
+
+// getSourceRange
+
+CXFieldDecl clang_FieldDecl_getCanonicalDecl(CXFieldDecl FD) {
+  return static_cast<clang::FieldDecl *>(FD)->getCanonicalDecl();
+}
+
 // TypeDecl
 CXType_ clang_TypeDecl_getTypeForDecl(CXTypeDecl TD) {
   return const_cast<clang::Type *>(static_cast<clang::TypeDecl *>(TD)->getTypeForDecl());

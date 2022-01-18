@@ -728,6 +728,52 @@ CINDEX_LINKAGE unsigned clang_FunctionDecl_getMemoryFunctionKind(CXFunctionDecl 
 
 CINDEX_LINKAGE unsigned clang_FunctionDecl_getODRHash(CXFunctionDecl FD);
 
+// FieldDecl
+CINDEX_LINKAGE unsigned clang_FieldDecl_getFieldIndex(CXFieldDecl FD);
+
+CINDEX_LINKAGE bool clang_FieldDecl_isMutable(CXFieldDecl FD);
+
+CINDEX_LINKAGE bool clang_FieldDecl_isBitField(CXFieldDecl FD);
+
+CINDEX_LINKAGE bool clang_FieldDecl_isUnnamedBitfield(CXFieldDecl FD);
+
+CINDEX_LINKAGE bool clang_FieldDecl_isAnonymousStructOrUnion(CXFieldDecl FD);
+
+CINDEX_LINKAGE CXExpr clang_FieldDecl_getBitWidth(CXFieldDecl FD);
+
+CINDEX_LINKAGE unsigned clang_FieldDecl_getBitWidthValue(CXFieldDecl FD, CXASTContext Ctx);
+
+// setBitWidth
+
+CINDEX_LINKAGE void clang_FieldDecl_removeBitWidth(CXFieldDecl FD);
+
+CINDEX_LINKAGE bool clang_FieldDecl_isZeroLengthBitField(CXFieldDecl FD, CXASTContext Ctx);
+
+CINDEX_LINKAGE bool clang_FieldDecl_isZeroSize(CXFieldDecl FD, CXASTContext Ctx);
+
+CINDEX_LINKAGE CXInClassInitStyle clang_FieldDecl_getInClassInitStyle(CXFieldDecl FD);
+
+CINDEX_LINKAGE bool clang_FieldDecl_hasInClassInitializer(CXFieldDecl FD);
+
+CINDEX_LINKAGE CXExpr clang_FieldDecl_getInClassInitializer(CXFieldDecl FD);
+
+CINDEX_LINKAGE void clang_FieldDecl_setInClassInitializer(CXFieldDecl FD, CXExpr Init);
+
+CINDEX_LINKAGE void clang_FieldDecl_removeInClassInitializer(CXFieldDecl FD);
+
+CINDEX_LINKAGE bool clang_FieldDecl_hasCapturedVLAType(CXFieldDecl FD);
+
+CINDEX_LINKAGE CXVariableArrayType clang_FieldDecl_getCapturedVLAType(CXFieldDecl FD);
+
+CINDEX_LINKAGE void clang_FieldDecl_setCapturedVLAType(CXFieldDecl FD,
+                                                       CXVariableArrayType VLAType);
+
+CINDEX_LINKAGE CXRecordDecl clang_FieldDecl_getParent(CXFieldDecl FD);
+
+// getSourceRange
+
+CINDEX_LINKAGE CXFieldDecl clang_FieldDecl_getCanonicalDecl(CXFieldDecl FD);
+
 // TypeDecl
 CINDEX_LINKAGE CXType_ clang_TypeDecl_getTypeForDecl(CXTypeDecl TD);
 
