@@ -2,6 +2,7 @@
 #define LIBCLANGEX_CXDECL_H
 
 #include "clang-ex/AST/CXType.h"
+#include "clang-ex/Basic/CXExceptionSpecificationType.h"
 #include "clang-ex/Basic/CXLinkage.h"
 #include "clang-ex/Basic/CXPragmaKinds.h"
 #include "clang-ex/Basic/CXSpecifiers.h"
@@ -422,7 +423,310 @@ CINDEX_LINKAGE CXQualType clang_ParmVarDecl_getOriginalType(CXParmVarDecl PVD);
 CINDEX_LINKAGE void clang_ParmVarDecl_setOwningFunction(CXParmVarDecl PVD,
                                                         CXDeclContext FD);
 
+// MultiVersionKind
+enum CXMultiVersionKind {
+  CXMultiVersionKind_None,
+  CXMultiVersionKind_Target,
+  CXMultiVersionKind_CPUSpecific,
+  CXMultiVersionKind_CPUDispatch
+};
+
 // FunctionDecl
+enum CXFunctionDecl_TemplatedKind {
+  CXFunctionDecl_TemplatedKind_TK_NonTemplate,
+  CXFunctionDecl_TemplatedKind_TK_FunctionTemplate,
+  CXFunctionDecl_TemplatedKind_TK_MemberSpecialization,
+  CXFunctionDecl_TemplatedKind_TK_FunctionTemplateSpecialization,
+  CXFunctionDecl_TemplatedKind_TK_DependentFunctionTemplateSpecialization
+};
+
+typedef void *CXFunctionDecl_DefaultedFunctionInfo;
+
+// getNameInfo
+// getNameForDiagnostic
+
+CINDEX_LINKAGE void clang_FunctionDecl_setRangeEnd(CXFunctionDecl FD,
+                                                   CXSourceLocation_ Loc);
+
+CINDEX_LINKAGE CXSourceLocation_ clang_FunctionDecl_getEllipsisLoc(CXFunctionDecl FD);
+
+// getSourceRange
+
+CINDEX_LINKAGE bool clang_FunctionDecl_hasBody(CXFunctionDecl FD);
+
+CINDEX_LINKAGE bool clang_FunctionDecl_hasTrivialBody(CXFunctionDecl FD);
+
+CINDEX_LINKAGE bool clang_FunctionDecl_isDefined(CXFunctionDecl FD);
+
+CINDEX_LINKAGE CXFunctionDecl clang_FunctionDecl_getDefinition(CXFunctionDecl FD);
+
+CINDEX_LINKAGE CXStmt clang_FunctionDecl_getBody(CXFunctionDecl FD);
+
+CINDEX_LINKAGE bool clang_FunctionDecl_isThisDeclarationADefinition(CXFunctionDecl FD);
+
+CINDEX_LINKAGE bool
+clang_FunctionDecl_isThisDeclarationInstantiatedFromAFriendDefinition(CXFunctionDecl FD);
+
+CINDEX_LINKAGE bool clang_FunctionDecl_doesThisDeclarationHaveABody(CXFunctionDecl FD);
+
+CINDEX_LINKAGE void clang_FunctionDecl_setBody(CXFunctionDecl FD, CXStmt B);
+
+CINDEX_LINKAGE void clang_FunctionDecl_setLazyBody(CXFunctionDecl FD, uint64_t Offset);
+
+CINDEX_LINKAGE void
+clang_FunctionDecl_setDefaultedFunctionInfo(CXFunctionDecl FD,
+                                            CXFunctionDecl_DefaultedFunctionInfo Info);
+
+CINDEX_LINKAGE bool clang_FunctionDecl_isVariadic(CXFunctionDecl FD);
+
+CINDEX_LINKAGE bool clang_FunctionDecl_isVirtualAsWritten(CXFunctionDecl FD);
+
+CINDEX_LINKAGE void clang_FunctionDecl_setVirtualAsWritten(CXFunctionDecl FD, bool V);
+
+CINDEX_LINKAGE bool clang_FunctionDecl_isPure(CXFunctionDecl FD);
+
+CINDEX_LINKAGE void clang_FunctionDecl_setPure(CXFunctionDecl FD, bool P);
+
+CINDEX_LINKAGE bool clang_FunctionDecl_isLateTemplateParsed(CXFunctionDecl FD);
+
+CINDEX_LINKAGE void clang_FunctionDecl_setLateTemplateParsed(CXFunctionDecl FD, bool ILT);
+
+CINDEX_LINKAGE bool clang_FunctionDecl_isTrivial(CXFunctionDecl FD);
+
+CINDEX_LINKAGE void clang_FunctionDecl_setTrivial(CXFunctionDecl FD, bool IT);
+
+CINDEX_LINKAGE bool clang_FunctionDecl_isTrivialForCall(CXFunctionDecl FD);
+
+CINDEX_LINKAGE void clang_FunctionDecl_setTrivialForCall(CXFunctionDecl FD, bool IT);
+
+CINDEX_LINKAGE bool clang_FunctionDecl_isDefaulted(CXFunctionDecl FD);
+
+CINDEX_LINKAGE void clang_FunctionDecl_setDefaulted(CXFunctionDecl FD, bool D);
+
+CINDEX_LINKAGE bool clang_FunctionDecl_isExplicitlyDefaulted(CXFunctionDecl FD);
+
+CINDEX_LINKAGE void clang_FunctionDecl_setExplicitlyDefaulted(CXFunctionDecl FD, bool ED);
+
+CINDEX_LINKAGE bool clang_FunctionDecl_isUserProvided(CXFunctionDecl FD);
+
+CINDEX_LINKAGE bool clang_FunctionDecl_hasImplicitReturnZero(CXFunctionDecl FD);
+
+CINDEX_LINKAGE void clang_FunctionDecl_setHasImplicitReturnZero(CXFunctionDecl FD,
+                                                                bool IRZ);
+
+CINDEX_LINKAGE bool clang_FunctionDecl_hasPrototype(CXFunctionDecl FD);
+
+CINDEX_LINKAGE bool clang_FunctionDecl_hasWrittenPrototype(CXFunctionDecl FD);
+
+CINDEX_LINKAGE void clang_FunctionDecl_setHasWrittenPrototype(CXFunctionDecl FD, bool P);
+
+CINDEX_LINKAGE bool clang_FunctionDecl_hasInheritedPrototype(CXFunctionDecl FD);
+
+CINDEX_LINKAGE void clang_FunctionDecl_setHasInheritedPrototype(CXFunctionDecl FD, bool P);
+
+CINDEX_LINKAGE bool clang_FunctionDecl_isConstexpr(CXFunctionDecl FD);
+
+CINDEX_LINKAGE void clang_FunctionDecl_setConstexprKind(CXFunctionDecl FD,
+                                                        CXConstexprSpecKind CSK);
+
+CINDEX_LINKAGE CXConstexprSpecKind clang_FunctionDecl_getConstexprKind(CXFunctionDecl FD);
+
+CINDEX_LINKAGE bool clang_FunctionDecl_isConstexprSpecified(CXFunctionDecl FD);
+
+CINDEX_LINKAGE bool clang_FunctionDecl_isConsteval(CXFunctionDecl FD);
+
+CINDEX_LINKAGE bool clang_FunctionDecl_instantiationIsPending(CXFunctionDecl FD);
+
+CINDEX_LINKAGE void clang_FunctionDecl_setInstantiationIsPending(CXFunctionDecl FD,
+                                                                 bool IC);
+
+CINDEX_LINKAGE bool clang_FunctionDecl_usesSEHTry(CXFunctionDecl FD);
+
+CINDEX_LINKAGE void clang_FunctionDecl_setUsesSEHTry(CXFunctionDecl FD, bool UST);
+
+CINDEX_LINKAGE bool clang_FunctionDecl_isDeleted(CXFunctionDecl FD);
+
+CINDEX_LINKAGE bool clang_FunctionDecl_isDeletedAsWritten(CXFunctionDecl FD);
+
+CINDEX_LINKAGE void clang_FunctionDecl_setDeletedAsWritten(CXFunctionDecl FD, bool D);
+
+CINDEX_LINKAGE bool clang_FunctionDecl_isMain(CXFunctionDecl FD);
+
+CINDEX_LINKAGE bool clang_FunctionDecl_isMSVCRTEntryPoint(CXFunctionDecl FD);
+
+CINDEX_LINKAGE bool clang_FunctionDecl_isReservedGlobalPlacementOperator(CXFunctionDecl FD);
+
+CINDEX_LINKAGE bool
+clang_FunctionDecl_isReplaceableGlobalAllocationFunction(CXFunctionDecl FD);
+
+CINDEX_LINKAGE bool clang_FunctionDecl_isInlineBuiltinDeclaration(CXFunctionDecl FD);
+
+CINDEX_LINKAGE bool clang_FunctionDecl_isDestroyingOperatorDelete(CXFunctionDecl FD);
+
+CINDEX_LINKAGE CXLanguageLinkage clang_FunctionDecl_getLanguageLinkage(CXFunctionDecl FD);
+
+CINDEX_LINKAGE bool clang_FunctionDecl_isExternC(CXFunctionDecl FD);
+
+CINDEX_LINKAGE bool clang_FunctionDecl_isInExternCContext(CXFunctionDecl FD);
+
+CINDEX_LINKAGE bool clang_FunctionDecl_isInExternCXXContext(CXFunctionDecl FD);
+
+CINDEX_LINKAGE bool clang_FunctionDecl_isGlobal(CXFunctionDecl FD);
+
+CINDEX_LINKAGE bool clang_FunctionDecl_isNoReturn(CXFunctionDecl FD);
+
+CINDEX_LINKAGE bool clang_FunctionDecl_hasSkippedBody(CXFunctionDecl FD);
+
+CINDEX_LINKAGE void clang_FunctionDecl_setHasSkippedBody(CXFunctionDecl FD, bool Skipped);
+
+CINDEX_LINKAGE bool clang_FunctionDecl_willHaveBody(CXFunctionDecl FD);
+
+CINDEX_LINKAGE void clang_FunctionDecl_setWillHaveBody(CXFunctionDecl FD, bool V);
+
+CINDEX_LINKAGE bool clang_FunctionDecl_isMultiVersion(CXFunctionDecl FD);
+
+CINDEX_LINKAGE void clang_FunctionDecl_setIsMultiVersion(CXFunctionDecl FD, bool V);
+
+CINDEX_LINKAGE CXMultiVersionKind clang_FunctionDecl_getMultiVersionKind(CXFunctionDecl FD);
+
+CINDEX_LINKAGE bool clang_FunctionDecl_isCPUDispatchMultiVersion(CXFunctionDecl FD);
+
+CINDEX_LINKAGE bool clang_FunctionDecl_isCPUSpecificMultiVersion(CXFunctionDecl FD);
+
+CINDEX_LINKAGE bool clang_FunctionDecl_isTargetMultiVersion(CXFunctionDecl FD);
+
+// getAssociatedConstraints
+
+CINDEX_LINKAGE void clang_FunctionDecl_setPreviousDeclaration(CXFunctionDecl FD,
+                                                              CXFunctionDecl PrevDecl);
+
+CINDEX_LINKAGE CXFunctionDecl clang_FunctionDecl_getCanonicalDecl(CXFunctionDecl FD);
+
+CINDEX_LINKAGE unsigned clang_FunctionDecl_getBuiltinID(CXFunctionDecl FD);
+
+// parameters
+
+CINDEX_LINKAGE unsigned clang_FunctionDecl_getNumParams(CXFunctionDecl FD);
+
+CINDEX_LINKAGE CXParmVarDecl clang_FunctionDecl_getParamDecl(CXFunctionDecl FD, unsigned i);
+
+// setParams
+
+CINDEX_LINKAGE unsigned clang_FunctionDecl_getMinRequiredArguments(CXFunctionDecl FD);
+
+CINDEX_LINKAGE bool clang_FunctionDecl_hasOneParamOrDefaultArgs(CXFunctionDecl FD);
+
+// getFunctionTypeLoc
+
+CINDEX_LINKAGE CXQualType clang_FunctionDecl_getReturnType(CXFunctionDecl FD);
+
+// getReturnTypeSourceRange
+// getParametersSourceRange
+
+CINDEX_LINKAGE CXQualType clang_FunctionDecl_getDeclaredReturnType(CXFunctionDecl FD);
+
+CINDEX_LINKAGE CXExceptionSpecificationType
+clang_FunctionDecl_getExceptionSpecType(CXFunctionDecl FD);
+
+// getExceptionSpecSourceRange
+
+CINDEX_LINKAGE CXQualType clang_FunctionDecl_getCallResultType(CXFunctionDecl FD);
+
+CINDEX_LINKAGE CXStorageClass clang_FunctionDecl_getStorageClass(CXFunctionDecl FD);
+
+CINDEX_LINKAGE void clang_FunctionDecl_setStorageClass(CXFunctionDecl FD,
+                                                       CXStorageClass SClass);
+
+CINDEX_LINKAGE bool clang_FunctionDecl_isInlineSpecified(CXFunctionDecl FD);
+
+CINDEX_LINKAGE void clang_FunctionDecl_setInlineSpecified(CXFunctionDecl FD, bool I);
+
+CINDEX_LINKAGE void clang_FunctionDecl_setImplicitlyInline(CXFunctionDecl FD, bool I);
+
+CINDEX_LINKAGE bool clang_FunctionDecl_isInlined(CXFunctionDecl FD);
+
+CINDEX_LINKAGE bool
+clang_FunctionDecl_isInlineDefinitionExternallyVisible(CXFunctionDecl FD);
+
+CINDEX_LINKAGE bool clang_FunctionDecl_isMSExternInline(CXFunctionDecl FD);
+
+CINDEX_LINKAGE bool
+clang_FunctionDecl_doesDeclarationForceExternallyVisibleDefinition(CXFunctionDecl FD);
+
+CINDEX_LINKAGE bool clang_FunctionDecl_isStatic(CXFunctionDecl FD);
+
+CINDEX_LINKAGE bool clang_FunctionDecl_isOverloadedOperator(CXFunctionDecl FD);
+
+// getOverloadedOperator
+
+CINDEX_LINKAGE CXIdentifierInfo clang_FunctionDecl_getLiteralIdentifier(CXFunctionDecl FD);
+
+CINDEX_LINKAGE CXFunctionDecl_TemplatedKind
+clang_FunctionDecl_getTemplatedKind(CXFunctionDecl FD);
+
+CINDEX_LINKAGE CXMemberSpecializationInfo
+clang_FunctionDecl_getMemberSpecializationInfo(CXFunctionDecl FD);
+
+CINDEX_LINKAGE void
+clang_FunctionDecl_setInstantiationOfMemberFunction(CXFunctionDecl FD, CXFunctionDecl FD2,
+                                                    CXTemplateSpecializationKind TSK);
+
+CINDEX_LINKAGE CXFunctionTemplateDecl
+clang_FunctionDecl_getDescribedFunctionTemplate(CXFunctionDecl FD);
+
+CINDEX_LINKAGE void
+clang_FunctionDecl_setDescribedFunctionTemplate(CXFunctionDecl FD,
+                                                CXFunctionTemplateDecl Template);
+
+CINDEX_LINKAGE CXFunctionDecl
+clang_FunctionDecl_getInstantiatedFromMemberFunction(CXFunctionDecl FD);
+
+CINDEX_LINKAGE bool clang_FunctionDecl_isFunctionTemplateSpecialization(CXFunctionDecl FD);
+
+CINDEX_LINKAGE CXFunctionTemplateSpecializationInfo
+clang_FunctionDecl_getTemplateSpecializationInfo(CXFunctionDecl FD);
+
+CINDEX_LINKAGE bool clang_FunctionDecl_isImplicitlyInstantiable(CXFunctionDecl FD);
+
+CINDEX_LINKAGE bool clang_FunctionDecl_isTemplateInstantiation(CXFunctionDecl FD);
+
+CINDEX_LINKAGE CXFunctionDecl
+clang_FunctionDecl_getTemplateInstantiationPattern(CXFunctionDecl FD, bool ForDefinition);
+
+CINDEX_LINKAGE CXFunctionTemplateDecl
+clang_FunctionDecl_getPrimaryTemplate(CXFunctionDecl FD);
+
+CINDEX_LINKAGE CXTemplateArgumentList
+clang_FunctionDecl_getTemplateSpecializationArgs(CXFunctionDecl FD);
+
+CINDEX_LINKAGE CXASTTemplateArgumentListInfo
+clang_FunctionDecl_getTemplateSpecializationArgsAsWritten(CXFunctionDecl FD);
+
+// setFunctionTemplateSpecialization
+// setDependentTemplateSpecialization
+
+CINDEX_LINKAGE CXDependentFunctionTemplateSpecializationInfo
+clang_FunctionDecl_getDependentSpecializationInfo(CXFunctionDecl FD);
+
+CINDEX_LINKAGE CXTemplateSpecializationKind
+clang_FunctionDecl_getTemplateSpecializationKind(CXFunctionDecl FD);
+
+CINDEX_LINKAGE CXTemplateSpecializationKind
+clang_FunctionDecl_getTemplateSpecializationKindForInstantiation(CXFunctionDecl FD);
+
+CINDEX_LINKAGE void
+clang_FunctionDecl_setTemplateSpecializationKind(CXFunctionDecl FD,
+                                                 CXTemplateSpecializationKind TSK,
+                                                 CXSourceLocation_ PointOfInstantiation);
+
+CINDEX_LINKAGE CXSourceLocation_
+clang_FunctionDecl_getPointOfInstantiation(CXFunctionDecl FD);
+
+CINDEX_LINKAGE bool clang_FunctionDecl_isOutOfLine(CXFunctionDecl FD);
+
+CINDEX_LINKAGE unsigned clang_FunctionDecl_getMemoryFunctionKind(CXFunctionDecl FD);
+
+CINDEX_LINKAGE unsigned clang_FunctionDecl_getODRHash(CXFunctionDecl FD);
 
 // TypeDecl
 CINDEX_LINKAGE CXType_ clang_TypeDecl_getTypeForDecl(CXTypeDecl TD);

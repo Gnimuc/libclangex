@@ -87,6 +87,9 @@ typedef void *CXDeclGroupRef;
 
 // DeclTemplate
 typedef void *CXTemplateDecl;
+typedef void *CXFunctionTemplateSpecializationInfo;
+typedef void *CXMemberSpecializationInfo;
+typedef void *CXDependentFunctionTemplateSpecializationInfo;
 typedef void *CXRedeclarableTemplateDecl;
 typedef void *CXFunctionTemplateDecl;
 typedef void *CXTemplateTypeParmDecl;
@@ -281,6 +284,7 @@ typedef void *CXTypeSourceInfo;
 
 // TemplateBase
 typedef void *CXTemplateName;
+typedef void *CXASTTemplateArgumentListInfo;
 
 // TemplateName
 typedef void *CXTemplateArgument;

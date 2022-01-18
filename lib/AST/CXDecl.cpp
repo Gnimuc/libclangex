@@ -716,6 +716,533 @@ void clang_ParmVarDecl_setOwningFunction(CXParmVarDecl PVD, CXDeclContext FD) {
 
 // FunctionDecl
 
+// getNameInfo
+// getNameForDiagnostic
+
+void clang_FunctionDecl_setRangeEnd(CXFunctionDecl FD, CXSourceLocation_ Loc) {
+  static_cast<clang::FunctionDecl *>(FD)->setRangeEnd(
+      clang::SourceLocation::getFromPtrEncoding(Loc));
+}
+
+CXSourceLocation_ clang_FunctionDecl_getEllipsisLoc(CXFunctionDecl FD) {
+  return static_cast<clang::FunctionDecl *>(FD)->getEllipsisLoc().getPtrEncoding();
+}
+
+// getSourceRange
+
+// bool clang_FunctionDecl_hasBody(CXFunctionDecl FD, CXFunctionDecl Definition) {
+//   return static_cast<clang::FunctionDecl *>(FD)->hasBody(
+//       static_cast<clang::FunctionDecl *>(Definition));
+// }
+
+bool clang_FunctionDecl_hasBody(CXFunctionDecl FD) {
+  return static_cast<clang::FunctionDecl *>(FD)->hasBody();
+}
+
+bool clang_FunctionDecl_hasTrivialBody(CXFunctionDecl FD) {
+  return static_cast<clang::FunctionDecl *>(FD)->hasTrivialBody();
+}
+
+bool clang_FunctionDecl_isDefined(CXFunctionDecl FD) {
+  return static_cast<clang::FunctionDecl *>(FD)->isDefined();
+}
+
+CXFunctionDecl clang_FunctionDecl_getDefinition(CXFunctionDecl FD) {
+  return static_cast<clang::FunctionDecl *>(FD)->getDefinition();
+}
+
+CXStmt clang_FunctionDecl_getBody(CXFunctionDecl FD) {
+  return static_cast<clang::FunctionDecl *>(FD)->getBody();
+}
+
+bool clang_FunctionDecl_isThisDeclarationADefinition(CXFunctionDecl FD) {
+  return static_cast<clang::FunctionDecl *>(FD)->isThisDeclarationADefinition();
+}
+
+bool clang_FunctionDecl_isThisDeclarationInstantiatedFromAFriendDefinition(
+    CXFunctionDecl FD) {
+  return static_cast<clang::FunctionDecl *>(FD)
+      ->isThisDeclarationInstantiatedFromAFriendDefinition();
+}
+
+bool clang_FunctionDecl_doesThisDeclarationHaveABody(CXFunctionDecl FD) {
+  return static_cast<clang::FunctionDecl *>(FD)->doesThisDeclarationHaveABody();
+}
+
+void clang_FunctionDecl_setBody(CXFunctionDecl FD, CXStmt B) {
+  static_cast<clang::FunctionDecl *>(FD)->setBody(static_cast<clang::Stmt *>(B));
+}
+
+void clang_FunctionDecl_setLazyBody(CXFunctionDecl FD, uint64_t Offset) {
+  static_cast<clang::FunctionDecl *>(FD)->setLazyBody(Offset);
+}
+
+void clang_FunctionDecl_setDefaultedFunctionInfo(
+    CXFunctionDecl FD, CXFunctionDecl_DefaultedFunctionInfo Info) {
+  static_cast<clang::FunctionDecl *>(FD)->setDefaultedFunctionInfo(
+      static_cast<clang::FunctionDecl::DefaultedFunctionInfo *>(Info));
+}
+
+bool clang_FunctionDecl_isVariadic(CXFunctionDecl FD) {
+  return static_cast<clang::FunctionDecl *>(FD)->isVariadic();
+}
+
+bool clang_FunctionDecl_isVirtualAsWritten(CXFunctionDecl FD) {
+  return static_cast<clang::FunctionDecl *>(FD)->isVirtualAsWritten();
+}
+
+void clang_FunctionDecl_setVirtualAsWritten(CXFunctionDecl FD, bool V) {
+  static_cast<clang::FunctionDecl *>(FD)->setVirtualAsWritten(V);
+}
+
+bool clang_FunctionDecl_isPure(CXFunctionDecl FD) {
+  return static_cast<clang::FunctionDecl *>(FD)->isPure();
+}
+
+void clang_FunctionDecl_setPure(CXFunctionDecl FD, bool P) {
+  static_cast<clang::FunctionDecl *>(FD)->setPure(P);
+}
+
+bool clang_FunctionDecl_isLateTemplateParsed(CXFunctionDecl FD) {
+  return static_cast<clang::FunctionDecl *>(FD)->isLateTemplateParsed();
+}
+
+void clang_FunctionDecl_setLateTemplateParsed(CXFunctionDecl FD, bool ILT) {
+  static_cast<clang::FunctionDecl *>(FD)->setLateTemplateParsed(ILT);
+}
+
+bool clang_FunctionDecl_isTrivial(CXFunctionDecl FD) {
+  return static_cast<clang::FunctionDecl *>(FD)->isTrivial();
+}
+
+void clang_FunctionDecl_setTrivial(CXFunctionDecl FD, bool IT) {
+  static_cast<clang::FunctionDecl *>(FD)->setTrivial(IT);
+}
+
+bool clang_FunctionDecl_isTrivialForCall(CXFunctionDecl FD) {
+  return static_cast<clang::FunctionDecl *>(FD)->isTrivialForCall();
+}
+
+void clang_FunctionDecl_setTrivialForCall(CXFunctionDecl FD, bool IT) {
+  static_cast<clang::FunctionDecl *>(FD)->setTrivialForCall(IT);
+}
+
+bool clang_FunctionDecl_isDefaulted(CXFunctionDecl FD) {
+  return static_cast<clang::FunctionDecl *>(FD)->isDefaulted();
+}
+
+void clang_FunctionDecl_setDefaulted(CXFunctionDecl FD, bool D) {
+  static_cast<clang::FunctionDecl *>(FD)->setDefaulted(D);
+}
+
+bool clang_FunctionDecl_isExplicitlyDefaulted(CXFunctionDecl FD) {
+  return static_cast<clang::FunctionDecl *>(FD)->isExplicitlyDefaulted();
+}
+
+void clang_FunctionDecl_setExplicitlyDefaulted(CXFunctionDecl FD, bool ED) {
+  static_cast<clang::FunctionDecl *>(FD)->setExplicitlyDefaulted(ED);
+}
+
+bool clang_FunctionDecl_isUserProvided(CXFunctionDecl FD) {
+  return static_cast<clang::FunctionDecl *>(FD)->isUserProvided();
+}
+
+bool clang_FunctionDecl_hasImplicitReturnZero(CXFunctionDecl FD) {
+  return static_cast<clang::FunctionDecl *>(FD)->hasImplicitReturnZero();
+}
+
+void clang_FunctionDecl_setHasImplicitReturnZero(CXFunctionDecl FD, bool IRZ) {
+  static_cast<clang::FunctionDecl *>(FD)->setHasImplicitReturnZero(IRZ);
+}
+
+bool clang_FunctionDecl_hasPrototype(CXFunctionDecl FD) {
+  return static_cast<clang::FunctionDecl *>(FD)->hasPrototype();
+}
+
+bool clang_FunctionDecl_hasWrittenPrototype(CXFunctionDecl FD) {
+  return static_cast<clang::FunctionDecl *>(FD)->hasWrittenPrototype();
+}
+
+void clang_FunctionDecl_setHasWrittenPrototype(CXFunctionDecl FD, bool P) {
+  static_cast<clang::FunctionDecl *>(FD)->setHasWrittenPrototype(P);
+}
+
+bool clang_FunctionDecl_hasInheritedPrototype(CXFunctionDecl FD) {
+  return static_cast<clang::FunctionDecl *>(FD)->hasInheritedPrototype();
+}
+
+void clang_FunctionDecl_setHasInheritedPrototype(CXFunctionDecl FD, bool P) {
+  static_cast<clang::FunctionDecl *>(FD)->setHasInheritedPrototype(P);
+}
+
+bool clang_FunctionDecl_isConstexpr(CXFunctionDecl FD) {
+  return static_cast<clang::FunctionDecl *>(FD)->isConstexpr();
+}
+
+void clang_FunctionDecl_setConstexprKind(CXFunctionDecl FD, CXConstexprSpecKind CSK) {
+  static_cast<clang::FunctionDecl *>(FD)->setConstexprKind(
+      static_cast<clang::ConstexprSpecKind>(CSK));
+}
+
+CXConstexprSpecKind clang_FunctionDecl_getConstexprKind(CXFunctionDecl FD) {
+  return static_cast<CXConstexprSpecKind>(
+      static_cast<clang::FunctionDecl *>(FD)->getConstexprKind());
+}
+
+bool clang_FunctionDecl_isConstexprSpecified(CXFunctionDecl FD) {
+  return static_cast<clang::FunctionDecl *>(FD)->isConstexprSpecified();
+}
+
+bool clang_FunctionDecl_isConsteval(CXFunctionDecl FD) {
+  return static_cast<clang::FunctionDecl *>(FD)->isConsteval();
+}
+
+bool clang_FunctionDecl_instantiationIsPending(CXFunctionDecl FD) {
+  return static_cast<clang::FunctionDecl *>(FD)->instantiationIsPending();
+}
+
+void clang_FunctionDecl_setInstantiationIsPending(CXFunctionDecl FD, bool IC) {
+  static_cast<clang::FunctionDecl *>(FD)->setInstantiationIsPending(IC);
+}
+
+bool clang_FunctionDecl_usesSEHTry(CXFunctionDecl FD) {
+  return static_cast<clang::FunctionDecl *>(FD)->usesSEHTry();
+}
+
+void clang_FunctionDecl_setUsesSEHTry(CXFunctionDecl FD, bool UST) {
+  static_cast<clang::FunctionDecl *>(FD)->setUsesSEHTry(UST);
+}
+
+bool clang_FunctionDecl_isDeleted(CXFunctionDecl FD) {
+  return static_cast<clang::FunctionDecl *>(FD)->isDeleted();
+}
+
+bool clang_FunctionDecl_isDeletedAsWritten(CXFunctionDecl FD) {
+  return static_cast<clang::FunctionDecl *>(FD)->isDeletedAsWritten();
+}
+
+void clang_FunctionDecl_setDeletedAsWritten(CXFunctionDecl FD, bool D) {
+  static_cast<clang::FunctionDecl *>(FD)->setDeletedAsWritten(D);
+}
+
+bool clang_FunctionDecl_isMain(CXFunctionDecl FD) {
+  return static_cast<clang::FunctionDecl *>(FD)->isMain();
+}
+
+bool clang_FunctionDecl_isMSVCRTEntryPoint(CXFunctionDecl FD) {
+  return static_cast<clang::FunctionDecl *>(FD)->isMSVCRTEntryPoint();
+}
+
+bool clang_FunctionDecl_isReservedGlobalPlacementOperator(CXFunctionDecl FD) {
+  return static_cast<clang::FunctionDecl *>(FD)->isReservedGlobalPlacementOperator();
+}
+
+bool clang_FunctionDecl_isReplaceableGlobalAllocationFunction(CXFunctionDecl FD) {
+  return static_cast<clang::FunctionDecl *>(FD)->isReplaceableGlobalAllocationFunction();
+}
+
+bool clang_FunctionDecl_isInlineBuiltinDeclaration(CXFunctionDecl FD) {
+  return static_cast<clang::FunctionDecl *>(FD)->isInlineBuiltinDeclaration();
+}
+
+bool clang_FunctionDecl_isDestroyingOperatorDelete(CXFunctionDecl FD) {
+  return static_cast<clang::FunctionDecl *>(FD)->isDestroyingOperatorDelete();
+}
+
+CXLanguageLinkage clang_FunctionDecl_getLanguageLinkage(CXFunctionDecl FD) {
+  return static_cast<CXLanguageLinkage>(
+      static_cast<clang::FunctionDecl *>(FD)->getLanguageLinkage());
+}
+
+bool clang_FunctionDecl_isExternC(CXFunctionDecl FD) {
+  return static_cast<clang::FunctionDecl *>(FD)->isExternC();
+}
+
+bool clang_FunctionDecl_isInExternCContext(CXFunctionDecl FD) {
+  return static_cast<clang::FunctionDecl *>(FD)->isInExternCContext();
+}
+
+bool clang_FunctionDecl_isInExternCXXContext(CXFunctionDecl FD) {
+  return static_cast<clang::FunctionDecl *>(FD)->isInExternCXXContext();
+}
+
+bool clang_FunctionDecl_isGlobal(CXFunctionDecl FD) {
+  return static_cast<clang::FunctionDecl *>(FD)->isGlobal();
+}
+
+bool clang_FunctionDecl_isNoReturn(CXFunctionDecl FD) {
+  return static_cast<clang::FunctionDecl *>(FD)->isNoReturn();
+}
+
+bool clang_FunctionDecl_hasSkippedBody(CXFunctionDecl FD) {
+  return static_cast<clang::FunctionDecl *>(FD)->hasSkippedBody();
+}
+
+void clang_FunctionDecl_setHasSkippedBody(CXFunctionDecl FD, bool Skipped) {
+  static_cast<clang::FunctionDecl *>(FD)->setHasSkippedBody(Skipped);
+}
+
+bool clang_FunctionDecl_willHaveBody(CXFunctionDecl FD) {
+  return static_cast<clang::FunctionDecl *>(FD)->willHaveBody();
+}
+
+void clang_FunctionDecl_setWillHaveBody(CXFunctionDecl FD, bool V) {
+  static_cast<clang::FunctionDecl *>(FD)->setWillHaveBody(V);
+}
+
+bool clang_FunctionDecl_isMultiVersion(CXFunctionDecl FD) {
+  return static_cast<clang::FunctionDecl *>(FD)->isMultiVersion();
+}
+
+void clang_FunctionDecl_setIsMultiVersion(CXFunctionDecl FD, bool V) {
+  static_cast<clang::FunctionDecl *>(FD)->setIsMultiVersion(V);
+}
+
+CXMultiVersionKind clang_FunctionDecl_getMultiVersionKind(CXFunctionDecl FD) {
+  return static_cast<CXMultiVersionKind>(
+      static_cast<clang::FunctionDecl *>(FD)->getMultiVersionKind());
+}
+
+bool clang_FunctionDecl_isCPUDispatchMultiVersion(CXFunctionDecl FD) {
+  return static_cast<clang::FunctionDecl *>(FD)->isCPUDispatchMultiVersion();
+}
+
+bool clang_FunctionDecl_isCPUSpecificMultiVersion(CXFunctionDecl FD) {
+  return static_cast<clang::FunctionDecl *>(FD)->isCPUSpecificMultiVersion();
+}
+
+bool clang_FunctionDecl_isTargetMultiVersion(CXFunctionDecl FD) {
+  return static_cast<clang::FunctionDecl *>(FD)->isTargetMultiVersion();
+}
+
+// getAssociatedConstraints
+
+void clang_FunctionDecl_setPreviousDeclaration(CXFunctionDecl FD, CXFunctionDecl PrevDecl) {
+  static_cast<clang::FunctionDecl *>(FD)->setPreviousDeclaration(
+      static_cast<clang::FunctionDecl *>(PrevDecl));
+}
+
+CXFunctionDecl clang_FunctionDecl_getCanonicalDecl(CXFunctionDecl FD) {
+  return static_cast<clang::FunctionDecl *>(FD)->getCanonicalDecl();
+}
+
+unsigned clang_FunctionDecl_getBuiltinID(CXFunctionDecl FD) {
+  return static_cast<clang::FunctionDecl *>(FD)->getBuiltinID();
+}
+
+// parameters
+
+unsigned clang_FunctionDecl_getNumParams(CXFunctionDecl FD) {
+  return static_cast<clang::FunctionDecl *>(FD)->getNumParams();
+}
+
+CXParmVarDecl clang_FunctionDecl_getParamDecl(CXFunctionDecl FD, unsigned i) {
+  return static_cast<clang::FunctionDecl *>(FD)->getParamDecl(i);
+}
+
+// setParams
+
+unsigned clang_FunctionDecl_getMinRequiredArguments(CXFunctionDecl FD) {
+  return static_cast<clang::FunctionDecl *>(FD)->getMinRequiredArguments();
+}
+
+bool clang_FunctionDecl_hasOneParamOrDefaultArgs(CXFunctionDecl FD) {
+  return static_cast<clang::FunctionDecl *>(FD)->hasOneParamOrDefaultArgs();
+}
+
+// getFunctionTypeLoc
+
+CXQualType clang_FunctionDecl_getReturnType(CXFunctionDecl FD) {
+  return static_cast<clang::FunctionDecl *>(FD)->getReturnType().getAsOpaquePtr();
+}
+
+// getReturnTypeSourceRange
+// getParametersSourceRange
+
+CXQualType clang_FunctionDecl_getDeclaredReturnType(CXFunctionDecl FD) {
+  return static_cast<clang::FunctionDecl *>(FD)->getDeclaredReturnType().getAsOpaquePtr();
+}
+
+CXExceptionSpecificationType clang_FunctionDecl_getExceptionSpecType(CXFunctionDecl FD) {
+  return static_cast<CXExceptionSpecificationType>(
+      static_cast<clang::FunctionDecl *>(FD)->getExceptionSpecType());
+}
+
+// getExceptionSpecSourceRange
+
+CXQualType clang_FunctionDecl_getCallResultType(CXFunctionDecl FD) {
+  return static_cast<clang::FunctionDecl *>(FD)->getCallResultType().getAsOpaquePtr();
+}
+
+CXStorageClass clang_FunctionDecl_getStorageClass(CXFunctionDecl FD) {
+  return static_cast<CXStorageClass>(
+      static_cast<clang::FunctionDecl *>(FD)->getStorageClass());
+}
+
+void clang_FunctionDecl_setStorageClass(CXFunctionDecl FD, CXStorageClass SClass) {
+  static_cast<clang::FunctionDecl *>(FD)->setStorageClass(
+      static_cast<clang::StorageClass>(SClass));
+}
+
+bool clang_FunctionDecl_isInlineSpecified(CXFunctionDecl FD) {
+  return static_cast<clang::FunctionDecl *>(FD)->isInlineSpecified();
+}
+
+void clang_FunctionDecl_setInlineSpecified(CXFunctionDecl FD, bool I) {
+  static_cast<clang::FunctionDecl *>(FD)->setInlineSpecified(I);
+}
+
+void clang_FunctionDecl_setImplicitlyInline(CXFunctionDecl FD, bool I) {
+  static_cast<clang::FunctionDecl *>(FD)->setImplicitlyInline(I);
+}
+
+bool clang_FunctionDecl_isInlined(CXFunctionDecl FD) {
+  return static_cast<clang::FunctionDecl *>(FD)->isInlined();
+}
+
+bool clang_FunctionDecl_isInlineDefinitionExternallyVisible(CXFunctionDecl FD) {
+  return static_cast<clang::FunctionDecl *>(FD)->isInlineDefinitionExternallyVisible();
+}
+
+bool clang_FunctionDecl_isMSExternInline(CXFunctionDecl FD) {
+  return static_cast<clang::FunctionDecl *>(FD)->isMSExternInline();
+}
+
+bool clang_FunctionDecl_doesDeclarationForceExternallyVisibleDefinition(CXFunctionDecl FD) {
+  return static_cast<clang::FunctionDecl *>(FD)
+      ->doesDeclarationForceExternallyVisibleDefinition();
+}
+
+bool clang_FunctionDecl_isStatic(CXFunctionDecl FD) {
+  return static_cast<clang::FunctionDecl *>(FD)->isStatic();
+}
+
+bool clang_FunctionDecl_isOverloadedOperator(CXFunctionDecl FD) {
+  return static_cast<clang::FunctionDecl *>(FD)->isOverloadedOperator();
+}
+
+// getOverloadedOperator
+
+CXIdentifierInfo clang_FunctionDecl_getLiteralIdentifier(CXFunctionDecl FD) {
+  return const_cast<clang::IdentifierInfo *>(
+      static_cast<clang::FunctionDecl *>(FD)->getLiteralIdentifier());
+}
+
+CXFunctionDecl_TemplatedKind clang_FunctionDecl_getTemplatedKind(CXFunctionDecl FD) {
+  return static_cast<CXFunctionDecl_TemplatedKind>(
+      static_cast<clang::FunctionDecl *>(FD)->getTemplatedKind());
+}
+
+CXMemberSpecializationInfo
+clang_FunctionDecl_getMemberSpecializationInfo(CXFunctionDecl FD) {
+  return static_cast<clang::FunctionDecl *>(FD)->getMemberSpecializationInfo();
+}
+
+void clang_FunctionDecl_setInstantiationOfMemberFunction(CXFunctionDecl FD,
+                                                         CXFunctionDecl FD2,
+                                                         CXTemplateSpecializationKind TSK) {
+  static_cast<clang::FunctionDecl *>(FD)->setInstantiationOfMemberFunction(
+      static_cast<clang::FunctionDecl *>(FD2),
+      static_cast<clang::TemplateSpecializationKind>(TSK));
+}
+
+CXFunctionTemplateDecl clang_FunctionDecl_getDescribedFunctionTemplate(CXFunctionDecl FD) {
+  return static_cast<clang::FunctionDecl *>(FD)->getDescribedFunctionTemplate();
+}
+
+void clang_FunctionDecl_setDescribedFunctionTemplate(CXFunctionDecl FD,
+                                                     CXFunctionTemplateDecl Template) {
+  static_cast<clang::FunctionDecl *>(FD)->setDescribedFunctionTemplate(
+      static_cast<clang::FunctionTemplateDecl *>(Template));
+}
+
+CXFunctionDecl clang_FunctionDecl_getInstantiatedFromMemberFunction(CXFunctionDecl FD) {
+  return static_cast<clang::FunctionDecl *>(FD)->getInstantiatedFromMemberFunction();
+}
+
+bool clang_FunctionDecl_isFunctionTemplateSpecialization(CXFunctionDecl FD) {
+  return static_cast<clang::FunctionDecl *>(FD)->isFunctionTemplateSpecialization();
+}
+
+CXFunctionTemplateSpecializationInfo
+clang_FunctionDecl_getTemplateSpecializationInfo(CXFunctionDecl FD) {
+  return static_cast<clang::FunctionDecl *>(FD)->getTemplateSpecializationInfo();
+}
+
+bool clang_FunctionDecl_isImplicitlyInstantiable(CXFunctionDecl FD) {
+  return static_cast<clang::FunctionDecl *>(FD)->isImplicitlyInstantiable();
+}
+
+bool clang_FunctionDecl_isTemplateInstantiation(CXFunctionDecl FD) {
+  return static_cast<clang::FunctionDecl *>(FD)->isTemplateInstantiation();
+}
+
+CXFunctionDecl clang_FunctionDecl_getTemplateInstantiationPattern(CXFunctionDecl FD,
+                                                                  bool ForDefinition) {
+  return static_cast<clang::FunctionDecl *>(FD)->getTemplateInstantiationPattern(
+      ForDefinition);
+}
+
+CXFunctionTemplateDecl clang_FunctionDecl_getPrimaryTemplate(CXFunctionDecl FD) {
+  return static_cast<clang::FunctionDecl *>(FD)->getPrimaryTemplate();
+}
+
+CXTemplateArgumentList clang_FunctionDecl_getTemplateSpecializationArgs(CXFunctionDecl FD) {
+  return const_cast<clang::TemplateArgumentList *>(
+      static_cast<clang::FunctionDecl *>(FD)->getTemplateSpecializationArgs());
+}
+
+CXASTTemplateArgumentListInfo
+clang_FunctionDecl_getTemplateSpecializationArgsAsWritten(CXFunctionDecl FD) {
+  return const_cast<clang::ASTTemplateArgumentListInfo *>(
+      static_cast<clang::FunctionDecl *>(FD)->getTemplateSpecializationArgsAsWritten());
+}
+
+// setFunctionTemplateSpecialization
+// setDependentTemplateSpecialization
+
+CXDependentFunctionTemplateSpecializationInfo
+clang_FunctionDecl_getDependentSpecializationInfo(CXFunctionDecl FD) {
+  return static_cast<clang::FunctionDecl *>(FD)->getDependentSpecializationInfo();
+}
+
+CXTemplateSpecializationKind
+clang_FunctionDecl_getTemplateSpecializationKind(CXFunctionDecl FD) {
+  return static_cast<CXTemplateSpecializationKind>(
+      static_cast<clang::FunctionDecl *>(FD)->getTemplateSpecializationKind());
+}
+
+CXTemplateSpecializationKind
+clang_FunctionDecl_getTemplateSpecializationKindForInstantiation(CXFunctionDecl FD) {
+  return static_cast<CXTemplateSpecializationKind>(
+      static_cast<clang::FunctionDecl *>(FD)
+          ->getTemplateSpecializationKindForInstantiation());
+}
+
+void clang_FunctionDecl_setTemplateSpecializationKind(
+    CXFunctionDecl FD, CXTemplateSpecializationKind TSK,
+    CXSourceLocation_ PointOfInstantiation) {
+  static_cast<clang::FunctionDecl *>(FD)->setTemplateSpecializationKind(
+      static_cast<clang::TemplateSpecializationKind>(TSK),
+      clang::SourceLocation::getFromPtrEncoding(PointOfInstantiation));
+}
+
+CXSourceLocation_ clang_FunctionDecl_getPointOfInstantiation(CXFunctionDecl FD) {
+  return static_cast<clang::FunctionDecl *>(FD)->getPointOfInstantiation().getPtrEncoding();
+}
+
+bool clang_FunctionDecl_isOutOfLine(CXFunctionDecl FD) {
+  return static_cast<clang::FunctionDecl *>(FD)->isOutOfLine();
+}
+
+unsigned clang_FunctionDecl_getMemoryFunctionKind(CXFunctionDecl FD) {
+  return static_cast<clang::FunctionDecl *>(FD)->getMemoryFunctionKind();
+}
+
+unsigned clang_FunctionDecl_getODRHash(CXFunctionDecl FD) {
+  return static_cast<clang::FunctionDecl *>(FD)->getODRHash();
+}
+
 // TypeDecl
 CXType_ clang_TypeDecl_getTypeForDecl(CXTypeDecl TD) {
   return const_cast<clang::Type *>(static_cast<clang::TypeDecl *>(TD)->getTypeForDecl());

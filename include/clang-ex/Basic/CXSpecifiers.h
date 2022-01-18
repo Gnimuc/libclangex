@@ -5,6 +5,13 @@
 extern "C" {
 #endif
 
+enum class CXConstexprSpecKind {
+  CXConstexprSpecKind_Unspecified,
+  CXConstexprSpecKind_Constexpr,
+  CXConstexprSpecKind_Consteval,
+  CXConstexprSpecKind_Constinit
+};
+
 enum CXTemplateSpecializationKind {
   CXTemplateSpecializationKind_TSK_Undeclared = 0,
   CXTemplateSpecializationKind_TSK_ImplicitInstantiation,
