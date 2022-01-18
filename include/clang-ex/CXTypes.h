@@ -47,6 +47,7 @@ typedef void *CXBlockDecl;
 typedef void *CXCapturedDecl;
 typedef void *CXImportDecl;
 typedef void *CXExportDecl;
+typedef void *CXEmptyDecl;
 
 // DeclarationName
 typedef void *CXDeclarationName;
@@ -317,6 +318,9 @@ typedef void *CXIdentifierTable;
 
 // LangOptions
 typedef void *CXLangOptions;
+
+// Module
+typedef void *CXModule;
 
 // SourceLocation
 typedef void *CXSourceLocation_;
