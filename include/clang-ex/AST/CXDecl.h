@@ -1002,13 +1002,82 @@ clang_EnumDecl_setInstantiationOfMemberEnum(CXEnumDecl ED, CXEnumDecl ED2,
                                             CXTemplateSpecializationKind TSK);
 
 // RecordDecl
+enum CXRecordDecl_ArgPassingKind : unsigned {
+  CXRecordDecl_ArgPassingKind_APK_CanPassInRegs,
+  CXRecordDecl_ArgPassingKind_APK_CannotPassInRegs,
+  CXRecordDecl_ArgPassingKind_APK_CanNeverPassInRegs
+};
+
 CINDEX_LINKAGE CXRecordDecl clang_RecordDecl_getPreviousDecl(CXRecordDecl RD);
 
 CINDEX_LINKAGE CXRecordDecl clang_RecordDecl_getMostRecentDecl(CXRecordDecl RD);
 
 CINDEX_LINKAGE bool clang_RecordDecl_hasFlexibleArrayMember(CXRecordDecl RD);
 
+CINDEX_LINKAGE void clang_RecordDecl_setHasFlexibleArrayMember(CXRecordDecl RD, bool V);
+
 CINDEX_LINKAGE bool clang_RecordDecl_isAnonymousStructOrUnion(CXRecordDecl RD);
+
+CINDEX_LINKAGE void clang_RecordDecl_setAnonymousStructOrUnion(CXRecordDecl RD, bool Anon);
+
+CINDEX_LINKAGE bool clang_RecordDecl_hasObjectMember(CXRecordDecl RD);
+
+CINDEX_LINKAGE void clang_RecordDecl_setHasObjectMember(CXRecordDecl RD, bool val);
+
+CINDEX_LINKAGE bool clang_RecordDecl_hasVolatileMember(CXRecordDecl RD);
+
+CINDEX_LINKAGE void clang_RecordDecl_setHasVolatileMember(CXRecordDecl RD, bool val);
+
+CINDEX_LINKAGE bool clang_RecordDecl_hasLoadedFieldsFromExternalStorage(CXRecordDecl RD);
+
+CINDEX_LINKAGE void clang_RecordDecl_setHasLoadedFieldsFromExternalStorage(CXRecordDecl RD,
+                                                                           bool val);
+
+CINDEX_LINKAGE bool
+clang_RecordDecl_isNonTrivialToPrimitiveDefaultInitialize(CXRecordDecl RD);
+
+CINDEX_LINKAGE void
+clang_RecordDecl_setNonTrivialToPrimitiveDefaultInitialize(CXRecordDecl RD, bool V);
+
+CINDEX_LINKAGE bool clang_RecordDecl_isNonTrivialToPrimitiveCopy(CXRecordDecl RD);
+
+CINDEX_LINKAGE void clang_RecordDecl_setNonTrivialToPrimitiveCopy(CXRecordDecl RD, bool V);
+
+CINDEX_LINKAGE bool clang_RecordDecl_isNonTrivialToPrimitiveDestroy(CXRecordDecl RD);
+
+CINDEX_LINKAGE void clang_RecordDecl_setNonTrivialToPrimitiveDestroy(CXRecordDecl RD,
+                                                                     bool V);
+
+CINDEX_LINKAGE bool
+clang_RecordDecl_hasNonTrivialToPrimitiveDefaultInitializeCUnion(CXRecordDecl RD);
+
+CINDEX_LINKAGE void
+clang_RecordDecl_setHasNonTrivialToPrimitiveDefaultInitializeCUnion(CXRecordDecl RD,
+                                                                    bool V);
+
+CINDEX_LINKAGE bool
+clang_RecordDecl_hasNonTrivialToPrimitiveDestructCUnion(CXRecordDecl RD);
+
+CINDEX_LINKAGE void
+clang_RecordDecl_setHasNonTrivialToPrimitiveDestructCUnion(CXRecordDecl RD, bool V);
+
+CINDEX_LINKAGE bool clang_RecordDecl_hasNonTrivialToPrimitiveCopyCUnion(CXRecordDecl RD);
+
+CINDEX_LINKAGE void clang_RecordDecl_setHasNonTrivialToPrimitiveCopyCUnion(CXRecordDecl RD,
+                                                                           bool V);
+
+CINDEX_LINKAGE bool clang_RecordDecl_canPassInRegisters(CXRecordDecl RD);
+
+CINDEX_LINKAGE CXRecordDecl_ArgPassingKind
+clang_RecordDecl_getArgPassingRestrictions(CXRecordDecl RD);
+
+CINDEX_LINKAGE void
+clang_RecordDecl_setArgPassingRestrictions(CXRecordDecl RD,
+                                           CXRecordDecl_ArgPassingKind Kind);
+
+CINDEX_LINKAGE bool clang_RecordDecl_isParamDestroyedInCallee(CXRecordDecl RD);
+
+CINDEX_LINKAGE void clang_RecordDecl_setParamDestroyedInCallee(CXRecordDecl RD, bool V);
 
 CINDEX_LINKAGE bool clang_RecordDecl_isInjectedClassName(CXRecordDecl RD);
 
@@ -1016,9 +1085,18 @@ CINDEX_LINKAGE bool clang_RecordDecl_isLambda(CXRecordDecl RD);
 
 CINDEX_LINKAGE bool clang_RecordDecl_isCapturedRecord(CXRecordDecl RD);
 
+CINDEX_LINKAGE void clang_RecordDecl_setCapturedRecord(CXRecordDecl RD);
+
 CINDEX_LINKAGE CXRecordDecl clang_RecordDecl_getDefinition(CXRecordDecl RD);
 
 CINDEX_LINKAGE bool clang_RecordDecl_isOrContainsUnion(CXRecordDecl RD);
+
+CINDEX_LINKAGE bool clang_RecordDecl_isMsStruct(CXRecordDecl RD, CXASTContext C);
+
+CINDEX_LINKAGE bool clang_RecordDecl_mayInsertExtraPadding(CXRecordDecl RD,
+                                                           bool EmitRemark);
+
+CINDEX_LINKAGE CXFieldDecl clang_RecordDecl_findFirstNamedDataMember(CXRecordDecl RD);
 
 // FileScopeAsmDecl
 CINDEX_LINKAGE CXSourceLocation_ clang_FileScopeAsmDecl_getAsmLoc(CXFileScopeAsmDecl FSAD);

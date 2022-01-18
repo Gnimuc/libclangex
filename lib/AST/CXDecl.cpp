@@ -1748,8 +1748,114 @@ bool clang_RecordDecl_hasFlexibleArrayMember(CXRecordDecl RD) {
   return static_cast<clang::RecordDecl *>(RD)->hasFlexibleArrayMember();
 }
 
+void clang_RecordDecl_setHasFlexibleArrayMember(CXRecordDecl RD, bool V) {
+  static_cast<clang::RecordDecl *>(RD)->setHasFlexibleArrayMember(V);
+}
+
 bool clang_RecordDecl_isAnonymousStructOrUnion(CXRecordDecl RD) {
   return static_cast<clang::RecordDecl *>(RD)->isAnonymousStructOrUnion();
+}
+
+void clang_RecordDecl_setAnonymousStructOrUnion(CXRecordDecl RD, bool Anon) {
+  static_cast<clang::RecordDecl *>(RD)->setAnonymousStructOrUnion(Anon);
+}
+
+bool clang_RecordDecl_hasObjectMember(CXRecordDecl RD) {
+  return static_cast<clang::RecordDecl *>(RD)->hasObjectMember();
+}
+
+void clang_RecordDecl_setHasObjectMember(CXRecordDecl RD, bool val) {
+  static_cast<clang::RecordDecl *>(RD)->setHasObjectMember(val);
+}
+
+bool clang_RecordDecl_hasVolatileMember(CXRecordDecl RD) {
+  return static_cast<clang::RecordDecl *>(RD)->hasVolatileMember();
+}
+
+void clang_RecordDecl_setHasVolatileMember(CXRecordDecl RD, bool val) {
+  static_cast<clang::RecordDecl *>(RD)->setHasVolatileMember(val);
+}
+
+bool clang_RecordDecl_hasLoadedFieldsFromExternalStorage(CXRecordDecl RD) {
+  return static_cast<clang::RecordDecl *>(RD)->hasLoadedFieldsFromExternalStorage();
+}
+
+void clang_RecordDecl_setHasLoadedFieldsFromExternalStorage(CXRecordDecl RD, bool val) {
+  static_cast<clang::RecordDecl *>(RD)->setHasLoadedFieldsFromExternalStorage(val);
+}
+
+bool clang_RecordDecl_isNonTrivialToPrimitiveDefaultInitialize(CXRecordDecl RD) {
+  return static_cast<clang::RecordDecl *>(RD)->isNonTrivialToPrimitiveDefaultInitialize();
+}
+
+void clang_RecordDecl_setNonTrivialToPrimitiveDefaultInitialize(CXRecordDecl RD, bool V) {
+  static_cast<clang::RecordDecl *>(RD)->setNonTrivialToPrimitiveDefaultInitialize(V);
+}
+
+bool clang_RecordDecl_isNonTrivialToPrimitiveCopy(CXRecordDecl RD) {
+  return static_cast<clang::RecordDecl *>(RD)->isNonTrivialToPrimitiveCopy();
+}
+
+void clang_RecordDecl_setNonTrivialToPrimitiveCopy(CXRecordDecl RD, bool V) {
+  static_cast<clang::RecordDecl *>(RD)->setNonTrivialToPrimitiveCopy(V);
+}
+
+bool clang_RecordDecl_isNonTrivialToPrimitiveDestroy(CXRecordDecl RD) {
+  return static_cast<clang::RecordDecl *>(RD)->isNonTrivialToPrimitiveDestroy();
+}
+
+void clang_RecordDecl_setNonTrivialToPrimitiveDestroy(CXRecordDecl RD, bool V) {
+  static_cast<clang::RecordDecl *>(RD)->setNonTrivialToPrimitiveDestroy(V);
+}
+
+bool clang_RecordDecl_hasNonTrivialToPrimitiveDefaultInitializeCUnion(CXRecordDecl RD) {
+  return static_cast<clang::RecordDecl *>(RD)
+      ->hasNonTrivialToPrimitiveDefaultInitializeCUnion();
+}
+
+void clang_RecordDecl_setHasNonTrivialToPrimitiveDefaultInitializeCUnion(CXRecordDecl RD,
+                                                                         bool V) {
+  static_cast<clang::RecordDecl *>(RD)->setHasNonTrivialToPrimitiveDefaultInitializeCUnion(
+      V);
+}
+
+bool clang_RecordDecl_hasNonTrivialToPrimitiveDestructCUnion(CXRecordDecl RD) {
+  return static_cast<clang::RecordDecl *>(RD)->hasNonTrivialToPrimitiveDestructCUnion();
+}
+
+void clang_RecordDecl_setHasNonTrivialToPrimitiveDestructCUnion(CXRecordDecl RD, bool V) {
+  static_cast<clang::RecordDecl *>(RD)->setHasNonTrivialToPrimitiveDestructCUnion(V);
+}
+
+bool clang_RecordDecl_hasNonTrivialToPrimitiveCopyCUnion(CXRecordDecl RD) {
+  return static_cast<clang::RecordDecl *>(RD)->hasNonTrivialToPrimitiveCopyCUnion();
+}
+
+void clang_RecordDecl_setHasNonTrivialToPrimitiveCopyCUnion(CXRecordDecl RD, bool V) {
+  static_cast<clang::RecordDecl *>(RD)->setHasNonTrivialToPrimitiveCopyCUnion(V);
+}
+
+bool clang_RecordDecl_canPassInRegisters(CXRecordDecl RD) {
+  return static_cast<clang::RecordDecl *>(RD)->canPassInRegisters();
+}
+
+CXRecordDecl_ArgPassingKind clang_RecordDecl_getArgPassingRestrictions(CXRecordDecl RD) {
+  return static_cast<CXRecordDecl_ArgPassingKind>(
+      static_cast<clang::RecordDecl *>(RD)->getArgPassingRestrictions());
+}
+
+void clang_RecordDecl_setArgPassingRestrictions(CXRecordDecl RD,
+                                                CXRecordDecl_ArgPassingKind Kind) {
+  static_cast<clang::RecordDecl *>(RD)->setArgPassingRestrictions(
+      static_cast<clang::RecordDecl::ArgPassingKind>(Kind));
+}
+
+bool clang_RecordDecl_isParamDestroyedInCallee(CXRecordDecl RD) {
+  return static_cast<clang::RecordDecl *>(RD)->isParamDestroyedInCallee();
+}
+
+void clang_RecordDecl_setParamDestroyedInCallee(CXRecordDecl RD, bool V) {
+  static_cast<clang::RecordDecl *>(RD)->setParamDestroyedInCallee(V);
 }
 
 bool clang_RecordDecl_isInjectedClassName(CXRecordDecl RD) {
@@ -1764,12 +1870,30 @@ bool clang_RecordDecl_isCapturedRecord(CXRecordDecl RD) {
   return static_cast<clang::RecordDecl *>(RD)->isCapturedRecord();
 }
 
+void clang_RecordDecl_setCapturedRecord(CXRecordDecl RD) {
+  static_cast<clang::RecordDecl *>(RD)->setCapturedRecord();
+}
+
 CXRecordDecl clang_RecordDecl_getDefinition(CXRecordDecl RD) {
   return static_cast<clang::RecordDecl *>(RD)->getDefinition();
 }
 
 bool clang_RecordDecl_isOrContainsUnion(CXRecordDecl RD) {
   return static_cast<clang::RecordDecl *>(RD)->isOrContainsUnion();
+}
+
+bool clang_RecordDecl_isMsStruct(CXRecordDecl RD, CXASTContext C) {
+  return static_cast<clang::RecordDecl *>(RD)->isMsStruct(
+      *static_cast<clang::ASTContext *>(C));
+}
+
+bool clang_RecordDecl_mayInsertExtraPadding(CXRecordDecl RD, bool EmitRemark) {
+  return static_cast<clang::RecordDecl *>(RD)->mayInsertExtraPadding(EmitRemark);
+}
+
+CXFieldDecl clang_RecordDecl_findFirstNamedDataMember(CXRecordDecl RD) {
+  return const_cast<clang::FieldDecl *>(
+      static_cast<clang::RecordDecl *>(RD)->findFirstNamedDataMember());
 }
 
 // FileScopeAsmDecl
