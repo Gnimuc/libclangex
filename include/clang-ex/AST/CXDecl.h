@@ -361,14 +361,14 @@ CINDEX_LINKAGE bool clang_VarDecl_isNoDestroy(CXVarDecl VD, CXASTContext AST);
 // needsDestruction
 
 // ImplicitParamDecl
-enum CXImplicitParamDecl_ImplicitParamKind : unsigned {
+typedef enum CXImplicitParamDecl_ImplicitParamKind : unsigned {
   CXImplicitParamDecl_ImplicitParamKind_ObjCSelf,
   CXImplicitParamDecl_ImplicitParamKind_ObjCCmd,
   CXImplicitParamDecl_ImplicitParamKind_CXXThis,
   CXImplicitParamDecl_ImplicitParamKind_CXXVTT,
   CXImplicitParamDecl_ImplicitParamKind_CapturedContext,
   CXImplicitParamDecl_ImplicitParamKind_Other,
-};
+} CXImplicitParamDecl_ImplicitParamKind;
 
 CINDEX_LINKAGE CXImplicitParamDecl_ImplicitParamKind
 clang_VarDecl_getParameterKind(CXImplicitParamDecl IPD);
@@ -424,21 +424,21 @@ CINDEX_LINKAGE void clang_ParmVarDecl_setOwningFunction(CXParmVarDecl PVD,
                                                         CXDeclContext FD);
 
 // MultiVersionKind
-enum CXMultiVersionKind {
+typedef enum CXMultiVersionKind {
   CXMultiVersionKind_None,
   CXMultiVersionKind_Target,
   CXMultiVersionKind_CPUSpecific,
   CXMultiVersionKind_CPUDispatch
-};
+} CXMultiVersionKind;
 
 // FunctionDecl
-enum CXFunctionDecl_TemplatedKind {
+typedef enum CXFunctionDecl_TemplatedKind {
   CXFunctionDecl_TemplatedKind_TK_NonTemplate,
   CXFunctionDecl_TemplatedKind_TK_FunctionTemplate,
   CXFunctionDecl_TemplatedKind_TK_MemberSpecialization,
   CXFunctionDecl_TemplatedKind_TK_FunctionTemplateSpecialization,
   CXFunctionDecl_TemplatedKind_TK_DependentFunctionTemplateSpecialization
-};
+} CXFunctionDecl_TemplatedKind;
 
 typedef void *CXFunctionDecl_DefaultedFunctionInfo;
 
@@ -1002,11 +1002,11 @@ clang_EnumDecl_setInstantiationOfMemberEnum(CXEnumDecl ED, CXEnumDecl ED2,
                                             CXTemplateSpecializationKind TSK);
 
 // RecordDecl
-enum CXRecordDecl_ArgPassingKind : unsigned {
+typedef enum CXRecordDecl_ArgPassingKind : unsigned {
   CXRecordDecl_ArgPassingKind_APK_CanPassInRegs,
   CXRecordDecl_ArgPassingKind_APK_CannotPassInRegs,
   CXRecordDecl_ArgPassingKind_APK_CanNeverPassInRegs
-};
+} CXRecordDecl_ArgPassingKind;
 
 CINDEX_LINKAGE CXRecordDecl clang_RecordDecl_getPreviousDecl(CXRecordDecl RD);
 

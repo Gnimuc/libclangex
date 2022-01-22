@@ -480,7 +480,7 @@ typedef enum CXTagTypeKind {
 } CXTagTypeKind;
 
 // ElaboratedTypeKeyword
-enum CXElaboratedTypeKeyword {
+typedef enum CXElaboratedTypeKeyword {
   CXElaboratedTypeKeyword_ETK_Struct,
   CXElaboratedTypeKeyword_ETK_Interface,
   CXElaboratedTypeKeyword_ETK_Union,
@@ -488,7 +488,7 @@ enum CXElaboratedTypeKeyword {
   CXElaboratedTypeKeyword_ETK_Enum,
   CXElaboratedTypeKeyword_ETK_Typename,
   CXElaboratedTypeKeyword_ETK_None
-};
+} CXElaboratedTypeKeyword;
 
 #ifdef __cplusplus
 }

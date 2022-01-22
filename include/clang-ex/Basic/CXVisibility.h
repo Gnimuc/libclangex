@@ -5,11 +5,11 @@
 extern "C" {
 #endif
 
-enum CXVisibility {
+typedef enum CXVisibility {
   CXVisibility_HiddenVisibility,
   CXVisibility_ProtectedVisibility,
   CXVisibility_DefaultVisibility
-};
+} CXVisibility;
 
 #ifdef __cplusplus
 }

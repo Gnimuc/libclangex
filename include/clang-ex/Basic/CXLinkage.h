@@ -5,7 +5,7 @@
 extern "C" {
 #endif
 
-enum CXLinkage : unsigned char {
+typedef enum CXLinkage : unsigned char {
   CXLinkage_NoLinkage = 0,
   CXLinkage_InternalLinkage,
   CXLinkage_UniqueExternalLinkage,
@@ -13,13 +13,13 @@ enum CXLinkage : unsigned char {
   CXLinkage_ModuleInternalLinkage,
   CXLinkage_ModuleLinkage,
   CXLinkage_ExternalLinkage
-};
+} CXLinkage;
 
-enum CXLanguageLinkage {
+typedef enum CXLanguageLinkage {
   CXLanguageLinkage_CLanguageLinkage,
   CXLanguageLinkage_CXXLanguageLinkage,
   CXLanguageLinkage_NoLanguageLinkage
-};
+} CXLanguageLinkage;
 
 #ifdef __cplusplus
 }

@@ -5,50 +5,50 @@
 extern "C" {
 #endif
 
-enum class CXConstexprSpecKind {
+typedef enum CXConstexprSpecKind {
   CXConstexprSpecKind_Unspecified,
   CXConstexprSpecKind_Constexpr,
   CXConstexprSpecKind_Consteval,
   CXConstexprSpecKind_Constinit
-};
+} CXConstexprSpecKind;
 
-enum CXTemplateSpecializationKind {
+typedef enum CXTemplateSpecializationKind {
   CXTemplateSpecializationKind_TSK_Undeclared = 0,
   CXTemplateSpecializationKind_TSK_ImplicitInstantiation,
   CXTemplateSpecializationKind_TSK_ExplicitSpecialization,
   CXTemplateSpecializationKind_TSK_ExplicitInstantiationDeclaration,
   CXTemplateSpecializationKind_TSK_ExplicitInstantiationDefinition
-};
+} CXTemplateSpecializationKind;
 
-enum CXThreadStorageClassSpecifier {
+typedef enum CXThreadStorageClassSpecifier {
   CXThreadStorageClassSpecifier_TSCS_unspecified,
   CXThreadStorageClassSpecifier_TSCS___thread,
   CXThreadStorageClassSpecifier_TSCS_thread_local,
   CXThreadStorageClassSpecifier_TSCS__Thread_local
-};
+} CXThreadStorageClassSpecifier;
 
-enum CXStorageClass {
+typedef enum CXStorageClass {
   CXStorageClass_SC_None,
   CXStorageClass_SC_Extern,
   CXStorageClass_SC_Static,
   CXStorageClass_SC_PrivateExtern,
   CXStorageClass_SC_Auto,
   CXStorageClass_SC_Register
-};
+} CXStorageClass;
 
-enum CXInClassInitStyle {
+typedef enum CXInClassInitStyle {
   CXInClassInitStyle_ICIS_NoInit,
   CXInClassInitStyle_ICIS_CopyInit,
   CXInClassInitStyle_ICIS_ListInit
-};
+} CXInClassInitStyle;
 
-enum CXStorageDuration {
+typedef enum CXStorageDuration {
   CXStorageDuration_SD_FullExpression,
   CXStorageDuration_SD_Automatic,
   CXStorageDuration_SD_Thread,
   CXStorageDuration_SD_Static,
   CXStorageDuration_SD_Dynamic
-};
+} CXStorageDuration;
 
 #ifdef __cplusplus
 }
