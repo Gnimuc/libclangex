@@ -371,7 +371,7 @@ typedef enum CXImplicitParamDecl_ImplicitParamKind : unsigned {
 } CXImplicitParamDecl_ImplicitParamKind;
 
 CINDEX_LINKAGE CXImplicitParamDecl_ImplicitParamKind
-clang_VarDecl_getParameterKind(CXImplicitParamDecl IPD);
+clang_ImplicitParamDecl_getParameterKind(CXImplicitParamDecl IPD);
 
 // ParmVarDecl
 CINDEX_LINKAGE void clang_ParmVarDecl_setObjCMethodScopeInfo(CXParmVarDecl PVD,

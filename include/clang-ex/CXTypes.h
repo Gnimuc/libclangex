@@ -173,6 +173,62 @@ typedef void *CXAtomicExpr;
 typedef void *CXTypoExpr;
 typedef void *CXRecoveryExpr;
 
+// ExprCXX
+typedef void *CXCXXOperatorCallExpr;
+typedef void *CXCXXMemberCallExpr;
+typedef void *CXCUDAKernelCallExpr;
+typedef void *CXCXXRewrittenBinaryOperator;
+typedef void *CXCXXNamedCastExpr;
+typedef void *CXCXXStaticCastExpr;
+typedef void *CXCXXDynamicCastExpr;
+typedef void *CXCXXReinterpretCastExpr;
+typedef void *CXCXXConstCastExpr;
+typedef void *CXCXXAddrspaceCastExpr;
+typedef void *CXUserDefinedLiteral;
+typedef void *CXCXXBoolLiteralExpr;
+typedef void *CXCXXNullPtrLiteralExpr;
+typedef void *CXCXXStdInitializerListExpr;
+typedef void *CXCXXTypeidExpr;
+typedef void *CXMSPropertyRefExpr;
+typedef void *CXMSPropertySubscriptExpr;
+typedef void *CXCXXUuidofExpr;
+typedef void *CXCXXThisExpr;
+typedef void *CXCXXThrowExpr;
+typedef void *CXCXXDefaultArgExpr;
+typedef void *CXCXXDefaultInitExpr;
+typedef void *CXCXXBindTemporaryExpr;
+typedef void *CXCXXConstructExpr;
+typedef void *CXCXXInheritedCtorInitExpr;
+typedef void *CXCXXFunctionalCastExpr;
+typedef void *CXCXXTemporaryObjectExpr;
+typedef void *CXLambdaExpr;
+typedef void *CXCXXScalarValueInitExpr;
+typedef void *CXCXXNewExpr;
+typedef void *CXCXXDeleteExpr;
+typedef void *CXCXXPseudoDestructorExpr;
+typedef void *CXTypeTraitExpr;
+typedef void *CXArrayTypeTraitExpr;
+typedef void *CXExpressionTraitExpr;
+typedef void *CXOverloadExpr;
+typedef void *CXUnresolvedLookupExpr;
+typedef void *CXDependentScopeDeclRefExpr;
+typedef void *CXCXXUnresolvedConstructExpr;
+typedef void *CXCXXDependentScopeMemberExpr;
+typedef void *CXUnresolvedMemberExpr;
+typedef void *CXCXXNoexceptExpr;
+typedef void *CXPackExpansionExpr;
+typedef void *CXSizeOfPackExpr;
+typedef void *CXSubstNonTypeTemplateParmExpr;
+typedef void *CXSubstNonTypeTemplateParmPackExpr;
+typedef void *CXFunctionParmPackExpr;
+typedef void *CXMaterializeTemporaryExpr;
+typedef void *CXCXXFoldExpr;
+typedef void *CXCoroutineSuspendExpr;
+typedef void *CXCoawaitExpr;
+typedef void *CXDependentCoawaitExpr;
+typedef void *CXCoyieldExpr;
+typedef void *CXBuiltinBitCastExpr;
+
 // NestedNameSpacifier
 typedef void *CXNestedNameSpecifier;
 
@@ -285,6 +341,9 @@ typedef void *CXTypeSourceInfo;
 
 // TemplateBase
 typedef void *CXTemplateName;
+typedef void *CXTemplateArgumentLocInfo;
+typedef void *CXTemplateArgumentLoc;
+typedef void *CXTemplateArgumentListInfo;
 typedef void *CXASTTemplateArgumentListInfo;
 
 // TemplateName

@@ -622,7 +622,7 @@ bool clang_VarDecl_isNoDestroy(CXVarDecl VD, CXASTContext AST) {
 
 // ImplicitParamDecl
 CXImplicitParamDecl_ImplicitParamKind
-clang_VarDecl_getParameterKind(CXImplicitParamDecl IPD) {
+clang_ImplicitParamDecl_getParameterKind(CXImplicitParamDecl IPD) {
   return static_cast<CXImplicitParamDecl_ImplicitParamKind>(
       static_cast<clang::ImplicitParamDecl *>(IPD)->getParameterKind());
 }
