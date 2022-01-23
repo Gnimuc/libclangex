@@ -74,6 +74,7 @@ typedef void *CXNamespaceAliasDecl;
 typedef void *CXLifetimeExtendedTemporaryDecl;
 typedef void *CXUsingShadowDecl;
 typedef void *CXConstructorUsingShadowDecl;
+typedef void *CXUsingDecl;
 typedef void *CXUsingPackDecl;
 typedef void *CXUnresolvedUsingValueDecl;
 typedef void *CXUnresolvedUsingTypenameDecl;
@@ -87,6 +88,8 @@ typedef void *CXMSGuidDecl;
 typedef void *CXDeclGroupRef;
 
 // DeclTemplate
+typedef void *CXTemplateParameterList;
+typedef void *CXTemplateArgumentList;
 typedef void *CXTemplateDecl;
 typedef void *CXFunctionTemplateSpecializationInfo;
 typedef void *CXMemberSpecializationInfo;
@@ -108,9 +111,6 @@ typedef void *CXVarTemplatePartialSpecializationDecl;
 typedef void *CXVarTemplateDecl;
 typedef void *CXConceptDecl;
 typedef void *CXTemplateParamObjectDecl;
-
-typedef void *CXTemplateParameterList;
-typedef void *CXTemplateArgumentList;
 
 // Expr
 typedef void *CXExpr;
