@@ -229,6 +229,9 @@ typedef void *CXDependentCoawaitExpr;
 typedef void *CXCoyieldExpr;
 typedef void *CXBuiltinBitCastExpr;
 
+// Mangle
+typedef void *CXMangleContext;
+
 // NestedNameSpacifier
 typedef void *CXNestedNameSpecifier;
 
