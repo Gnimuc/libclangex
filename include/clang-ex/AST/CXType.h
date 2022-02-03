@@ -2,8 +2,8 @@
 #define LIBCLANGEX_CXQUALTYPE_H
 
 #include "clang-ex/CXTypes.h"
-#include "clang-c/Platform.h"
 #include "clang-c/CXString.h"
+#include "clang-c/Platform.h"
 
 #ifdef __cplusplus
 extern "C" {
