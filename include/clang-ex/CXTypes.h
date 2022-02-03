@@ -231,6 +231,9 @@ typedef void *CXBuiltinBitCastExpr;
 
 // Mangle
 typedef void *CXMangleContext;
+typedef void *CXItaniumMangleContext;
+typedef void *CXMicrosoftMangleContext;
+typedef void *CXASTNameGenerator;
 
 // NestedNameSpacifier
 typedef void *CXNestedNameSpecifier;

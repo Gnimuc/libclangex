@@ -3,6 +3,7 @@
 
 #include "clang-ex/CXTypes.h"
 #include "clang-c/Platform.h"
+#include "clang-c/CXString.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -38,8 +39,7 @@ CINDEX_LINKAGE bool clang_QualType_hasLocalQualifiers(CXQualType OpaquePtr);
 
 CINDEX_LINKAGE unsigned clang_QualType_getCVRQualifiers(CXQualType OpaquePtr);
 
-CINDEX_LINKAGE char *clang_QualType_getAsString(CXQualType OpaquePtr);
-CINDEX_LINKAGE void clang_QualType_disposeString(char *Str);
+CINDEX_LINKAGE CXString clang_QualType_getAsString(CXQualType OpaquePtr);
 
 CINDEX_LINKAGE void clang_QualType_dump(CXQualType OpaquePtr);
 

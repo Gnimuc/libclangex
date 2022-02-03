@@ -2,6 +2,7 @@
 #define LIBCLANGEX_CXDECLARATIONNAME_H
 
 #include "clang-ex/CXTypes.h"
+#include "clang-c/CXString.h"
 #include "clang-c/Platform.h"
 
 #ifdef __cplusplus
@@ -17,9 +18,7 @@ CINDEX_LINKAGE void clang_DeclarationName_dump(CXDeclarationName DN);
 
 CINDEX_LINKAGE bool clang_DeclarationName_isEmpty(CXDeclarationName DN);
 
-CINDEX_LINKAGE char *clang_DeclarationName_getAsString(CXDeclarationName DN);
-
-CINDEX_LINKAGE void clang_DeclarationName_disposeString(char *Str);
+CINDEX_LINKAGE CXString clang_DeclarationName_getAsString(CXDeclarationName DN);
 
 #ifdef __cplusplus
 }

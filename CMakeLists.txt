@@ -38,10 +38,14 @@ add_subdirectory(include)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-rtti")
 
+set(CLANG_SRC ${CMAKE_CURRENT_SOURCE_DIR}/llvm-project/clang)
+target_sources(clangex PRIVATE ${CLANG_SRC}/tools/libclang/CXString.cpp)
+
 target_include_directories(clangex PUBLIC
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
     $<BUILD_INTERFACE:${CLANG_DIR}/include>
     $<BUILD_INTERFACE:${LLVM_DIR}/include>
+    $<BUILD_INTERFACE:${CLANG_SRC}/tools>
     $<INSTALL_INTERFACE:include>)
     
 target_compile_features(clangex PRIVATE cxx_std_14)

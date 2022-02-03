@@ -1,4 +1,5 @@
 #include "clang-ex/AST/CXType.h"
+#include "libclang/CXString.h"
 #include "clang/AST/Decl.h"
 #include "clang/AST/TemplateBase.h"
 #include "clang/AST/Type.h"
@@ -92,15 +93,10 @@ unsigned clang_QualType_getCVRQualifiers(CXQualType OpaquePtr) {
   return clang::QualType::getFromOpaquePtr(OpaquePtr).getCVRQualifiers();
 }
 
-char *clang_QualType_getAsString(CXQualType OpaquePtr) {
-  auto str = clang::QualType::getFromOpaquePtr(OpaquePtr).getAsString();
-  std::unique_ptr<char[]> ptr = std::make_unique<char[]>(str.size() + 1);
-  ptr[str.size() + 1] = '\0';
-  std::copy(str.begin(), str.end(), ptr.get());
-  return ptr.release();
+CXString clang_QualType_getAsString(CXQualType OpaquePtr) {
+  return clang::cxstring::createDup(
+      clang::QualType::getFromOpaquePtr(OpaquePtr).getAsString());
 }
-
-void clang_QualType_disposeString(char *Str) { delete[] Str; }
 
 void clang_QualType_dump(CXQualType OpaquePtr) {
   clang::QualType::getFromOpaquePtr(OpaquePtr).dump();

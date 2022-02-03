@@ -3,6 +3,7 @@
 
 #include "clang-ex/CXTypes.h"
 #include "clang-c/Platform.h"
+#include "clang-c/CXString.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -25,10 +26,8 @@ CINDEX_LINKAGE unsigned clang_SourceLocation_getHashValue(CXSourceLocation_ Loc)
 
 CINDEX_LINKAGE void clang_SourceLocation_dump(CXSourceLocation_ Loc, CXSourceManager SM);
 
-CINDEX_LINKAGE char *clang_SourceLocation_printToString(CXSourceLocation_ Loc,
-                                                        CXSourceManager SM);
-
-CINDEX_LINKAGE void clang_SourceLocation_disposeString(char *Str);
+CINDEX_LINKAGE CXString clang_SourceLocation_printToString(CXSourceLocation_ Loc,
+                                                           CXSourceManager SM);
 
 CINDEX_LINKAGE CXSourceLocation_
 clang_SourceLocation_getLocWithOffset(CXSourceLocation_ Loc, int Offset);
