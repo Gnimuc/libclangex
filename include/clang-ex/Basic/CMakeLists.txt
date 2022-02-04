@@ -6,6 +6,7 @@ target_sources(clangex PRIVATE ${CMAKE_CURRENT_LIST_DIR}/CXExceptionSpecificatio
 target_sources(clangex PRIVATE ${CMAKE_CURRENT_LIST_DIR}/CXFileEntry.h)
 target_sources(clangex PRIVATE ${CMAKE_CURRENT_LIST_DIR}/CXFileManager.h)
 target_sources(clangex PRIVATE ${CMAKE_CURRENT_LIST_DIR}/CXIdentifierTable.h)
+target_sources(clangex PRIVATE ${CMAKE_CURRENT_LIST_DIR}/CXLambda.h)
 target_sources(clangex PRIVATE ${CMAKE_CURRENT_LIST_DIR}/CXLangOptions.h)
 target_sources(clangex PRIVATE ${CMAKE_CURRENT_LIST_DIR}/CXLinkage.h)
 target_sources(clangex PRIVATE ${CMAKE_CURRENT_LIST_DIR}/CXPragmaKinds.h)

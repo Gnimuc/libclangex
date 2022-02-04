@@ -5,6 +5,13 @@
 extern "C" {
 #endif
 
+typedef enum CXAccessSpecifier {
+  CXAccessSpecifier_AS_public,
+  CXAccessSpecifier_AS_protected,
+  CXAccessSpecifier_AS_private,
+  CXAccessSpecifier_AS_none
+} CXAccessSpecifier;
+
 typedef enum CXConstexprSpecKind {
   CXConstexprSpecKind_Unspecified,
   CXConstexprSpecKind_Constexpr,
