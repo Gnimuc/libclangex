@@ -18,6 +18,12 @@ typedef enum CXAccessSpecifier {
   CXAccessSpecifier_AS_none
 } CXAccessSpecifier;
 
+typedef enum CXExprValueKind {
+  CXExprValueKind_VK_RValue,
+  CXExprValueKind_VK_LValue,
+  CXExprValueKind_VK_XValue,
+} CXExprValueKind;
+
 typedef enum CXConstexprSpecKind {
   CXConstexprSpecKind_Unspecified,
   CXConstexprSpecKind_Constexpr,

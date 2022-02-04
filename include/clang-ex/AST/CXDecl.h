@@ -402,12 +402,12 @@ CINDEX_LINKAGE bool clang_VarDecl_isNoDestroy(CXVarDecl VD, CXASTContext AST);
 
 // ImplicitParamDecl
 typedef enum CXImplicitParamDecl_ImplicitParamKind : unsigned {
-  CXImplicitParamDecl_ImplicitParamKind_ObjCSelf,
-  CXImplicitParamDecl_ImplicitParamKind_ObjCCmd,
-  CXImplicitParamDecl_ImplicitParamKind_CXXThis,
-  CXImplicitParamDecl_ImplicitParamKind_CXXVTT,
-  CXImplicitParamDecl_ImplicitParamKind_CapturedContext,
-  CXImplicitParamDecl_ImplicitParamKind_Other,
+  CXImplicitParamDecl_ObjCSelf,
+  CXImplicitParamDecl_ObjCCmd,
+  CXImplicitParamDecl_CXXThis,
+  CXImplicitParamDecl_CXXVTT,
+  CXImplicitParamDecl_CapturedContext,
+  CXImplicitParamDecl_Other,
 } CXImplicitParamDecl_ImplicitParamKind;
 
 CXImplicitParamDecl
@@ -491,11 +491,11 @@ typedef enum CXMultiVersionKind {
 
 // FunctionDecl
 typedef enum CXFunctionDecl_TemplatedKind {
-  CXFunctionDecl_TemplatedKind_TK_NonTemplate,
-  CXFunctionDecl_TemplatedKind_TK_FunctionTemplate,
-  CXFunctionDecl_TemplatedKind_TK_MemberSpecialization,
-  CXFunctionDecl_TemplatedKind_TK_FunctionTemplateSpecialization,
-  CXFunctionDecl_TemplatedKind_TK_DependentFunctionTemplateSpecialization
+  CXFunctionDecl_TK_NonTemplate,
+  CXFunctionDecl_TK_FunctionTemplate,
+  CXFunctionDecl_TK_MemberSpecialization,
+  CXFunctionDecl_TK_FunctionTemplateSpecialization,
+  CXFunctionDecl_TK_DependentFunctionTemplateSpecialization
 } CXFunctionDecl_TemplatedKind;
 
 typedef void *CXFunctionDecl_DefaultedFunctionInfo;
@@ -1115,9 +1115,9 @@ clang_EnumDecl_setInstantiationOfMemberEnum(CXEnumDecl ED, CXEnumDecl ED2,
 
 // RecordDecl
 typedef enum CXRecordDecl_ArgPassingKind : unsigned {
-  CXRecordDecl_ArgPassingKind_APK_CanPassInRegs,
-  CXRecordDecl_ArgPassingKind_APK_CannotPassInRegs,
-  CXRecordDecl_ArgPassingKind_APK_CanNeverPassInRegs
+  CXRecordDecl_APK_CanPassInRegs,
+  CXRecordDecl_APK_CannotPassInRegs,
+  CXRecordDecl_APK_CanNeverPassInRegs
 } CXRecordDecl_ArgPassingKind;
 
 CINDEX_LINKAGE CXRecordDecl clang_RecordDecl_Create(

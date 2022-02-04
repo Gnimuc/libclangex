@@ -352,3 +352,84 @@ CXCXXRecordDecl clang_CXXMethodDecl_getCorrespondingMethodDeclaredInClass(
   return static_cast<clang::CXXMethodDecl *>(CXXMD)->getCorrespondingMethodDeclaredInClass(
       static_cast<clang::CXXRecordDecl *>(RD), MayBeBase);
 }
+
+// CXXCtorInitializer
+
+// InheritedConstructor
+
+// CXXConstructorDecl
+
+// CXXDestructorDecl
+
+// CXXConversionDecl
+
+// LinkageSpecDecl
+CXLinkageSpecDecl clang_LinkageSpecDecl_Create(CXASTContext C, CXDeclContext DC,
+                                               CXSourceLocation_ ExternLoc,
+                                               CXSourceLocation_ LangLoc,
+                                               CXLinkageSpecDecl_LanguageIDs Lang,
+                                               bool HasBraces) {
+  return clang::LinkageSpecDecl::Create(
+      *static_cast<clang::ASTContext *>(C), static_cast<clang::DeclContext *>(DC),
+      clang::SourceLocation::getFromPtrEncoding(ExternLoc),
+      clang::SourceLocation::getFromPtrEncoding(LangLoc),
+      static_cast<clang::LinkageSpecDecl::LanguageIDs>(Lang), HasBraces);
+}
+
+CXLinkageSpecDecl clang_LinkageSpecDecl_CreateDeserialized(CXASTContext C, unsigned ID) {
+  return clang::LinkageSpecDecl::CreateDeserialized(*static_cast<clang::ASTContext *>(C),
+                                                    ID);
+}
+
+CXLinkageSpecDecl_LanguageIDs clang_LinkageSpecDecl_getLanguage(CXLinkageSpecDecl LSD) {
+  return static_cast<CXLinkageSpecDecl_LanguageIDs>(
+      static_cast<clang::LinkageSpecDecl *>(LSD)->getLanguage());
+}
+
+void clang_LinkageSpecDecl_setLanguage(CXLinkageSpecDecl LSD,
+                                       CXLinkageSpecDecl_LanguageIDs Lang) {
+  static_cast<clang::LinkageSpecDecl *>(LSD)->setLanguage(
+      static_cast<clang::LinkageSpecDecl::LanguageIDs>(Lang));
+}
+
+bool clang_LinkageSpecDecl_hasBraces(CXLinkageSpecDecl LSD) {
+  return static_cast<clang::LinkageSpecDecl *>(LSD)->hasBraces();
+}
+
+CXSourceLocation_ clang_LinkageSpecDecl_getExternLoc(CXLinkageSpecDecl LSD) {
+  return static_cast<clang::LinkageSpecDecl *>(LSD)->getExternLoc().getPtrEncoding();
+}
+
+CXSourceLocation_ clang_LinkageSpecDecl_getRBraceLoc(CXLinkageSpecDecl LSD) {
+  return static_cast<clang::LinkageSpecDecl *>(LSD)->getRBraceLoc().getPtrEncoding();
+}
+
+void clang_LinkageSpecDecl_setExternLoc(CXLinkageSpecDecl LSD, CXSourceLocation_ Loc) {
+  static_cast<clang::LinkageSpecDecl *>(LSD)->setExternLoc(
+      clang::SourceLocation::getFromPtrEncoding(Loc));
+}
+
+void clang_LinkageSpecDecl_setRBraceLoc(CXLinkageSpecDecl LSD, CXSourceLocation_ Loc) {
+  static_cast<clang::LinkageSpecDecl *>(LSD)->setRBraceLoc(
+      clang::SourceLocation::getFromPtrEncoding(Loc));
+}
+
+CXSourceLocation_ clang_LinkageSpecDecl_getEndLoc(CXLinkageSpecDecl LSD) {
+  return static_cast<clang::LinkageSpecDecl *>(LSD)->getEndLoc().getPtrEncoding();
+}
+
+CXSourceRange_ clang_LinkageSpecDecl_getSourceRange(CXLinkageSpecDecl LSD) {
+  auto rng = static_cast<clang::LinkageSpecDecl *>(LSD)->getSourceRange();
+  CXSourceLocation_ B = rng.getBegin().getPtrEncoding();
+  CXSourceLocation_ E = rng.getEnd().getPtrEncoding();
+  return CXSourceRange_{B, E};
+}
+
+CXDeclContext clang_LinkageSpecDecl_castToDeclContext(CXLinkageSpecDecl LSD) {
+  return clang::LinkageSpecDecl::castToDeclContext(
+      static_cast<clang::LinkageSpecDecl *>(LSD));
+}
+
+CXLinkageSpecDecl clang_LinkageSpecDecl_castFromDeclContext(CXDeclContext DC) {
+  return clang::LinkageSpecDecl::castFromDeclContext(static_cast<clang::DeclContext *>(DC));
+}

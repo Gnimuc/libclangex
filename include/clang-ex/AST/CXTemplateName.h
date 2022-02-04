@@ -9,13 +9,13 @@ extern "C" {
 #endif
 
 typedef enum CXTemplateName_NameKind {
-  CXTemplateName_NameKind_Template,
-  CXTemplateName_NameKind_OverloadedTemplate,
-  CXTemplateName_NameKind_AssumedTemplate,
-  CXTemplateName_NameKind_QualifiedTemplate,
-  CXTemplateName_NameKind_DependentTemplate,
-  CXTemplateName_NameKind_SubstTemplateTemplateParm,
-  CXTemplateName_NameKind_SubstTemplateTemplateParmPack
+  CXTemplateName_Template,
+  CXTemplateName_OverloadedTemplate,
+  CXTemplateName_AssumedTemplate,
+  CXTemplateName_QualifiedTemplate,
+  CXTemplateName_DependentTemplate,
+  CXTemplateName_SubstTemplateTemplateParm,
+  CXTemplateName_SubstTemplateTemplateParmPack
 } CXTemplateName_NameKind;
 
 CINDEX_LINKAGE bool clang_TemplateName_isNull(CXTemplateName TN);

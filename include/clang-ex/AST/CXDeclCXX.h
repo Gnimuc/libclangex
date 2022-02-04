@@ -196,6 +196,56 @@ CINDEX_LINKAGE CXCXXRecordDecl clang_CXXMethodDecl_getCorrespondingMethodInClass
 CINDEX_LINKAGE CXCXXRecordDecl clang_CXXMethodDecl_getCorrespondingMethodDeclaredInClass(
     CXCXXMethodDecl CXXMD, CXCXXRecordDecl RD, bool MayBeBase);
 
+// CXXCtorInitializer
+
+// InheritedConstructor
+
+// CXXConstructorDecl
+
+// CXXDestructorDecl
+
+// CXXConversionDecl
+
+// LinkageSpecDecl
+typedef enum CXLinkageSpecDecl_LanguageIDs {
+  CXLinkageSpecDecl_lang_c = 1,
+  CXLinkageSpecDecl_lang_cxx = 2
+} CXLinkageSpecDecl_LanguageIDs;
+
+CINDEX_LINKAGE CXLinkageSpecDecl clang_LinkageSpecDecl_Create(
+    CXASTContext C, CXDeclContext DC, CXSourceLocation_ ExternLoc,
+    CXSourceLocation_ LangLoc, CXLinkageSpecDecl_LanguageIDs Lang, bool HasBraces);
+
+CINDEX_LINKAGE CXLinkageSpecDecl clang_LinkageSpecDecl_CreateDeserialized(CXASTContext C,
+                                                                          unsigned ID);
+
+CINDEX_LINKAGE CXLinkageSpecDecl_LanguageIDs
+clang_LinkageSpecDecl_getLanguage(CXLinkageSpecDecl LSD);
+
+CINDEX_LINKAGE void clang_LinkageSpecDecl_setLanguage(CXLinkageSpecDecl LSD,
+                                                      CXLinkageSpecDecl_LanguageIDs Lang);
+
+CINDEX_LINKAGE bool clang_LinkageSpecDecl_hasBraces(CXLinkageSpecDecl LSD);
+
+CINDEX_LINKAGE CXSourceLocation_ clang_LinkageSpecDecl_getExternLoc(CXLinkageSpecDecl LSD);
+
+CINDEX_LINKAGE CXSourceLocation_ clang_LinkageSpecDecl_getRBraceLoc(CXLinkageSpecDecl LSD);
+
+CINDEX_LINKAGE void clang_LinkageSpecDecl_setExternLoc(CXLinkageSpecDecl LSD,
+                                                       CXSourceLocation_ Loc);
+
+CINDEX_LINKAGE void clang_LinkageSpecDecl_setRBraceLoc(CXLinkageSpecDecl LSD,
+                                                       CXSourceLocation_ Loc);
+
+CINDEX_LINKAGE CXSourceLocation_ clang_LinkageSpecDecl_getEndLoc(CXLinkageSpecDecl LSD);
+
+CINDEX_LINKAGE CXSourceRange_ clang_LinkageSpecDecl_getSourceRange(CXLinkageSpecDecl LSD);
+
+CINDEX_LINKAGE CXDeclContext clang_LinkageSpecDecl_castToDeclContext(CXLinkageSpecDecl LSD);
+
+CINDEX_LINKAGE CXLinkageSpecDecl
+clang_LinkageSpecDecl_castFromDeclContext(CXDeclContext DC);
+
 #ifdef __cplusplus
 }
 #endif

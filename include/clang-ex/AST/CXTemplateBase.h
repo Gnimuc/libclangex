@@ -10,15 +10,15 @@ extern "C" {
 #endif
 
 typedef enum CXTemplateArgument_ArgKind {
-  CXTemplateArgument_ArgKind_Null = 0,
-  CXTemplateArgument_ArgKind_Type,
-  CXTemplateArgument_ArgKind_Declaration,
-  CXTemplateArgument_ArgKind_NullPtr,
-  CXTemplateArgument_ArgKind_Integral,
-  CXTemplateArgument_ArgKind_Template,
-  CXTemplateArgument_ArgKind_TemplateExpansion,
-  CXTemplateArgument_ArgKind_Expression,
-  CXTemplateArgument_ArgKind_Pack
+  CXTemplateArgument_Null = 0,
+  CXTemplateArgument_Type,
+  CXTemplateArgument_Declaration,
+  CXTemplateArgument_NullPtr,
+  CXTemplateArgument_Integral,
+  CXTemplateArgument_Template,
+  CXTemplateArgument_TemplateExpansion,
+  CXTemplateArgument_Expression,
+  CXTemplateArgument_Pack
 } CXTemplateArgument_ArgKind;
 
 CINDEX_LINKAGE CXTemplateArgument

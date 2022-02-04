@@ -10,8 +10,8 @@ extern "C" {
 #endif
 
 typedef enum CXMangleContext_ManglerKind {
-  CXMangleContext_ManglerKind_MK_Itanium,
-  CXMangleContext_ManglerKind_MK_Microsoft
+  CXMangleContext_MK_Itanium,
+  CXMangleContext_MK_Microsoft
 } CXMangleContext_ManglerKind;
 
 // MangleContext
