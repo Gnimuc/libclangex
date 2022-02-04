@@ -2,6 +2,7 @@
 #include "clang/AST/ASTContext.h"
 #include "clang/AST/ASTContextAllocate.h"
 #include "clang/AST/Decl.h"
+#include "llvm/ExecutionEngine/GenericValue.h"
 
 // TranslationUnitDecl
 CXASTContext clang_TranslationUnitDecl_getASTContext(CXTranslationUnitDecl TUD) {
@@ -18,7 +19,21 @@ void clang_TranslationUnitDecl_setAnonymousNamespace(CXTranslationUnitDecl TUD,
       static_cast<clang::NamespaceDecl *>(ND));
 }
 
+CXTranslationUnitDecl clang_TranslationUnitDecl_Create(CXASTContext C) {
+  return clang::TranslationUnitDecl::Create(*static_cast<clang::ASTContext *>(C));
+}
+
 // PragmaCommentDecl
+CXPragmaCommentDecl clang_PragmaCommentDecl_Create(CXASTContext C, CXTranslationUnitDecl DC,
+                                                   CXSourceLocation_ CommentLoc,
+                                                   CXPragmaMSCommentKind CommentKind,
+                                                   const char *Arg) {
+  return clang::PragmaCommentDecl::Create(
+      *static_cast<clang::ASTContext *>(C), static_cast<clang::TranslationUnitDecl *>(DC),
+      clang::SourceLocation::getFromPtrEncoding(CommentLoc),
+      static_cast<clang::PragmaMSCommentKind>(CommentKind), llvm::StringRef(Arg));
+}
+
 CXPragmaMSCommentKind clang_PragmaCommentDecl_getCommentKind(CXPragmaCommentDecl PCD) {
   return static_cast<CXPragmaMSCommentKind>(
       static_cast<clang::PragmaCommentDecl *>(PCD)->getCommentKind());
@@ -29,6 +44,17 @@ const char *clang_PragmaCommentDecl_getArg(CXPragmaCommentDecl PCD) {
 }
 
 // PragmaDetectMismatchDecl
+CXPragmaDetectMismatchDecl clang_PragmaDetectMismatchDecl_Create(CXASTContext C,
+                                                                 CXTranslationUnitDecl DC,
+                                                                 CXSourceLocation_ Loc,
+                                                                 const char *Name,
+                                                                 const char *Value) {
+  return clang::PragmaDetectMismatchDecl::Create(
+      *static_cast<clang::ASTContext *>(C), static_cast<clang::TranslationUnitDecl *>(DC),
+      clang::SourceLocation::getFromPtrEncoding(Loc), llvm::StringRef(Name),
+      llvm::StringRef(Value));
+}
+
 const char *clang_PragmaDetectMismatchDecl_getName(CXPragmaDetectMismatchDecl PDMD) {
   return static_cast<clang::PragmaDetectMismatchDecl *>(PDMD)->getName().data();
 }
@@ -38,6 +64,11 @@ const char *clang_PragmaDetectMismatchDecl_getValue(CXPragmaDetectMismatchDecl P
 }
 
 // ExternCContextDecl
+CXExternCContextDecl clang_ExternCContextDecl_Create(CXASTContext C,
+                                                     CXTranslationUnitDecl TU) {
+  return clang::ExternCContextDecl::Create(*static_cast<clang::ASTContext *>(C),
+                                           static_cast<clang::TranslationUnitDecl *>(TU));
+}
 
 // NamedDecl
 CXIdentifierInfo clang_NamedDecl_getIdentifier(CXNamedDecl ND) {
@@ -126,6 +157,14 @@ CXTypeDecl clang_NamedDecl_castToTypeDecl(CXNamedDecl ND) {
 }
 
 // LabelDecl
+CXLabelDecl clang_LabelDecl_Create(CXASTContext C, CXDeclContext DC,
+                                   CXSourceLocation_ IdentL, CXIdentifierInfo II) {
+  return clang::LabelDecl::Create(*static_cast<clang::ASTContext *>(C),
+                                  static_cast<clang::DeclContext *>(DC),
+                                  clang::SourceLocation::getFromPtrEncoding(IdentL),
+                                  static_cast<clang::IdentifierInfo *>(II));
+}
+
 CXLabelStmt clang_LabelDecl_getStmt(CXLabelDecl LD) {
   return static_cast<clang::LabelDecl *>(LD)->getStmt();
 }
@@ -164,6 +203,18 @@ void clang_LabelDecl_setMSAsmLabelResolved(CXLabelDecl LD) {
 }
 
 // NamespaceDecl
+CXNamespaceDecl clang_NamespaceDecl_Create(CXASTContext C, CXDeclContext DC, bool Inline,
+                                           CXSourceLocation_ StartLoc,
+                                           CXSourceLocation_ IdLoc, CXIdentifierInfo Id,
+                                           CXNamespaceDecl PrevDecl) {
+  return clang::NamespaceDecl::Create(*static_cast<clang::ASTContext *>(C),
+                                      static_cast<clang::DeclContext *>(DC), Inline,
+                                      clang::SourceLocation::getFromPtrEncoding(StartLoc),
+                                      clang::SourceLocation::getFromPtrEncoding(IdLoc),
+                                      static_cast<clang::IdentifierInfo *>(Id),
+                                      static_cast<clang::NamespaceDecl *>(PrevDecl));
+}
+
 bool clang_NamespaceDecl_isAnonymousNamespace(CXNamespaceDecl ND) {
   return static_cast<clang::NamespaceDecl *>(ND)->isAnonymousNamespace();
 }
@@ -295,6 +346,16 @@ CXSourceLocation_ clang_DeclaratorDecl_getTypeSpecEndLoc(CXDeclaratorDecl DD) {
 }
 
 // VarDecl
+CXVarDecl clang_VarDecl_Create(CXASTContext C, CXDeclContext DC, CXSourceLocation_ StartLoc,
+                               CXSourceLocation_ IdLoc, CXIdentifierInfo Id, CXQualType T,
+                               CXTypeSourceInfo TInfo, CXStorageClass S) {
+  return clang::VarDecl::Create(
+      *static_cast<clang::ASTContext *>(C), static_cast<clang::DeclContext *>(DC),
+      clang::SourceLocation::getFromPtrEncoding(StartLoc),
+      clang::SourceLocation::getFromPtrEncoding(IdLoc),
+      static_cast<clang::IdentifierInfo *>(Id), clang::QualType::getFromOpaquePtr(T),
+      static_cast<clang::TypeSourceInfo *>(TInfo), static_cast<clang::StorageClass>(S));
+}
 
 // getSourceRange
 
@@ -621,6 +682,17 @@ bool clang_VarDecl_isNoDestroy(CXVarDecl VD, CXASTContext AST) {
 // needsDestruction
 
 // ImplicitParamDecl
+CXImplicitParamDecl
+clang_ImplicitParamDecl_Create(CXASTContext C, CXDeclContext DC, CXSourceLocation_ IdLoc,
+                               CXIdentifierInfo Id, CXQualType T,
+                               CXImplicitParamDecl_ImplicitParamKind ParamKind) {
+  return clang::ImplicitParamDecl::Create(
+      *static_cast<clang::ASTContext *>(C), static_cast<clang::DeclContext *>(DC),
+      clang::SourceLocation::getFromPtrEncoding(IdLoc),
+      static_cast<clang::IdentifierInfo *>(Id), clang::QualType::getFromOpaquePtr(T),
+      static_cast<clang::ImplicitParamDecl::ImplicitParamKind>(ParamKind));
+}
+
 CXImplicitParamDecl_ImplicitParamKind
 clang_ImplicitParamDecl_getParameterKind(CXImplicitParamDecl IPD) {
   return static_cast<CXImplicitParamDecl_ImplicitParamKind>(
@@ -628,6 +700,20 @@ clang_ImplicitParamDecl_getParameterKind(CXImplicitParamDecl IPD) {
 }
 
 // ParmVarDecl
+CXParmVarDecl clang_ParmVarDecl_Create(CXASTContext C, CXDeclContext DC,
+                                       CXSourceLocation_ StartLoc, CXSourceLocation_ IdLoc,
+                                       CXIdentifierInfo Id, CXQualType T,
+                                       CXTypeSourceInfo TInfo, CXStorageClass S,
+                                       CXExpr DefArg) {
+  return clang::ParmVarDecl::Create(
+      *static_cast<clang::ASTContext *>(C), static_cast<clang::DeclContext *>(DC),
+      clang::SourceLocation::getFromPtrEncoding(StartLoc),
+      clang::SourceLocation::getFromPtrEncoding(IdLoc),
+      static_cast<clang::IdentifierInfo *>(Id), clang::QualType::getFromOpaquePtr(T),
+      static_cast<clang::TypeSourceInfo *>(TInfo), static_cast<clang::StorageClass>(S),
+      static_cast<clang::Expr *>(DefArg));
+}
+
 void clang_ParmVarDecl_setObjCMethodScopeInfo(CXParmVarDecl PVD, unsigned parameterIndex) {
   static_cast<clang::ParmVarDecl *>(PVD)->setObjCMethodScopeInfo(parameterIndex);
 }
@@ -717,6 +803,19 @@ void clang_ParmVarDecl_setOwningFunction(CXParmVarDecl PVD, CXDeclContext FD) {
 }
 
 // FunctionDecl
+CXFunctionDecl clang_FunctionDecl_Create(CXASTContext C, CXDeclContext DC,
+                                         CXSourceLocation_ StartLoc, CXSourceLocation_ NLoc,
+                                         CXDeclarationName N, CXQualType T,
+                                         CXTypeSourceInfo TInfo, CXStorageClass SC,
+                                         bool isInlineSpecified, bool hasWrittenPrototype) {
+  return clang::FunctionDecl::Create(
+      *static_cast<clang::ASTContext *>(C), static_cast<clang::DeclContext *>(DC),
+      clang::SourceLocation::getFromPtrEncoding(StartLoc),
+      clang::SourceLocation::getFromPtrEncoding(NLoc),
+      clang::DeclarationName::getFromOpaquePtr(N), clang::QualType::getFromOpaquePtr(T),
+      static_cast<clang::TypeSourceInfo *>(TInfo), static_cast<clang::StorageClass>(SC),
+      isInlineSpecified, hasWrittenPrototype);
+}
 
 // getNameInfo
 // getNameForDiagnostic
@@ -1246,6 +1345,19 @@ unsigned clang_FunctionDecl_getODRHash(CXFunctionDecl FD) {
 }
 
 // FieldDecl
+CXFieldDecl clang_FieldDecl_Create(CXASTContext C, CXDeclContext DC,
+                                   CXSourceLocation_ StartLoc, CXSourceLocation_ IdLoc,
+                                   CXIdentifierInfo I, CXQualType T, CXTypeSourceInfo TInfo,
+                                   CXExpr BW, bool Mutable, CXInClassInitStyle InitStyle) {
+  return clang::FieldDecl::Create(
+      *static_cast<clang::ASTContext *>(C), static_cast<clang::DeclContext *>(DC),
+      clang::SourceLocation::getFromPtrEncoding(StartLoc),
+      clang::SourceLocation::getFromPtrEncoding(IdLoc),
+      static_cast<clang::IdentifierInfo *>(I), clang::QualType::getFromOpaquePtr(T),
+      static_cast<clang::TypeSourceInfo *>(TInfo), static_cast<clang::Expr *>(BW), Mutable,
+      static_cast<clang::InClassInitStyle>(InitStyle));
+}
+
 unsigned clang_FieldDecl_getFieldIndex(CXFieldDecl FD) {
   return static_cast<clang::FieldDecl *>(FD)->getFieldIndex();
 }
@@ -1340,6 +1452,18 @@ CXFieldDecl clang_FieldDecl_getCanonicalDecl(CXFieldDecl FD) {
 }
 
 // EnumConstantDecl
+CXEnumConstantDecl clang_EnumConstantDecl_Create(CXASTContext C, CXEnumDecl DC,
+                                                 CXSourceLocation_ L, CXIdentifierInfo Id,
+                                                 CXQualType T, CXExpr E,
+                                                 LLVMGenericValueRef V) {
+  return clang::EnumConstantDecl::Create(
+      *static_cast<clang::ASTContext *>(C), static_cast<clang::EnumDecl *>(DC),
+      clang::SourceLocation::getFromPtrEncoding(L),
+      static_cast<clang::IdentifierInfo *>(Id), clang::QualType::getFromOpaquePtr(T),
+      static_cast<clang::Expr *>(E),
+      llvm::APSInt(reinterpret_cast<llvm::GenericValue *>(V)->IntVal));
+}
+
 CXExpr clang_EnumConstantDecl_getInitExpr(CXEnumConstantDecl ECD) {
   return static_cast<clang::EnumConstantDecl *>(ECD)->getInitExpr();
 }
@@ -1438,10 +1562,31 @@ bool clang_TypedefNameDecl_isTransparentTag(CXTypedefNameDecl TND) {
 }
 
 // TypedefDecl
+CXTypedefDecl clang_TypedefDecl_Create(CXASTContext C, CXDeclContext DC,
+                                       CXSourceLocation_ StartLoc, CXSourceLocation_ IdLoc,
+                                       CXIdentifierInfo Id, CXTypeSourceInfo TInfo) {
+  return clang::TypedefDecl::Create(*static_cast<clang::ASTContext *>(C),
+                                    static_cast<clang::DeclContext *>(DC),
+                                    clang::SourceLocation::getFromPtrEncoding(StartLoc),
+                                    clang::SourceLocation::getFromPtrEncoding(IdLoc),
+                                    static_cast<clang::IdentifierInfo *>(Id),
+                                    static_cast<clang::TypeSourceInfo *>(TInfo));
+}
 
 // getSourceRange
 
 // TypeAliasDecl
+CXTypeAliasDecl clang_TypeAliasDecl_Create(CXASTContext C, CXDeclContext DC,
+                                           CXSourceLocation_ StartLoc,
+                                           CXSourceLocation_ IdLoc, CXIdentifierInfo Id,
+                                           CXTypeSourceInfo TInfo) {
+  return clang::TypeAliasDecl::Create(*static_cast<clang::ASTContext *>(C),
+                                      static_cast<clang::DeclContext *>(DC),
+                                      clang::SourceLocation::getFromPtrEncoding(StartLoc),
+                                      clang::SourceLocation::getFromPtrEncoding(IdLoc),
+                                      static_cast<clang::IdentifierInfo *>(Id),
+                                      static_cast<clang::TypeSourceInfo *>(TInfo));
+}
 
 // getSourceRange
 
@@ -1598,6 +1743,18 @@ CXDeclContext clang_TagDecl_castToDeclContext(CXTagDecl TD) {
 }
 
 // EnumDecl
+CXEnumDecl clang_EnumDecl_Create(CXASTContext C, CXDeclContext DC,
+                                 CXSourceLocation_ StartLoc, CXSourceLocation_ IdLoc,
+                                 CXIdentifierInfo Id, CXEnumDecl PrevDecl, bool IsScoped,
+                                 bool IsScopedUsingClassTag, bool IsFixed) {
+  return clang::EnumDecl::Create(
+      *static_cast<clang::ASTContext *>(C), static_cast<clang::DeclContext *>(DC),
+      clang::SourceLocation::getFromPtrEncoding(StartLoc),
+      clang::SourceLocation::getFromPtrEncoding(IdLoc),
+      static_cast<clang::IdentifierInfo *>(Id), static_cast<clang::EnumDecl *>(PrevDecl),
+      IsScoped, IsScopedUsingClassTag, IsFixed);
+}
+
 void clang_EnumDecl_setScoped(CXEnumDecl ED, bool Scoped) {
   static_cast<clang::EnumDecl *>(ED)->setScoped(Scoped);
 }
@@ -1736,6 +1893,17 @@ void clang_EnumDecl_setInstantiationOfMemberEnum(CXEnumDecl ED, CXEnumDecl ED2,
 }
 
 // RecordDecl
+CXRecordDecl clang_RecordDecl_Create(CXASTContext C, CXTagTypeKind TK, CXDeclContext DC,
+                                     CXSourceLocation_ StartLoc, CXSourceLocation_ IdLoc,
+                                     CXIdentifierInfo Id, CXRecordDecl PrevDecl) {
+  return clang::RecordDecl::Create(
+      *static_cast<clang::ASTContext *>(C), static_cast<clang::TagTypeKind>(TK),
+      static_cast<clang::DeclContext *>(DC),
+      clang::SourceLocation::getFromPtrEncoding(StartLoc),
+      clang::SourceLocation::getFromPtrEncoding(IdLoc),
+      static_cast<clang::IdentifierInfo *>(Id), static_cast<clang::RecordDecl *>(PrevDecl));
+}
+
 CXRecordDecl clang_RecordDecl_getPreviousDecl(CXRecordDecl RD) {
   return static_cast<clang::RecordDecl *>(RD)->getPreviousDecl();
 }
@@ -1897,6 +2065,17 @@ CXFieldDecl clang_RecordDecl_findFirstNamedDataMember(CXRecordDecl RD) {
 }
 
 // FileScopeAsmDecl
+CXFileScopeAsmDecl clang_FileScopeAsmDecl_Create(CXASTContext C, CXDeclContext DC,
+                                                 CXStringLiteral Str,
+                                                 CXSourceLocation_ AsmLoc,
+                                                 CXSourceLocation_ RParenLoc) {
+  return clang::FileScopeAsmDecl::Create(
+      *static_cast<clang::ASTContext *>(C), static_cast<clang::DeclContext *>(DC),
+      static_cast<clang::StringLiteral *>(DC),
+      clang::SourceLocation::getFromPtrEncoding(AsmLoc),
+      clang::SourceLocation::getFromPtrEncoding(RParenLoc));
+}
+
 CXSourceLocation_ clang_FileScopeAsmDecl_getAsmLoc(CXFileScopeAsmDecl FSAD) {
   return static_cast<clang::FileScopeAsmDecl *>(FSAD)->getAsmLoc().getPtrEncoding();
 }
@@ -1922,6 +2101,12 @@ void clang_FileScopeAsmDecl_setAsmString(CXFileScopeAsmDecl FSAD, CXStringLitera
 }
 
 // BlockDecl
+CXBlockDecl clang_BlockDecl_Create(CXASTContext C, CXDeclContext DC, CXSourceLocation_ L) {
+  return clang::BlockDecl::Create(*static_cast<clang::ASTContext *>(C),
+                                  static_cast<clang::DeclContext *>(DC),
+                                  clang::SourceLocation::getFromPtrEncoding(L));
+}
+
 CXSourceLocation_ clang_BlockDecl_getCaretLocation(CXBlockDecl BD) {
   return static_cast<clang::BlockDecl *>(BD)->getCaretLocation().getPtrEncoding();
 }
@@ -2024,6 +2209,12 @@ void clang_BlockDecl_setBlockMangling(CXBlockDecl BD, unsigned Number, CXDecl Ct
 // getSourceRange
 
 // CapturedDecl
+CXCapturedDecl clang_CapturedDecl_Create(CXASTContext C, CXDeclContext DC,
+                                         unsigned NumParams) {
+  return clang::CapturedDecl::Create(*static_cast<clang::ASTContext *>(C),
+                                     static_cast<clang::DeclContext *>(DC), NumParams);
+}
+
 CXStmt clang_CapturedDecl_getBody(CXCapturedDecl CD) {
   return static_cast<clang::CapturedDecl *>(CD)->getBody();
 }
@@ -2077,6 +2268,13 @@ CXModule clang_ImportDecl_getImportedModule(CXImportDecl ID) {
 // getSourceRange
 
 // ExportDecl
+CXExportDecl clang_ExportDecl_Create(CXASTContext C, CXDeclContext DC,
+                                     CXSourceLocation_ ExportLoc) {
+  return clang::ExportDecl::Create(*static_cast<clang::ASTContext *>(C),
+                                   static_cast<clang::DeclContext *>(DC),
+                                   clang::SourceLocation::getFromPtrEncoding(ExportLoc));
+}
+
 CXSourceLocation_ clang_ExportDecl_getExportLoc(CXExportDecl ED) {
   return static_cast<clang::ExportDecl *>(ED)->getExportLoc().getPtrEncoding();
 }
@@ -2101,4 +2299,8 @@ CXSourceLocation_ clang_ExportDecl_getEndLoc(CXExportDecl ED) {
 // getSourceRange
 
 // EmptyDecl
-// Create/CreateDeserialized
+CXEmptyDecl clang_EmptyDecl_Create(CXASTContext C, CXDeclContext DC, CXSourceLocation_ L) {
+  return clang::EmptyDecl::Create(*static_cast<clang::ASTContext *>(C),
+                                  static_cast<clang::DeclContext *>(DC),
+                                  clang::SourceLocation::getFromPtrEncoding(L));
+}

@@ -9,6 +9,7 @@
 #include "clang-ex/Basic/CXVisibility.h"
 #include "clang-ex/CXTypes.h"
 #include "clang-c/Platform.h"
+#include "llvm-c/ExecutionEngine.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -25,13 +26,24 @@ CINDEX_LINKAGE void
 clang_TranslationUnitDecl_setAnonymousNamespace(CXTranslationUnitDecl TUD,
                                                 CXNamespaceDecl ND);
 
+CINDEX_LINKAGE CXTranslationUnitDecl
+clang_TranslationUnitDecl_Create(CXTranslationUnitDecl TUD, CXASTContext C);
+
 // PragmaCommentDecl
+CINDEX_LINKAGE CXPragmaCommentDecl clang_PragmaCommentDecl_Create(
+    CXASTContext C, CXTranslationUnitDecl DC, CXSourceLocation_ CommentLoc,
+    CXPragmaMSCommentKind CommentKind, const char *Arg);
+
 CINDEX_LINKAGE CXPragmaMSCommentKind
 clang_PragmaCommentDecl_getCommentKind(CXPragmaCommentDecl PCD);
 
 CINDEX_LINKAGE const char *clang_PragmaCommentDecl_getArg(CXPragmaCommentDecl PCD);
 
 // PragmaDetectMismatchDecl
+CINDEX_LINKAGE CXPragmaDetectMismatchDecl clang_PragmaDetectMismatchDecl_Create(
+    CXASTContext C, CXTranslationUnitDecl DC, CXSourceLocation_ Loc, const char *Name,
+    const char *Value);
+
 CINDEX_LINKAGE const char *
 clang_PragmaDetectMismatchDecl_getName(CXPragmaDetectMismatchDecl PDMD);
 
@@ -39,6 +51,8 @@ CINDEX_LINKAGE const char *
 clang_PragmaDetectMismatchDecl_getValue(CXPragmaDetectMismatchDecl PDMD);
 
 // ExternCContextDecl
+CINDEX_LINKAGE CXExternCContextDecl
+clang_ExternCContextDecl_Create(CXASTContext C, CXTranslationUnitDecl TU);
 
 // NamedDecl
 CINDEX_LINKAGE CXIdentifierInfo clang_NamedDecl_getIdentifier(CXNamedDecl ND);
@@ -87,6 +101,10 @@ CINDEX_LINKAGE CXNamedDecl clang_NamedDecl_getMostRecentDecl(CXNamedDecl ND);
 CINDEX_LINKAGE CXTypeDecl clang_NamedDecl_castToTypeDecl(CXNamedDecl ND);
 
 // LabelDecl
+CINDEX_LINKAGE CXLabelDecl clang_LabelDecl_Create(CXASTContext C, CXDeclContext DC,
+                                                  CXSourceLocation_ IdentL,
+                                                  CXIdentifierInfo II);
+
 CINDEX_LINKAGE CXLabelStmt clang_LabelDecl_getStmt(CXLabelDecl LD);
 
 CINDEX_LINKAGE void clang_LabelDecl_setStmt(CXLabelDecl LD, CXLabelStmt T);
@@ -108,6 +126,10 @@ CINDEX_LINKAGE const char *clang_LabelDecl_getMSAsmLabel(CXLabelDecl LD);
 CINDEX_LINKAGE void clang_LabelDecl_setMSAsmLabelResolved(CXLabelDecl LD);
 
 // NamespaceDecl
+CINDEX_LINKAGE CXNamespaceDecl clang_NamespaceDecl_Create(
+    CXASTContext C, CXDeclContext DC, bool Inline, CXSourceLocation_ StartLoc,
+    CXSourceLocation_ IdLoc, CXIdentifierInfo Id, CXNamespaceDecl PrevDecl);
+
 CINDEX_LINKAGE bool clang_NamespaceDecl_isAnonymousNamespace(CXNamespaceDecl ND);
 
 CINDEX_LINKAGE bool clang_NamespaceDecl_isInline(CXNamespaceDecl ND);
@@ -186,6 +208,11 @@ CINDEX_LINKAGE CXSourceLocation_
 clang_DeclaratorDecl_getTypeSpecEndLoc(CXDeclaratorDecl DD);
 
 // VarDecl
+CINDEX_LINKAGE CXVarDecl clang_VarDecl_Create(CXASTContext C, CXDeclContext DC,
+                                              CXSourceLocation_ StartLoc,
+                                              CXSourceLocation_ IdLoc, CXIdentifierInfo Id,
+                                              CXQualType T, CXTypeSourceInfo TInfo,
+                                              CXStorageClass S);
 
 // getSourceRange
 
@@ -370,6 +397,11 @@ typedef enum CXImplicitParamDecl_ImplicitParamKind : unsigned {
   CXImplicitParamDecl_ImplicitParamKind_Other,
 } CXImplicitParamDecl_ImplicitParamKind;
 
+CXImplicitParamDecl
+clang_ImplicitParamDecl_Create(CXASTContext C, CXDeclContext DC, CXSourceLocation_ IdLoc,
+                               CXIdentifierInfo Id, CXQualType T,
+                               CXImplicitParamDecl_ImplicitParamKind ParamKind);
+
 CINDEX_LINKAGE CXImplicitParamDecl_ImplicitParamKind
 clang_ImplicitParamDecl_getParameterKind(CXImplicitParamDecl IPD);
 
@@ -441,6 +473,11 @@ typedef enum CXFunctionDecl_TemplatedKind {
 } CXFunctionDecl_TemplatedKind;
 
 typedef void *CXFunctionDecl_DefaultedFunctionInfo;
+
+CINDEX_LINKAGE CXFunctionDecl clang_FunctionDecl_Create(
+    CXASTContext C, CXDeclContext DC, CXSourceLocation_ StartLoc, CXSourceLocation_ NLoc,
+    CXDeclarationName N, CXQualType T, CXTypeSourceInfo TInfo, CXStorageClass SC,
+    bool isInlineSpecified, bool hasWrittenPrototype);
 
 // getNameInfo
 // getNameForDiagnostic
@@ -729,6 +766,11 @@ CINDEX_LINKAGE unsigned clang_FunctionDecl_getMemoryFunctionKind(CXFunctionDecl 
 CINDEX_LINKAGE unsigned clang_FunctionDecl_getODRHash(CXFunctionDecl FD);
 
 // FieldDecl
+CINDEX_LINKAGE CXFieldDecl clang_FieldDecl_Create(
+    CXASTContext C, CXDeclContext DC, CXSourceLocation_ StartLoc, CXSourceLocation_ IdLoc,
+    CXIdentifierInfo I, CXQualType T, CXTypeSourceInfo TInfo, CXExpr BW, bool Mutable,
+    CXInClassInitStyle InitStyle);
+
 CINDEX_LINKAGE unsigned clang_FieldDecl_getFieldIndex(CXFieldDecl FD);
 
 CINDEX_LINKAGE bool clang_FieldDecl_isMutable(CXFieldDecl FD);
@@ -775,6 +817,10 @@ CINDEX_LINKAGE CXRecordDecl clang_FieldDecl_getParent(CXFieldDecl FD);
 CINDEX_LINKAGE CXFieldDecl clang_FieldDecl_getCanonicalDecl(CXFieldDecl FD);
 
 // EnumConstantDecl
+CINDEX_LINKAGE CXEnumConstantDecl clang_EnumConstantDecl_Create(
+    CXASTContext C, CXEnumDecl DC, CXSourceLocation_ L, CXIdentifierInfo Id, CXQualType T,
+    CXExpr E, LLVMGenericValueRef V);
+
 CINDEX_LINKAGE CXExpr clang_EnumConstantDecl_getInitExpr(CXEnumConstantDecl ECD);
 
 // getInitVal
@@ -833,10 +879,20 @@ clang_TypedefNameDecl_getAnonDeclWithTypedefName(CXTypedefNameDecl TND, bool Any
 CINDEX_LINKAGE bool clang_TypedefNameDecl_isTransparentTag(CXTypedefNameDecl TND);
 
 // TypedefDecl
+CINDEX_LINKAGE CXTypedefDecl clang_TypedefDecl_Create(CXASTContext C, CXDeclContext DC,
+                                                      CXSourceLocation_ StartLoc,
+                                                      CXSourceLocation_ IdLoc,
+                                                      CXIdentifierInfo Id,
+                                                      CXTypeSourceInfo TInfo);
 
 // getSourceRange
 
 // TypeAliasDecl
+CINDEX_LINKAGE CXTypeAliasDecl clang_TypeAliasDecl_Create(CXASTContext C, CXDeclContext DC,
+                                                          CXSourceLocation_ StartLoc,
+                                                          CXSourceLocation_ IdLoc,
+                                                          CXIdentifierInfo Id,
+                                                          CXTypeSourceInfo TInfo);
 
 // getSourceRange
 
@@ -928,6 +984,13 @@ CINDEX_LINKAGE CXTemplateParameterList clang_TagDecl_getTemplateParameterList(CX
 CINDEX_LINKAGE CXDeclContext clang_TagDecl_castToDeclContext(CXTagDecl TD);
 
 // EnumDecl
+CINDEX_LINKAGE CXEnumDecl clang_EnumDecl_Create(CXASTContext C, CXDeclContext DC,
+                                                CXSourceLocation_ StartLoc,
+                                                CXSourceLocation_ IdLoc,
+                                                CXIdentifierInfo Id, CXEnumDecl PrevDecl,
+                                                bool IsScoped, bool IsScopedUsingClassTag,
+                                                bool IsFixed);
+
 CINDEX_LINKAGE void clang_EnumDecl_setScoped(CXEnumDecl ED, bool Scoped);
 
 CINDEX_LINKAGE void clang_EnumDecl_setScopedUsingClassTag(CXEnumDecl ED, bool ScopedUCT);
@@ -1007,6 +1070,10 @@ typedef enum CXRecordDecl_ArgPassingKind : unsigned {
   CXRecordDecl_ArgPassingKind_APK_CannotPassInRegs,
   CXRecordDecl_ArgPassingKind_APK_CanNeverPassInRegs
 } CXRecordDecl_ArgPassingKind;
+
+CINDEX_LINKAGE CXRecordDecl clang_RecordDecl_Create(
+    CXASTContext C, CXTagTypeKind TK, CXDeclContext DC, CXSourceLocation_ StartLoc,
+    CXSourceLocation_ IdLoc, CXIdentifierInfo Id, CXRecordDecl PrevDecl);
 
 CINDEX_LINKAGE CXRecordDecl clang_RecordDecl_getPreviousDecl(CXRecordDecl RD);
 
@@ -1099,6 +1166,10 @@ CINDEX_LINKAGE bool clang_RecordDecl_mayInsertExtraPadding(CXRecordDecl RD,
 CINDEX_LINKAGE CXFieldDecl clang_RecordDecl_findFirstNamedDataMember(CXRecordDecl RD);
 
 // FileScopeAsmDecl
+CINDEX_LINKAGE CXFileScopeAsmDecl
+clang_FileScopeAsmDecl_Create(CXASTContext C, CXDeclContext DC, CXStringLiteral Str,
+                              CXSourceLocation_ AsmLoc, CXSourceLocation_ RParenLoc);
+
 CINDEX_LINKAGE CXSourceLocation_ clang_FileScopeAsmDecl_getAsmLoc(CXFileScopeAsmDecl FSAD);
 
 CINDEX_LINKAGE CXSourceLocation_
@@ -1115,6 +1186,9 @@ CINDEX_LINKAGE void clang_FileScopeAsmDecl_setAsmString(CXFileScopeAsmDecl FSAD,
                                                         CXStringLiteral Asm);
 
 // BlockDecl
+CINDEX_LINKAGE CXBlockDecl clang_BlockDecl_Create(CXASTContext C, CXDeclContext DC,
+                                                  CXSourceLocation_ L);
+
 CINDEX_LINKAGE CXSourceLocation_ clang_BlockDecl_getCaretLocation(CXBlockDecl BD);
 
 CINDEX_LINKAGE bool clang_BlockDecl_isVariadic(CXBlockDecl BD);
@@ -1170,6 +1244,9 @@ CINDEX_LINKAGE void clang_BlockDecl_setBlockMangling(CXBlockDecl BD, unsigned Nu
 // getSourceRange
 
 // CapturedDecl
+CINDEX_LINKAGE CXCapturedDecl clang_CapturedDecl_Create(CXASTContext C, CXDeclContext DC,
+                                                        unsigned NumParams);
+
 CINDEX_LINKAGE CXStmt clang_CapturedDecl_getBody(CXCapturedDecl CD);
 
 CINDEX_LINKAGE void clang_CapturedDecl_setBody(CXCapturedDecl CD, CXStmt B);
@@ -1201,6 +1278,9 @@ CINDEX_LINKAGE CXModule clang_ImportDecl_getImportedModule(CXImportDecl ID);
 // getSourceRange
 
 // ExportDecl
+CINDEX_LINKAGE CXExportDecl clang_ExportDecl_Create(CXASTContext C, CXDeclContext DC,
+                                                    CXSourceLocation_ ExportLoc);
+
 CINDEX_LINKAGE CXSourceLocation_ clang_ExportDecl_getExportLoc(CXExportDecl ED);
 
 CINDEX_LINKAGE CXSourceLocation_ clang_ExportDecl_getRBraceLoc(CXExportDecl ED);
@@ -1214,7 +1294,8 @@ CINDEX_LINKAGE CXSourceLocation_ clang_ExportDecl_getEndLoc(CXExportDecl ED);
 // getSourceRange
 
 // EmptyDecl
-// Create/CreateDeserialized
+CINDEX_LINKAGE CXEmptyDecl clang_EmptyDecl_Create(CXASTContext C, CXDeclContext DC,
+                                                  CXSourceLocation_ L);
 
 #ifdef __cplusplus
 }
