@@ -43,6 +43,69 @@ CXAccessSpecDecl clang_AccessSpecDecl_CreateDeserialized(CXASTContext C, unsigne
                                                    ID);
 }
 
+// CXXBaseSpecifier
+CXSourceRange_ clang_CXXBaseSpecifier_getSourceRange(CXCXXBaseSpecifier CXXBS) {
+  auto rng = static_cast<clang::CXXBaseSpecifier *>(CXXBS)->getSourceRange();
+  CXSourceLocation_ B = rng.getBegin().getPtrEncoding();
+  CXSourceLocation_ E = rng.getEnd().getPtrEncoding();
+  return CXSourceRange_{B, E};
+}
+
+CXSourceLocation_ clang_CXXBaseSpecifier_getColonLoc(CXCXXBaseSpecifier CXXBS) {
+  return static_cast<clang::CXXBaseSpecifier *>(CXXBS)->getBeginLoc().getPtrEncoding();
+}
+
+CXSourceLocation_ clang_CXXBaseSpecifier_getEndLoc(CXCXXBaseSpecifier CXXBS) {
+  return static_cast<clang::CXXBaseSpecifier *>(CXXBS)->getEndLoc().getPtrEncoding();
+}
+
+CXSourceLocation_ clang_CXXBaseSpecifier_getBaseTypeLoc(CXCXXBaseSpecifier CXXBS) {
+  return static_cast<clang::CXXBaseSpecifier *>(CXXBS)->getBaseTypeLoc().getPtrEncoding();
+}
+
+bool clang_CXXBaseSpecifier_isVirtual(CXCXXBaseSpecifier CXXBS) {
+  return static_cast<clang::CXXBaseSpecifier *>(CXXBS)->isVirtual();
+}
+
+bool clang_CXXBaseSpecifier_isBaseOfClass(CXCXXBaseSpecifier CXXBS) {
+  return static_cast<clang::CXXBaseSpecifier *>(CXXBS)->isBaseOfClass();
+}
+
+bool clang_CXXBaseSpecifier_isPackExpansion(CXCXXBaseSpecifier CXXBS) {
+  return static_cast<clang::CXXBaseSpecifier *>(CXXBS)->isPackExpansion();
+}
+
+bool clang_CXXBaseSpecifier_getInheritConstructors(CXCXXBaseSpecifier CXXBS) {
+  return static_cast<clang::CXXBaseSpecifier *>(CXXBS)->getInheritConstructors();
+}
+
+void clang_CXXBaseSpecifier_setInheritConstructors(CXCXXBaseSpecifier CXXBS, bool Inherit) {
+  static_cast<clang::CXXBaseSpecifier *>(CXXBS)->setInheritConstructors(Inherit);
+}
+
+CXSourceLocation_ clang_CXXBaseSpecifier_getEllipsisLoc(CXCXXBaseSpecifier CXXBS) {
+  return static_cast<clang::CXXBaseSpecifier *>(CXXBS)->getEllipsisLoc().getPtrEncoding();
+}
+
+CXAccessSpecifier clang_CXXBaseSpecifier_getAccessSpecifier(CXCXXBaseSpecifier CXXBS) {
+  return static_cast<CXAccessSpecifier>(
+      static_cast<clang::CXXBaseSpecifier *>(CXXBS)->getAccessSpecifier());
+}
+
+CXAccessSpecifier
+clang_CXXBaseSpecifier_getAccessSpecifierAsWritten(CXCXXBaseSpecifier CXXBS) {
+  return static_cast<CXAccessSpecifier>(
+      static_cast<clang::CXXBaseSpecifier *>(CXXBS)->getAccessSpecifierAsWritten());
+}
+
+CXQualType clang_CXXBaseSpecifier_getType(CXCXXBaseSpecifier CXXBS) {
+  return static_cast<clang::CXXBaseSpecifier *>(CXXBS)->getType().getAsOpaquePtr();
+}
+
+CXTypeSourceInfo clang_CXXBaseSpecifier_getTypeSourceInfo(CXCXXBaseSpecifier CXXBS) {
+  return static_cast<clang::CXXBaseSpecifier *>(CXXBS)->getTypeSourceInfo();
+}
+
 // CXXRecordDecl
 CXCXXRecordDecl clang_CXXRecordDecl_getCanonicalDecl(CXCXXRecordDecl CXXRD) {
   return static_cast<clang::CXXRecordDecl *>(CXXRD)->getCanonicalDecl();
@@ -126,4 +189,166 @@ bool clang_CXXRecordDecl_isCLike(CXCXXRecordDecl CXXRD) {
 
 bool clang_CXXRecordDecl_isEmpty(CXCXXRecordDecl CXXRD) {
   return static_cast<clang::CXXRecordDecl *>(CXXRD)->isEmpty();
+}
+
+// ExplicitSpecifier
+CXExplicitSpecKind clang_ExplicitSpecifier_getKind(CXExplicitSpecifier ES) {
+  return static_cast<CXExplicitSpecKind>(
+      static_cast<clang::ExplicitSpecifier *>(ES)->getKind());
+}
+
+CXExpr clang_ExplicitSpecifier_getExpr(CXExplicitSpecifier ES) {
+  return static_cast<clang::ExplicitSpecifier *>(ES)->getExpr();
+}
+
+bool clang_ExplicitSpecifier_isSpecified(CXExplicitSpecifier ES) {
+  return static_cast<clang::ExplicitSpecifier *>(ES)->isSpecified();
+}
+
+// isEquivalent
+
+bool clang_ExplicitSpecifier_isExplicit(CXExplicitSpecifier ES) {
+  return static_cast<clang::ExplicitSpecifier *>(ES)->isExplicit();
+}
+
+bool clang_ExplicitSpecifier_isInvalid(CXExplicitSpecifier ES) {
+  return static_cast<clang::ExplicitSpecifier *>(ES)->isInvalid();
+}
+
+void clang_ExplicitSpecifier_setKind(CXExplicitSpecifier ES, CXExplicitSpecKind Kind) {
+  static_cast<clang::ExplicitSpecifier *>(ES)->setKind(
+      static_cast<clang::ExplicitSpecKind>(Kind));
+}
+
+void clang_ExplicitSpecifier_setExpr(CXExplicitSpecifier ES, CXExpr E) {
+  static_cast<clang::ExplicitSpecifier *>(ES)->setExpr(static_cast<clang::Expr *>(E));
+}
+
+// getFromDecl
+// Invalid
+
+// CXXDeductionGuideDecl
+
+// RequiresExprBodyDecl
+CXRequiresExprBodyDecl clang_RequiresExprBodyDecl_Create(CXASTContext C, CXDeclContext DC,
+                                                         CXSourceLocation_ StartLoc) {
+  return clang::RequiresExprBodyDecl::Create(
+      *static_cast<clang::ASTContext *>(C), static_cast<clang::DeclContext *>(DC),
+      clang::SourceLocation::getFromPtrEncoding(StartLoc));
+}
+
+CXRequiresExprBodyDecl clang_RequiresExprBodyDecl_CreateDeserialized(CXASTContext C,
+                                                                     unsigned ID) {
+  return clang::RequiresExprBodyDecl::CreateDeserialized(
+      *static_cast<clang::ASTContext *>(C), ID);
+}
+
+// CXXMethodDecl
+CXCXXMethodDecl clang_CXXMethodDecl_Create(CXASTContext C, CXCXXRecordDecl RD,
+                                           CXSourceLocation_ StartLoc,
+                                           CXDeclarationNameInfo NameInfo, CXQualType T,
+                                           CXTypeSourceInfo TInfo, CXStorageClass SC,
+                                           bool isInline, CXConstexprSpecKind ConstexprKind,
+                                           CXSourceLocation_ EndLocation,
+                                           CXExpr TrailingRequiresClause) {
+  return clang::CXXMethodDecl::Create(
+      *static_cast<clang::ASTContext *>(C), static_cast<clang::CXXRecordDecl *>(RD),
+      clang::SourceLocation::getFromPtrEncoding(StartLoc),
+      *static_cast<clang::DeclarationNameInfo *>(NameInfo),
+      clang::QualType::getFromOpaquePtr(T), static_cast<clang::TypeSourceInfo *>(TInfo),
+      static_cast<clang::StorageClass>(SC), isInline,
+      static_cast<clang::ConstexprSpecKind>(ConstexprKind),
+      clang::SourceLocation::getFromPtrEncoding(EndLocation),
+      static_cast<clang::Expr *>(TrailingRequiresClause));
+}
+
+CXCXXMethodDecl clang_CXXMethodDecl_CreateDeserialized(CXASTContext C, unsigned ID) {
+  return clang::CXXMethodDecl::CreateDeserialized(*static_cast<clang::ASTContext *>(C), ID);
+}
+
+bool clang_CXXMethodDecl_isStatic(CXCXXMethodDecl CXXMD) {
+  return static_cast<clang::CXXMethodDecl *>(CXXMD)->isStatic();
+}
+
+bool clang_CXXMethodDecl_isInstance(CXCXXMethodDecl CXXMD) {
+  return static_cast<clang::CXXMethodDecl *>(CXXMD)->isInstance();
+}
+
+// isStaticOverloadedOperator
+
+bool clang_CXXMethodDecl_isConst(CXCXXMethodDecl CXXMD) {
+  return static_cast<clang::CXXMethodDecl *>(CXXMD)->isConst();
+}
+
+bool clang_CXXMethodDecl_isVolatile(CXCXXMethodDecl CXXMD) {
+  return static_cast<clang::CXXMethodDecl *>(CXXMD)->isVolatile();
+}
+
+bool clang_CXXMethodDecl_isVirtual(CXCXXMethodDecl CXXMD) {
+  return static_cast<clang::CXXMethodDecl *>(CXXMD)->isVirtual();
+}
+
+CXCXXMethodDecl clang_CXXMethodDecl_getDevirtualizedMethod(CXCXXMethodDecl CXXMD,
+                                                           CXExpr Base, bool IsAppleKext) {
+  return static_cast<clang::CXXMethodDecl *>(CXXMD)->getDevirtualizedMethod(
+      static_cast<clang::Expr *>(Base), IsAppleKext);
+}
+
+// isUsualDeallocationFunction
+
+bool clang_CXXMethodDecl_isCopyAssignmentOperator(CXCXXMethodDecl CXXMD) {
+  return static_cast<clang::CXXMethodDecl *>(CXXMD)->isCopyAssignmentOperator();
+}
+
+bool clang_CXXMethodDecl_isMoveAssignmentOperator(CXCXXMethodDecl CXXMD) {
+  return static_cast<clang::CXXMethodDecl *>(CXXMD)->isMoveAssignmentOperator();
+}
+
+CXCXXMethodDecl clang_CXXMethodDecl_getCanonicalDecl(CXCXXMethodDecl CXXMD) {
+  return static_cast<clang::CXXMethodDecl *>(CXXMD)->getCanonicalDecl();
+}
+
+CXCXXMethodDecl clang_CXXMethodDecl_getMostRecentDecl(CXCXXMethodDecl CXXMD) {
+  return static_cast<clang::CXXMethodDecl *>(CXXMD)->getMostRecentDecl();
+}
+
+void clang_CXXMethodDecl_addOverriddenMethod(CXCXXMethodDecl CXXMD, CXCXXMethodDecl MD) {
+  static_cast<clang::CXXMethodDecl *>(CXXMD)->addOverriddenMethod(
+      static_cast<clang::CXXMethodDecl *>(MD));
+}
+
+CXCXXRecordDecl clang_CXXMethodDecl_getParent(CXCXXMethodDecl CXXMD) {
+  return static_cast<clang::CXXMethodDecl *>(CXXMD)->getParent();
+}
+
+CXQualType clang_CXXMethodDecl_getThisType(CXCXXMethodDecl CXXMD) {
+  return static_cast<clang::CXXMethodDecl *>(CXXMD)->getThisType().getAsOpaquePtr();
+}
+
+CXQualType clang_CXXMethodDecl_getThisObjectType(CXCXXMethodDecl CXXMD) {
+  return static_cast<clang::CXXMethodDecl *>(CXXMD)->getThisObjectType().getAsOpaquePtr();
+}
+
+// getMethodQualifiers
+// getRefQualifier
+
+bool clang_CXXMethodDecl_hasInlineBody(CXCXXMethodDecl CXXMD) {
+  return static_cast<clang::CXXMethodDecl *>(CXXMD)->hasInlineBody();
+}
+
+bool clang_CXXMethodDecl_isLambdaStaticInvoker(CXCXXMethodDecl CXXMD) {
+  return static_cast<clang::CXXMethodDecl *>(CXXMD)->isLambdaStaticInvoker();
+}
+
+CXCXXRecordDecl clang_CXXMethodDecl_getCorrespondingMethodInClass(CXCXXMethodDecl CXXMD,
+                                                                  CXCXXRecordDecl RD,
+                                                                  bool MayBeBase) {
+  return static_cast<clang::CXXMethodDecl *>(CXXMD)->getCorrespondingMethodInClass(
+      static_cast<clang::CXXRecordDecl *>(RD), MayBeBase);
+}
+
+CXCXXRecordDecl clang_CXXMethodDecl_getCorrespondingMethodDeclaredInClass(
+    CXCXXMethodDecl CXXMD, CXCXXRecordDecl RD, bool MayBeBase) {
+  return static_cast<clang::CXXMethodDecl *>(CXXMD)->getCorrespondingMethodDeclaredInClass(
+      static_cast<clang::CXXRecordDecl *>(RD), MayBeBase);
 }

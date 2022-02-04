@@ -5,6 +5,12 @@
 extern "C" {
 #endif
 
+typedef enum CXExplicitSpecKind : unsigned {
+  CXExplicitSpecKind_ResolvedFalse,
+  CXExplicitSpecKind_ResolvedTrue,
+  CXExplicitSpecKind_Unresolved,
+} CXExplicitSpecKind;
+
 typedef enum CXAccessSpecifier {
   CXAccessSpecifier_AS_public,
   CXAccessSpecifier_AS_protected,

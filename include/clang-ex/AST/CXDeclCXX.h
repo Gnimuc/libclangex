@@ -34,6 +34,43 @@ CINDEX_LINKAGE CXAccessSpecDecl clang_AccessSpecDecl_Create(CXASTContext C,
 CINDEX_LINKAGE CXAccessSpecDecl clang_AccessSpecDecl_CreateDeserialized(CXASTContext C,
                                                                         unsigned ID);
 
+// CXXBaseSpecifier
+CINDEX_LINKAGE CXSourceRange_
+clang_CXXBaseSpecifier_getSourceRange(CXCXXBaseSpecifier CXXBS);
+
+CINDEX_LINKAGE CXSourceLocation_
+clang_CXXBaseSpecifier_getColonLoc(CXCXXBaseSpecifier CXXBS);
+
+CINDEX_LINKAGE CXSourceLocation_ clang_CXXBaseSpecifier_getEndLoc(CXCXXBaseSpecifier CXXBS);
+
+CINDEX_LINKAGE CXSourceLocation_
+clang_CXXBaseSpecifier_getBaseTypeLoc(CXCXXBaseSpecifier CXXBS);
+
+CINDEX_LINKAGE bool clang_CXXBaseSpecifier_isVirtual(CXCXXBaseSpecifier CXXBS);
+
+CINDEX_LINKAGE bool clang_CXXBaseSpecifier_isBaseOfClass(CXCXXBaseSpecifier CXXBS);
+
+CINDEX_LINKAGE bool clang_CXXBaseSpecifier_isPackExpansion(CXCXXBaseSpecifier CXXBS);
+
+CINDEX_LINKAGE bool clang_CXXBaseSpecifier_getInheritConstructors(CXCXXBaseSpecifier CXXBS);
+
+CINDEX_LINKAGE void clang_CXXBaseSpecifier_setInheritConstructors(CXCXXBaseSpecifier CXXBS,
+                                                                  bool Inherit);
+
+CINDEX_LINKAGE CXSourceLocation_
+clang_CXXBaseSpecifier_getEllipsisLoc(CXCXXBaseSpecifier CXXBS);
+
+CINDEX_LINKAGE CXAccessSpecifier
+clang_CXXBaseSpecifier_getAccessSpecifier(CXCXXBaseSpecifier CXXBS);
+
+CINDEX_LINKAGE CXAccessSpecifier
+clang_CXXBaseSpecifier_getAccessSpecifierAsWritten(CXCXXBaseSpecifier CXXBS);
+
+CINDEX_LINKAGE CXQualType clang_CXXBaseSpecifier_getType(CXCXXBaseSpecifier CXXBS);
+
+CINDEX_LINKAGE CXTypeSourceInfo
+clang_CXXBaseSpecifier_getTypeSourceInfo(CXCXXBaseSpecifier CXXBS);
+
 // CXXRecordDecl
 CINDEX_LINKAGE CXCXXRecordDecl clang_CXXRecordDecl_getCanonicalDecl(CXCXXRecordDecl CXXRD);
 
@@ -47,6 +84,15 @@ clang_CXXRecordDecl_getMostRecentNonInjectedDecl(CXCXXRecordDecl CXXRD);
 CINDEX_LINKAGE CXCXXRecordDecl clang_CXXRecordDecl_getDefinition(CXCXXRecordDecl CXXRD);
 
 CINDEX_LINKAGE bool clang_CXXRecordDecl_hasDefinition(CXCXXRecordDecl CXXRD);
+
+CINDEX_LINKAGE CXCXXRecordDecl clang_CXXRecordDecl_Create(
+    CXASTContext C, CXTagTypeKind TK, CXDeclContext DC, CXSourceLocation_ StartLoc,
+    CXSourceLocation_ IdLoc, CXIdentifierInfo Id, CXCXXRecordDecl PrevDecl,
+    bool DelayTypeCreation);
+
+CINDEX_LINKAGE CXCXXRecordDecl clang_CXXRecordDecl_CreateLambda(
+    CXASTContext C, CXDeclContext DC, CXTypeSourceInfo Info, CXSourceLocation_ Loc,
+    bool DependentLambda, bool IsGeneric, CXLambdaCaptureDefault CaptureDefault);
 
 CINDEX_LINKAGE bool clang_CXXRecordDecl_isLambda(CXCXXRecordDecl CXXRD);
 
@@ -62,6 +108,93 @@ CINDEX_LINKAGE bool clang_CXXRecordDecl_isPOD(CXCXXRecordDecl CXXRD);
 CINDEX_LINKAGE bool clang_CXXRecordDecl_isCLike(CXCXXRecordDecl CXXRD);
 
 CINDEX_LINKAGE bool clang_CXXRecordDecl_isEmpty(CXCXXRecordDecl CXXRD);
+
+// ExplicitSpecifier
+CINDEX_LINKAGE CXExplicitSpecKind clang_ExplicitSpecifier_getKind(CXExplicitSpecifier ES);
+
+CINDEX_LINKAGE CXExpr clang_ExplicitSpecifier_getExpr(CXExplicitSpecifier ES);
+
+CINDEX_LINKAGE bool clang_ExplicitSpecifier_isSpecified(CXExplicitSpecifier ES);
+
+// isEquivalent
+
+CINDEX_LINKAGE bool clang_ExplicitSpecifier_isExplicit(CXExplicitSpecifier ES);
+
+CINDEX_LINKAGE bool clang_ExplicitSpecifier_isInvalid(CXExplicitSpecifier ES);
+
+CINDEX_LINKAGE void clang_ExplicitSpecifier_setKind(CXExplicitSpecifier ES,
+                                                    CXExplicitSpecKind Kind);
+
+CINDEX_LINKAGE void clang_ExplicitSpecifier_setExpr(CXExplicitSpecifier ES, CXExpr E);
+
+// getFromDecl
+// Invalid
+
+// CXXDeductionGuideDecl
+
+// RequiresExprBodyDecl
+CINDEX_LINKAGE CXRequiresExprBodyDecl clang_RequiresExprBodyDecl_Create(
+    CXASTContext C, CXDeclContext DC, CXSourceLocation_ StartLoc);
+
+CINDEX_LINKAGE CXRequiresExprBodyDecl
+clang_RequiresExprBodyDecl_CreateDeserialized(CXASTContext C, unsigned ID);
+
+// CXXMethodDecl
+CINDEX_LINKAGE CXCXXMethodDecl clang_CXXMethodDecl_Create(
+    CXASTContext C, CXCXXRecordDecl RD, CXSourceLocation_ StartLoc,
+    CXDeclarationNameInfo NameInfo, CXQualType T, CXTypeSourceInfo TInfo, CXStorageClass SC,
+    bool isInline, CXConstexprSpecKind ConstexprKind, CXSourceLocation_ EndLocation,
+    CXExpr TrailingRequiresClause);
+
+CINDEX_LINKAGE CXCXXMethodDecl clang_CXXMethodDecl_CreateDeserialized(CXASTContext C,
+                                                                      unsigned ID);
+
+CINDEX_LINKAGE bool clang_CXXMethodDecl_isStatic(CXCXXMethodDecl CXXMD);
+
+CINDEX_LINKAGE bool clang_CXXMethodDecl_isInstance(CXCXXMethodDecl CXXMD);
+
+// isStaticOverloadedOperator
+
+CINDEX_LINKAGE bool clang_CXXMethodDecl_isConst(CXCXXMethodDecl CXXMD);
+
+CINDEX_LINKAGE bool clang_CXXMethodDecl_isVolatile(CXCXXMethodDecl CXXMD);
+
+CINDEX_LINKAGE bool clang_CXXMethodDecl_isVirtual(CXCXXMethodDecl CXXMD);
+
+CINDEX_LINKAGE CXCXXMethodDecl clang_CXXMethodDecl_getDevirtualizedMethod(
+    CXCXXMethodDecl CXXMD, CXExpr Base, bool IsAppleKext);
+
+// isUsualDeallocationFunction
+
+CINDEX_LINKAGE bool clang_CXXMethodDecl_isCopyAssignmentOperator(CXCXXMethodDecl CXXMD);
+
+CINDEX_LINKAGE bool clang_CXXMethodDecl_isMoveAssignmentOperator(CXCXXMethodDecl CXXMD);
+
+CINDEX_LINKAGE CXCXXMethodDecl clang_CXXMethodDecl_getCanonicalDecl(CXCXXMethodDecl CXXMD);
+
+CINDEX_LINKAGE CXCXXMethodDecl clang_CXXMethodDecl_getMostRecentDecl(CXCXXMethodDecl CXXMD);
+
+CINDEX_LINKAGE void clang_CXXMethodDecl_addOverriddenMethod(CXCXXMethodDecl CXXMD,
+                                                            CXCXXMethodDecl MD);
+
+CINDEX_LINKAGE CXCXXRecordDecl clang_CXXMethodDecl_getParent(CXCXXMethodDecl CXXMD);
+
+CINDEX_LINKAGE CXQualType clang_CXXMethodDecl_getThisType(CXCXXMethodDecl CXXMD);
+
+CINDEX_LINKAGE CXQualType clang_CXXMethodDecl_getThisObjectType(CXCXXMethodDecl CXXMD);
+
+// getMethodQualifiers
+// getRefQualifier
+
+CINDEX_LINKAGE bool clang_CXXMethodDecl_hasInlineBody(CXCXXMethodDecl CXXMD);
+
+CINDEX_LINKAGE bool clang_CXXMethodDecl_isLambdaStaticInvoker(CXCXXMethodDecl CXXMD);
+
+CINDEX_LINKAGE CXCXXRecordDecl clang_CXXMethodDecl_getCorrespondingMethodInClass(
+    CXCXXMethodDecl CXXMD, CXCXXRecordDecl RD, bool MayBeBase);
+
+CINDEX_LINKAGE CXCXXRecordDecl clang_CXXMethodDecl_getCorrespondingMethodDeclaredInClass(
+    CXCXXMethodDecl CXXMD, CXCXXRecordDecl RD, bool MayBeBase);
 
 #ifdef __cplusplus
 }

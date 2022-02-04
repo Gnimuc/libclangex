@@ -51,6 +51,7 @@ typedef void *CXEmptyDecl;
 
 // DeclarationName
 typedef void *CXDeclarationName;
+typedef void *CXDeclarationNameInfo;
 
 // DeclBase
 typedef void *CXDecl;
