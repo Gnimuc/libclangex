@@ -390,6 +390,11 @@ typedef void *CXModule;
 // SourceLocation
 typedef void *CXSourceLocation_;
 
+typedef struct CXSourceRange_ {
+  CXSourceLocation_ B;
+  CXSourceLocation_ E;
+} CXSourceRange_;
+
 // SourceManager
 typedef void *CXFileID;
 typedef void *CXSourceManager;

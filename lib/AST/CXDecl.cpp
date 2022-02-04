@@ -182,7 +182,12 @@ void clang_LabelDecl_setLocStart(CXLabelDecl LD, CXSourceLocation_ Loc) {
       clang::SourceLocation::getFromPtrEncoding(Loc));
 }
 
-// getSourceRange
+CXSourceRange_ clang_LabelDecl_getSourceRange(CXLabelDecl LD) {
+  auto rng = static_cast<clang::LabelDecl *>(LD)->getSourceRange();
+  CXSourceLocation_ B = rng.getBegin().getPtrEncoding();
+  CXSourceLocation_ E = rng.getEnd().getPtrEncoding();
+  return CXSourceRange_{B, E};
+}
 
 bool clang_LabelDecl_isMSAsmLabel(CXLabelDecl LD) {
   return static_cast<clang::LabelDecl *>(LD)->isMSAsmLabel();
@@ -248,7 +253,12 @@ CXNamespaceDecl clang_NamespaceDecl_getCanonicalDecl(CXNamespaceDecl ND) {
   return static_cast<clang::NamespaceDecl *>(ND)->getCanonicalDecl();
 }
 
-// getSourceRange
+CXSourceRange_ clang_NamespaceDecl_getSourceRange(CXNamespaceDecl ND) {
+  auto rng = static_cast<clang::NamespaceDecl *>(ND)->getSourceRange();
+  CXSourceLocation_ B = rng.getBegin().getPtrEncoding();
+  CXSourceLocation_ E = rng.getEnd().getPtrEncoding();
+  return CXSourceRange_{B, E};
+}
 
 CXSourceLocation_ clang_NamespaceDecl_getBeginLoc(CXNamespaceDecl ND) {
   return static_cast<clang::NamespaceDecl *>(ND)->getBeginLoc().getPtrEncoding();
@@ -357,7 +367,12 @@ CXVarDecl clang_VarDecl_Create(CXASTContext C, CXDeclContext DC, CXSourceLocatio
       static_cast<clang::TypeSourceInfo *>(TInfo), static_cast<clang::StorageClass>(S));
 }
 
-// getSourceRange
+CXSourceRange_ clang_VarDecl_getSourceRange(CXVarDecl VD) {
+  auto rng = static_cast<clang::VarDecl *>(VD)->getSourceRange();
+  CXSourceLocation_ B = rng.getBegin().getPtrEncoding();
+  CXSourceLocation_ E = rng.getEnd().getPtrEncoding();
+  return CXSourceRange_{B, E};
+}
 
 CXStorageClass clang_VarDecl_getStorageClass(CXVarDecl VD) {
   return static_cast<CXStorageClass>(static_cast<clang::VarDecl *>(VD)->getStorageClass());
@@ -758,7 +773,12 @@ void clang_ParmVarDecl_setDefaultArg(CXParmVarDecl PVD, CXExpr defarg) {
   static_cast<clang::ParmVarDecl *>(PVD)->setDefaultArg(static_cast<clang::Expr *>(defarg));
 }
 
-// getDefaultArgRange
+CXSourceRange_ clang_ParmVarDecl_getDefaultArgRange(CXParmVarDecl PVD) {
+  auto rng = static_cast<clang::ParmVarDecl *>(PVD)->getDefaultArgRange();
+  CXSourceLocation_ B = rng.getBegin().getPtrEncoding();
+  CXSourceLocation_ E = rng.getEnd().getPtrEncoding();
+  return CXSourceRange_{B, E};
+}
 
 void clang_ParmVarDecl_setUninstantiatedDefaultArg(CXParmVarDecl PVD, CXExpr arg) {
   static_cast<clang::ParmVarDecl *>(PVD)->setUninstantiatedDefaultArg(
@@ -829,7 +849,12 @@ CXSourceLocation_ clang_FunctionDecl_getEllipsisLoc(CXFunctionDecl FD) {
   return static_cast<clang::FunctionDecl *>(FD)->getEllipsisLoc().getPtrEncoding();
 }
 
-// getSourceRange
+CXSourceRange_ clang_FunctionDecl_getSourceRange(CXFunctionDecl FD) {
+  auto rng = static_cast<clang::FunctionDecl *>(FD)->getSourceRange();
+  CXSourceLocation_ B = rng.getBegin().getPtrEncoding();
+  CXSourceLocation_ E = rng.getEnd().getPtrEncoding();
+  return CXSourceRange_{B, E};
+}
 
 // bool clang_FunctionDecl_hasBody(CXFunctionDecl FD, CXFunctionDecl Definition) {
 //   return static_cast<clang::FunctionDecl *>(FD)->hasBody(
@@ -1157,8 +1182,19 @@ CXQualType clang_FunctionDecl_getReturnType(CXFunctionDecl FD) {
   return static_cast<clang::FunctionDecl *>(FD)->getReturnType().getAsOpaquePtr();
 }
 
-// getReturnTypeSourceRange
-// getParametersSourceRange
+CXSourceRange_ clang_FunctionDecl_getReturnTypeSourceRange(CXFunctionDecl FD) {
+  auto rng = static_cast<clang::FunctionDecl *>(FD)->getReturnTypeSourceRange();
+  CXSourceLocation_ B = rng.getBegin().getPtrEncoding();
+  CXSourceLocation_ E = rng.getEnd().getPtrEncoding();
+  return CXSourceRange_{B, E};
+}
+
+CXSourceRange_ clang_FunctionDecl_getParametersSourceRange(CXFunctionDecl FD) {
+  auto rng = static_cast<clang::FunctionDecl *>(FD)->getParametersSourceRange();
+  CXSourceLocation_ B = rng.getBegin().getPtrEncoding();
+  CXSourceLocation_ E = rng.getEnd().getPtrEncoding();
+  return CXSourceRange_{B, E};
+}
 
 CXQualType clang_FunctionDecl_getDeclaredReturnType(CXFunctionDecl FD) {
   return static_cast<clang::FunctionDecl *>(FD)->getDeclaredReturnType().getAsOpaquePtr();
@@ -1169,7 +1205,12 @@ CXExceptionSpecificationType clang_FunctionDecl_getExceptionSpecType(CXFunctionD
       static_cast<clang::FunctionDecl *>(FD)->getExceptionSpecType());
 }
 
-// getExceptionSpecSourceRange
+CXSourceRange_ clang_FunctionDecl_getExceptionSpecSourceRange(CXFunctionDecl FD) {
+  auto rng = static_cast<clang::FunctionDecl *>(FD)->getExceptionSpecSourceRange();
+  CXSourceLocation_ B = rng.getBegin().getPtrEncoding();
+  CXSourceLocation_ E = rng.getEnd().getPtrEncoding();
+  return CXSourceRange_{B, E};
+}
 
 CXQualType clang_FunctionDecl_getCallResultType(CXFunctionDecl FD) {
   return static_cast<clang::FunctionDecl *>(FD)->getCallResultType().getAsOpaquePtr();
@@ -1445,7 +1486,12 @@ CXRecordDecl clang_FieldDecl_getParent(CXFieldDecl FD) {
   return static_cast<clang::FieldDecl *>(FD)->getParent();
 }
 
-// getSourceRange
+CXSourceRange_ clang_FieldDecl_getSourceRange(CXFieldDecl FD) {
+  auto rng = static_cast<clang::FieldDecl *>(FD)->getSourceRange();
+  CXSourceLocation_ B = rng.getBegin().getPtrEncoding();
+  CXSourceLocation_ E = rng.getEnd().getPtrEncoding();
+  return CXSourceRange_{B, E};
+}
 
 CXFieldDecl clang_FieldDecl_getCanonicalDecl(CXFieldDecl FD) {
   return static_cast<clang::FieldDecl *>(FD)->getCanonicalDecl();
@@ -1475,7 +1521,13 @@ void clang_EnumConstantDecl_setInitExpr(CXEnumConstantDecl ECD, CXExpr E) {
 }
 
 // setInitVal
-// getSourceRange
+
+CXSourceRange_ clang_EnumConstantDecl_getSourceRange(CXEnumConstantDecl ECD) {
+  auto rng = static_cast<clang::EnumConstantDecl *>(ECD)->getSourceRange();
+  CXSourceLocation_ B = rng.getBegin().getPtrEncoding();
+  CXSourceLocation_ E = rng.getEnd().getPtrEncoding();
+  return CXSourceRange_{B, E};
+}
 
 CXEnumConstantDecl clang_EnumConstantDecl_getCanonicalDecl(CXEnumConstantDecl ECD) {
   return static_cast<clang::EnumConstantDecl *>(ECD)->getCanonicalDecl();
@@ -1519,7 +1571,12 @@ void clang_TypeDecl_setLocStart(CXTypeDecl TD, CXSourceLocation_ Loc) {
       clang::SourceLocation::getFromPtrEncoding(Loc));
 }
 
-// getSourceRange
+CXSourceRange_ clang_TypeDecl_getSourceRange(CXTypeDecl TD) {
+  auto rng = static_cast<clang::TypeDecl *>(TD)->getSourceRange();
+  CXSourceLocation_ B = rng.getBegin().getPtrEncoding();
+  CXSourceLocation_ E = rng.getEnd().getPtrEncoding();
+  return CXSourceRange_{B, E};
+}
 
 // TypedefNameDecl
 bool clang_TypedefNameDecl_isModed(CXTypedefNameDecl TND) {
@@ -1573,7 +1630,12 @@ CXTypedefDecl clang_TypedefDecl_Create(CXASTContext C, CXDeclContext DC,
                                     static_cast<clang::TypeSourceInfo *>(TInfo));
 }
 
-// getSourceRange
+CXSourceRange_ clang_TypedefDecl_getSourceRange(CXTypedefDecl TD) {
+  auto rng = static_cast<clang::TypedefDecl *>(TD)->getSourceRange();
+  CXSourceLocation_ B = rng.getBegin().getPtrEncoding();
+  CXSourceLocation_ E = rng.getEnd().getPtrEncoding();
+  return CXSourceRange_{B, E};
+}
 
 // TypeAliasDecl
 CXTypeAliasDecl clang_TypeAliasDecl_Create(CXASTContext C, CXDeclContext DC,
@@ -1588,7 +1650,12 @@ CXTypeAliasDecl clang_TypeAliasDecl_Create(CXASTContext C, CXDeclContext DC,
                                       static_cast<clang::TypeSourceInfo *>(TInfo));
 }
 
-// getSourceRange
+CXSourceRange_ clang_TypeAliasDecl_getSourceRange(CXTypeAliasDecl TAD) {
+  auto rng = static_cast<clang::TypeAliasDecl *>(TAD)->getSourceRange();
+  CXSourceLocation_ B = rng.getBegin().getPtrEncoding();
+  CXSourceLocation_ E = rng.getEnd().getPtrEncoding();
+  return CXSourceRange_{B, E};
+}
 
 CXTypeAliasTemplateDecl clang_TypeAliasDecl_getDescribedAliasTemplate(CXTypeAliasDecl TAD) {
   return static_cast<clang::TypeAliasDecl *>(TAD)->getDescribedAliasTemplate();
@@ -1601,9 +1668,18 @@ void clang_TypeAliasDecl_setDescribedAliasTemplate(CXTypeAliasDecl TAD,
 }
 
 // TagDecl
+CXSourceRange_ clang_TagDecl_getBraceRange(CXTagDecl TD) {
+  auto rng = static_cast<clang::TagDecl *>(TD)->getBraceRange();
+  CXSourceLocation_ B = rng.getBegin().getPtrEncoding();
+  CXSourceLocation_ E = rng.getEnd().getPtrEncoding();
+  return CXSourceRange_{B, E};
+}
 
-// getBraceRange
-// setBraceRange
+void clang_TagDecl_setBraceRange(CXTagDecl TD, CXSourceRange_ R) {
+  static_cast<clang::TagDecl *>(TD)->setBraceRange(
+      clang::SourceRange(clang::SourceLocation::getFromPtrEncoding(R.B),
+                         clang::SourceLocation::getFromPtrEncoding(R.E)));
+}
 
 CXSourceLocation_ clang_TagDecl_getInnerLocStart(CXTagDecl TD) {
   return static_cast<clang::TagDecl *>(TD)->getInnerLocStart().getPtrEncoding();
@@ -1613,7 +1689,12 @@ CXSourceLocation_ clang_TagDecl_getOuterLocStart(CXTagDecl TD) {
   return static_cast<clang::TagDecl *>(TD)->getOuterLocStart().getPtrEncoding();
 }
 
-// getSourceRange
+CXSourceRange_ clang_TagDecl_getSourceRange(CXTagDecl TD) {
+  auto rng = static_cast<clang::TagDecl *>(TD)->getSourceRange();
+  CXSourceLocation_ B = rng.getBegin().getPtrEncoding();
+  CXSourceLocation_ E = rng.getEnd().getPtrEncoding();
+  return CXSourceRange_{B, E};
+}
 
 CXTagDecl clang_TagDecl_getCanonicalDecl(CXTagDecl TD) {
   return static_cast<clang::TagDecl *>(TD)->getCanonicalDecl();
@@ -1817,7 +1898,12 @@ CXTypeSourceInfo clang_EnumDecl_getIntegerTypeSourceInfo(CXEnumDecl ED) {
   return static_cast<clang::EnumDecl *>(ED)->getIntegerTypeSourceInfo();
 }
 
-// getIntegerTypeRange
+CXSourceRange_ clang_EnumDecl_getIntegerTypeRange(CXEnumDecl ED) {
+  auto rng = static_cast<clang::EnumDecl *>(ED)->getIntegerTypeRange();
+  CXSourceLocation_ B = rng.getBegin().getPtrEncoding();
+  CXSourceLocation_ E = rng.getEnd().getPtrEncoding();
+  return CXSourceRange_{B, E};
+}
 
 unsigned clang_EnumDecl_getNumPositiveBits(CXEnumDecl ED) {
   return static_cast<clang::EnumDecl *>(ED)->getNumPositiveBits();
@@ -2089,7 +2175,12 @@ void clang_FileScopeAsmDecl_setRParenLoc(CXFileScopeAsmDecl FSAD, CXSourceLocati
       clang::SourceLocation::getFromPtrEncoding(L));
 }
 
-// getSourceRange
+CXSourceRange_ clang_FileScopeAsmDecl_getSourceRange(CXFileScopeAsmDecl FSAD) {
+  auto rng = static_cast<clang::FileScopeAsmDecl *>(FSAD)->getSourceRange();
+  CXSourceLocation_ B = rng.getBegin().getPtrEncoding();
+  CXSourceLocation_ E = rng.getEnd().getPtrEncoding();
+  return CXSourceRange_{B, E};
+}
 
 CXStringLiteral clang_FileScopeAsmDecl_getAsmString(CXFileScopeAsmDecl FSAD) {
   return static_cast<clang::FileScopeAsmDecl *>(FSAD)->getAsmString();
@@ -2206,7 +2297,12 @@ void clang_BlockDecl_setBlockMangling(CXBlockDecl BD, unsigned Number, CXDecl Ct
                                                         static_cast<clang::Decl *>(Ctx));
 }
 
-// getSourceRange
+CXSourceRange_ clang_BlockDecl_getSourceRange(CXBlockDecl BD) {
+  auto rng = static_cast<clang::BlockDecl *>(BD)->getSourceRange();
+  CXSourceLocation_ B = rng.getBegin().getPtrEncoding();
+  CXSourceLocation_ E = rng.getEnd().getPtrEncoding();
+  return CXSourceRange_{B, E};
+}
 
 // CapturedDecl
 CXCapturedDecl clang_CapturedDecl_Create(CXASTContext C, CXDeclContext DC,
@@ -2265,7 +2361,12 @@ CXModule clang_ImportDecl_getImportedModule(CXImportDecl ID) {
 
 // getIdentifierLocs
 
-// getSourceRange
+CXSourceRange_ clang_ImportDecl_getSourceRange(CXImportDecl ID) {
+  auto rng = static_cast<clang::ImportDecl *>(ID)->getSourceRange();
+  CXSourceLocation_ B = rng.getBegin().getPtrEncoding();
+  CXSourceLocation_ E = rng.getEnd().getPtrEncoding();
+  return CXSourceRange_{B, E};
+}
 
 // ExportDecl
 CXExportDecl clang_ExportDecl_Create(CXASTContext C, CXDeclContext DC,
@@ -2296,7 +2397,12 @@ CXSourceLocation_ clang_ExportDecl_getEndLoc(CXExportDecl ED) {
   return static_cast<clang::ExportDecl *>(ED)->getEndLoc().getPtrEncoding();
 }
 
-// getSourceRange
+CXSourceRange_ clang_ExportDecl_getSourceRange(CXExportDecl ED) {
+  auto rng = static_cast<clang::ExportDecl *>(ED)->getSourceRange();
+  CXSourceLocation_ B = rng.getBegin().getPtrEncoding();
+  CXSourceLocation_ E = rng.getEnd().getPtrEncoding();
+  return CXSourceRange_{B, E};
+}
 
 // EmptyDecl
 CXEmptyDecl clang_EmptyDecl_Create(CXASTContext C, CXDeclContext DC, CXSourceLocation_ L) {

@@ -113,7 +113,7 @@ CINDEX_LINKAGE bool clang_LabelDecl_isGnuLocal(CXLabelDecl LD);
 
 CINDEX_LINKAGE void clang_LabelDecl_setLocStart(CXLabelDecl LD, CXSourceLocation_ Loc);
 
-// getSourceRange
+CINDEX_LINKAGE CXSourceRange_ clang_LabelDecl_getSourceRange(CXLabelDecl LD);
 
 CINDEX_LINKAGE bool clang_LabelDecl_isMSAsmLabel(CXLabelDecl LD);
 
@@ -148,7 +148,7 @@ CINDEX_LINKAGE void clang_NamespaceDecl_setAnonymousNamespace(CXNamespaceDecl ND
 
 CINDEX_LINKAGE CXNamespaceDecl clang_NamespaceDecl_getCanonicalDecl(CXNamespaceDecl ND);
 
-// getSourceRange
+CINDEX_LINKAGE CXSourceRange_ clang_NamespaceDecl_getSourceRange(CXNamespaceDecl ND);
 
 CINDEX_LINKAGE CXSourceLocation_ clang_NamespaceDecl_getBeginLoc(CXNamespaceDecl ND);
 
@@ -214,7 +214,7 @@ CINDEX_LINKAGE CXVarDecl clang_VarDecl_Create(CXASTContext C, CXDeclContext DC,
                                               CXQualType T, CXTypeSourceInfo TInfo,
                                               CXStorageClass S);
 
-// getSourceRange
+CINDEX_LINKAGE CXSourceRange_ clang_VarDecl_getSourceRange(CXVarDecl VD);
 
 CINDEX_LINKAGE CXStorageClass clang_VarDecl_getStorageClass(CXVarDecl VD);
 
@@ -431,7 +431,7 @@ CINDEX_LINKAGE CXExpr clang_ParmVarDecl_getDefaultArg(CXParmVarDecl PVD);
 
 CINDEX_LINKAGE void clang_ParmVarDecl_setDefaultArg(CXParmVarDecl PVD, CXExpr defarg);
 
-// getDefaultArgRange
+CINDEX_LINKAGE CXSourceRange_ clang_ParmVarDecl_getDefaultArgRange(CXParmVarDecl PVD);
 
 CINDEX_LINKAGE void clang_ParmVarDecl_setUninstantiatedDefaultArg(CXParmVarDecl PVD,
                                                                   CXExpr arg);
@@ -487,7 +487,7 @@ CINDEX_LINKAGE void clang_FunctionDecl_setRangeEnd(CXFunctionDecl FD,
 
 CINDEX_LINKAGE CXSourceLocation_ clang_FunctionDecl_getEllipsisLoc(CXFunctionDecl FD);
 
-// getSourceRange
+CINDEX_LINKAGE CXSourceRange_ clang_FunctionDecl_getSourceRange(CXFunctionDecl FD);
 
 CINDEX_LINKAGE bool clang_FunctionDecl_hasBody(CXFunctionDecl FD);
 
@@ -657,15 +657,19 @@ CINDEX_LINKAGE bool clang_FunctionDecl_hasOneParamOrDefaultArgs(CXFunctionDecl F
 
 CINDEX_LINKAGE CXQualType clang_FunctionDecl_getReturnType(CXFunctionDecl FD);
 
-// getReturnTypeSourceRange
-// getParametersSourceRange
+CINDEX_LINKAGE CXSourceRange_
+clang_FunctionDecl_getReturnTypeSourceRange(CXFunctionDecl FD);
+
+CINDEX_LINKAGE CXSourceRange_
+clang_FunctionDecl_getParametersSourceRange(CXFunctionDecl FD);
 
 CINDEX_LINKAGE CXQualType clang_FunctionDecl_getDeclaredReturnType(CXFunctionDecl FD);
 
 CINDEX_LINKAGE CXExceptionSpecificationType
 clang_FunctionDecl_getExceptionSpecType(CXFunctionDecl FD);
 
-// getExceptionSpecSourceRange
+CINDEX_LINKAGE CXSourceRange_
+clang_FunctionDecl_getExceptionSpecSourceRange(CXFunctionDecl FD);
 
 CINDEX_LINKAGE CXQualType clang_FunctionDecl_getCallResultType(CXFunctionDecl FD);
 
@@ -812,7 +816,7 @@ CINDEX_LINKAGE void clang_FieldDecl_setCapturedVLAType(CXFieldDecl FD,
 
 CINDEX_LINKAGE CXRecordDecl clang_FieldDecl_getParent(CXFieldDecl FD);
 
-// getSourceRange
+CINDEX_LINKAGE CXSourceRange_ clang_FieldDecl_getSourceRange(CXFieldDecl FD);
 
 CINDEX_LINKAGE CXFieldDecl clang_FieldDecl_getCanonicalDecl(CXFieldDecl FD);
 
@@ -828,7 +832,8 @@ CINDEX_LINKAGE CXExpr clang_EnumConstantDecl_getInitExpr(CXEnumConstantDecl ECD)
 CINDEX_LINKAGE void clang_EnumConstantDecl_setInitExpr(CXEnumConstantDecl ECD, CXExpr E);
 
 // setInitVal
-// getSourceRange
+
+CINDEX_LINKAGE CXSourceRange_ clang_EnumConstantDecl_getSourceRange(CXEnumConstantDecl ECD);
 
 CINDEX_LINKAGE CXEnumConstantDecl
 clang_EnumConstantDecl_getCanonicalDecl(CXEnumConstantDecl ECD);
@@ -885,7 +890,7 @@ CINDEX_LINKAGE CXTypedefDecl clang_TypedefDecl_Create(CXASTContext C, CXDeclCont
                                                       CXIdentifierInfo Id,
                                                       CXTypeSourceInfo TInfo);
 
-// getSourceRange
+CINDEX_LINKAGE CXSourceRange_ clang_TypedefDecl_getSourceRange(CXTypedefDecl TD);
 
 // TypeAliasDecl
 CINDEX_LINKAGE CXTypeAliasDecl clang_TypeAliasDecl_Create(CXASTContext C, CXDeclContext DC,
@@ -894,7 +899,7 @@ CINDEX_LINKAGE CXTypeAliasDecl clang_TypeAliasDecl_Create(CXASTContext C, CXDecl
                                                           CXIdentifierInfo Id,
                                                           CXTypeSourceInfo TInfo);
 
-// getSourceRange
+CINDEX_LINKAGE CXSourceRange_ clang_TypeAliasDecl_getSourceRange(CXTypeAliasDecl TAD);
 
 CINDEX_LINKAGE CXTypeAliasTemplateDecl
 clang_TypeAliasDecl_getDescribedAliasTemplate(CXTypeAliasDecl TAD);
@@ -904,15 +909,15 @@ clang_TypeAliasDecl_setDescribedAliasTemplate(CXTypeAliasDecl TAD,
                                               CXTypeAliasTemplateDecl TAT);
 
 // TagDecl
+CINDEX_LINKAGE CXSourceRange_ clang_TagDecl_getBraceRange(CXTagDecl TD);
 
-// getBraceRange
-// setBraceRange
+CINDEX_LINKAGE void clang_TagDecl_setBraceRange(CXTagDecl TD, CXSourceRange_ R);
 
 CINDEX_LINKAGE CXSourceLocation_ clang_TagDecl_getInnerLocStart(CXTagDecl TD);
 
 CINDEX_LINKAGE CXSourceLocation_ clang_TagDecl_getOuterLocStart(CXTagDecl TD);
 
-// getSourceRange
+CINDEX_LINKAGE CXSourceRange_ clang_TagDecl_getSourceRange(CXTagDecl TD);
 
 CINDEX_LINKAGE CXTagDecl clang_TagDecl_getCanonicalDecl(CXTagDecl TD);
 
@@ -1023,7 +1028,7 @@ CINDEX_LINKAGE void clang_EnumDecl_setIntegerTypeSourceInfo(CXEnumDecl ED,
 
 CINDEX_LINKAGE CXTypeSourceInfo clang_EnumDecl_getIntegerTypeSourceInfo(CXEnumDecl ED);
 
-// getIntegerTypeRange
+CINDEX_LINKAGE CXSourceRange_ clang_EnumDecl_getIntegerTypeRange(CXEnumDecl ED);
 
 CINDEX_LINKAGE unsigned clang_EnumDecl_getNumPositiveBits(CXEnumDecl ED);
 
@@ -1178,7 +1183,8 @@ clang_FileScopeAsmDecl_getRParenLoc(CXFileScopeAsmDecl FSAD);
 CINDEX_LINKAGE void clang_FileScopeAsmDecl_setRParenLoc(CXFileScopeAsmDecl FSAD,
                                                         CXSourceLocation_ L);
 
-// getSourceRange
+CINDEX_LINKAGE CXSourceRange_
+clang_FileScopeAsmDecl_getSourceRange(CXFileScopeAsmDecl FSAD);
 
 CINDEX_LINKAGE CXStringLiteral clang_FileScopeAsmDecl_getAsmString(CXFileScopeAsmDecl FSAD);
 
@@ -1241,7 +1247,7 @@ CINDEX_LINKAGE CXDecl clang_BlockDecl_getBlockManglingContextDecl(CXBlockDecl BD
 CINDEX_LINKAGE void clang_BlockDecl_setBlockMangling(CXBlockDecl BD, unsigned Number,
                                                      CXDecl Ctx);
 
-// getSourceRange
+CINDEX_LINKAGE CXSourceRange_ clang_BlockDecl_getSourceRange(CXBlockDecl BD);
 
 // CapturedDecl
 CINDEX_LINKAGE CXCapturedDecl clang_CapturedDecl_Create(CXASTContext C, CXDeclContext DC,
@@ -1275,7 +1281,7 @@ CINDEX_LINKAGE CXModule clang_ImportDecl_getImportedModule(CXImportDecl ID);
 
 // getIdentifierLocs
 
-// getSourceRange
+CINDEX_LINKAGE CXSourceRange_ clang_ImportDecl_getSourceRange(CXImportDecl ID);
 
 // ExportDecl
 CINDEX_LINKAGE CXExportDecl clang_ExportDecl_Create(CXASTContext C, CXDeclContext DC,
@@ -1291,7 +1297,7 @@ CINDEX_LINKAGE bool clang_ExportDecl_hasBraces(CXExportDecl ED);
 
 CINDEX_LINKAGE CXSourceLocation_ clang_ExportDecl_getEndLoc(CXExportDecl ED);
 
-// getSourceRange
+CINDEX_LINKAGE CXSourceRange_ clang_ExportDecl_getSourceRange(CXExportDecl ED);
 
 // EmptyDecl
 CINDEX_LINKAGE CXEmptyDecl clang_EmptyDecl_Create(CXASTContext C, CXDeclContext DC,
