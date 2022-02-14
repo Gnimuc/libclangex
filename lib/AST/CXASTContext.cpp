@@ -516,7 +516,7 @@ CXQualType clang_ASTContext_getTypedefType(CXASTContext Ctx, CXTypedefNameDecl D
       .getAsOpaquePtr();
 }
 
-CXQualType getRecordType(CXASTContext Ctx, CXRecordDecl Decl) {
+CXQualType clang_ASTContext_getRecordType(CXASTContext Ctx, CXRecordDecl Decl) {
   return static_cast<clang::ASTContext *>(Ctx)
       ->getRecordType(static_cast<clang::RecordDecl *>(Decl))
       .getAsOpaquePtr();

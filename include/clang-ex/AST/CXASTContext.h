@@ -304,7 +304,7 @@ CINDEX_LINKAGE CXQualType clang_ASTContext_getTypedefType(CXASTContext Ctx,
                                                           CXTypedefNameDecl Decl,
                                                           CXQualType Underlying);
 
-CINDEX_LINKAGE CXQualType getRecordType(CXASTContext Ctx, CXRecordDecl Decl);
+CINDEX_LINKAGE CXQualType clang_ASTContext_getRecordType(CXASTContext Ctx, CXRecordDecl Decl);
 
 CINDEX_LINKAGE CXQualType clang_ASTContext_getEnumType(CXASTContext Ctx, CXEnumDecl Decl);
 
