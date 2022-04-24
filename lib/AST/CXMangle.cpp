@@ -39,14 +39,6 @@ bool clang_MangleContext_shouldMangleStringLiteral(CXMangleContext MC, CXStringL
       static_cast<clang::StringLiteral *>(SL));
 }
 
-bool clang_MangleContext_isDeviceMangleContext(CXMangleContext MC) {
-  return static_cast<clang::MangleContext *>(MC)->isDeviceMangleContext();
-}
-
-void clang_MangleContext_setDeviceMangleContext(CXMangleContext MC, bool setDMC) {
-  static_cast<clang::MangleContext *>(MC)->setDeviceMangleContext(setDMC);
-}
-
 // mangleName
 // mangleCXXName
 // mangleCXXDtorThunk

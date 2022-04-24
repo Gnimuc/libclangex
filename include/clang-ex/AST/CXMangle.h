@@ -32,10 +32,6 @@ CINDEX_LINKAGE bool clang_MangleContext_shouldMangleCXXName(CXMangleContext MC, 
 
 CINDEX_LINKAGE bool clang_MangleContext_shouldMangleStringLiteral(CXMangleContext MC, CXStringLiteral SL);
 
-CINDEX_LINKAGE bool clang_MangleContext_isDeviceMangleContext(CXMangleContext MC);
-
-CINDEX_LINKAGE void clang_MangleContext_setDeviceMangleContext(CXMangleContext MC, bool setDMC);
-
 // mangleName
 // mangleCXXName
 // mangleCXXDtorThunk

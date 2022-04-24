@@ -147,7 +147,7 @@ void clang_CompilerInstance_setTargetAndLangOpts(CXCompilerInstance CI) {
   compiler->setTarget(clang::TargetInfo::CreateTargetInfo(
       compiler->getDiagnostics(),
       std::make_shared<clang::TargetOptions>(compiler->getTargetOpts())));
-  compiler->getTarget().adjust(compiler->getLangOpts());
+  compiler->getTarget().adjust(compiler->getDiagnostics(), compiler->getLangOpts());
 }
 
 // Preprocessor
