@@ -465,7 +465,7 @@ typedef void *CXScope;
 typedef enum CXTranslationUnitKind {
   CXTranslationUnitKind_TU_Complete,
   CXTranslationUnitKind_TU_Prefix,
-  CXTranslationUnitKind_TU_Module
+  CXTranslationUnitKind_TU_Module,
   CXTranslationUnitKind_TU_Incremental,
 } CXTranslationUnitKind;
 
