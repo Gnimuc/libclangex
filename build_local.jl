@@ -40,7 +40,7 @@ CLANG_DIR = joinpath(Clang.artifact_dir)
 
 @info "Building" scratch_dir source_dir LLVM_DIR CLANG_DIR
 
-run(`cmake -DLLVM_DIR=$(LLVM_DIR) -DCLANG_DIR=$(CLANG_DIR) -DLLVM_ASSERT_BUILD=$(llvm_assertions) -B$(scratch_dir) -S$(source_dir)`)
+run(`cmake -DLLVM_DIR=$(LLVM_DIR) -DCLANG_DIR=$(CLANG_DIR) -DLLVM_ASSERT_BUILD=$(llvm_assertions) -DLLVM_VERSION_MAJOR=$(Base.libllvm_version.major) -B$(scratch_dir) -S$(source_dir)`)
 run(`cmake --build $(scratch_dir) --parallel $(Sys.CPU_THREADS)`)
 
 # Discover built libraries

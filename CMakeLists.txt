@@ -8,6 +8,10 @@ set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 # Options
 option(LLVM_ASSERT_BUILD "build with LLVM assert" OFF)
 
+# TODO: Autodetect
+set(LLVM_VERSION_MAJOR 13 CACHE STRING "LLVM Version to target")
+message("LLVM version " ${LLVM_VERSION_MAJOR})
+
 set(CMAKE_SKIP_BUILD_RPATH FALSE)
 set(CMAKE_BUILD_WITH_INSTALL_RPATH FALSE)
 set(CMAKE_INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/lib")
@@ -38,7 +42,7 @@ add_subdirectory(include)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-rtti")
 
-set(CLANG_SRC ${CMAKE_CURRENT_SOURCE_DIR}/upstream/13)
+set(CLANG_SRC ${CMAKE_CURRENT_SOURCE_DIR}/upstream/${LLVM_VERSION_MAJOR})
 target_sources(clangex PRIVATE ${CLANG_SRC}/libclang/CXString.cpp)
 
 target_include_directories(clangex PUBLIC
