@@ -77,9 +77,9 @@ jobs:
           julia --project=testenv -e 'using Pkg;
                 println("--- :julia: Instantiating project");
                 Pkg.add([
-                  PackageSpec(name="ClangCompiler", rev="main",
+                  PackageSpec(name="ClangCompiler", rev="master",
                               url="https://github.com/Gnimuc/ClangCompiler.jl.git"),
-                  PackageSpec(name="libclangex_jll", rev="master")
+                  PackageSpec(name="libclangex_jll", rev="main")
                   ]);
                 Pkg.build();
                 println("+++ :julia: Running tests");
