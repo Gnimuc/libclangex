@@ -31,10 +31,10 @@ else()
     message(FATAL_ERROR "Cannot find LLVM directory. You may need to install `LLVM_full_jll`.")
 endif()
 
-find_library(ClangCPP NAMES clang-cpp HINTS "${CLANG_DIR}/lib")
+find_library(ClangCPP NAMES clang-cpp HINTS "${CLANG_DIR}/lib" "${CLANG_DIR}/bin")
 message(STATUS "Found Clang: ${ClangCPP}")
 
-find_library(LLVM NAMES LLVM HINTS "${LLVM_DIR}/lib")
+find_library(LLVM NAMES LLVM HINTS "${LLVM_DIR}/lib" "${LLVM_DIR}/bin")
 message(STATUS "Found LLVM: ${LLVM}")
 
 add_subdirectory(lib)
