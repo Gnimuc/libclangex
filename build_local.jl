@@ -25,22 +25,23 @@ else
     using LLVM_full_jll
     LLVM_full_jll
 end
-LLVM_DIR = joinpath(LLVM.artifact_dir)
+LLVM_DIR = joinpath(LLVM.artifact_dir, "lib", "cmake", "llvm")
 
-Clang = if VERSION < v"1.8-" && llvm_assertions
-    Pkg.add(name="Clang_assert_jll", version=Base.libllvm_version)
-    using Clang_assert_jll
-    Clang_assert_jll
-else
-    Pkg.add(name="Clang_jll", version=Base.libllvm_version)
-    using Clang_jll
-    Clang_jll
-end
-CLANG_DIR = joinpath(Clang.artifact_dir)
+# Clang = if VERSION < v"1.8-" && llvm_assertions
+#     Pkg.add(name="Clang_assert_jll", version=Base.libllvm_version)
+#     using Clang_assert_jll
+#     Clang_assert_jll
+# else
+#     Pkg.add(name="Clang_jll", version=Base.libllvm_version)
+#     using Clang_jll
+#     Clang_jll
+# end
+Clang_DIR = joinpath(LLVM.artifact_dir, "lib", "cmake", "clang")
+# Clang_DIR = joinpath(Clang.artifact_dir)
 
-@info "Building" scratch_dir source_dir LLVM_DIR CLANG_DIR
+@info "Building" scratch_dir source_dir LLVM_DIR Clang_DIR
 
-run(`cmake -DLLVM_DIR=$(LLVM_DIR) -DCLANG_DIR=$(CLANG_DIR) -DLLVM_ASSERT_BUILD=$(llvm_assertions) -DLLVM_VERSION_MAJOR=$(Base.libllvm_version.major) -B$(scratch_dir) -S$(source_dir)`)
+run(`cmake -DLLVM_DIR=$(LLVM_DIR) -DClang_DIR=$(Clang_DIR) -B$(scratch_dir) -S$(source_dir)`)
 run(`cmake --build $(scratch_dir) --parallel $(Sys.CPU_THREADS)`)
 
 # Discover built libraries
