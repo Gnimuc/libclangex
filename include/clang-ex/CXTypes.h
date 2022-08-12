@@ -424,6 +424,12 @@ typedef void *CXCompilerInvocation;
 // FrontendOptions
 typedef void *CXFrontendOptions;
 
+// Interpreter
+// Interpreter
+typedef void *CXInterpreter;
+typedef void *CXPartialTranslationUnit;
+
+
 // Lex
 // HeaderSearch
 typedef void *CXHeaderSearch;

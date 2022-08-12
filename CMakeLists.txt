@@ -46,6 +46,7 @@ target_include_directories(clangex PUBLIC
     $<BUILD_INTERFACE:${CLANG_DIR}/include>
     $<BUILD_INTERFACE:${LLVM_DIR}/include>
     $<BUILD_INTERFACE:${CLANG_SRC}/tools>
+    $<BUILD_INTERFACE:${CLANG_SRC}/lib>
     $<INSTALL_INTERFACE:include>)
     
 target_compile_features(clangex PRIVATE cxx_std_14)
