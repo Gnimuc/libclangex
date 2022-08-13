@@ -159,6 +159,14 @@ void clang_Decl_EnableStatistics(void) { clang::Decl::EnableStatistics(); }
 
 void clang_Decl_PrintStats(void) { clang::Decl::PrintStats(); }
 
+CXDeclContext clang_Decl_castToDeclContext(CXDecl D) {
+  return clang::Decl::castToDeclContext(static_cast<clang::Decl *>(D));
+}
+
+CXDecl clang_Decl_castFromDeclContext(CXDeclContext DC) {
+  return clang::Decl::castFromDeclContext(static_cast<clang::DeclContext *>(DC));
+}
+
 // Decl Cast
 CXClassTemplateDecl clang_Decl_castToClassTemplateDecl(CXDecl DC) {
   return llvm::dyn_cast<clang::ClassTemplateDecl>(static_cast<clang::Decl *>(DC));
@@ -262,6 +270,10 @@ CXDeclContext clang_DeclContext_getPrimaryContext(CXDeclContext DC) {
   return static_cast<clang::DeclContext *>(DC)->getPrimaryContext();
 }
 
+CXDecl clang_DeclContext_decl_iterator_begin(CXDeclContext DC) {
+  return *static_cast<clang::DeclContext *>(DC)->decls_begin();
+}
+
 void clang_DeclContext_addDecl(CXDeclContext DC, CXDecl D) {
   static_cast<clang::DeclContext *>(DC)->addDecl(static_cast<clang::Decl *>(D));
 }
@@ -289,3 +301,4 @@ void clang_DeclContext_dumpDeclContext(CXDeclContext DC) {
 void clang_DeclContext_dumpLookups(CXDeclContext DC) {
   static_cast<clang::DeclContext *>(DC)->dumpLookups();
 }
+

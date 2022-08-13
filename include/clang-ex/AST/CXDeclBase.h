@@ -88,6 +88,10 @@ CINDEX_LINKAGE void clang_Decl_EnableStatistics(void);
 CINDEX_LINKAGE void clang_Decl_PrintStats(void);
 
 // Decl Cast
+CINDEX_LINKAGE CXDeclContext clang_Decl_castToDeclContext(CXDecl D);
+
+CINDEX_LINKAGE CXDecl clang_Decl_castFromDeclContext(CXDeclContext DC);
+
 CINDEX_LINKAGE CXClassTemplateDecl clang_Decl_castToClassTemplateDecl(CXDecl DC);
 
 CINDEX_LINKAGE CXValueDecl clang_Decl_castToValueDecl(CXDecl DC);
@@ -138,6 +142,8 @@ CINDEX_LINKAGE bool clang_DeclContext_isExternCXXContext(CXDeclContext DC);
 CINDEX_LINKAGE bool clang_DeclContext_Equals(CXDeclContext DC, CXDeclContext DC2);
 
 CINDEX_LINKAGE CXDeclContext clang_DeclContext_getPrimaryContext(CXDeclContext DC);
+
+CINDEX_LINKAGE CXDecl clang_DeclContext_decl_iterator_begin(CXDeclContext DC);
 
 CINDEX_LINKAGE void clang_DeclContext_addDecl(CXDeclContext DC, CXDecl D);
 
