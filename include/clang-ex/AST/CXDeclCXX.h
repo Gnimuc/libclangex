@@ -140,11 +140,19 @@ CINDEX_LINKAGE CXRequiresExprBodyDecl
 clang_RequiresExprBodyDecl_CreateDeserialized(CXASTContext C, unsigned ID);
 
 // CXXMethodDecl
+#if LLVM_VERSION_MAJOR >= 14
+CINDEX_LINKAGE CXCXXMethodDecl clang_CXXMethodDecl_Create(
+    CXASTContext C, CXCXXRecordDecl RD, CXSourceLocation_ StartLoc,
+    CXDeclarationNameInfo NameInfo, CXQualType T, CXTypeSourceInfo TInfo, CXStorageClass SC,
+    boll UsesFPIntrin, bool isInline, CXConstexprSpecKind ConstexprKind, CXSourceLocation_ EndLocation,
+    CXExpr TrailingRequiresClause); 
+#else
 CINDEX_LINKAGE CXCXXMethodDecl clang_CXXMethodDecl_Create(
     CXASTContext C, CXCXXRecordDecl RD, CXSourceLocation_ StartLoc,
     CXDeclarationNameInfo NameInfo, CXQualType T, CXTypeSourceInfo TInfo, CXStorageClass SC,
     bool isInline, CXConstexprSpecKind ConstexprKind, CXSourceLocation_ EndLocation,
     CXExpr TrailingRequiresClause);
+#endif
 
 CINDEX_LINKAGE CXCXXMethodDecl clang_CXXMethodDecl_CreateDeserialized(CXASTContext C,
                                                                       unsigned ID);
