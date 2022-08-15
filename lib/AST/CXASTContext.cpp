@@ -46,12 +46,21 @@ CXQualType clang_ASTContext_getIntTypeForBitwidth(CXASTContext Ctx, unsigned Des
       .getAsOpaquePtr();
 }
 
+#if LLVM_VERSION_MAJOR >= 14
+CXQualType clang_ASTContext_getRealTypeForBitwidth(CXASTContext Ctx, unsigned DestWidth,
+                                                   clang::FloatModeKind ExplicitType) {
+  return static_cast<clang::ASTContext *>(Ctx)
+      ->getRealTypeForBitwidth(DestWidth, ExplicitType)
+      .getAsOpaquePtr();
+}
+#else
 CXQualType clang_ASTContext_getRealTypeForBitwidth(CXASTContext Ctx, unsigned DestWidth,
                                                    bool ExplicitIEEE) {
   return static_cast<clang::ASTContext *>(Ctx)
       ->getRealTypeForBitwidth(DestWidth, ExplicitIEEE)
       .getAsOpaquePtr();
 }
+#endif
 
 bool clang_ASTContext_AtomicUsesUnsupportedLibcall(CXASTContext Ctx, CXAtomicExpr E) {
   return static_cast<clang::ASTContext *>(Ctx)->AtomicUsesUnsupportedLibcall(
@@ -345,6 +354,21 @@ CXQualType clang_ASTContext_getWritePipeType(CXASTContext Ctx, CXQualType T) {
       .getAsOpaquePtr();
 }
 
+#if LLVM_VERSION_MAJOR >= 14
+CXQualType clang_ASTContext_getBitIntType(CXASTContext Ctx, bool Unsigned,
+                                          unsigned NumBits) {
+  return static_cast<clang::ASTContext *>(Ctx)
+      ->getBitIntType(Unsigned, NumBits)
+      .getAsOpaquePtr();
+}
+
+CXQualType clang_ASTContext_getDependentBitIntType(CXASTContext Ctx, bool Unsigned,
+                                                   CXExpr BitsExpr) {
+  return static_cast<clang::ASTContext *>(Ctx)
+      ->getDependentBitIntType(Unsigned, static_cast<clang::Expr *>(BitsExpr))
+      .getAsOpaquePtr();
+}
+#else
 CXQualType clang_ASTContext_getExtIntType(CXASTContext Ctx, bool Unsigned,
                                           unsigned NumBits) {
   return static_cast<clang::ASTContext *>(Ctx)
@@ -358,6 +382,7 @@ CXQualType clang_ASTContext_getDependentExtIntType(CXASTContext Ctx, bool Unsign
       ->getDependentExtIntType(Unsigned, static_cast<clang::Expr *>(BitsExpr))
       .getAsOpaquePtr();
 }
+#endif
 
 CXQualType clang_ASTContext_getBlockDescriptorExtendedType(CXASTContext Ctx) {
   return static_cast<clang::ASTContext *>(Ctx)
@@ -1597,6 +1622,8 @@ CXQualType clang_ASTContext_Float16Ty_getAsQualType(CXASTContext Ctx) {
   return static_cast<clang::ASTContext *>(Ctx)->Float16Ty.getAsOpaquePtr();
 }
 
+#if LLVM_VERSION_MAJOR >= 14
+#else
 CXQualType clang_ASTContext_FloatComplexTy_getAsQualType(CXASTContext Ctx) {
   return static_cast<clang::ASTContext *>(Ctx)->FloatComplexTy.getAsOpaquePtr();
 }
@@ -1612,6 +1639,7 @@ CXQualType clang_ASTContext_LongDoubleComplexTy_getAsQualType(CXASTContext Ctx) 
 CXQualType clang_ASTContext_Float128ComplexTy_getAsQualType(CXASTContext Ctx) {
   return static_cast<clang::ASTContext *>(Ctx)->Float128ComplexTy.getAsOpaquePtr();
 }
+#endif
 
 CXQualType clang_ASTContext_VoidPtrTy_getAsQualType(CXASTContext Ctx) {
   return static_cast<clang::ASTContext *>(Ctx)->VoidPtrTy.getAsOpaquePtr();

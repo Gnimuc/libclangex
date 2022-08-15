@@ -39,9 +39,15 @@ CINDEX_LINKAGE CXQualType clang_ASTContext_getIntTypeForBitwidth(CXASTContext Ct
                                                                  unsigned DestWidth,
                                                                  unsigned Signed);
 
+#if LLVM_VERSION_MAJOR >= 14
+CINDEX_LINKAGE CXQualType clang_ASTContext_getRealTypeForBitwidth(CXASTContext Ctx,
+                                                   unsigned DestWidth,
+                                                   clang::FloatModeKind ExplicitType);
+#else
 CINDEX_LINKAGE CXQualType clang_ASTContext_getRealTypeForBitwidth(CXASTContext Ctx,
                                                                   unsigned DestWidth,
                                                                   bool ExplicitIEEE);
+#endif
 
 CINDEX_LINKAGE bool clang_ASTContext_AtomicUsesUnsupportedLibcall(CXASTContext Ctx,
                                                                   CXAtomicExpr E);
@@ -214,12 +220,22 @@ CINDEX_LINKAGE CXQualType clang_ASTContext_getReadPipeType(CXASTContext Ctx, CXQ
 
 CINDEX_LINKAGE CXQualType clang_ASTContext_getWritePipeType(CXASTContext Ctx, CXQualType T);
 
+// LLVM < 14
+#if LLVM_VERSION_MAJOR >= 14
+CINDEX_LINKAGE CXQualType clang_ASTContext_getBitIntType(CXASTContext Ctx, bool Unsigned,
+                                                         unsigned NumBits);
+
+CINDEX_LINKAGE CXQualType clang_ASTContext_getDependentBitIntType(CXASTContext Ctx,
+                                                                  bool Unsigned,
+                                                                  CXExpr BitsExpr);
+#else
 CINDEX_LINKAGE CXQualType clang_ASTContext_getExtIntType(CXASTContext Ctx, bool Unsigned,
                                                          unsigned NumBits);
 
 CINDEX_LINKAGE CXQualType clang_ASTContext_getDependentExtIntType(CXASTContext Ctx,
                                                                   bool Unsigned,
                                                                   CXExpr BitsExpr);
+#endif
 
 CINDEX_LINKAGE CXQualType clang_ASTContext_getBlockDescriptorExtendedType(CXASTContext Ctx);
 
@@ -886,12 +902,15 @@ CINDEX_LINKAGE CXQualType clang_ASTContext_Float128Ty_getAsQualType(CXASTContext
 CINDEX_LINKAGE CXQualType clang_ASTContext_HalfTy_getAsQualType(CXASTContext Ctx);
 CINDEX_LINKAGE CXQualType clang_ASTContext_BFloat16Ty_getAsQualType(CXASTContext Ctx);
 CINDEX_LINKAGE CXQualType clang_ASTContext_Float16Ty_getAsQualType(CXASTContext Ctx);
+#if LLVM_VERSION_MAJOR >= 14
+#else
 CINDEX_LINKAGE CXQualType clang_ASTContext_FloatComplexTy_getAsQualType(CXASTContext Ctx);
 CINDEX_LINKAGE CXQualType clang_ASTContext_DoubleComplexTy_getAsQualType(CXASTContext Ctx);
 CINDEX_LINKAGE CXQualType
 clang_ASTContext_LongDoubleComplexTy_getAsQualType(CXASTContext Ctx);
 CINDEX_LINKAGE CXQualType
 clang_ASTContext_Float128ComplexTy_getAsQualType(CXASTContext Ctx);
+#endif
 CINDEX_LINKAGE CXQualType clang_ASTContext_VoidPtrTy_getAsQualType(CXASTContext Ctx);
 CINDEX_LINKAGE CXQualType clang_ASTContext_NullPtrTy_getAsQualType(CXASTContext Ctx);
 
