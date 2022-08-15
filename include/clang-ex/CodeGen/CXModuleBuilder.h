@@ -4,6 +4,8 @@
 #include "clang-ex/CXTypes.h"
 #include "clang-c/Platform.h"
 #include "llvm-c/Types.h"
+#include "libclang/CXString.h"
+
 
 #ifdef __cplusplus
 extern "C" {
@@ -25,6 +27,8 @@ CINDEX_LINKAGE CXDecl clang_CodeGenerator_GetDeclForMangledName(CXCodeGenerator 
 CINDEX_LINKAGE LLVMModuleRef clang_CodeGenerator_StartModule(CXCodeGenerator CG,
                                                              LLVMContextRef LLVMCtx,
                                                              const char *ModuleName);
+
+CINDEX_LINKAGE CXString clang_CodeGenerator_GetMangledName(CXCodeGenerator CG, CXNamedDecl D);
 
 #ifdef __cplusplus
 }
