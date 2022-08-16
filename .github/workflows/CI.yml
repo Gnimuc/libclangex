@@ -70,3 +70,17 @@ jobs:
         run: |
           julia --project=. -e 'using Pkg; Pkg.instantiate()'
           julia --project=. build_local.jl
+      - name: Test ClangCompiler
+        run: |
+          mkdir -p testenv
+          cp LocalPreferences.toml testenv/
+          julia --project=testenv -e 'using Pkg;
+                println("--- :julia: Instantiating project");
+                Pkg.add([
+                  PackageSpec(name="ClangCompiler", rev="master",
+                              url="https://github.com/Gnimuc/ClangCompiler.jl.git"),
+                  PackageSpec(name="libclangex_jll", rev="main")
+                  ]);
+                Pkg.build();
+                println("+++ :julia: Running tests");
+                Pkg.test("ClangCompiler"; coverage=true);'
