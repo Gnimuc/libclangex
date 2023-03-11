@@ -144,7 +144,7 @@ clang_RequiresExprBodyDecl_CreateDeserialized(CXASTContext C, unsigned ID);
 CINDEX_LINKAGE CXCXXMethodDecl clang_CXXMethodDecl_Create(
     CXASTContext C, CXCXXRecordDecl RD, CXSourceLocation_ StartLoc,
     CXDeclarationNameInfo NameInfo, CXQualType T, CXTypeSourceInfo TInfo, CXStorageClass SC,
-    boll UsesFPIntrin, bool isInline, CXConstexprSpecKind ConstexprKind, CXSourceLocation_ EndLocation,
+    bool UsesFPIntrin, bool isInline, CXConstexprSpecKind ConstexprKind, CXSourceLocation_ EndLocation,
     CXExpr TrailingRequiresClause); 
 #else
 CINDEX_LINKAGE CXCXXMethodDecl clang_CXXMethodDecl_Create(
