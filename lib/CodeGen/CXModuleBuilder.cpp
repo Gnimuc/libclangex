@@ -1,9 +1,11 @@
 #include "clang-ex/CodeGen/CXModuleBuilder.h"
 #include "clang/CodeGen/ModuleBuilder.h"
 #include "clang/Frontend/CompilerInstance.h"
+#include "clang/AST/GlobalDecl.h"
 #include "llvm/IR/LLVMContext.h"
 #include "llvm/IR/Module.h"
 #include "llvm/Support/Casting.h"
+#include "libclang/CXString.h"
 
 CXCodeGenerator clang_CreateLLVMCodeGen(CXCompilerInstance CI, LLVMContextRef LLVMCtx,
                                         const char *ModuleName) {
@@ -38,3 +40,19 @@ LLVMModuleRef clang_CodeGenerator_StartModule(CXCodeGenerator CG, LLVMContextRef
   return llvm::wrap(static_cast<clang::CodeGenerator *>(CG)->StartModule(
       llvm::StringRef(ModuleName), *llvm::unwrap(LLVMCtx)));
 }
+
+// TODO: Introduce CXGlobalDecl
+#if LLVM_VERSION_MAJOR >= 14
+CXString clang_CodeGenerator_GetMangledName(CXCodeGenerator CG, CXNamedDecl D) {
+  clang::GlobalDecl GD = clang::GlobalDecl(static_cast<clang::NamedDecl *>(D));
+  llvm::StringRef name = static_cast<clang::CodeGenerator *>(CG)->GetMangledName(GD);
+
+  return clang::cxstring::createDup(name);
+}
+#else
+CXString clang_CodeGenerator_GetMangledName(CXCodeGenerator CG, CXNamedDecl D) {
+  return clang::cxstring::createNull();
+}
+#endif
+
+
