@@ -1,5 +1,7 @@
 # libclangex
 
+#### Development has been moved to https://github.com/Gnimuc/ClangCompiler.jl/tree/master/deps
+
 ## Build 
 ```
 LLVM_MAJOR_VER=`julia -e "print(Base.libllvm_version.major)"`
